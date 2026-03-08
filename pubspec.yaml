@@ -1,0 +1,124 @@
+name: yelpify
+description: "A modern Flutter app with Firebase, Maps, Authentication, and In-App Purchases."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 2.0.0+9
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core & UI
+  cupertino_icons: ^1.0.8
+  get: ^4.7.3
+  provider: ^6.1.5+1
+  intl: ^0.20.2
+  flutter_svg: ^2.2.3
+  cached_network_image: ^3.4.1
+  flutter_easyloading: ^3.0.5
+  badges: ^3.1.2
+  share_plus: ^12.0.1
+  url_launcher: ^6.3.2
+  flutter_html: ^3.0.0
+  rxdart: ^0.28.0
+
+  # Firebase & Authentication
+  firebase_core: ^4.3.0
+  firebase_auth: ^6.1.3
+  firebase_storage: ^13.0.5
+  firebase_database: ^12.1.1
+  cloud_firestore: ^6.1.1
+  firebase_app_check: ^0.4.1+3
+  firebase_messaging: ^16.1.0
+  google_sign_in: ^7.2.0
+  sign_in_with_apple: ^7.0.1
+
+  # Local Storage & Utilities
+  shared_preferences: ^2.5.4
+  path_provider: ^2.1.5
+  uuid: ^4.5.2
+  crypto: ^3.0.7
+
+  # Location & Maps
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
+  google_maps_flutter: ^2.14.0
+  flutter_map: ^8.2.2
+  latlong2: ^0.9.1
+
+  # Media & File Handling
+  image_picker: ^1.2.1
+  file_picker: ^10.3.7
+  video_player: ^2.10.1
+  get_thumbnail_video: ^0.7.3
+  mime: ^2.0.0
+
+  # Notifications & App Links
+  flutter_local_notifications: ^19.5.0
+  app_links: ^7.0.0
+
+  # Monetization
+  google_mobile_ads: ^7.0.0
+  in_app_purchase: ^3.2.3
+
+  # Google APIs
+  googleapis_auth: ^2.0.0
+  http: ^1.6.0
+
+  # UI Components
+  country_code_picker: ^3.4.1
+  pin_code_fields: ^8.0.1
+  syncfusion_flutter_datepicker: ^32.1.22
+  webview_flutter: ^4.13.1
+  flutter_custom_tabs: ^2.4.1
+
+  # Email & Communication
+  mailer: ^6.6.0
+  speech_to_text: ^7.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/fonts/
+    - assets/
+
+  fonts:
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
+    - family: Poppins-ExtraBold
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+    - family: Poppins-Medium
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+    - family: Poppins-Regular
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+    - family: Poppins-SemiBold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+
+    - family: OpenSans-Bold
+      fonts:
+        - asset: assets/fonts/OpenSans-Bold.ttf
+    - family: OpenSans-ExtraBold
+      fonts:
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+    - family: OpenSans-Medium
+      fonts:
+        - asset: assets/fonts/OpenSans-Medium.ttf
+    - family: OpenSans-Regular
+      fonts:
+         - asset: assets/fonts/OpenSans-Regular.ttf

@@ -1,0 +1,1096 @@
+{
+  "countries": [
+    {
+      "name": "Afghanistan",
+      "dial_code": "+93",
+      "currency": "Afghani",
+      "symbol": "؋"
+    },
+    {
+      "name": "Albania",
+      "dial_code": "+355",
+      "currency": "Lek",
+      "symbol": "Lek"
+    },
+    {
+      "name": "Algeria",
+      "dial_code": "+213",
+      "currency": "Algerian Dinar",
+      "symbol": "د.ج"
+    },
+    {
+      "name": "Andorra",
+      "dial_code": "+376",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Angola",
+      "dial_code": "+244",
+      "currency": "Kwanza",
+      "symbol": "Kz"
+    },
+    {
+      "name": "Anguilla",
+      "dial_code": "+1-264",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Antarctica",
+      "dial_code": "+672",
+      "currency": "No universal currency",
+      "symbol": null
+    },
+    {
+      "name": "Antigua and Barbuda",
+      "dial_code": "+1-268",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Argentina",
+      "dial_code": "+54",
+      "currency": "Argentine Peso",
+      "symbol": "$"
+    },
+    {
+      "name": "Armenia",
+      "dial_code": "+374",
+      "currency": "Armenian Dram",
+      "symbol": "֏"
+    },
+    {
+      "name": "Aruba",
+      "dial_code": "+297",
+      "currency": "Aruban Florin",
+      "symbol": "ƒ"
+    },
+    {
+      "name": "Australia",
+      "dial_code": "+61",
+      "currency": "Australian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Austria",
+      "dial_code": "+43",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Azerbaijan",
+      "dial_code": "+994",
+      "currency": "Azerbaijani Manat",
+      "symbol": "₼"
+    },
+    {
+      "name": "Bahamas",
+      "dial_code": "+1-242",
+      "currency": "Bahamian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Bahrain",
+      "dial_code": "+973",
+      "currency": "Bahraini Dinar",
+      "symbol": ".د.ب"
+    },
+    {
+      "name": "Bangladesh",
+      "dial_code": "+880",
+      "currency": "Bangladeshi Taka",
+      "symbol": "৳"
+    },
+    {
+      "name": "Barbados",
+      "dial_code": "+1-246",
+      "currency": "Barbados Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Belarus",
+      "dial_code": "+375",
+      "currency": "Belarusian Ruble",
+      "symbol": "Br"
+    },
+    {
+      "name": "Belgium",
+      "dial_code": "+32",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Belize",
+      "dial_code": "+501",
+      "currency": "Belize Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Benin",
+      "dial_code": "+229",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Bermuda",
+      "dial_code": "+1-441",
+      "currency": "Bermudian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Bhutan",
+      "dial_code": "+975",
+      "currency": "Bhutanese Ngultrum",
+      "symbol": "Nu."
+    },
+    {
+      "name": "Bolivia",
+      "dial_code": "+591",
+      "currency": "Boliviano",
+      "symbol": "Bs."
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "dial_code": "+387",
+      "currency": "Convertible Mark",
+      "symbol": "KM"
+    },
+    {
+      "name": "Botswana",
+      "dial_code": "+267",
+      "currency": "Pula",
+      "symbol": "P"
+    },
+    {
+      "name": "Brazil",
+      "dial_code": "+55",
+      "currency": "Brazilian Real",
+      "symbol": "R$"
+    },
+    {
+      "name": "Brunei",
+      "dial_code": "+673",
+      "currency": "Brunei Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Bulgaria",
+      "dial_code": "+359",
+      "currency": "Bulgarian Lev",
+      "symbol": "лв"
+    },
+    {
+      "name": "Burkina Faso",
+      "dial_code": "+226",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Burundi",
+      "dial_code": "+257",
+      "currency": "Burundi Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Cabo Verde",
+      "dial_code": "+238",
+      "currency": "Cabo Verde Escudo",
+      "symbol": "Esc"
+    },
+    {
+      "name": "Cambodia",
+      "dial_code": "+855",
+      "currency": "Riel",
+      "symbol": "៛"
+    },
+    {
+      "name": "Cameroon",
+      "dial_code": "+237",
+      "currency": "CFA Franc BEAC",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Canada",
+      "dial_code": "+1",
+      "currency": "Canadian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Cayman Islands",
+      "dial_code": "+1-345",
+      "currency": "Cayman Islands Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Central African Republic",
+      "dial_code": "+236",
+      "currency": "CFA Franc BEAC",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Chad",
+      "dial_code": "+235",
+      "currency": "CFA Franc BEAC",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Chile",
+      "dial_code": "+56",
+      "currency": "Chilean Peso",
+      "symbol": "$"
+    },
+    {
+      "name": "China",
+      "dial_code": "+86",
+      "currency": "Renminbi",
+      "symbol": "¥"
+    },
+    {
+      "name": "Colombia",
+      "dial_code": "+57",
+      "currency": "Colombian Peso",
+      "symbol": "$"
+    },
+    {
+      "name": "Comoros",
+      "dial_code": "+269",
+      "currency": "Comorian Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Congo (Democratic Republic)",
+      "dial_code": "+243",
+      "currency": "Congolese Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Congo (Republic)",
+      "dial_code": "+242",
+      "currency": "CFA Franc BEAC",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Cook Islands",
+      "dial_code": "+682",
+      "currency": "New Zealand Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Costa Rica",
+      "dial_code": "+506",
+      "currency": "Costa Rican Colón",
+      "symbol": "₡"
+    },
+    {
+      "name": "Côte d'Ivoire",
+      "dial_code": "+225",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Croatia",
+      "dial_code": "+385",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Cuba",
+      "dial_code": "+53",
+      "currency": "Cuban Peso",
+      "symbol": "$"
+    },
+    {
+      "name": "Cyprus",
+      "dial_code": "+357",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Czech Republic",
+      "dial_code": "+420",
+      "currency": "Czech Koruna",
+      "symbol": "Kč"
+    },
+    {
+      "name": "Denmark",
+      "dial_code": "+45",
+      "currency": "Danish Krone",
+      "symbol": "kr"
+    },
+    {
+      "name": "Djibouti",
+      "dial_code": "+253",
+      "currency": "Djiboutian Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Dominica",
+      "dial_code": "+1-767",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Dominican Republic",
+      "dial_code": "+1-809",
+      "currency": "Dominican Peso",
+      "symbol": "$"
+    },
+    {
+      "name": "Ecuador",
+      "dial_code": "+593",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Egypt",
+      "dial_code": "+20",
+      "currency": "Egyptian Pound",
+      "symbol": "E£"
+    },
+    {
+      "name": "El Salvador",
+      "dial_code": "+503",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Equatorial Guinea",
+      "dial_code": "+240",
+      "currency": "CFA Franc BEAC",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Eritrea",
+      "dial_code": "+291",
+      "currency": "Eritrean Nakfa",
+      "symbol": "Nfk"
+    },
+    {
+      "name": "Estonia",
+      "dial_code": "+372",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Eswatini",
+      "dial_code": "+268",
+      "currency": "Lilangeni",
+      "symbol": "L"
+    },
+    {
+      "name": "Ethiopia",
+      "dial_code": "+251",
+      "currency": "Ethiopian Birr",
+      "symbol": "Br"
+    },
+    {
+      "name": "Fiji",
+      "dial_code": "+679",
+      "currency": "Fiji Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Finland",
+      "dial_code": "+358",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "France",
+      "dial_code": "+33",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Gabon",
+      "dial_code": "+241",
+      "currency": "CFA Franc BEAC",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Gambia",
+      "dial_code": "+220",
+      "currency": "Gambian Dalasi",
+      "symbol": "D"
+    },
+    {
+      "name": "Georgia",
+      "dial_code": "+995",
+      "currency": "Georgian Lari",
+      "symbol": "₾"
+    },
+    {
+      "name": "Germany",
+      "dial_code": "+49",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Ghana",
+      "dial_code": "+233",
+      "currency": "Ghanaian Cedi",
+      "symbol": "₵"
+    },
+    {
+      "name": "Greece",
+      "dial_code": "+30",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Grenada",
+      "dial_code": "+1-473",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Guatemala",
+      "dial_code": "+502",
+      "currency": "Quetzal",
+      "symbol": "Q"
+    },
+    {
+      "name": "Guinea",
+      "dial_code": "+224",
+      "currency": "Guinean Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Guinea-Bissau",
+      "dial_code": "+245",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Guyana",
+      "dial_code": "+592",
+      "currency": "Guyanese Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Haiti",
+      "dial_code": "+509",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Honduras",
+      "dial_code": "+504",
+      "currency": "Lempira",
+      "symbol": "L"
+    },
+    {
+      "name": "Hungary",
+      "dial_code": "+36",
+      "currency": "Hungarian Forint",
+      "symbol": "Ft"
+    },
+    {
+      "name": "Iceland",
+      "dial_code": "+354",
+      "currency": "Icelandic Króna",
+      "symbol": "kr"
+    },
+    {
+      "name": "India",
+      "dial_code": "+91",
+      "currency": "Indian Rupee",
+      "symbol": "₹"
+    },
+    {
+      "name": "Indonesia",
+      "dial_code": "+62",
+      "currency": "Indonesian Rupiah",
+      "symbol": "Rp"
+    },
+    {
+      "name": "Iran",
+      "dial_code": "+98",
+      "currency": "Iranian Rial",
+      "symbol": "﷼"
+    },
+    {
+      "name": "Iraq",
+      "dial_code": "+964",
+      "currency": "Iraqi Dinar",
+      "symbol": "ع.د"
+    },
+    {
+      "name": "Ireland",
+      "dial_code": "+353",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Israel",
+      "dial_code": "+972",
+      "currency": "Israeli New Shekel",
+      "symbol": "₪"
+    },
+    {
+      "name": "Italy",
+      "dial_code": "+39",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Jamaica",
+      "dial_code": "+1-876",
+      "currency": "Jamaican Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Japan",
+      "dial_code": "+81",
+      "currency": "Japanese Yen",
+      "symbol": "¥"
+    },
+    {
+      "name": "Jordan",
+      "dial_code": "+962",
+      "currency": "Jordanian Dinar",
+      "symbol": "د.ا"
+    },
+    {
+      "name": "Kazakhstan",
+      "dial_code": "+7",
+      "currency": "Kazakhstani Tenge",
+      "symbol": "₸"
+    },
+    {
+      "name": "Kenya",
+      "dial_code": "+254",
+      "currency": "Kenyan Shilling",
+      "symbol": "Sh"
+    },
+    {
+      "name": "Kiribati",
+      "dial_code": "+686",
+      "currency": "Australian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Korea, North",
+      "dial_code": "+850",
+      "currency": "North Korean Won",
+      "symbol": "₩"
+    },
+    {
+      "name": "Korea, South",
+      "dial_code": "+82",
+      "currency": "South Korean Won",
+      "symbol": "₩"
+    },
+    {
+      "name": "Kosovo",
+      "dial_code": "+383",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Kuwait",
+      "dial_code": "+965",
+      "currency": "Kuwaiti Dinar",
+      "symbol": "د.ك"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "dial_code": "+996",
+      "currency": "Kyrgyzstani Som",
+      "symbol": "лв"
+    },
+    {
+      "name": "Laos",
+      "dial_code": "+856",
+      "currency": "Lao Kip",
+      "symbol": "₭"
+    },
+    {
+      "name": "Latvia",
+      "dial_code": "+371",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Lebanon",
+      "dial_code": "+961",
+      "currency": "Lebanese Pound",
+      "symbol": "ل.ل"
+    },
+    {
+      "name": "Lesotho",
+      "dial_code": "+266",
+      "currency": "Lesotho Loti",
+      "symbol": "L"
+    },
+    {
+      "name": "Liberia",
+      "dial_code": "+231",
+      "currency": "Liberian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Libya",
+      "dial_code": "+218",
+      "currency": "Libyan Dinar",
+      "symbol": "ل.د"
+    },
+    {
+      "name": "Liechtenstein",
+      "dial_code": "+423",
+      "currency": "Swiss Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Lithuania",
+      "dial_code": "+370",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Luxembourg",
+      "dial_code": "+352",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Madagascar",
+      "dial_code": "+261",
+      "currency": "Malagasy Ariary",
+      "symbol": "Ar"
+    },
+    {
+      "name": "Malawi",
+      "dial_code": "+265",
+      "currency": "Malawian Kwacha",
+      "symbol": "MK"
+    },
+    {
+      "name": "Malaysia",
+      "dial_code": "+60",
+      "currency": "Malaysian Ringgit",
+      "symbol": "RM"
+    },
+    {
+      "name": "Maldives",
+      "dial_code": "+960",
+      "currency": "Maldivian Rufiyaa",
+      "symbol": "Rf"
+    },
+    {
+      "name": "Mali",
+      "dial_code": "+223",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Malta",
+      "dial_code": "+356",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Marshall Islands",
+      "dial_code": "+692",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Mauritania",
+      "dial_code": "+222",
+      "currency": "Mauritanian Ouguiya",
+      "symbol": "UM"
+    },
+    {
+      "name": "Mauritius",
+      "dial_code": "+230",
+      "currency": "Mauritian Rupee",
+      "symbol": "₨"
+    },
+    {
+      "name": "Mexico",
+      "dial_code": "+52",
+      "currency": "Mexican Peso",
+      "symbol": "$"
+    },
+    {
+      "name": "Micronesia",
+      "dial_code": "+691",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Moldova",
+      "dial_code": "+373",
+      "currency": "Moldovan Leu",
+      "symbol": "L"
+    },
+    {
+      "name": "Monaco",
+      "dial_code": "+377",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Mongolia",
+      "dial_code": "+976",
+      "currency": "Mongolian Tögrög",
+      "symbol": "₮"
+    },
+    {
+      "name": "Montenegro",
+      "dial_code": "+382",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Morocco",
+      "dial_code": "+212",
+      "currency": "Moroccan Dirham",
+      "symbol": "د.م."
+    },
+    {
+      "name": "Mozambique",
+      "dial_code": "+258",
+      "currency": "Mozambican Metical",
+      "symbol": "MT"
+    },
+    {
+      "name": "Myanmar",
+      "dial_code": "+95",
+      "currency": "Kyat",
+      "symbol": "Ks"
+    },
+    {
+      "name": "Namibia",
+      "dial_code": "+264",
+      "currency": "Namibian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Nauru",
+      "dial_code": "+674",
+      "currency": "Australian Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Nepal",
+      "dial_code": "+977",
+      "currency": "Nepalese Rupee",
+      "symbol": "₨"
+    },
+    {
+      "name": "Netherlands",
+      "dial_code": "+31",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "New Zealand",
+      "dial_code": "+64",
+      "currency": "New Zealand Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Nicaragua",
+      "dial_code": "+505",
+      "currency": "Nicaraguan Córdoba",
+      "symbol": "C$"
+    },
+    {
+      "name": "Niger",
+      "dial_code": "+227",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Nigeria",
+      "dial_code": "+234",
+      "currency": "Nigerian Naira",
+      "symbol": "₦"
+    },
+    {
+      "name": "Norway",
+      "dial_code": "+47",
+      "currency": "Norwegian Krone",
+      "symbol": "kr"
+    },
+    {
+      "name": "Oman",
+      "dial_code": "+968",
+      "currency": "Omani Rial",
+      "symbol": "ر.ع."
+    },
+    {
+      "name": "Pakistan",
+      "dial_code": "+92",
+      "currency": "Pakistani Rupee",
+      "symbol": "₨"
+    },
+    {
+      "name": "Palau",
+      "dial_code": "+680",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Panama",
+      "dial_code": "+507",
+      "currency": "Balboa",
+      "symbol": "B/."
+    },
+    {
+      "name": "Papua New Guinea",
+      "dial_code": "+675",
+      "currency": "Kina",
+      "symbol": "K"
+    },
+    {
+      "name": "Paraguay",
+      "dial_code": "+595",
+      "currency": "Paraguayan Guaraní",
+      "symbol": "₲"
+    },
+    {
+      "name": "Peru",
+      "dial_code": "+51",
+      "currency": "Sol",
+      "symbol": "S/."
+    },
+    {
+      "name": "Philippines",
+      "dial_code": "+63",
+      "currency": "Philippine Peso",
+      "symbol": "₱"
+    },
+    {
+      "name": "Poland",
+      "dial_code": "+48",
+      "currency": "Polish Złoty",
+      "symbol": "zł"
+    },
+    {
+      "name": "Portugal",
+      "dial_code": "+351",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Qatar",
+      "dial_code": "+974",
+      "currency": "Qatari Riyal",
+      "symbol": "ر.ق"
+    },
+    {
+      "name": "Romania",
+      "dial_code": "+40",
+      "currency": "Romanian Leu",
+      "symbol": "lei"
+    },
+    {
+      "name": "Russia",
+      "dial_code": "+7",
+      "currency": "Russian Ruble",
+      "symbol": "₽"
+    },
+    {
+      "name": "Rwanda",
+      "dial_code": "+250",
+      "currency": "Rwandan Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Saint Kitts and Nevis",
+      "dial_code": "+1-869",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Saint Lucia",
+      "dial_code": "+1-758",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Saint Vincent and the Grenadines",
+      "dial_code": "+1-784",
+      "currency": "East Caribbean Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Samoa",
+      "dial_code": "+685",
+      "currency": "Samoan Tālā",
+      "symbol": "T"
+    },
+    {
+      "name": "San Marino",
+      "dial_code": "+378",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Sao Tome and Principe",
+      "dial_code": "+239",
+      "currency": "Dobra",
+      "symbol": "Db"
+    },
+    {
+      "name": "Saudi Arabia",
+      "dial_code": "+966",
+      "currency": "Saudi Riyal",
+      "symbol": "ر.س"
+    },
+    {
+      "name": "Senegal",
+      "dial_code": "+221",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Serbia",
+      "dial_code": "+381",
+      "currency": "Serbian Dinar",
+      "symbol": "дин"
+    },
+    {
+      "name": "Seychelles",
+      "dial_code": "+248",
+      "currency": "Seychelles Rupee",
+      "symbol": "₨"
+    },
+    {
+      "name": "Sierra Leone",
+      "dial_code": "+232",
+      "currency": "Sierra Leonean Leone",
+      "symbol": "Le"
+    },
+    {
+      "name": "Singapore",
+      "dial_code": "+65",
+      "currency": "Singapore Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Slovakia",
+      "dial_code": "+421",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Slovenia",
+      "dial_code": "+386",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Solomon Islands",
+      "dial_code": "+677",
+      "currency": "Solomon Islands Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Somalia",
+      "dial_code": "+252",
+      "currency": "Somali Shilling",
+      "symbol": "Sh"
+    },
+    {
+      "name": "South Africa",
+      "dial_code": "+27",
+      "currency": "South African Rand",
+      "symbol": "R"
+    },
+    {
+      "name": "South Sudan",
+      "dial_code": "+211",
+      "currency": "South Sudanese Pound",
+      "symbol": "£"
+    },
+    {
+      "name": "Spain",
+      "dial_code": "+34",
+      "currency": "Euro",
+      "symbol": "€"
+    },
+    {
+      "name": "Sri Lanka",
+      "dial_code": "+94",
+      "currency": "Sri Lankan Rupee",
+      "symbol": "Rs"
+    },
+    {
+      "name": "Sudan",
+      "dial_code": "+249",
+      "currency": "Sudanese Pound",
+      "symbol": "£"
+    },
+    {
+      "name": "Suriname",
+      "dial_code": "+597",
+      "currency": "Surinamese Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Sweden",
+      "dial_code": "+46",
+      "currency": "Swedish Krona",
+      "symbol": "kr"
+    },
+    {
+      "name": "Switzerland",
+      "dial_code": "+41",
+      "currency": "Swiss Franc",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Syria",
+      "dial_code": "+963",
+      "currency": "Syrian Pound",
+      "symbol": "£S"
+    },
+    {
+      "name": "Taiwan",
+      "dial_code": "+886",
+      "currency": "New Taiwan Dollar",
+      "symbol": "NT$"
+    },
+    {
+      "name": "Tajikistan",
+      "dial_code": "+992",
+      "currency": "Tajikistani Somoni",
+      "symbol": "ЅМ"
+    },
+    {
+      "name": "Tanzania",
+      "dial_code": "+255",
+      "currency": "Tanzanian Shilling",
+      "symbol": "Sh"
+    },
+    {
+      "name": "Thailand",
+      "dial_code": "+66",
+      "currency": "Thai Baht",
+      "symbol": "฿"
+    },
+    {
+      "name": "Timor-Leste",
+      "dial_code": "+670",
+      "currency": "US Dollar",
+      "symbol": "$"
+    },
+    {
+      "name": "Togo",
+      "dial_code": "+228",
+      "currency": "CFA Franc BCEAO",
+      "symbol": "Fr"
+    },
+    {
+      "name": "Tonga",
+      "dial_code": "+676",
+      "currency": "Tongan Paʻanga",
+      "symbol": "T$"
+    }
+  ]
+}

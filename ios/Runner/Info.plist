@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition to convert your speech into text for searching restaurants and products.</string>
+
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-3940256099942544~1458002511</string>
+    <key>SKAdNetworkItems</key>
+    <array>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>cstr6suwn9.skadnetwork</string>
+        </dict>
+    </array>
+
+    <key>FlutterDeepLinkingEnabled</key>
+    <false/>
+
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+
+    <key>CFBundleDisplayName</key>
+    <string>Yelpify</string>
+
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+
+    <key>CFBundleName</key>
+    <string>Yelpify</string>
+
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+
+    <!-- Universal Links setup -->
+    <key>AssociatedDomains</key>
+    <array>
+        <string>applinks:yelpifyweb.siswebapp.com</string>
+    </array>
+
+    <!-- App URL schemes -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>yelpify</string> <!-- Your custom URL scheme -->
+                <string>com.googleusercontent.apps.930102973522-bt2njb5e2agb21q7uji5jik25duoo9ef</string> <!-- Google Sign-In Client ID if needed -->
+            </array>
+        </dict>
+    </array>
+
+    <!-- Local network and user tracking descriptions -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>This app needs local network access for debugging.</string>
+
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This identifier will be used to deliver personalized ads to you.</string>
+
+    <!-- Permissions -->
+    <key>NSCameraUsageDescription</key>
+    <string>This app needs access to the camera for photo features.</string>
+
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Used to capture audio for image picker plugin.</string>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app needs access to your gallery photos.</string>
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We use your location to show nearby businesses and recommendations.</string>
+
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>We need your location to enhance your experience.</string>
+
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need your location to track nearby business listings and provide local search results.</string>
+
+    <!-- Background modes -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+
+    <!-- Other settings -->
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+
+    <!-- Optional: Flutter-specific settings -->
+    <key>FLTEnableImpeller</key>
+    <false/>
+
+    <!-- Allow some external apps -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>sms</string>
+        <string>tel</string>
+    </array>
+
+</dict>
+</plist>
