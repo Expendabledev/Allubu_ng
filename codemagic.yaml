@@ -4,9 +4,13 @@ workflows:
     max_build_duration: 60
     environment:
       flutter: stable
+      groups:
+        - firebase
     scripts:
       - name: Restore google-services.json
         script: echo $GOOGLE_SERVICES_JSON > android/app/google-services.json
+      - name: Restore GoogleService-Info.plist
+        script: echo $GOOGLE_PLIST > ios/Runner/GoogleService-Info.plist
       - name: Get dependencies
         script: flutter pub get
       - name: Build Android APK
