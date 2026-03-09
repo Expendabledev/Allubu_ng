@@ -1,0 +1,18 @@
+workflows:
+  android-ios-workflow:
+    name: Android & iOS Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Restore google-services.json
+        script: echo $GOOGLE_SERVICES_JSON > android/app/google-services.json
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build Android APK
+        script: flutter build apk --release
+      - name: Build iOS
+        script: flutter build ios --release --no-codesign
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/ios/iphoneos/Runner.app
