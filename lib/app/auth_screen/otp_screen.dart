@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:yelpify/app/auth_screen/singup_screen.dart';
 import 'package:yelpify/app/dashboard_screen/dashboard_screen.dart';
@@ -30,7 +29,9 @@ class OtpScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: DebouncedInkWell(
@@ -41,13 +42,19 @@ class OtpScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/icon_left.svg",
-                      colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          BlendMode.srcIn),
                     ),
                     Text(
                       "Back".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -58,7 +65,9 @@ class OtpScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -101,31 +110,54 @@ class OtpScreen extends StatelessWidget {
                       "Verify Your Account".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark02
+                            : AppThemeData.grey02,
                         fontSize: 20,
                         fontFamily: AppThemeData.bold,
                       ),
                     ),
                   ),
-                  PinCodeTextField(
-                    length: 6,
-                    appContext: context,
-                    keyboardType: TextInputType.phone,
-                    enablePinAutofill: true,
-                    hintCharacter: "-",
-                    hintStyle: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04, fontFamily: AppThemeData.regular),
-                    textStyle: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontFamily: AppThemeData.regular),
-                    pinTheme: PinTheme(
-                      selectedColor: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
-                      activeColor: themeChange.getThem() ? AppThemeData.grey05 : AppThemeData.grey05,
-                      inactiveColor: themeChange.getThem() ? AppThemeData.grey05 : AppThemeData.grey05,
-                      disabledColor: themeChange.getThem() ? AppThemeData.grey05 : AppThemeData.grey05,
-                      shape: PinCodeFieldShape.underline,
+                  // OTP Input using standard TextFields
+                  SizedBox(
+                    height: 50,
+                    child: TextField(
+                      controller: controller.otpController.value,
+                      keyboardType: TextInputType.phone,
+                      textAlign: TextAlign.center,
+                      maxLength: 6,
+                      style: TextStyle(
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
+                        fontFamily: AppThemeData.regular,
+                        fontSize: 20,
+                        letterSpacing: 8,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "------",
+                        hintStyle: TextStyle(
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark04
+                              : AppThemeData.grey04,
+                          letterSpacing: 8,
+                        ),
+                        counterText: '',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: themeChange.getThem()
+                                ? AppThemeData.grey05
+                                : AppThemeData.grey05,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppThemeData.red02,
+                          ),
+                        ),
+                      ),
+                      onChanged: (value) {},
                     ),
-                    cursorColor: AppThemeData.red02,
-                    controller: controller.otpController.value,
-                    onCompleted: (v) async {},
-                    onChanged: (value) {},
                   ),
                   SizedBox(
                     height: 10,
@@ -137,7 +169,9 @@ class OtpScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: AppThemeData.regularOpenSans,
-                        color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark10
+                            : AppThemeData.grey01,
                       ),
                       children: <TextSpan>[
                         TextSpan(
@@ -147,7 +181,9 @@ class OtpScreen extends StatelessWidget {
                             },
                           text: 'Resend OTP'.tr,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                            color: themeChange.getThem()
+                                ? AppThemeData.tealDark02
+                                : AppThemeData.teal02,
                             fontSize: 14,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -161,21 +197,33 @@ class OtpScreen extends StatelessWidget {
                   RoundedButtonFill(
                     title: 'Verify & Continue'.tr,
                     height: 5.5,
-                    textColor: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
-                    color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                    textColor: themeChange.getThem()
+                        ? AppThemeData.grey10
+                        : AppThemeData.grey10,
+                    color: themeChange.getThem()
+                        ? AppThemeData.redDark02
+                        : AppThemeData.red02,
                     onPress: () async {
                       if (controller.otpController.value.text.length == 6) {
                         ShowToastDialog.showLoader("Verify OTP.".tr);
 
-                        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: controller.verificationId.value, smsCode: controller.otpController.value.text);
+                        PhoneAuthCredential credential =
+                            PhoneAuthProvider.credential(
+                                verificationId: controller.verificationId.value,
+                                smsCode: controller.otpController.value.text);
                         String fcmToken = await NotificationService.getToken();
-                        await FirebaseAuth.instance.signInWithCredential(credential).then((value) async {
+                        await FirebaseAuth.instance
+                            .signInWithCredential(credential)
+                            .then((value) async {
                           if (value.additionalUserInfo!.isNewUser) {
                             UserModel userModel = UserModel();
                             userModel.id = value.user!.uid;
-                            userModel.countryCode = controller.countryCode.value;
-                            userModel.countryISOCode = controller.countryISOCode.value;
-                            userModel.phoneNumber = controller.phoneNumber.value;
+                            userModel.countryCode =
+                                controller.countryCode.value;
+                            userModel.countryISOCode =
+                                controller.countryISOCode.value;
+                            userModel.phoneNumber =
+                                controller.phoneNumber.value;
                             userModel.loginType = Constant.phoneLoginType;
                             userModel.fcmToken = fcmToken;
 
@@ -184,24 +232,32 @@ class OtpScreen extends StatelessWidget {
                               "userModel": userModel,
                             });
                           } else {
-                            await FireStoreUtils.userExistOrNot(value.user!.uid).then((userExit) async {
+                            await FireStoreUtils.userExistOrNot(value.user!.uid)
+                                .then((userExit) async {
                               ShowToastDialog.closeLoader();
                               if (userExit == true) {
-                                UserModel? userModel = await FireStoreUtils.getUserProfile(value.user!.uid);
+                                UserModel? userModel =
+                                    await FireStoreUtils.getUserProfile(
+                                        value.user!.uid);
                                 if (userModel != null) {
                                   if (userModel.isActive == true) {
                                     Get.offAll(const DashBoardScreen());
                                   } else {
                                     await FirebaseAuth.instance.signOut();
-                                    ShowToastDialog.showToast("This user is disable please contact administrator".tr);
+                                    ShowToastDialog.showToast(
+                                        "This user is disable please contact administrator"
+                                            .tr);
                                   }
                                 }
                               } else {
                                 UserModel userModel = UserModel();
                                 userModel.id = value.user!.uid;
-                                userModel.countryCode = controller.countryCode.value;
-                                userModel.countryISOCode = controller.countryISOCode.value;
-                                userModel.phoneNumber = controller.phoneNumber.value;
+                                userModel.countryCode =
+                                    controller.countryCode.value;
+                                userModel.countryISOCode =
+                                    controller.countryISOCode.value;
+                                userModel.phoneNumber =
+                                    controller.phoneNumber.value;
                                 userModel.loginType = Constant.phoneLoginType;
                                 userModel.fcmToken = fcmToken;
 

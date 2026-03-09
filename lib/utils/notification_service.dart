@@ -21,10 +21,12 @@ Future<void> firebaseMessageBackgroundHandle(RemoteMessage message) async {
 }
 
 class NotificationService {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   Future<void> initInfo() async {
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
@@ -39,19 +41,30 @@ class NotificationService {
       sound: true,
     );
 
-    if (request.authorizationStatus == AuthorizationStatus.authorized || request.authorizationStatus == AuthorizationStatus.provisional) {
-      const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+    if (request.authorizationStatus == AuthorizationStatus.authorized ||
+        request.authorizationStatus == AuthorizationStatus.provisional) {
+      const AndroidInitializationSettings initializationSettingsAndroid =
+          AndroidInitializationSettings('@mipmap/ic_launcher');
       var iosInitializationSettings = const DarwinInitializationSettings();
-      final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: iosInitializationSettings);
-      await flutterLocalNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: (payload) {});
+      final InitializationSettings initializationSettings =
+          InitializationSettings(
+        android: initializationSettingsAndroid,
+        iOS: iosInitializationSettings,
+      );
+      await flutterLocalNotificationsPlugin.initialize(
+        settings: initializationSettings,
+        onDidReceiveNotificationResponse: (NotificationResponse payload) {},
+      );
       setupInteractedMessage();
     }
   }
 
   Future<void> setupInteractedMessage() async {
-    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
-      FirebaseMessaging.onBackgroundMessage((message) => firebaseMessageBackgroundHandle(message));
+      FirebaseMessaging.onBackgroundMessage(
+          (message) => firebaseMessageBackgroundHandle(message));
     }
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -84,20 +97,27 @@ class NotificationService {
       String receiverId = data['receiverId'];
 
       ShowToastDialog.showLoader("Please wait".tr);
-      UserModel? senderUserModel = await FireStoreUtils.getUserProfile(senderId);
-      UserModel? receiverUserModel = await FireStoreUtils.getUserProfile(receiverId);
+      UserModel? senderUserModel =
+          await FireStoreUtils.getUserProfile(senderId);
+      UserModel? receiverUserModel =
+          await FireStoreUtils.getUserProfile(receiverId);
       ShowToastDialog.closeLoader();
       bool isMe = senderUserModel!.id == senderId;
-      Get.to(const UserChatScreen(), arguments: {"receiverModel": isMe ? senderUserModel : receiverUserModel});
+      Get.to(const UserChatScreen(), arguments: {
+        "receiverModel": isMe ? senderUserModel : receiverUserModel
+      });
     } else if (data['type'] == "project_chat") {
       String isSender = data['isSender'];
       String businessId = data['businessId'];
       String projectId = data['projectId'];
 
       ShowToastDialog.showLoader("Please wait".tr);
-      PricingRequestModel? pricingRequestModel = await FireStoreUtils.getPricingRequestById(projectId);
-      BusinessModel? businessModel = await FireStoreUtils.getBusinessById(businessId);
-      UserModel? userModel = await FireStoreUtils.getUserProfile(pricingRequestModel!.userId.toString());
+      PricingRequestModel? pricingRequestModel =
+          await FireStoreUtils.getPricingRequestById(projectId);
+      BusinessModel? businessModel =
+          await FireStoreUtils.getBusinessById(businessId);
+      UserModel? userModel = await FireStoreUtils.getUserProfile(
+          pricingRequestModel!.userId.toString());
       ShowToastDialog.closeLoader();
       Get.to(ChatScreen(), arguments: {
         "userModel": userModel!,
@@ -108,16 +128,21 @@ class NotificationService {
     } else if (data['type'] == "project_request") {
       String businessId = data['businessId'];
       // String projectId = data['projectId'];
-      BusinessModel? businessModel = await FireStoreUtils.getBusinessById(businessId);
-      Get.to(BusinessProjectListScreen(), arguments: {"businessModel": businessModel});
+      BusinessModel? businessModel =
+          await FireStoreUtils.getBusinessById(businessId);
+      Get.to(BusinessProjectListScreen(),
+          arguments: {"businessModel": businessModel});
     } else if (data['type'] == "review") {
       String businessId = data['businessId'];
-      BusinessModel? businessModel = await FireStoreUtils.getBusinessById(businessId);
-      Get.to(BusinessDetailsScreen(), arguments: {"businessModel": businessModel});
+      BusinessModel? businessModel =
+          await FireStoreUtils.getBusinessById(businessId);
+      Get.to(BusinessDetailsScreen(),
+          arguments: {"businessModel": businessModel});
     } else if (data['type'] == "user_follow") {
       String userId = data['userId'];
       ShowToastDialog.showLoader("Please wait");
-      UserModel? userModel0 = await FireStoreUtils.getUserProfile(userId.toString());
+      UserModel? userModel0 =
+          await FireStoreUtils.getUserProfile(userId.toString());
       ShowToastDialog.closeLoader();
       Get.to(OtherPeopleScreen(), arguments: {"userModel": userModel0});
     }
@@ -134,14 +159,21 @@ class NotificationService {
         importance: Importance.max,
       );
       AndroidNotificationDetails notificationDetails =
-          AndroidNotificationDetails(channel.id, channel.name, channelDescription: 'your channel Description', importance: Importance.high, priority: Priority.high, ticker: 'ticker');
-      const DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails(presentAlert: true, presentBadge: true, presentSound: true);
-      NotificationDetails notificationDetailsBoth = NotificationDetails(android: notificationDetails, iOS: darwinNotificationDetails);
+          AndroidNotificationDetails(channel.id, channel.name,
+              channelDescription: 'your channel Description',
+              importance: Importance.high,
+              priority: Priority.high,
+              ticker: 'ticker');
+      const DarwinNotificationDetails darwinNotificationDetails =
+          DarwinNotificationDetails(
+              presentAlert: true, presentBadge: true, presentSound: true);
+      NotificationDetails notificationDetailsBoth = NotificationDetails(
+          android: notificationDetails, iOS: darwinNotificationDetails);
       await FlutterLocalNotificationsPlugin().show(
-        0,
-        message.notification!.title,
-        message.notification!.body,
-        notificationDetailsBoth,
+        id: 0,
+        title: message.notification!.title,
+        body: message.notification!.body,
+        notificationDetails: notificationDetailsBoth,
         payload: jsonEncode(message.data),
       );
     } on Exception catch (e) {

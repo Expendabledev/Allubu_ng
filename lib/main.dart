@@ -29,12 +29,11 @@ Future<void> main() async {
   if (currentEnv == FirebaseEnv.defaultDb) {
     FireStoreUtils.instance.init(firebaseApp);
   } else {
-    FireStoreUtils.instance.init(firebaseApp, databaseId: 'staging'); // pass databaseId if named DB
+    FireStoreUtils.instance.init(firebaseApp,
+        databaseId: 'staging'); // pass databaseId if named DB
   }
   await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-    androidProvider: AndroidProvider.playIntegrity,
-    appleProvider: AppleProvider.appAttest,
+    providerWeb: ReCaptchaV3Provider('recaptcha-v3-site-key'),
   );
   await Preferences.initPref();
   runApp(const MyApp());
@@ -65,12 +64,16 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   Future<void> _setInitialLanguage() async {
-    if (Preferences.getString(Preferences.languageCodeKey).toString().isNotEmpty) {
+    if (Preferences.getString(Preferences.languageCodeKey)
+        .toString()
+        .isNotEmpty) {
       LanguageModel languageModel = Constant.getLanguage();
       LocalizationService().changeLocale(languageModel.slug.toString());
     } else {
-      LanguageModel languageModel = LanguageModel(slug: "en", isRtl: false, title: "English");
-      Preferences.setString(Preferences.languageCodeKey, jsonEncode(languageModel.toJson()));
+      LanguageModel languageModel =
+          LanguageModel(slug: "en", isRtl: false, title: "English");
+      Preferences.setString(
+          Preferences.languageCodeKey, jsonEncode(languageModel.toJson()));
     }
   }
 
@@ -107,7 +110,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   void getCurrentAppTheme() async {
-    themeChangeProvider.darkTheme = await themeChangeProvider.darkThemePreference.getTheme();
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
   }
 
   @override
