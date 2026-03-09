@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/dashboard_screen/dashboard_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/dashboard_screen/dashboard_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class PinCodeController extends GetxController {
-  Rx<TextEditingController> pinCodeTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> pinCodeTextFieldController =
+      TextEditingController().obs;
 
   @override
   void onInit() {

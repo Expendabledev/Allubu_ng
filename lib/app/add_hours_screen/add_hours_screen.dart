@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/add_hours_controller.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/add_hours_controller.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class AddHoursScreen extends StatelessWidget {
   const AddHoursScreen({super.key});
@@ -20,7 +20,9 @@ class AddHoursScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
               appBar: AppBar(
-                backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                backgroundColor: themeChange.getThem()
+                    ? AppThemeData.greyDark10
+                    : AppThemeData.grey10,
                 centerTitle: true,
                 leadingWidth: 120,
                 leading: Padding(
@@ -34,7 +36,9 @@ class AddHoursScreen extends StatelessWidget {
                         SvgPicture.asset(
                           "assets/icons/icon_close.svg",
                           colorFilter: ColorFilter.mode(
-                            themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark06
+                                : AppThemeData.grey01,
                             BlendMode.srcIn,
                           ),
                           width: 22,
@@ -46,7 +50,9 @@ class AddHoursScreen extends StatelessWidget {
                           "Close".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 14,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -59,7 +65,9 @@ class AddHoursScreen extends StatelessWidget {
                   "Add Hours".tr,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.semiboldOpenSans,
                   ),
@@ -75,7 +83,9 @@ class AddHoursScreen extends StatelessWidget {
                         "Submit".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                          color: themeChange.getThem()
+                              ? AppThemeData.tealDark02
+                              : AppThemeData.teal02,
                           fontSize: 14,
                           fontFamily: AppThemeData.boldOpenSans,
                         ),
@@ -89,7 +99,8 @@ class AddHoursScreen extends StatelessWidget {
                   : Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 14),
                           child: Row(
                             children: [
                               Expanded(
@@ -97,7 +108,9 @@ class AddHoursScreen extends StatelessWidget {
                                   "Show your hours to customer?",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontSize: 14,
                                     fontFamily: AppThemeData.boldOpenSans,
                                   ),
@@ -110,8 +123,12 @@ class AddHoursScreen extends StatelessWidget {
                                   onChanged: (bool value) async {
                                     controller.showWorkingHours.value = value;
                                   },
-                                  activeTrackColor: AppThemeData.red02, // Color when switch is ON
-                                  inactiveTrackColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, // Color when switch is OFF
+                                  activeTrackColor: AppThemeData
+                                      .red02, // Color when switch is ON
+                                  inactiveTrackColor: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData
+                                          .grey06, // Color when switch is OFF
                                 ),
                               ),
                             ],
@@ -123,7 +140,10 @@ class AddHoursScreen extends StatelessWidget {
                             : Expanded(
                                 child: ListView(
                                   padding: const EdgeInsets.all(16),
-                                  children: controller.businessWeek.entries.map((entry) => _buildDayEditor(context, controller, entry.key, entry.value)).toList(),
+                                  children: controller.businessWeek.entries
+                                      .map((entry) => _buildDayEditor(context,
+                                          controller, entry.key, entry.value))
+                                      .toList(),
                                 ),
                               ),
                       ],
@@ -131,7 +151,8 @@ class AddHoursScreen extends StatelessWidget {
         });
   }
 
-  Widget _buildDayEditor(BuildContext context, AddHoursController controller, String day, DayHours hours) {
+  Widget _buildDayEditor(BuildContext context, AddHoursController controller,
+      String day, DayHours hours) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +164,9 @@ class AddHoursScreen extends StatelessWidget {
                 day[0].toUpperCase() + day.substring(1),
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 14,
                   fontFamily: AppThemeData.boldOpenSans,
                 ),
@@ -154,10 +177,13 @@ class AddHoursScreen extends StatelessWidget {
               child: CupertinoSwitch(
                 value: hours.isOpen,
                 onChanged: (bool value) async {
-                  controller.businessWeek[day] = DayHours(isOpen: value, timeRanges: hours.timeRanges);
+                  controller.businessWeek[day] =
+                      DayHours(isOpen: value, timeRanges: hours.timeRanges);
                 },
                 activeTrackColor: AppThemeData.red02, // Color when switch is ON
-                inactiveTrackColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, // Color when switch is OFF
+                inactiveTrackColor: themeChange.getThem()
+                    ? AppThemeData.greyDark06
+                    : AppThemeData.grey06, // Color when switch is OFF
               ),
             ),
           ],
@@ -184,19 +210,30 @@ class AddHoursScreen extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                              border: Border.all(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
+                              border: Border.all(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
                               child: Text(
-                                'Open - ${hours.timeRanges[i].open.format(context)}'.tr,
+                                'Open - ${hours.timeRanges[i].open.format(context)}'
+                                    .tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: AppThemeData.semiboldOpenSans,
                                   fontSize: 14,
-                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark01
+                                      : AppThemeData.grey01,
                                 ),
                               ),
                             ),
@@ -220,19 +257,29 @@ class AddHoursScreen extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                              border: Border.all(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
+                              border: Border.all(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
                               child: Text(
                                 'Close: ${hours.timeRanges[i].close.format(context)}',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: AppThemeData.semiboldOpenSans,
                                   fontSize: 14,
-                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark01
+                                      : AppThemeData.grey01,
                                 ),
                               ),
                             ),
@@ -247,7 +294,13 @@ class AddHoursScreen extends StatelessWidget {
                           hours.timeRanges.removeAt(i);
                           controller.businessWeek.refresh();
                         },
-                        child: Constant.svgPictureShow("assets/icons/icon_delete-one.svg", themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02, null, null),
+                        child: Constant.svgPictureShow(
+                            "assets/icons/icon_delete-one.svg",
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark02
+                                : AppThemeData.grey02,
+                            null,
+                            null),
                       ),
                     ],
                   ),

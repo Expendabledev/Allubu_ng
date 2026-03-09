@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/bookmarks_model.dart';
-import 'package:yelpify/models/category_history_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/utils/category_history_storage.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/bookmarks_model.dart';
+import 'package:allubmarket/models/category_history_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/utils/category_history_storage.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/utils.dart';
 
 class HomeController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
@@ -45,12 +45,14 @@ class HomeController extends GetxController {
   }
 
   Future<void> getCurrentLocation() async {
-    if (FireStoreUtils.getCurrentUid() != '') await FireStoreUtils.getCurrentUserModel();
+    if (FireStoreUtils.getCurrentUid() != '')
+      await FireStoreUtils.getCurrentUserModel();
     Constant.currentLocation = await Utils.getCurrentLocation();
     if (Constant.currentLocation == null) {
       latLng.value = Constant.currentLocationLatLng!;
     } else {
-      latLng.value = LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude);
+      latLng.value = LatLng(Constant.currentLocation!.latitude,
+          Constant.currentLocation!.longitude);
     }
   }
 

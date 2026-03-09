@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/complain_report_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/complain_report_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class ComplainReportScreen extends StatelessWidget {
   const ComplainReportScreen({super.key});
@@ -20,7 +20,9 @@ class ComplainReportScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -34,7 +36,11 @@ class ComplainReportScreen extends StatelessWidget {
                       SvgPicture.asset(
                         "assets/icons/icon_left.svg",
                         width: 22,
-                        colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
+                            BlendMode.srcIn),
                       ),
                       SizedBox(
                         width: 10,
@@ -43,7 +49,9 @@ class ComplainReportScreen extends StatelessWidget {
                         "Back".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -56,7 +64,9 @@ class ComplainReportScreen extends StatelessWidget {
                 "Complain & Report".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -66,8 +76,10 @@ class ComplainReportScreen extends StatelessWidget {
                   onTap: () {
                     if (controller.selectedReason.value.isEmpty) {
                       ShowToastDialog.showToast("Please select reason".tr);
-                    } else if (controller.reportTextFieldController.value.text.isEmpty) {
-                      ShowToastDialog.showToast("Please share your experience".tr);
+                    } else if (controller
+                        .reportTextFieldController.value.text.isEmpty) {
+                      ShowToastDialog.showToast(
+                          "Please share your experience".tr);
                     } else {
                       controller.submitReport();
                     }
@@ -78,7 +90,9 @@ class ComplainReportScreen extends StatelessWidget {
                       "Send".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.tealDark02
+                            : AppThemeData.teal02,
                         fontSize: 14,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
@@ -90,44 +104,79 @@ class ComplainReportScreen extends StatelessWidget {
             body: controller.isLoading.value
                 ? Constant.loader()
                 : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 20),
                     child: Column(
                       children: [
                         DropdownButtonFormField<String>(
                           hint: Text("Select a reason".tr),
-                          initialValue: controller.selectedReason.value.isEmpty ? null : controller.selectedReason.value,
+                          initialValue: controller.selectedReason.value.isEmpty
+                              ? null
+                              : controller.selectedReason.value,
                           onChanged: (String? newValue) {
                             controller.selectedReason.value = newValue!;
                           },
-                          items: controller.reportCategories.map((String reason) {
+                          items:
+                              controller.reportCategories.map((String reason) {
                             return DropdownMenuItem<String>(
                               value: reason,
                               child: Text(reason),
                             );
                           }).toList(),
-                          style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontFamily: AppThemeData.medium),
+                          style: TextStyle(
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark01
+                                  : AppThemeData.grey01,
+                              fontFamily: AppThemeData.medium),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                            fillColor: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
                             disabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.redDark02
+                                      : AppThemeData.red02,
+                                  width: 1),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                             errorBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                             border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                           ),
                         ),
@@ -135,8 +184,10 @@ class ComplainReportScreen extends StatelessWidget {
                           height: 10,
                         ),
                         TextFieldWidget(
-                          controller: controller.reportTextFieldController.value,
-                          hintText: 'What went wrong? Share your experience.'.tr,
+                          controller:
+                              controller.reportTextFieldController.value,
+                          hintText:
+                              'What went wrong? Share your experience.'.tr,
                           maxLine: 6,
                         ),
                       ],

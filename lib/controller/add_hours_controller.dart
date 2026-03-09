@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class AddHoursController extends GetxController {
   RxBool isLoading = true.obs;
@@ -68,13 +68,48 @@ class AddHoursController extends GetxController {
 
   BusinessHours generateBusinessHours() {
     return BusinessHours(
-      monday: businessWeek['monday']!.isOpen ? businessWeek['monday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
-      tuesday: businessWeek['tuesday']!.isOpen ? businessWeek['tuesday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
-      wednesday: businessWeek['wednesday']!.isOpen ? businessWeek['wednesday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
-      thursday: businessWeek['thursday']!.isOpen ? businessWeek['thursday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
-      friday: businessWeek['friday']!.isOpen ? businessWeek['friday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
-      saturday: businessWeek['saturday']!.isOpen ? businessWeek['saturday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
-      sunday: businessWeek['sunday']!.isOpen ? businessWeek['sunday']!.timeRanges.map((e) => e.toRangeString()).toList() : [],
+      monday: businessWeek['monday']!.isOpen
+          ? businessWeek['monday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
+      tuesday: businessWeek['tuesday']!.isOpen
+          ? businessWeek['tuesday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
+      wednesday: businessWeek['wednesday']!.isOpen
+          ? businessWeek['wednesday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
+      thursday: businessWeek['thursday']!.isOpen
+          ? businessWeek['thursday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
+      friday: businessWeek['friday']!.isOpen
+          ? businessWeek['friday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
+      saturday: businessWeek['saturday']!.isOpen
+          ? businessWeek['saturday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
+      sunday: businessWeek['sunday']!.isOpen
+          ? businessWeek['sunday']!
+              .timeRanges
+              .map((e) => e.toRangeString())
+              .toList()
+          : [],
     );
   }
 
@@ -100,8 +135,10 @@ class AddHoursController extends GetxController {
       final closeParts = parts[1].split(':');
 
       return TimeRange(
-        open: TimeOfDay(hour: int.parse(openParts[0]), minute: int.parse(openParts[1])),
-        close: TimeOfDay(hour: int.parse(closeParts[0]), minute: int.parse(closeParts[1])),
+        open: TimeOfDay(
+            hour: int.parse(openParts[0]), minute: int.parse(openParts[1])),
+        close: TimeOfDay(
+            hour: int.parse(closeParts[0]), minute: int.parse(closeParts[1])),
       );
     }).toList();
     return DayHours(isOpen: true, timeRanges: ranges);

@@ -5,8 +5,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
-import 'package:yelpify/utils/utils.dart';
-import 'package:yelpify/widgets/osm_map/place_model.dart';
+import 'package:allubmarket/utils/utils.dart';
+import 'package:allubmarket/widgets/osm_map/place_model.dart';
 
 class OSMMapController extends GetxController {
   final mapController = MapController();

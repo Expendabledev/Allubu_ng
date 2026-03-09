@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/models/business_model.dart';
+import 'package:allubmarket/models/business_model.dart';
 
 class EditAddressController extends GetxController {
-  Rx<TextEditingController> addressOneTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> addressTwoFieldController = TextEditingController().obs;
-  Rx<TextEditingController> addressThreeFieldController = TextEditingController().obs;
+  Rx<TextEditingController> addressOneTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> addressTwoFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> addressThreeFieldController =
+      TextEditingController().obs;
 
   Rx<AddressModel> address = AddressModel().obs;
   Rx<LatLngModel> location = LatLngModel().obs;

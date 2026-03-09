@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/pricing_request_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/pricing_request_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class BusinessProjectListController extends GetxController {
   RxBool isLoading = true.obs;
@@ -35,7 +35,6 @@ class BusinessProjectListController extends GetxController {
     );
   }
 
-
   Stream<bool> checkStatus(PricingRequestModel projectRequestModel) {
     return FireStoreUtils.fireStore
         .collection(CollectionName.projectRequest)
@@ -43,7 +42,7 @@ class BusinessProjectListController extends GetxController {
         .collection("chat")
         .where("senderId", isEqualTo: businessModel.value.id)
         .snapshots()
-        .map((snapshot) => snapshot.docs.isNotEmpty?true:false);
+        .map((snapshot) => snapshot.docs.isNotEmpty ? true : false);
   }
 
   Stream<int> getUnreadChatCount(PricingRequestModel projectRequestModel) {

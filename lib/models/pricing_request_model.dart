@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/models/category_model.dart';
+import 'package:allubmarket/models/category_model.dart';
 
 class PricingRequestModel {
   String? id;
@@ -30,7 +30,9 @@ class PricingRequestModel {
     images = json['images'].cast<String>();
     createdAt = json['createdAt'];
     status = json['status'];
-    category = json['category'] != null ? CategoryModel.fromJson(json['category']) : CategoryModel();
+    category = json['category'] != null
+        ? CategoryModel.fromJson(json['category'])
+        : CategoryModel();
   }
 
   Map<String, dynamic> toJson() {

@@ -6,38 +6,38 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/add_review_screen/add_review_screen.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/business_details_screen/pricing_form_screen.dart';
-import 'package:yelpify/app/business_details_screen/see_full_menu_screen.dart';
-import 'package:yelpify/app/check_in_screen/add_check_in_screen.dart';
-import 'package:yelpify/app/complain_report_screen/complain_report_screen.dart';
-import 'package:yelpify/app/other_people_screen/other_people_screen.dart';
-import 'package:yelpify/app/photo_screen/photo_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/business_details_controller.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/highlight_model.dart';
-import 'package:yelpify/models/item_model.dart';
-import 'package:yelpify/models/review_model.dart';
-import 'package:yelpify/models/service_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/service/ad_manager.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/round_button_border.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/utils/utils.dart';
-import 'package:yelpify/widgets/bookmark_bottomsheet.dart';
-import 'package:yelpify/widgets/custom_star_rating/custom_star_rating_screen.dart';
-import 'package:yelpify/widgets/readmore.dart';
-import 'package:yelpify/widgets/review_photo_view.dart';
-import 'package:yelpify/widgets/review_user_view.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/app/add_review_screen/add_review_screen.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/business_details_screen/pricing_form_screen.dart';
+import 'package:allubmarket/app/business_details_screen/see_full_menu_screen.dart';
+import 'package:allubmarket/app/check_in_screen/add_check_in_screen.dart';
+import 'package:allubmarket/app/complain_report_screen/complain_report_screen.dart';
+import 'package:allubmarket/app/other_people_screen/other_people_screen.dart';
+import 'package:allubmarket/app/photo_screen/photo_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/business_details_controller.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/highlight_model.dart';
+import 'package:allubmarket/models/item_model.dart';
+import 'package:allubmarket/models/review_model.dart';
+import 'package:allubmarket/models/service_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/service/ad_manager.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/round_button_border.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/utils/utils.dart';
+import 'package:allubmarket/widgets/bookmark_bottomsheet.dart';
+import 'package:allubmarket/widgets/custom_star_rating/custom_star_rating_screen.dart';
+import 'package:allubmarket/widgets/readmore.dart';
+import 'package:allubmarket/widgets/review_photo_view.dart';
+import 'package:allubmarket/widgets/review_user_view.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class BusinessDetailsScreen extends StatelessWidget {
   const BusinessDetailsScreen({super.key});
@@ -59,7 +59,8 @@ class BusinessDetailsScreen extends StatelessWidget {
                   ? Constant.loader()
                   : NestedScrollView(
                       controller: controller.scrollController,
-                      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                      headerSliverBuilder:
+                          (BuildContext context, bool innerBoxIsScrolled) {
                         return <Widget>[
                           SliverAppBar(
                             expandedHeight: 410,
@@ -101,18 +102,25 @@ class BusinessDetailsScreen extends StatelessWidget {
                             ),
                             actions: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
                                 child: Row(
                                   children: [
                                     DebouncedInkWell(
                                       onTap: () async {
-                                        if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                        if (FireStoreUtils.getCurrentUid() ==
+                                                '' ||
+                                            FireStoreUtils.getCurrentUid()
+                                                .isEmpty) {
                                           Get.offAll(WelcomeScreen());
                                         } else {
                                           var result = await Get.bottomSheet(
-                                            BookMarkBottomSheet(businessModel: controller.businessModel.value),
+                                            BookMarkBottomSheet(
+                                                businessModel: controller
+                                                    .businessModel.value),
                                             isScrollControlled: true,
-                                            backgroundColor: AppThemeData.grey10,
+                                            backgroundColor:
+                                                AppThemeData.grey10,
                                           );
                                           if (result == true) {
                                             await controller.getBusiness();
@@ -121,10 +129,16 @@ class BusinessDetailsScreen extends StatelessWidget {
                                       },
                                       child: Obx(
                                         () => Constant.svgPictureShow(
-                                          controller.businessModel.value.bookmarkUserId!.contains(FireStoreUtils.getCurrentUid())
+                                          controller.businessModel.value
+                                                  .bookmarkUserId!
+                                                  .contains(FireStoreUtils
+                                                      .getCurrentUid())
                                               ? "assets/icons/bookmark-one_fill.svg"
                                               : "assets/icons/icon_bookmark-one.svg",
-                                          controller.businessModel.value.bookmarkUserId!.contains(FireStoreUtils.getCurrentUid())
+                                          controller.businessModel.value
+                                                  .bookmarkUserId!
+                                                  .contains(FireStoreUtils
+                                                      .getCurrentUid())
                                               ? AppThemeData.red02
                                               : innerBoxIsScrolled
                                                   ? themeChange.getThem()
@@ -141,7 +155,8 @@ class BusinessDetailsScreen extends StatelessWidget {
                                     ),
                                     DebouncedInkWell(
                                       onTap: () async {
-                                        showBusinessCupertinoActionSheet(themeChange, context, controller);
+                                        showBusinessCupertinoActionSheet(
+                                            themeChange, context, controller);
                                       },
                                       child: Constant.svgPictureShow(
                                         "assets/icons/icon_more.svg",
@@ -158,32 +173,47 @@ class BusinessDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                             ],
-                            backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                            backgroundColor: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
                             flexibleSpace: FlexibleSpaceBar(
                               background: Padding(
                                 padding: const EdgeInsets.only(bottom: 50),
                                 child: Stack(
                                   children: [
-                                    controller.businessModel.value.coverPhoto != null && controller.businessModel.value.coverPhoto!.isNotEmpty
+                                    controller.businessModel.value.coverPhoto !=
+                                                null &&
+                                            controller.businessModel.value
+                                                .coverPhoto!.isNotEmpty
                                         ? Stack(
                                             children: [
                                               NetworkImageWidget(
-                                                width: Responsive.width(100, context),
-                                                height: Responsive.width(100, context),
-                                                imageUrl: controller.businessModel.value.coverPhoto.toString(),
+                                                width: Responsive.width(
+                                                    100, context),
+                                                height: Responsive.width(
+                                                    100, context),
+                                                imageUrl: controller
+                                                    .businessModel
+                                                    .value
+                                                    .coverPhoto
+                                                    .toString(),
                                                 fit: BoxFit.cover,
                                               ),
                                               Container(
-                                                width: Responsive.width(100, context),
-                                                height: Responsive.width(100, context),
-                                                color: Colors.black.withOpacity(0.70),
+                                                width: Responsive.width(
+                                                    100, context),
+                                                height: Responsive.width(
+                                                    100, context),
+                                                color: Colors.black
+                                                    .withOpacity(0.70),
                                               ),
                                             ],
                                           )
                                         : Container(
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                image: AssetImage("assets/images/business_cover_placeholder.png"),
+                                                image: AssetImage(
+                                                    "assets/images/business_cover_placeholder.png"),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -195,9 +225,14 @@ class BusinessDetailsScreen extends StatelessWidget {
                                       right: 16,
                                       child: SingleChildScrollView(
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            controller.businessModel.value.ownerId == null || controller.businessModel.value.ownerId!.isEmpty
+                                            controller.businessModel.value
+                                                            .ownerId ==
+                                                        null ||
+                                                    controller.businessModel
+                                                        .value.ownerId!.isEmpty
                                                 ? RoundedButtonFill(
                                                     title: 'Unclaimed'.tr,
                                                     height: 3,
@@ -207,13 +242,27 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                     isCenter: true,
                                                     icon: Icon(
                                                       Icons.info_outline,
-                                                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark01
+                                                          : AppThemeData.grey01,
                                                       size: 16,
                                                     ),
-                                                    textColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                    textColor: themeChange
+                                                            .getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark10
+                                                        : AppThemeData.grey10,
                                                     onPress: () {
-                                                      Constant.launchUrlOfClimBusiness(context, Constant.claimBusinessURL);
+                                                      Constant.launchUrlOfClimBusiness(
+                                                          context,
+                                                          Constant
+                                                              .claimBusinessURL);
                                                     },
                                                   )
                                                 : RoundedButtonFill(
@@ -225,21 +274,35 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                     isCenter: true,
                                                     icon: Icon(
                                                       Icons.info_outline,
-                                                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark01
+                                                          : AppThemeData.grey01,
                                                       size: 16,
                                                     ),
-                                                    textColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                    textColor: themeChange
+                                                            .getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark10
+                                                        : AppThemeData.grey10,
                                                     onPress: () {},
                                                   ),
                                             SizedBox(
                                               height: 5,
                                             ),
                                             Text(
-                                              controller.businessModel.value.businessName!.tr,
+                                              controller.businessModel.value
+                                                  .businessName!.tr,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.grey10
+                                                    : AppThemeData.grey10,
                                                 fontSize: 24,
                                                 fontFamily: AppThemeData.bold,
                                               ),
@@ -252,11 +315,23 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                 CustomStarRating(
                                                   size: 18,
                                                   enable: false,
-                                                  bgColor: themeChange.getThem() ? AppThemeData.grey03 : AppThemeData.grey03,
-                                                  emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                                  initialRating: Constant.calculateReview(
-                                                    reviewCount: controller.businessModel.value.reviewCount!,
-                                                    reviewSum: controller.businessModel.value.reviewSum!,
+                                                  bgColor: themeChange.getThem()
+                                                      ? AppThemeData.grey03
+                                                      : AppThemeData.grey03,
+                                                  emptyColor: themeChange
+                                                          .getThem()
+                                                      ? AppThemeData.greyDark10
+                                                      : AppThemeData.grey10,
+                                                  initialRating:
+                                                      Constant.calculateReview(
+                                                    reviewCount: controller
+                                                        .businessModel
+                                                        .value
+                                                        .reviewCount!,
+                                                    reviewSum: controller
+                                                        .businessModel
+                                                        .value
+                                                        .reviewSum!,
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -264,14 +339,23 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                 ),
                                                 Text(
                                                   Constant.calculateReview(
-                                                    reviewCount: controller.businessModel.value.reviewCount!,
-                                                    reviewSum: controller.businessModel.value.reviewSum!,
+                                                    reviewCount: controller
+                                                        .businessModel
+                                                        .value
+                                                        .reviewCount!,
+                                                    reviewSum: controller
+                                                        .businessModel
+                                                        .value
+                                                        .reviewSum!,
                                                   ),
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData.grey10
+                                                        : AppThemeData.grey10,
                                                     fontSize: 14,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -281,52 +365,92 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                   "(${double.parse(controller.businessModel.value.reviewCount.toString()).toStringAsFixed(0)} reviews)",
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData.grey10
+                                                        : AppThemeData.grey10,
                                                     fontSize: 14,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                             SizedBox(height: 10),
                                             Text(
-                                              Constant.getCategoryNames(controller.businessModel.value.category).tr,
+                                              Constant.getCategoryNames(
+                                                      controller.businessModel
+                                                          .value.category)
+                                                  .tr,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.grey10
+                                                    : AppThemeData.grey10,
                                                 fontSize: 14,
-                                                fontFamily: AppThemeData.semiboldOpenSans,
+                                                fontFamily: AppThemeData
+                                                    .semiboldOpenSans,
                                               ),
                                             ),
-                                            controller.businessModel.value.businessHours == null || controller.businessModel.value.showWorkingHours == false
+                                            controller.businessModel.value
+                                                            .businessHours ==
+                                                        null ||
+                                                    controller
+                                                            .businessModel
+                                                            .value
+                                                            .showWorkingHours ==
+                                                        false
                                                 ? SizedBox()
                                                 : Padding(
-                                                    padding: const EdgeInsets.only(top: 5),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
                                                     child: Row(
                                                       children: [
-                                                        Constant.buildStatusText(themeChange, Constant.getBusinessStatus(controller.businessModel.value.businessHours!), false),
+                                                        Constant.buildStatusText(
+                                                            themeChange,
+                                                            Constant.getBusinessStatus(
+                                                                controller
+                                                                    .businessModel
+                                                                    .value
+                                                                    .businessHours!),
+                                                            false),
                                                         SizedBox(
                                                           width: 10,
                                                         ),
                                                         Icon(
                                                           Icons.circle_rounded,
                                                           size: 8,
-                                                          color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                          color: themeChange
+                                                                  .getThem()
+                                                              ? AppThemeData
+                                                                  .greyDark10
+                                                              : AppThemeData
+                                                                  .grey10,
                                                         ),
                                                         SizedBox(
                                                           width: 10,
                                                         ),
                                                         DebouncedInkWell(
                                                           onTap: () {
-                                                            seeHoursFilterBottomSheet(themeChange, controller);
+                                                            seeHoursFilterBottomSheet(
+                                                                themeChange,
+                                                                controller);
                                                           },
                                                           child: Text(
                                                             "See hours".tr,
-                                                            textAlign: TextAlign.start,
+                                                            textAlign:
+                                                                TextAlign.start,
                                                             style: TextStyle(
-                                                              color: themeChange.getThem() ? AppThemeData.teal02 : AppThemeData.teal02,
+                                                              color: themeChange
+                                                                      .getThem()
+                                                                  ? AppThemeData
+                                                                      .teal02
+                                                                  : AppThemeData
+                                                                      .teal02,
                                                               fontSize: 14,
-                                                              fontFamily: AppThemeData.boldOpenSans,
+                                                              fontFamily:
+                                                                  AppThemeData
+                                                                      .boldOpenSans,
                                                             ),
                                                           ),
                                                         ),
@@ -334,28 +458,41 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                             SizedBox(height: 5),
-                                            LayoutBuilder(builder: (context, constraints) {
+                                            LayoutBuilder(builder:
+                                                (context, constraints) {
                                               return ConstrainedBox(
                                                   constraints: BoxConstraints(
-                                                    maxHeight: Responsive.height(8, context),
+                                                    maxHeight:
+                                                        Responsive.height(
+                                                            8, context),
                                                   ),
                                                   child: SingleChildScrollView(
                                                     child: ReadMoreText(
-                                                      controller.businessModel.value.description.toString().tr,
+                                                      controller.businessModel
+                                                          .value.description
+                                                          .toString()
+                                                          .tr,
                                                       trimLines: 2,
-                                                      colorClickableText: Colors.pink,
+                                                      colorClickableText:
+                                                          Colors.pink,
                                                       trimMode: TrimMode.Line,
-                                                      trimCollapsedText: 'Show more'.tr,
-                                                      trimExpandedText: 'Show less'.tr,
+                                                      trimCollapsedText:
+                                                          'Show more'.tr,
+                                                      trimExpandedText:
+                                                          'Show less'.tr,
                                                       style: TextStyle(
-                                                        color: AppThemeData.grey10,
+                                                        color:
+                                                            AppThemeData.grey10,
                                                         fontSize: 14,
-                                                        fontFamily: AppThemeData.regularOpenSans,
+                                                        fontFamily: AppThemeData
+                                                            .regularOpenSans,
                                                       ),
                                                       moreStyle: TextStyle(
-                                                        color: AppThemeData.red02,
+                                                        color:
+                                                            AppThemeData.red02,
                                                         fontSize: 14,
-                                                        fontFamily: AppThemeData.boldOpenSans,
+                                                        fontFamily: AppThemeData
+                                                            .boldOpenSans,
                                                       ),
                                                     ),
                                                   ));
@@ -363,16 +500,31 @@ class BusinessDetailsScreen extends StatelessWidget {
                                             SizedBox(height: 20),
                                             Obx(
                                               () => RoundedButtonFill(
-                                                title: controller.allPhotos.isEmpty
-                                                    ? 'Upload Photo'.tr
-                                                    : 'see_all_images'.trParams({
-                                                        'count': controller.allPhotos.length.toString(),
-                                                      }).tr,
+                                                title:
+                                                    controller.allPhotos.isEmpty
+                                                        ? 'Upload Photo'.tr
+                                                        : 'see_all_images'
+                                                            .trParams({
+                                                            'count': controller
+                                                                .allPhotos
+                                                                .length
+                                                                .toString(),
+                                                          }).tr,
                                                 height: 4.5,
-                                                textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                                color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.grey02,
+                                                textColor: themeChange.getThem()
+                                                    ? AppThemeData.greyDark10
+                                                    : AppThemeData.grey10,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.redDark02
+                                                    : AppThemeData.grey02,
                                                 onPress: () {
-                                                  Get.to(PhotoScreen(), arguments: {"businessModel": controller.businessModel.value});
+                                                  Get.to(PhotoScreen(),
+                                                      arguments: {
+                                                        "businessModel":
+                                                            controller
+                                                                .businessModel
+                                                                .value
+                                                      });
                                                 },
                                               ),
                                             ),
@@ -387,9 +539,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                             bottom: PreferredSize(
                               preferredSize: Size.fromHeight(48),
                               child: Align(
-                                alignment: Alignment.centerLeft, // 👈 Align to left
+                                alignment:
+                                    Alignment.centerLeft, // 👈 Align to left
                                 child: Container(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark10
+                                      : AppThemeData.grey10,
                                   child: TabBar(
                                     controller: controller.tabController,
                                     isScrollable: false,
@@ -398,58 +553,89 @@ class BusinessDetailsScreen extends StatelessWidget {
                                     // 👈 This makes it scrollable
                                     onTap: (value) {
                                       controller.currentIndex.value = value;
-                                      if (controller.hasPricing() && controller.hasMenuItem()) {
+                                      if (controller.hasPricing() &&
+                                          controller.hasMenuItem()) {
                                         if (value == 0) {
-                                          controller.scrollToSection(controller.getTouch);
+                                          controller.scrollToSection(
+                                              controller.getTouch);
                                         } else if (value == 1) {
-                                          controller.scrollToSection(controller.menuKey);
+                                          controller.scrollToSection(
+                                              controller.menuKey);
                                         } else if (value == 2) {
-                                          controller.scrollToSection(controller.infoKey);
+                                          controller.scrollToSection(
+                                              controller.infoKey);
                                         } else {
-                                          controller.scrollToSection(controller.reviewKey);
+                                          controller.scrollToSection(
+                                              controller.reviewKey);
                                         }
-                                      } else if (controller.hasPricing() || controller.hasMenuItem()) {
+                                      } else if (controller.hasPricing() ||
+                                          controller.hasMenuItem()) {
                                         if (value == 0) {
                                           if (controller.hasPricing()) {
-                                            controller.scrollToSection(controller.getTouch);
+                                            controller.scrollToSection(
+                                                controller.getTouch);
                                           } else {
-                                            controller.scrollToSection(controller.menuKey);
+                                            controller.scrollToSection(
+                                                controller.menuKey);
                                           }
                                         } else if (value == 1) {
-                                          controller.scrollToSection(controller.infoKey);
+                                          controller.scrollToSection(
+                                              controller.infoKey);
                                         } else {
-                                          controller.scrollToSection(controller.reviewKey);
+                                          controller.scrollToSection(
+                                              controller.reviewKey);
                                         }
                                       } else {
                                         if (value == 0) {
-                                          controller.scrollToSection(controller.infoKey);
+                                          controller.scrollToSection(
+                                              controller.infoKey);
                                         } else {
-                                          controller.scrollToSection(controller.reviewKey);
+                                          controller.scrollToSection(
+                                              controller.reviewKey);
                                         }
                                       }
                                     },
-                                    indicatorColor: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
-                                    labelColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                    unselectedLabelColor: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                    labelPadding: EdgeInsets.symmetric(horizontal: 5),
+                                    indicatorColor: themeChange.getThem()
+                                        ? AppThemeData.red02
+                                        : AppThemeData.red02,
+                                    labelColor: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
+                                    unselectedLabelColor: themeChange.getThem()
+                                        ? AppThemeData.greyDark04
+                                        : AppThemeData.grey04,
+                                    labelPadding:
+                                        EdgeInsets.symmetric(horizontal: 5),
                                     // 👈 Equal padding
                                     indicator: UnderlineTabIndicator(
-                                      insets: EdgeInsets.symmetric(horizontal: controller.tabController.length > 3 ? -20 : -50),
+                                      insets: EdgeInsets.symmetric(
+                                          horizontal:
+                                              controller.tabController.length >
+                                                      3
+                                                  ? -20
+                                                  : -50),
                                       borderSide: BorderSide(
-                                        color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.red02
+                                            : AppThemeData.red02,
                                         width: 4,
                                       ),
                                     ),
-                                    tabs: controller.hasPricing() && controller.hasMenuItem()
+                                    tabs: controller.hasPricing() &&
+                                            controller.hasMenuItem()
                                         ? [
                                             Tab(text: "Get in touch".tr),
                                             Tab(text: "Menu".tr),
                                             Tab(text: "Info".tr),
                                             Tab(text: "Reviews".tr),
                                           ]
-                                        : controller.hasPricing() || controller.hasMenuItem()
+                                        : controller.hasPricing() ||
+                                                controller.hasMenuItem()
                                             ? [
-                                                controller.hasPricing() ? Tab(text: "Get in touch".tr) : Tab(text: "Menu".tr),
+                                                controller.hasPricing()
+                                                    ? Tab(
+                                                        text: "Get in touch".tr)
+                                                    : Tab(text: "Menu".tr),
                                                 Tab(text: "Info".tr),
                                                 Tab(text: "Reviews".tr),
                                               ]
@@ -464,7 +650,11 @@ class BusinessDetailsScreen extends StatelessWidget {
                           ),
                         ];
                       },
-                      body: Container(color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, child: infoPage(themeChange, controller)),
+                      body: Container(
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark10
+                              : AppThemeData.grey10,
+                          child: infoPage(themeChange, controller)),
                     ),
             ),
           );
@@ -479,9 +669,12 @@ class BusinessDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AdManager.bannerAdWidget(),
-            if (FireStoreUtils.getCurrentUid() != '') pricingWidget(controller, themeChange),
+            if (FireStoreUtils.getCurrentUid() != '')
+              pricingWidget(controller, themeChange),
             Obx(
-              () => controller.businessModel.value.recommendUserId?.contains(FireStoreUtils.getCurrentUid()) == true
+              () => controller.businessModel.value.recommendUserId
+                          ?.contains(FireStoreUtils.getCurrentUid()) ==
+                      true
                   ? SizedBox()
                   : FireStoreUtils.getCurrentUid() != ''
                       ? Padding(
@@ -496,23 +689,38 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   "Do you recommend this business?".tr,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark02
+                                        : AppThemeData.grey02,
                                     fontSize: 16,
                                     fontFamily: AppThemeData.boldOpenSans,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: RoundedButtonBorder(
                                           title: 'Yes',
                                           height: 4,
-                                          borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                          textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                          borderColor: themeChange.getThem()
+                                              ? AppThemeData.greyDark06
+                                              : AppThemeData.grey06,
+                                          textColor: themeChange.getThem()
+                                              ? AppThemeData.greyDark02
+                                              : AppThemeData.grey02,
                                           onPress: () {
-                                            controller.businessModel.value.recommendYesCount = (double.parse(controller.businessModel.value.recommendYesCount.toString()) + 1).toString();
+                                            controller.businessModel.value
+                                                    .recommendYesCount =
+                                                (double.parse(controller
+                                                            .businessModel
+                                                            .value
+                                                            .recommendYesCount
+                                                            .toString()) +
+                                                        1)
+                                                    .toString();
                                             controller.updateRecommended("yes");
                                           },
                                         ),
@@ -524,8 +732,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                                         child: RoundedButtonBorder(
                                           title: 'No',
                                           height: 4,
-                                          borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                          textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                          borderColor: themeChange.getThem()
+                                              ? AppThemeData.greyDark06
+                                              : AppThemeData.grey06,
+                                          textColor: themeChange.getThem()
+                                              ? AppThemeData.greyDark02
+                                              : AppThemeData.grey02,
                                           onPress: () {
                                             controller.updateRecommended("no");
                                           },
@@ -538,10 +750,15 @@ class BusinessDetailsScreen extends StatelessWidget {
                                         child: RoundedButtonBorder(
                                           title: 'Maybe',
                                           height: 4,
-                                          borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                          textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                          borderColor: themeChange.getThem()
+                                              ? AppThemeData.greyDark06
+                                              : AppThemeData.grey06,
+                                          textColor: themeChange.getThem()
+                                              ? AppThemeData.greyDark02
+                                              : AppThemeData.grey02,
                                           onPress: () {
-                                            controller.updateRecommended("maybe");
+                                            controller
+                                                .updateRecommended("maybe");
                                           },
                                         ),
                                       )
@@ -549,10 +766,13 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: Divider(
                                     height: 1,
-                                    color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark06
+                                        : AppThemeData.grey06,
                                   ),
                                 ),
                               ],
@@ -563,13 +783,19 @@ class BusinessDetailsScreen extends StatelessWidget {
             ),
             menuWidget(controller, themeChange),
             infoWidget(controller, themeChange),
-            if (controller.businessModel.value.fbLink?.isNotEmpty == true || controller.businessModel.value.instaLink?.isNotEmpty == true)
+            if (controller.businessModel.value.fbLink?.isNotEmpty == true ||
+                controller.businessModel.value.instaLink?.isNotEmpty == true)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09, height: 14),
+                  Container(
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark09
+                          : AppThemeData.grey09,
+                      height: 14),
                   Padding(
-                    padding: const EdgeInsets.only(left: 14, right: 14, bottom: 16, top: 16),
+                    padding: const EdgeInsets.only(
+                        left: 14, right: 14, bottom: 16, top: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -577,7 +803,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                           "Social media links".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 20,
                             fontFamily: AppThemeData.boldOpenSans,
                           ),
@@ -586,24 +814,45 @@ class BusinessDetailsScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            if (controller.businessModel.value.fbLink?.isNotEmpty == true)
+                            if (controller
+                                    .businessModel.value.fbLink?.isNotEmpty ==
+                                true)
                               DebouncedInkWell(
                                   onTap: () async {
-                                    Utils.launchURL(controller.businessModel.value.fbLink.toString().toString());
+                                    Utils.launchURL(controller
+                                        .businessModel.value.fbLink
+                                        .toString()
+                                        .toString());
                                   },
-                                  child: imageWidget(themeChange, "assets/images/fb.png", "Facebook Link".tr)),
-                            if (controller.businessModel.value.instaLink?.isNotEmpty == true)
+                                  child: imageWidget(
+                                      themeChange,
+                                      "assets/images/fb.png",
+                                      "Facebook Link".tr)),
+                            if (controller.businessModel.value.instaLink
+                                    ?.isNotEmpty ==
+                                true)
                               DebouncedInkWell(
                                   onTap: () {
-                                    Utils.launchURL(controller.businessModel.value.instaLink.toString().toString().toString());
+                                    Utils.launchURL(controller
+                                        .businessModel.value.instaLink
+                                        .toString()
+                                        .toString()
+                                        .toString());
                                   },
-                                  child: imageWidget(themeChange, "assets/images/insta.png", "Instagram Link".tr)),
+                                  child: imageWidget(
+                                      themeChange,
+                                      "assets/images/insta.png",
+                                      "Instagram Link".tr)),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  Container(color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09, height: 14),
+                  Container(
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark09
+                          : AppThemeData.grey09,
+                      height: 14),
                 ],
               ),
             Padding(
@@ -615,7 +864,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                     "Share this business".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark02
+                          : AppThemeData.grey02,
                       fontSize: 16,
                       fontFamily: AppThemeData.boldOpenSans,
                     ),
@@ -629,28 +880,41 @@ class BusinessDetailsScreen extends StatelessWidget {
                       DebouncedInkWell(
                           onTap: () {
                             Utils.sendSMS(
-                                phoneNumber: '', message: "${controller.businessModel.value.businessName} \n ${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}");
+                                phoneNumber: '',
+                                message:
+                                    "${controller.businessModel.value.businessName} \n ${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}");
                           },
-                          child: imageWidget(themeChange, "assets/icons/icon_message-unread.svg", "Message".tr)),
+                          child: imageWidget(
+                              themeChange,
+                              "assets/icons/icon_message-unread.svg",
+                              "Message".tr)),
                       DebouncedInkWell(
                           onTap: () {
-                            Clipboard.setData(ClipboardData(text: "${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}")).then((_) {
+                            Clipboard.setData(ClipboardData(
+                                    text:
+                                        "${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}"))
+                                .then((_) {
                               ShowToastDialog.showToast("Link Copied".tr);
                             });
                           },
-                          child: imageWidget(themeChange, "assets/icons/icon_copy.svg", "Copy link".tr)),
+                          child: imageWidget(themeChange,
+                              "assets/icons/icon_copy.svg", "Copy link".tr)),
                       DebouncedInkWell(
                           onTap: () {
-                            Utils.shareBusiness("${controller.businessModel.value.businessName} \n ${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}");
+                            Utils.shareBusiness(
+                                "${controller.businessModel.value.businessName} \n ${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}");
                           },
-                          child: imageWidget(themeChange, "assets/icons/icon_more-one.svg", "More".tr)),
+                          child: imageWidget(themeChange,
+                              "assets/icons/icon_more-one.svg", "More".tr)),
                     ],
                   ),
                 ],
               ),
             ),
             Container(
-              color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark09
+                  : AppThemeData.grey09,
               height: 14,
             ),
             Padding(
@@ -659,7 +923,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                 "You might also consider".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 20,
                   fontFamily: AppThemeData.boldOpenSans,
                 ),
@@ -676,7 +942,10 @@ class BusinessDetailsScreen extends StatelessWidget {
                   onTap: () {
                     Constant.setRecentBusiness(businessModel);
                     Get.back();
-                    Get.to(BusinessDetailsScreen(), arguments: {"businessModel": businessModel, "categoryModel": controller.categoryModel.value});
+                    Get.to(BusinessDetailsScreen(), arguments: {
+                      "businessModel": businessModel,
+                      "categoryModel": controller.categoryModel.value
+                    });
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -689,13 +958,18 @@ class BusinessDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                               child: NetworkImageWidget(
                                 imageUrl: businessModel.coverPhoto.toString(),
                                 width: Responsive.width(22, context),
                                 height: Responsive.height(10, context),
                                 fit: BoxFit.cover,
-                                errorWidget: Constant.svgPictureShow("assets/icons/ic_placeholder_bussiness.svg", null, 50, 50),
+                                errorWidget: Constant.svgPictureShow(
+                                    "assets/icons/ic_placeholder_bussiness.svg",
+                                    null,
+                                    50,
+                                    50),
                               ),
                             ),
                             SizedBox(
@@ -703,14 +977,17 @@ class BusinessDetailsScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "${businessModel.businessName}".tr,
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark02
+                                          : AppThemeData.grey02,
                                       fontSize: 16,
                                       fontFamily: AppThemeData.boldOpenSans,
                                     ),
@@ -719,11 +996,17 @@ class BusinessDetailsScreen extends StatelessWidget {
                                     height: 5,
                                   ),
                                   CustomStarRating(
-                                    initialRating: Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum),
+                                    initialRating: Constant.calculateReview(
+                                        reviewCount: businessModel.reviewCount,
+                                        reviewSum: businessModel.reviewSum),
                                     size: 20,
                                     enable: false,
-                                    bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                    emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                    bgColor: themeChange.getThem()
+                                        ? AppThemeData.greyDark06
+                                        : AppThemeData.grey06,
+                                    emptyColor: themeChange.getThem()
+                                        ? AppThemeData.greyDark10
+                                        : AppThemeData.grey10,
                                   ),
                                   SizedBox(
                                     height: 5,
@@ -731,12 +1014,20 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum).tr,
+                                        Constant.calculateReview(
+                                                reviewCount:
+                                                    businessModel.reviewCount,
+                                                reviewSum:
+                                                    businessModel.reviewSum)
+                                            .tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark04
+                                              : AppThemeData.grey04,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.semiboldOpenSans,
+                                          fontFamily:
+                                              AppThemeData.semiboldOpenSans,
                                         ),
                                       ),
                                       SizedBox(
@@ -746,9 +1037,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                                         "(${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews)",
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark04
+                                              : AppThemeData.grey04,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.semiboldOpenSans,
+                                          fontFamily:
+                                              AppThemeData.semiboldOpenSans,
                                         ),
                                       ),
                                     ],
@@ -776,15 +1070,28 @@ class BusinessDetailsScreen extends StatelessWidget {
                     child: RoundedButtonBorder(
                       title: 'Add Photo'.tr,
                       height: 5.5,
-                      icon: Constant.svgPictureShow("assets/icons/icon_picture.svg", themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02, null, null),
-                      borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                      icon: Constant.svgPictureShow(
+                          "assets/icons/icon_picture.svg",
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark02
+                              : AppThemeData.grey02,
+                          null,
+                          null),
+                      borderColor: themeChange.getThem()
+                          ? AppThemeData.greyDark06
+                          : AppThemeData.grey06,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark02
+                          : AppThemeData.grey02,
                       isRight: false,
                       onPress: () {
-                        if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                        if (FireStoreUtils.getCurrentUid() == '' ||
+                            FireStoreUtils.getCurrentUid().isEmpty) {
                           Get.offAll(WelcomeScreen());
                         } else {
-                          Get.to(PhotoScreen(), arguments: {"businessModel": controller.businessModel.value});
+                          Get.to(PhotoScreen(), arguments: {
+                            "businessModel": controller.businessModel.value
+                          });
                         }
                       },
                     ),
@@ -796,15 +1103,28 @@ class BusinessDetailsScreen extends StatelessWidget {
                     child: RoundedButtonBorder(
                       title: 'Check in'.tr,
                       height: 5.5,
-                      icon: Constant.svgPictureShow("assets/icons/icon_check-one.svg", themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02, null, null),
+                      icon: Constant.svgPictureShow(
+                          "assets/icons/icon_check-one.svg",
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark02
+                              : AppThemeData.grey02,
+                          null,
+                          null),
                       isRight: false,
-                      borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                      borderColor: themeChange.getThem()
+                          ? AppThemeData.greyDark06
+                          : AppThemeData.grey06,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark02
+                          : AppThemeData.grey02,
                       onPress: () {
-                        if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                        if (FireStoreUtils.getCurrentUid() == '' ||
+                            FireStoreUtils.getCurrentUid().isEmpty) {
                           Get.offAll(WelcomeScreen());
                         } else {
-                          Get.to(AddCheckInScreen(), arguments: {"businessModel": controller.businessModel.value});
+                          Get.to(AddCheckInScreen(), arguments: {
+                            "businessModel": controller.businessModel.value
+                          });
                         }
                       },
                     ),
@@ -818,20 +1138,24 @@ class BusinessDetailsScreen extends StatelessWidget {
     );
   }
 
-  void showBusinessCupertinoActionSheet(themeChange, BuildContext context, BusinessDetailsController controller) {
+  void showBusinessCupertinoActionSheet(
+      themeChange, BuildContext context, BusinessDetailsController controller) {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
         actions: <Widget>[
           CupertinoActionSheetAction(
             onPressed: () {
-              Utils.shareBusiness("${controller.businessModel.value.businessName} \n ${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}");
+              Utils.shareBusiness(
+                  "${controller.businessModel.value.businessName} \n ${Constant.deepLinkUrl}${Constant.businessDeepLink}${controller.businessModel.value.id}");
             },
             child: Text(
               "Share Business".tr,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                color: themeChange.getThem()
+                    ? AppThemeData.tealDark02
+                    : AppThemeData.teal02,
                 fontSize: 16,
                 fontFamily: AppThemeData.semiboldOpenSans,
               ),
@@ -839,19 +1163,25 @@ class BusinessDetailsScreen extends StatelessWidget {
           ),
           CupertinoActionSheetAction(
             onPressed: () {
-              if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+              if (FireStoreUtils.getCurrentUid() == '' ||
+                  FireStoreUtils.getCurrentUid().isEmpty) {
                 Get.offAll(WelcomeScreen());
               } else {
                 Get.back();
-                Get.to(ComplainReportScreen(),
-                    arguments: {"type": Constant.businessIssues, "givenBy": controller.businessModel.value.id.toString(), "postId": controller.businessModel.value.id.toString()});
+                Get.to(ComplainReportScreen(), arguments: {
+                  "type": Constant.businessIssues,
+                  "givenBy": controller.businessModel.value.id.toString(),
+                  "postId": controller.businessModel.value.id.toString()
+                });
               }
             },
             child: Text(
               "Complain/Report".tr,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                color: themeChange.getThem()
+                    ? AppThemeData.tealDark02
+                    : AppThemeData.teal02,
                 fontSize: 16,
                 fontFamily: AppThemeData.semiboldOpenSans,
               ),
@@ -867,7 +1197,9 @@ class BusinessDetailsScreen extends StatelessWidget {
             "Cancel".tr,
             textAlign: TextAlign.start,
             style: TextStyle(
-              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark01
+                  : AppThemeData.grey01,
               fontSize: 16,
               fontFamily: AppThemeData.boldOpenSans,
             ),
@@ -877,20 +1209,24 @@ class BusinessDetailsScreen extends StatelessWidget {
     );
   }
 
-  void showReviewCupertinoActionSheet(themeChange, BuildContext context, BusinessDetailsController controller, ReviewModel reviewModel) {
+  void showReviewCupertinoActionSheet(themeChange, BuildContext context,
+      BusinessDetailsController controller, ReviewModel reviewModel) {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
         actions: <Widget>[
           CupertinoActionSheetAction(
             onPressed: () {
-              Utils.shareBusiness("${controller.businessModel.value.businessName} \n\n${reviewModel.comment} \n${"Review : ${reviewModel.review}"}");
+              Utils.shareBusiness(
+                  "${controller.businessModel.value.businessName} \n\n${reviewModel.comment} \n${"Review : ${reviewModel.review}"}");
             },
             child: Text(
               "Share Review".tr,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                color: themeChange.getThem()
+                    ? AppThemeData.tealDark02
+                    : AppThemeData.teal02,
                 fontSize: 16,
                 fontFamily: AppThemeData.semiboldOpenSans,
               ),
@@ -898,18 +1234,25 @@ class BusinessDetailsScreen extends StatelessWidget {
           ),
           CupertinoActionSheetAction(
             onPressed: () {
-              if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+              if (FireStoreUtils.getCurrentUid() == '' ||
+                  FireStoreUtils.getCurrentUid().isEmpty) {
                 Get.offAll(WelcomeScreen());
               } else {
                 Get.back();
-                Get.to(ComplainReportScreen(), arguments: {"type": Constant.reviewIssues, "givenBy": reviewModel.userId.toString(), "postId": reviewModel.id.toString()});
+                Get.to(ComplainReportScreen(), arguments: {
+                  "type": Constant.reviewIssues,
+                  "givenBy": reviewModel.userId.toString(),
+                  "postId": reviewModel.id.toString()
+                });
               }
             },
             child: Text(
               "Complain/Report".tr,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                color: themeChange.getThem()
+                    ? AppThemeData.tealDark02
+                    : AppThemeData.teal02,
                 fontSize: 16,
                 fontFamily: AppThemeData.semiboldOpenSans,
               ),
@@ -925,7 +1268,9 @@ class BusinessDetailsScreen extends StatelessWidget {
             "Cancel".tr,
             textAlign: TextAlign.start,
             style: TextStyle(
-              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark01
+                  : AppThemeData.grey01,
               fontSize: 16,
               fontFamily: AppThemeData.boldOpenSans,
             ),
@@ -935,13 +1280,16 @@ class BusinessDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget imageWidget(themeChange, String imagePath, String title, {double? fontSize}) {
+  Widget imageWidget(themeChange, String imagePath, String title,
+      {double? fontSize}) {
     return Column(
       children: [
         ClipOval(
             child: Container(
           decoration: BoxDecoration(
-            color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark07
+                : AppThemeData.grey07,
           ),
           child: Padding(
             padding: const EdgeInsets.all(14),
@@ -952,7 +1300,13 @@ class BusinessDetailsScreen extends StatelessWidget {
                     height: 25,
                     fit: BoxFit.cover,
                   )
-                : Constant.svgPictureShow(imagePath, themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, null, null),
+                : Constant.svgPictureShow(
+                    imagePath,
+                    themeChange.getThem()
+                        ? AppThemeData.greyDark03
+                        : AppThemeData.grey03,
+                    null,
+                    null),
           ),
         )),
         SizedBox(
@@ -962,7 +1316,9 @@ class BusinessDetailsScreen extends StatelessWidget {
           title.tr,
           textAlign: TextAlign.start,
           style: TextStyle(
-            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark02
+                : AppThemeData.grey02,
             fontSize: fontSize ?? 14,
             fontFamily: AppThemeData.mediumOpenSans,
           ),
@@ -972,9 +1328,24 @@ class BusinessDetailsScreen extends StatelessWidget {
   }
 
   Widget buildStatusText(themeChange, String status) {
-    TextStyle defaultStyle = TextStyle(fontSize: 12, color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04, fontFamily: AppThemeData.boldOpenSans);
-    TextStyle openStyle = TextStyle(fontSize: 12, color: themeChange.getThem() ? AppThemeData.greenDark02 : AppThemeData.green02, fontFamily: AppThemeData.boldOpenSans);
-    TextStyle closedStyle = TextStyle(fontSize: 12, color: themeChange.getThem() ? AppThemeData.greenDark02 : AppThemeData.red02, fontFamily: AppThemeData.boldOpenSans);
+    TextStyle defaultStyle = TextStyle(
+        fontSize: 12,
+        color: themeChange.getThem()
+            ? AppThemeData.greyDark04
+            : AppThemeData.grey04,
+        fontFamily: AppThemeData.boldOpenSans);
+    TextStyle openStyle = TextStyle(
+        fontSize: 12,
+        color: themeChange.getThem()
+            ? AppThemeData.greenDark02
+            : AppThemeData.green02,
+        fontFamily: AppThemeData.boldOpenSans);
+    TextStyle closedStyle = TextStyle(
+        fontSize: 12,
+        color: themeChange.getThem()
+            ? AppThemeData.greenDark02
+            : AppThemeData.red02,
+        fontFamily: AppThemeData.boldOpenSans);
 
     if (status.startsWith("Open until")) {
       return RichText(
@@ -1004,7 +1375,8 @@ class BusinessDetailsScreen extends StatelessWidget {
     }
   }
 
-  Widget overallRatingWidget(themeChange, BusinessModel businessModel, List<ReviewModel> reviews) {
+  Widget overallRatingWidget(
+      themeChange, BusinessModel businessModel, List<ReviewModel> reviews) {
     Map<double, double> ratingCount = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
 
     // Count how many reviews are in each rating bucket
@@ -1025,24 +1397,34 @@ class BusinessDetailsScreen extends StatelessWidget {
               Text(
                 'Overall rating'.tr,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 14,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
               ),
               const SizedBox(height: 10),
               CustomStarRating(
-                initialRating: Constant.calculateReview(reviewCount: businessModel.reviewCount!, reviewSum: businessModel.reviewSum!),
+                initialRating: Constant.calculateReview(
+                    reviewCount: businessModel.reviewCount!,
+                    reviewSum: businessModel.reviewSum!),
                 enable: false,
                 size: 20,
-                bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                bgColor: themeChange.getThem()
+                    ? AppThemeData.greyDark06
+                    : AppThemeData.grey06,
+                emptyColor: themeChange.getThem()
+                    ? AppThemeData.greyDark10
+                    : AppThemeData.grey10,
               ),
               const SizedBox(height: 10),
               Text(
                 '${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews',
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark04
+                      : AppThemeData.grey04,
                   fontSize: 14,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -1059,7 +1441,9 @@ class BusinessDetailsScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 int star = 5 - index;
                 double count = ratingCount[star] ?? 0;
-                double percent = double.parse(businessModel.reviewCount!) > 0 ? count / double.parse(businessModel.reviewCount!) : 0;
+                double percent = double.parse(businessModel.reviewCount!) > 0
+                    ? count / double.parse(businessModel.reviewCount!)
+                    : 0;
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Row(
@@ -1067,7 +1451,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                       Text(
                         '$star',
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 12,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -1101,7 +1487,8 @@ class BusinessDetailsScreen extends StatelessWidget {
     );
   }
 
-  void seeHoursFilterBottomSheet(themeChange, BusinessDetailsController controller) {
+  void seeHoursFilterBottomSheet(
+      themeChange, BusinessDetailsController controller) {
     Get.bottomSheet(
       DraggableScrollableSheet(
           initialChildSize: 0.4,
@@ -1116,7 +1503,9 @@ class BusinessDetailsScreen extends StatelessWidget {
               height: Responsive.height(32, Get.context!),
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+                color: themeChange.getThem()
+                    ? AppThemeData.surfaceDark50
+                    : AppThemeData.surface50,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Column(
@@ -1128,7 +1517,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                         child: Text(
                           "Hours",
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 22,
                             fontFamily: AppThemeData.boldOpenSans,
                           ),
@@ -1144,7 +1535,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                             "assets/icons/icon_close.svg",
                             width: 22,
                             colorFilter: ColorFilter.mode(
-                              themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                              themeChange.getThem()
+                                  ? AppThemeData.greyDark06
+                                  : AppThemeData.grey01,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -1160,9 +1553,20 @@ class BusinessDetailsScreen extends StatelessWidget {
                       itemCount: controller.days.length,
                       itemBuilder: (context, index) {
                         final day = controller.days[index];
-                        final isToday = day == DateFormat('EEEE').format(DateTime.now());
-                        final slots = Constant.getFormattedSlots(Constant.getDayHours(
-                            controller.businessModel.value.businessHours ?? BusinessHours(sunday: [], monday: [], thursday: [], wednesday: [], tuesday: [], friday: [], saturday: []), day));
+                        final isToday =
+                            day == DateFormat('EEEE').format(DateTime.now());
+                        final slots = Constant.getFormattedSlots(
+                            Constant.getDayHours(
+                                controller.businessModel.value.businessHours ??
+                                    BusinessHours(
+                                        sunday: [],
+                                        monday: [],
+                                        thursday: [],
+                                        wednesday: [],
+                                        tuesday: [],
+                                        friday: [],
+                                        saturday: []),
+                                day));
 
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -1173,9 +1577,13 @@ class BusinessDetailsScreen extends StatelessWidget {
                                 child: Text(
                                   day,
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontSize: 16,
-                                    fontFamily: isToday ? AppThemeData.boldOpenSans : AppThemeData.mediumOpenSans,
+                                    fontFamily: isToday
+                                        ? AppThemeData.boldOpenSans
+                                        : AppThemeData.mediumOpenSans,
                                   ),
                                 ),
                               ),
@@ -1184,7 +1592,8 @@ class BusinessDetailsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: slots
                                     .map((slot) => Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
                                           child: Text(
                                             slot,
                                             style: TextStyle(
@@ -1194,7 +1603,10 @@ class BusinessDetailsScreen extends StatelessWidget {
                                                       ? AppThemeData.greyDark01
                                                       : AppThemeData.grey01,
                                               fontSize: 14,
-                                              fontFamily: isToday ? AppThemeData.boldOpenSans : AppThemeData.regularOpenSans,
+                                              fontFamily: isToday
+                                                  ? AppThemeData.boldOpenSans
+                                                  : AppThemeData
+                                                      .regularOpenSans,
                                             ),
                                           ),
                                         ))
@@ -1229,10 +1641,13 @@ class BusinessDetailsScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "${controller.categoryModel.value.getPricingFormTitle!.isEmpty ? "Get Pricing & availability" : controller.categoryModel.value.getPricingFormTitle}".tr,
+                    "${controller.categoryModel.value.getPricingFormTitle!.isEmpty ? "Get Pricing & availability" : controller.categoryModel.value.getPricingFormTitle}"
+                        .tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                       fontSize: 20,
                       fontFamily: AppThemeData.boldOpenSans,
                     ),
@@ -1241,10 +1656,16 @@ class BusinessDetailsScreen extends StatelessWidget {
                     height: 8,
                   ),
                   RoundedButtonFill(
-                    title: '${controller.categoryModel.value.getPricingFormTitle!.isEmpty ? "Get Pricing & availability" : controller.categoryModel.value.getPricingFormTitle}'.tr,
+                    title:
+                        '${controller.categoryModel.value.getPricingFormTitle!.isEmpty ? "Get Pricing & availability" : controller.categoryModel.value.getPricingFormTitle}'
+                            .tr,
                     height: 5,
-                    textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                    color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                    textColor: themeChange.getThem()
+                        ? AppThemeData.greyDark10
+                        : AppThemeData.grey10,
+                    color: themeChange.getThem()
+                        ? AppThemeData.redDark02
+                        : AppThemeData.red02,
                     onPress: () {
                       Get.to(PricingFormScreen(), arguments: {
                         "businessModel": controller.businessModel.value,
@@ -1278,7 +1699,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                     "Menu".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                       fontSize: 20,
                       fontFamily: AppThemeData.boldOpenSans,
                     ),
@@ -1290,7 +1713,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                     "Popular dishes".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                       fontSize: 16,
                       fontFamily: AppThemeData.semiboldOpenSans,
                     ),
@@ -1301,7 +1726,8 @@ class BusinessDetailsScreen extends StatelessWidget {
                   SizedBox(
                     height: Responsive.height(18, Get.context!),
                     child: controller.itemList.isEmpty
-                        ? Constant.showEmptyView(message: "Menu Item Not available".tr)
+                        ? Constant.showEmptyView(
+                            message: "Menu Item Not available".tr)
                         : ListView.builder(
                             itemCount: controller.itemList.length,
                             scrollDirection: Axis.horizontal,
@@ -1310,56 +1736,78 @@ class BusinessDetailsScreen extends StatelessWidget {
                               return Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   child: Stack(
                                     children: [
                                       NetworkImageWidget(
                                         imageUrl: itemModel.images!.first,
-                                        width: Responsive.width(60, Get.context!),
+                                        width:
+                                            Responsive.width(60, Get.context!),
                                         fit: BoxFit.cover,
                                       ),
                                       Container(
-                                        width: Responsive.width(60, Get.context!),
+                                        width:
+                                            Responsive.width(60, Get.context!),
                                         color: Colors.black.withOpacity(0.20),
                                       ),
                                       Positioned(
                                         bottom: 10,
                                         child: SizedBox(
-                                          width: Responsive.width(60, Get.context!),
+                                          width: Responsive.width(
+                                              60, Get.context!),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   itemModel.name.toString(),
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark10
+                                                        : AppThemeData.grey10,
                                                     fontSize: 16,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(vertical: 5),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 5),
                                                   child: Text(
-                                                    itemModel.description.toString(),
+                                                    itemModel.description
+                                                        .toString(),
                                                     textAlign: TextAlign.start,
                                                     maxLines: 2,
                                                     style: TextStyle(
-                                                      color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05,
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark05
+                                                          : AppThemeData.grey05,
                                                       fontSize: 10,
-                                                      fontFamily: AppThemeData.semiboldOpenSans,
+                                                      fontFamily: AppThemeData
+                                                          .semiboldOpenSans,
                                                     ),
                                                   ),
                                                 ),
                                                 Text(
-                                                  "${controller.currency.value.symbol} ${double.parse(itemModel.price.toString()).toStringAsFixed(2)}".tr,
+                                                  "${controller.currency.value.symbol} ${double.parse(itemModel.price.toString()).toStringAsFixed(2)}"
+                                                      .tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark10
+                                                        : AppThemeData.grey10,
                                                     fontSize: 14,
-                                                    fontFamily: AppThemeData.boldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .boldOpenSans,
                                                   ),
                                                 ),
                                               ],
@@ -1382,10 +1830,16 @@ class BusinessDetailsScreen extends StatelessWidget {
                       : RoundedButtonFill(
                           title: 'See full menu'.tr,
                           height: 5,
-                          textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                          color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                          textColor: themeChange.getThem()
+                              ? AppThemeData.greyDark10
+                              : AppThemeData.grey10,
+                          color: themeChange.getThem()
+                              ? AppThemeData.redDark02
+                              : AppThemeData.red02,
                           onPress: () {
-                            Get.to(SeeFullMenuScreen(), arguments: {"businessModel": controller.businessModel.value});
+                            Get.to(SeeFullMenuScreen(), arguments: {
+                              "businessModel": controller.businessModel.value
+                            });
                           },
                         ),
                   SizedBox(
@@ -1409,7 +1863,9 @@ class BusinessDetailsScreen extends StatelessWidget {
               "Info".tr,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                color: themeChange.getThem()
+                    ? AppThemeData.greyDark01
+                    : AppThemeData.grey01,
                 fontSize: 20,
                 fontFamily: AppThemeData.boldOpenSans,
               ),
@@ -1421,7 +1877,8 @@ class BusinessDetailsScreen extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              controller.businessModel.value.businessHours == null || controller.businessModel.value.showWorkingHours == false
+              controller.businessModel.value.businessHours == null ||
+                      controller.businessModel.value.showWorkingHours == false
                   ? SizedBox()
                   : Expanded(
                       child: DebouncedInkWell(
@@ -1433,11 +1890,19 @@ class BusinessDetailsScreen extends StatelessWidget {
                             ClipOval(
                                 child: Container(
                               decoration: BoxDecoration(
-                                color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark07
+                                    : AppThemeData.grey07,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(14),
-                                child: Constant.svgPictureShow("assets/icons/icon_alarm-clock.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, null, null),
+                                child: Constant.svgPictureShow(
+                                    "assets/icons/icon_alarm-clock.svg",
+                                    themeChange.getThem()
+                                        ? AppThemeData.greyDark03
+                                        : AppThemeData.grey03,
+                                    null,
+                                    null),
                               ),
                             )),
                             SizedBox(
@@ -1447,7 +1912,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                               "Hours".tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
                                 fontSize: 16,
                                 fontFamily: AppThemeData.boldOpenSans,
                               ),
@@ -1456,7 +1923,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                                 ? SizedBox()
                                 : Padding(
                                     padding: const EdgeInsets.only(top: 5),
-                                    child: buildStatusText(themeChange, Constant.getBusinessStatus(controller.businessModel.value.businessHours!)),
+                                    child: buildStatusText(
+                                        themeChange,
+                                        Constant.getBusinessStatus(controller
+                                            .businessModel
+                                            .value
+                                            .businessHours!)),
                                   ),
                             SizedBox(
                               height: 5,
@@ -1464,10 +1936,14 @@ class BusinessDetailsScreen extends StatelessWidget {
                             controller.businessModel.value.businessHours == null
                                 ? SizedBox()
                                 : Text(
-                                    Constant.getTodaySingleTimeSlot(controller.businessModel.value.businessHours!).tr,
+                                    Constant.getTodaySingleTimeSlot(controller
+                                            .businessModel.value.businessHours!)
+                                        .tr,
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark03
+                                          : AppThemeData.grey03,
                                       fontSize: 12,
                                       fontFamily: AppThemeData.regularOpenSans,
                                     ),
@@ -1482,7 +1958,8 @@ class BusinessDetailsScreen extends StatelessWidget {
                     if (controller.businessModel.value.website!.isEmpty) {
                       ShowToastDialog.showToast("Website not available".tr);
                     } else {
-                      Utils.launchURL(controller.businessModel.value.website.toString());
+                      Utils.launchURL(
+                          controller.businessModel.value.website.toString());
                     }
                   },
                   child: Column(
@@ -1490,11 +1967,19 @@ class BusinessDetailsScreen extends StatelessWidget {
                       ClipOval(
                           child: Container(
                         decoration: BoxDecoration(
-                          color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark07
+                              : AppThemeData.grey07,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(14),
-                          child: Constant.svgPictureShow("assets/icons/icon_globe.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, null, null),
+                          child: Constant.svgPictureShow(
+                              "assets/icons/icon_globe.svg",
+                              themeChange.getThem()
+                                  ? AppThemeData.greyDark03
+                                  : AppThemeData.grey03,
+                              null,
+                              null),
                         ),
                       )),
                       SizedBox(
@@ -1504,7 +1989,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                         "Website".tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 16,
                           fontFamily: AppThemeData.boldOpenSans,
                         ),
@@ -1513,7 +2000,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                         "${controller.businessModel.value.website}".tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark03
+                              : AppThemeData.grey03,
                           fontSize: 12,
                           fontFamily: AppThemeData.regularOpenSans,
                         ),
@@ -1526,9 +2015,11 @@ class BusinessDetailsScreen extends StatelessWidget {
                 child: DebouncedInkWell(
                   onTap: () {
                     if (controller.businessModel.value.website!.isEmpty) {
-                      ShowToastDialog.showToast("Phone number not available ".tr);
+                      ShowToastDialog.showToast(
+                          "Phone number not available ".tr);
                     } else {
-                      Utils.dialPhoneNumber("${controller.businessModel.value.countryCode} ${controller.businessModel.value.phoneNumber}");
+                      Utils.dialPhoneNumber(
+                          "${controller.businessModel.value.countryCode} ${controller.businessModel.value.phoneNumber}");
                     }
                   },
                   child: Column(
@@ -1536,11 +2027,19 @@ class BusinessDetailsScreen extends StatelessWidget {
                       ClipOval(
                           child: Container(
                         decoration: BoxDecoration(
-                          color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark07
+                              : AppThemeData.grey07,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(14),
-                          child: Constant.svgPictureShow("assets/icons/icon_phone-call.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, null, null),
+                          child: Constant.svgPictureShow(
+                              "assets/icons/icon_phone-call.svg",
+                              themeChange.getThem()
+                                  ? AppThemeData.greyDark03
+                                  : AppThemeData.grey03,
+                              null,
+                              null),
                         ),
                       )),
                       SizedBox(
@@ -1550,16 +2049,21 @@ class BusinessDetailsScreen extends StatelessWidget {
                         "Call".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 16,
                           fontFamily: AppThemeData.boldOpenSans,
                         ),
                       ),
                       Text(
-                        "${controller.businessModel.value.countryCode} ${controller.businessModel.value.phoneNumber}".tr,
+                        "${controller.businessModel.value.countryCode} ${controller.businessModel.value.phoneNumber}"
+                            .tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark03
+                              : AppThemeData.grey03,
                           fontSize: 12,
                           fontFamily: AppThemeData.regularOpenSans,
                         ),
@@ -1573,7 +2077,9 @@ class BusinessDetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Container(
-              color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark09
+                  : AppThemeData.grey09,
               height: 14,
             ),
           ),
@@ -1583,7 +2089,13 @@ class BusinessDetailsScreen extends StatelessWidget {
             child: Obx(
               () => GoogleMap(
                 initialCameraPosition: CameraPosition(
-                  target: LatLng(double.parse(controller.businessModel.value.location!.latitude ?? "0.0"), double.parse(controller.businessModel.value.location!.longitude ?? "0.0")),
+                  target: LatLng(
+                      double.parse(
+                          controller.businessModel.value.location!.latitude ??
+                              "0.0"),
+                      double.parse(
+                          controller.businessModel.value.location!.longitude ??
+                              "0.0")),
                   // Example coordinates
                   zoom: 16,
                 ),
@@ -1601,10 +2113,13 @@ class BusinessDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Constant.getFullAddressModel(controller.businessModel.value.address!),
+                  Constant.getFullAddressModel(
+                      controller.businessModel.value.address!),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark02
+                        : AppThemeData.grey02,
                     fontSize: 16,
                     fontFamily: AppThemeData.semiboldOpenSans,
                   ),
@@ -1613,15 +2128,22 @@ class BusinessDetailsScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   child: Divider(
                     height: 1,
-                    color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark08
+                        : AppThemeData.grey08,
                   ),
                 ),
                 DebouncedInkWell(
                   onTap: () {
                     Utils.openMap(
-                        label: controller.businessModel.value.businessName.toString(),
-                        lat: double.parse(controller.businessModel.value.location!.latitude.toString()),
-                        lng: double.parse(controller.businessModel.value.location!.longitude.toString()));
+                        label: controller.businessModel.value.businessName
+                            .toString(),
+                        lat: double.parse(controller
+                            .businessModel.value.location!.latitude
+                            .toString()),
+                        lng: double.parse(controller
+                            .businessModel.value.location!.longitude
+                            .toString()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1632,13 +2154,21 @@ class BusinessDetailsScreen extends StatelessWidget {
                           "Get Direction".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark02
+                                : AppThemeData.grey02,
                             fontSize: 16,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
                         ),
                       ),
-                      Constant.svgPictureShow('assets/icons/icon_map-draw.svg', themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02, 24, 24)
+                      Constant.svgPictureShow(
+                          'assets/icons/icon_map-draw.svg',
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark02
+                              : AppThemeData.grey02,
+                          24,
+                          24)
                     ],
                   ),
                 ),
@@ -1650,19 +2180,24 @@ class BusinessDetailsScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   child: Divider(
                     height: 1,
-                    color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark08
+                        : AppThemeData.grey08,
                   ),
                 )
               : SizedBox(height: 14),
           if (controller.serviceList.isNotEmpty)
             Container(
-              color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark09
+                  : AppThemeData.grey09,
               height: 14,
             ),
           controller.serviceList.isEmpty
               ? SizedBox()
               : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                   child: ListView.separated(
                     itemCount: controller.serviceList.length,
                     padding: EdgeInsets.zero,
@@ -1677,7 +2212,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                             item['name'],
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark01
+                                  : AppThemeData.grey01,
                               fontSize: 16,
                               fontFamily: AppThemeData.boldOpenSans,
                             ),
@@ -1690,9 +2227,11 @@ class BusinessDetailsScreen extends StatelessWidget {
                             children: List.generate(
                               item['options'].length,
                               (index) {
-                                OptionModel optionModel = item['options'][index];
+                                OptionModel optionModel =
+                                    item['options'][index];
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 4),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
                                   child: Row(
                                     children: [
                                       NetworkImageWidget(
@@ -1706,9 +2245,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                                       Text(
                                         optionModel.name.toString(),
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark01
+                                              : AppThemeData.grey01,
                                           fontSize: 16,
-                                          fontFamily: AppThemeData.regularOpenSans,
+                                          fontFamily:
+                                              AppThemeData.regularOpenSans,
                                         ),
                                       ),
                                     ],
@@ -1724,7 +2266,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Divider(
-                          color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark07
+                              : AppThemeData.grey07,
                         ),
                       );
                     },
@@ -1732,13 +2276,16 @@ class BusinessDetailsScreen extends StatelessWidget {
                 ),
           if (controller.highLightList.isNotEmpty)
             Container(
-              color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark09
+                  : AppThemeData.grey09,
               height: 14,
             ),
           controller.highLightList.isEmpty
               ? SizedBox()
               : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1746,7 +2293,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                         "Highlights from the business".tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 16,
                           fontFamily: AppThemeData.boldOpenSans,
                         ),
@@ -1762,7 +2311,8 @@ class BusinessDetailsScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            HighlightModel item = controller.highLightList[index];
+                            HighlightModel item =
+                                controller.highLightList[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 16),
                               child: SizedBox(
@@ -1782,9 +2332,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                                       maxLines: 2,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 12,
-                                        fontFamily: AppThemeData.semiboldOpenSans,
+                                        fontFamily:
+                                            AppThemeData.semiboldOpenSans,
                                       ),
                                     ),
                                   ],
@@ -1796,7 +2349,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Divider(
-                                color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark07
+                                    : AppThemeData.grey07,
                               ),
                             );
                           },
@@ -1817,20 +2372,25 @@ class BusinessDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark09
+                : AppThemeData.grey09,
             height: 14,
           ),
           if (FireStoreUtils.getCurrentUid() != '')
             Container(
               width: Responsive.width(100, Get.context!),
               decoration: BoxDecoration(
-                color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                color: themeChange.getThem()
+                    ? AppThemeData.greyDark10
+                    : AppThemeData.grey10,
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -1838,7 +2398,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                       "Leave a review".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 20,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
@@ -1848,7 +2410,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark10
+                            : AppThemeData.grey10,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),
@@ -1863,10 +2427,13 @@ class BusinessDetailsScreen extends StatelessWidget {
                       ),
                       child: DebouncedInkWell(
                         onTap: () {
-                          if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                          if (FireStoreUtils.getCurrentUid() == '' ||
+                              FireStoreUtils.getCurrentUid().isEmpty) {
                             Get.offAll(WelcomeScreen());
                           } else {
-                            Get.to(AddReviewScreen(), arguments: {"businessModel": controller.businessModel.value})?.then(
+                            Get.to(AddReviewScreen(), arguments: {
+                              "businessModel": controller.businessModel.value
+                            })?.then(
                               (value) {
                                 if (value == true) {
                                   controller.reviewList.clear();
@@ -1890,8 +2457,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                               CustomStarRating(
                                 initialRating: "0.0",
                                 enable: false,
-                                bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                bgColor: themeChange.getThem()
+                                    ? AppThemeData.greyDark06
+                                    : AppThemeData.grey06,
+                                emptyColor: themeChange.getThem()
+                                    ? AppThemeData.greyDark10
+                                    : AppThemeData.grey10,
                               ),
                               SizedBox(
                                 height: 10,
@@ -1900,7 +2471,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                                 "Tap to review".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark03
+                                      : AppThemeData.grey03,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.regularOpenSans,
                                 ),
@@ -1918,15 +2491,20 @@ class BusinessDetailsScreen extends StatelessWidget {
               ),
             ),
           Container(
-            color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark09
+                : AppThemeData.grey09,
             height: 14,
           ),
           controller.reviewList.isEmpty
               ? Container(
                   width: Responsive.width(100, Get.context!),
-                  color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark09
+                      : AppThemeData.grey09,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1934,7 +2512,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                           "No Review yet".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark02
+                                : AppThemeData.grey02,
                             fontSize: 20,
                             fontFamily: AppThemeData.boldOpenSans,
                           ),
@@ -1944,10 +2524,13 @@ class BusinessDetailsScreen extends StatelessWidget {
                         ),
                         DebouncedInkWell(
                           onTap: () {
-                            if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                            if (FireStoreUtils.getCurrentUid() == '' ||
+                                FireStoreUtils.getCurrentUid().isEmpty) {
                               Get.offAll(WelcomeScreen());
                             } else {
-                              Get.to(AddReviewScreen(), arguments: {"businessModel": controller.businessModel.value})?.then(
+                              Get.to(AddReviewScreen(), arguments: {
+                                "businessModel": controller.businessModel.value
+                              })?.then(
                                 (value) {
                                   if (value == true) {
                                     controller.reviewList.clear();
@@ -1960,13 +2543,16 @@ class BusinessDetailsScreen extends StatelessWidget {
                           child: Container(
                             width: Responsive.width(100, Get.context!),
                             decoration: BoxDecoration(
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 10),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -1975,9 +2561,12 @@ class BusinessDetailsScreen extends StatelessWidget {
                                       "Be the first to review".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark02
+                                            : AppThemeData.grey02,
                                         fontSize: 16,
-                                        fontFamily: AppThemeData.semiboldOpenSans,
+                                        fontFamily:
+                                            AppThemeData.semiboldOpenSans,
                                       ),
                                     ),
                                   ),
@@ -2007,15 +2596,20 @@ class BusinessDetailsScreen extends StatelessWidget {
                         "Recommended reviews".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 20,
                           fontFamily: AppThemeData.boldOpenSans,
                         ),
                       ),
                     ),
-                    overallRatingWidget(themeChange, controller.businessModel.value, controller.reviewList),
+                    overallRatingWidget(themeChange,
+                        controller.businessModel.value, controller.reviewList),
                     Container(
-                      color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark09
+                          : AppThemeData.grey09,
                       height: 14,
                     ),
                     SizedBox(
@@ -2038,13 +2632,24 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   Expanded(
                                     child: DebouncedInkWell(
                                       onTap: () async {
-                                        if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                        if (FireStoreUtils.getCurrentUid() ==
+                                                '' ||
+                                            FireStoreUtils.getCurrentUid()
+                                                .isEmpty) {
                                           Get.offAll(WelcomeScreen());
                                         } else {
-                                          ShowToastDialog.showLoader("Please wait");
-                                          UserModel? userModel0 = await FireStoreUtils.getUserProfile(reviewModel.userId.toString());
+                                          ShowToastDialog.showLoader(
+                                              "Please wait");
+                                          UserModel? userModel0 =
+                                              await FireStoreUtils
+                                                  .getUserProfile(reviewModel
+                                                      .userId
+                                                      .toString());
                                           ShowToastDialog.closeLoader();
-                                          Get.to(OtherPeopleScreen(), arguments: {"userModel": userModel0});
+                                          Get.to(OtherPeopleScreen(),
+                                              arguments: {
+                                                "userModel": userModel0
+                                              });
                                         }
                                       },
                                       child: ReviewUserView(
@@ -2054,9 +2659,17 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   ),
                                   DebouncedInkWell(
                                       onTap: () {
-                                        showReviewCupertinoActionSheet(themeChange, context, controller, reviewModel);
+                                        showReviewCupertinoActionSheet(
+                                            themeChange,
+                                            context,
+                                            controller,
+                                            reviewModel);
                                       },
-                                      child: Constant.svgPictureShow("assets/icons/icon_more.svg", AppThemeData.grey05, 30, 30))
+                                      child: Constant.svgPictureShow(
+                                          "assets/icons/icon_more.svg",
+                                          AppThemeData.grey05,
+                                          30,
+                                          30))
                                 ],
                               ),
                               SizedBox(
@@ -2065,10 +2678,15 @@ class BusinessDetailsScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   CustomStarRating(
-                                    initialRating: reviewModel.review.toString(),
+                                    initialRating:
+                                        reviewModel.review.toString(),
                                     enable: false,
-                                    bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                    emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                    bgColor: themeChange.getThem()
+                                        ? AppThemeData.greyDark06
+                                        : AppThemeData.grey06,
+                                    emptyColor: themeChange.getThem()
+                                        ? AppThemeData.greyDark10
+                                        : AppThemeData.grey10,
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -2077,7 +2695,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                                     Constant.timeAgo(reviewModel.createdAt!).tr,
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark04
+                                          : AppThemeData.grey04,
                                       fontSize: 12,
                                       fontFamily: AppThemeData.regularOpenSans,
                                     ),
@@ -2091,7 +2711,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                                 "${reviewModel.comment}".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.regularOpenSans,
                                 ),
@@ -2099,50 +2721,78 @@ class BusinessDetailsScreen extends StatelessWidget {
                               SizedBox(
                                 height: 8,
                               ),
-                              ReviewPhotoView(reviewId: reviewModel.id.toString()),
+                              ReviewPhotoView(
+                                  reviewId: reviewModel.id.toString()),
                               SizedBox(
                                 height: 14,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   DebouncedInkWell(
                                     onTap: () async {
-                                      if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                      if (FireStoreUtils.getCurrentUid() ==
+                                              '' ||
+                                          FireStoreUtils.getCurrentUid()
+                                              .isEmpty) {
                                         Get.offAll(WelcomeScreen());
                                       } else {
-                                        if (reviewModel.helpful!.contains(FireStoreUtils.getCurrentUid())) {
-                                          reviewModel.helpful!.remove(FireStoreUtils.getCurrentUid());
+                                        if (reviewModel.helpful!.contains(
+                                            FireStoreUtils.getCurrentUid())) {
+                                          reviewModel.helpful!.remove(
+                                              FireStoreUtils.getCurrentUid());
                                         } else {
-                                          reviewModel.helpful!.add(FireStoreUtils.getCurrentUid());
+                                          reviewModel.helpful!.add(
+                                              FireStoreUtils.getCurrentUid());
                                         }
-                                        FireStoreUtils.updateReview(reviewModel);
-                                        controller.updateReviewList(index, reviewModel);
+                                        FireStoreUtils.updateReview(
+                                            reviewModel);
+                                        controller.updateReviewList(
+                                            index, reviewModel);
                                       }
                                     },
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 50,
                                           width: 50,
                                           decoration: BoxDecoration(
-                                              color: reviewModel.helpful?.contains(FireStoreUtils.getCurrentUid()) == true ? AppThemeData.red02 : Colors.transparent,
+                                              color: reviewModel.helpful?.contains(
+                                                          FireStoreUtils
+                                                              .getCurrentUid()) ==
+                                                      true
+                                                  ? AppThemeData.red02
+                                                  : Colors.transparent,
                                               border: Border.all(
-                                                  color: reviewModel.helpful?.contains(FireStoreUtils.getCurrentUid()) == true
+                                                  color: reviewModel.helpful
+                                                              ?.contains(
+                                                                  FireStoreUtils
+                                                                      .getCurrentUid()) ==
+                                                          true
                                                       ? AppThemeData.red02
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark05
-                                                          : AppThemeData.grey05),
-                                              borderRadius: BorderRadius.all(Radius.circular(40))),
+                                                          ? AppThemeData
+                                                              .greyDark05
+                                                          : AppThemeData
+                                                              .grey05),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40))),
                                           child: Center(
                                               child: Constant.svgPictureShow(
                                                   "assets/icons/icon_light.svg",
-                                                  reviewModel.helpful?.contains(FireStoreUtils.getCurrentUid()) == true
+                                                  reviewModel.helpful?.contains(
+                                                              FireStoreUtils
+                                                                  .getCurrentUid()) ==
+                                                          true
                                                       ? AppThemeData.grey10
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark02
+                                                          ? AppThemeData
+                                                              .greyDark02
                                                           : AppThemeData.grey02,
                                                   24,
                                                   24)),
@@ -2156,17 +2806,25 @@ class BusinessDetailsScreen extends StatelessWidget {
                                               TextSpan(
                                                 text: 'Helpful '.tr,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.regularOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .regularOpenSans,
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: reviewModel.helpful!.length.toString(),
+                                                text: reviewModel
+                                                    .helpful!.length
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.semibold,
+                                                  fontFamily:
+                                                      AppThemeData.semibold,
                                                 ),
                                               )
                                             ],
@@ -2177,41 +2835,67 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   ),
                                   DebouncedInkWell(
                                     onTap: () async {
-                                      if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                      if (FireStoreUtils.getCurrentUid() ==
+                                              '' ||
+                                          FireStoreUtils.getCurrentUid()
+                                              .isEmpty) {
                                         Get.offAll(WelcomeScreen());
                                       } else {
-                                        if (reviewModel.thanks!.contains(FireStoreUtils.getCurrentUid())) {
-                                          reviewModel.thanks!.remove(FireStoreUtils.getCurrentUid());
+                                        if (reviewModel.thanks!.contains(
+                                            FireStoreUtils.getCurrentUid())) {
+                                          reviewModel.thanks!.remove(
+                                              FireStoreUtils.getCurrentUid());
                                         } else {
-                                          reviewModel.thanks!.add(FireStoreUtils.getCurrentUid());
+                                          reviewModel.thanks!.add(
+                                              FireStoreUtils.getCurrentUid());
                                         }
-                                        FireStoreUtils.updateReview(reviewModel);
-                                        controller.updateReviewList(index, reviewModel);
+                                        FireStoreUtils.updateReview(
+                                            reviewModel);
+                                        controller.updateReviewList(
+                                            index, reviewModel);
                                       }
                                     },
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 50,
                                           width: 50,
                                           decoration: BoxDecoration(
-                                              color: reviewModel.thanks?.contains(FireStoreUtils.getCurrentUid()) == true ? AppThemeData.red02 : Colors.transparent,
+                                              color: reviewModel.thanks?.contains(
+                                                          FireStoreUtils
+                                                              .getCurrentUid()) ==
+                                                      true
+                                                  ? AppThemeData.red02
+                                                  : Colors.transparent,
                                               border: Border.all(
-                                                  color: reviewModel.thanks?.contains(FireStoreUtils.getCurrentUid()) == true
+                                                  color: reviewModel.thanks
+                                                              ?.contains(
+                                                                  FireStoreUtils
+                                                                      .getCurrentUid()) ==
+                                                          true
                                                       ? AppThemeData.red02
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark05
-                                                          : AppThemeData.grey05),
-                                              borderRadius: BorderRadius.all(Radius.circular(40))),
+                                                          ? AppThemeData
+                                                              .greyDark05
+                                                          : AppThemeData
+                                                              .grey05),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40))),
                                           child: Center(
                                               child: Constant.svgPictureShow(
                                                   "assets/icons/icon_thumbs-up.svg",
-                                                  reviewModel.thanks?.contains(FireStoreUtils.getCurrentUid()) == true
+                                                  reviewModel.thanks?.contains(
+                                                              FireStoreUtils
+                                                                  .getCurrentUid()) ==
+                                                          true
                                                       ? AppThemeData.grey10
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark02
+                                                          ? AppThemeData
+                                                              .greyDark02
                                                           : AppThemeData.grey02,
                                                   24,
                                                   24)),
@@ -2225,17 +2909,24 @@ class BusinessDetailsScreen extends StatelessWidget {
                                               TextSpan(
                                                 text: 'Thanks '.tr,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.regularOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .regularOpenSans,
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: reviewModel.thanks!.length.toString(),
+                                                text: reviewModel.thanks!.length
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.semibold,
+                                                  fontFamily:
+                                                      AppThemeData.semibold,
                                                 ),
                                               )
                                             ],
@@ -2246,41 +2937,67 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   ),
                                   DebouncedInkWell(
                                     onTap: () async {
-                                      if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                      if (FireStoreUtils.getCurrentUid() ==
+                                              '' ||
+                                          FireStoreUtils.getCurrentUid()
+                                              .isEmpty) {
                                         Get.offAll(WelcomeScreen());
                                       } else {
-                                        if (reviewModel.loveThis!.contains(FireStoreUtils.getCurrentUid())) {
-                                          reviewModel.loveThis!.remove(FireStoreUtils.getCurrentUid());
+                                        if (reviewModel.loveThis!.contains(
+                                            FireStoreUtils.getCurrentUid())) {
+                                          reviewModel.loveThis!.remove(
+                                              FireStoreUtils.getCurrentUid());
                                         } else {
-                                          reviewModel.loveThis!.add(FireStoreUtils.getCurrentUid());
+                                          reviewModel.loveThis!.add(
+                                              FireStoreUtils.getCurrentUid());
                                         }
-                                        FireStoreUtils.updateReview(reviewModel);
-                                        controller.updateReviewList(index, reviewModel);
+                                        FireStoreUtils.updateReview(
+                                            reviewModel);
+                                        controller.updateReviewList(
+                                            index, reviewModel);
                                       }
                                     },
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 50,
                                           width: 50,
                                           decoration: BoxDecoration(
-                                              color: reviewModel.loveThis?.contains(FireStoreUtils.getCurrentUid()) == true ? AppThemeData.red02 : Colors.transparent,
+                                              color: reviewModel.loveThis
+                                                          ?.contains(FireStoreUtils
+                                                              .getCurrentUid()) ==
+                                                      true
+                                                  ? AppThemeData.red02
+                                                  : Colors.transparent,
                                               border: Border.all(
-                                                  color: reviewModel.loveThis?.contains(FireStoreUtils.getCurrentUid()) == true
+                                                  color: reviewModel.loveThis
+                                                              ?.contains(
+                                                                  FireStoreUtils
+                                                                      .getCurrentUid()) ==
+                                                          true
                                                       ? AppThemeData.red02
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark05
-                                                          : AppThemeData.grey05),
-                                              borderRadius: BorderRadius.all(Radius.circular(40))),
+                                                          ? AppThemeData
+                                                              .greyDark05
+                                                          : AppThemeData
+                                                              .grey05),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40))),
                                           child: Center(
                                               child: Constant.svgPictureShow(
                                                   "assets/icons/icon_like.svg",
-                                                  reviewModel.loveThis?.contains(FireStoreUtils.getCurrentUid()) == true
+                                                  reviewModel.loveThis?.contains(
+                                                              FireStoreUtils
+                                                                  .getCurrentUid()) ==
+                                                          true
                                                       ? AppThemeData.grey10
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark02
+                                                          ? AppThemeData
+                                                              .greyDark02
                                                           : AppThemeData.grey02,
                                                   24,
                                                   24)),
@@ -2294,17 +3011,25 @@ class BusinessDetailsScreen extends StatelessWidget {
                                               TextSpan(
                                                 text: 'Love this '.tr,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.regularOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .regularOpenSans,
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: reviewModel.loveThis!.length.toString(),
+                                                text: reviewModel
+                                                    .loveThis!.length
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.semibold,
+                                                  fontFamily:
+                                                      AppThemeData.semibold,
                                                 ),
                                               )
                                             ],
@@ -2315,41 +3040,63 @@ class BusinessDetailsScreen extends StatelessWidget {
                                   ),
                                   DebouncedInkWell(
                                     onTap: () async {
-                                      if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                      if (FireStoreUtils.getCurrentUid() ==
+                                              '' ||
+                                          FireStoreUtils.getCurrentUid()
+                                              .isEmpty) {
                                         Get.offAll(WelcomeScreen());
                                       } else {
-                                        if (reviewModel.ohNo!.contains(FireStoreUtils.getCurrentUid())) {
-                                          reviewModel.ohNo!.remove(FireStoreUtils.getCurrentUid());
+                                        if (reviewModel.ohNo!.contains(
+                                            FireStoreUtils.getCurrentUid())) {
+                                          reviewModel.ohNo!.remove(
+                                              FireStoreUtils.getCurrentUid());
                                         } else {
-                                          reviewModel.ohNo!.add(FireStoreUtils.getCurrentUid());
+                                          reviewModel.ohNo!.add(
+                                              FireStoreUtils.getCurrentUid());
                                         }
-                                        FireStoreUtils.updateReview(reviewModel);
-                                        controller.updateReviewList(index, reviewModel);
+                                        FireStoreUtils.updateReview(
+                                            reviewModel);
+                                        controller.updateReviewList(
+                                            index, reviewModel);
                                       }
                                     },
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 50,
                                           width: 50,
                                           decoration: BoxDecoration(
-                                              color: reviewModel.ohNo!.contains(FireStoreUtils.getCurrentUid()) ? AppThemeData.red02 : Colors.transparent,
+                                              color: reviewModel.ohNo!.contains(
+                                                      FireStoreUtils
+                                                          .getCurrentUid())
+                                                  ? AppThemeData.red02
+                                                  : Colors.transparent,
                                               border: Border.all(
-                                                  color: reviewModel.ohNo!.contains(FireStoreUtils.getCurrentUid())
+                                                  color: reviewModel.ohNo!
+                                                          .contains(FireStoreUtils
+                                                              .getCurrentUid())
                                                       ? AppThemeData.red02
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark05
-                                                          : AppThemeData.grey05),
-                                              borderRadius: BorderRadius.all(Radius.circular(40))),
+                                                          ? AppThemeData
+                                                              .greyDark05
+                                                          : AppThemeData
+                                                              .grey05),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40))),
                                           child: Center(
                                               child: Constant.svgPictureShow(
                                                   "assets/icons/icon_emotion-unhappy.svg",
-                                                  reviewModel.ohNo!.contains(FireStoreUtils.getCurrentUid())
+                                                  reviewModel.ohNo!.contains(
+                                                          FireStoreUtils
+                                                              .getCurrentUid())
                                                       ? AppThemeData.grey10
                                                       : themeChange.getThem()
-                                                          ? AppThemeData.greyDark02
+                                                          ? AppThemeData
+                                                              .greyDark02
                                                           : AppThemeData.grey02,
                                                   24,
                                                   24)),
@@ -2363,17 +3110,24 @@ class BusinessDetailsScreen extends StatelessWidget {
                                               TextSpan(
                                                 text: 'Oh no '.tr,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.regularOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .regularOpenSans,
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: reviewModel.ohNo!.length.toString(),
+                                                text: reviewModel.ohNo!.length
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark02
+                                                      : AppThemeData.grey02,
                                                   fontSize: 12,
-                                                  fontFamily: AppThemeData.semibold,
+                                                  fontFamily:
+                                                      AppThemeData.semibold,
                                                 ),
                                               )
                                             ],
@@ -2392,7 +3146,9 @@ class BusinessDetailsScreen extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Divider(
-                            color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark07
+                                : AppThemeData.grey07,
                           ),
                         );
                       },

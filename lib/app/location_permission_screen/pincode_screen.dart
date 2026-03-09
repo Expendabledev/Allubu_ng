@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/controller/pincode_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/preferences.dart';
+import 'package:allubmarket/controller/pincode_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/preferences.dart';
 
 import '../../themes/text_field_widget.dart' show TextFieldWidget;
 
@@ -22,7 +22,9 @@ class PinCodeScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -36,7 +38,9 @@ class PinCodeScreen extends StatelessWidget {
                       SvgPicture.asset(
                         "assets/icons/icon_close.svg",
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                         width: 22,
@@ -48,7 +52,9 @@ class PinCodeScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -60,7 +66,9 @@ class PinCodeScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -68,7 +76,9 @@ class PinCodeScreen extends StatelessWidget {
                 "Pin code".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -91,20 +101,29 @@ class PinCodeScreen extends StatelessWidget {
               ),
             ),
             bottomNavigationBar: Container(
-              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              color: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     RoundedButtonFill(
                       title: 'Next'.tr,
                       height: 5,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                      color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.redDark02
+                          : AppThemeData.red02,
                       onPress: () {
-                        Preferences.setString(Preferences.zipcode, controller.pinCodeTextFieldController.value.text);
-                        controller.getCoordinatesFromZip(controller.pinCodeTextFieldController.value.text);
+                        Preferences.setString(Preferences.zipcode,
+                            controller.pinCodeTextFieldController.value.text);
+                        controller.getCoordinatesFromZip(
+                            controller.pinCodeTextFieldController.value.text);
                       },
                     ),
                     SizedBox(

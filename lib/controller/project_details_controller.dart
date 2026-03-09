@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/pricing_request_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/pricing_request_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
-class ProjectDetailsController extends GetxController with GetSingleTickerProviderStateMixin {
+class ProjectDetailsController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   RxBool isLoading = true.obs;
   RxList<BusinessModel> businessList = <BusinessModel>[].obs;
   final ScrollController scrollController = ScrollController();

@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/send_notification.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/bookmarks_model.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/compliment_model.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/models/review_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/send_notification.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/bookmarks_model.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/compliment_model.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/models/review_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class OtherPeopleController extends GetxController {
   final List<String> items = [
@@ -26,7 +26,8 @@ class OtherPeopleController extends GetxController {
     'Sunshine in human form ☀️',
     'Pure magic ✨'
   ];
-  Rx<TextEditingController> complimentTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> complimentTextFieldController =
+      TextEditingController().obs;
 
   RxInt selectedIndex = 4.obs;
 
@@ -70,11 +71,16 @@ class OtherPeopleController extends GetxController {
   }
 
   Future<void> getData() async {
-    myBusinessList.value = await FireStoreUtils.getBusinessListById(userModel.value.id.toString());
-    photoList.value = await FireStoreUtils.getAllPhotosByUserId(userModel.value.id.toString());
-    reviewList.value = await FireStoreUtils.getReviewsNyUserId(userModel.value.id.toString());
-    bookMarkList.value = await FireStoreUtils.getBookmarks(userModel.value.id.toString());
-    followingList.value = await FireStoreUtils.getFollowing(userModel.value.id.toString());
+    myBusinessList.value =
+        await FireStoreUtils.getBusinessListById(userModel.value.id.toString());
+    photoList.value = await FireStoreUtils.getAllPhotosByUserId(
+        userModel.value.id.toString());
+    reviewList.value =
+        await FireStoreUtils.getReviewsNyUserId(userModel.value.id.toString());
+    bookMarkList.value =
+        await FireStoreUtils.getBookmarks(userModel.value.id.toString());
+    followingList.value =
+        await FireStoreUtils.getFollowing(userModel.value.id.toString());
   }
 
   Future<void> followUser() async {
@@ -87,9 +93,14 @@ class OtherPeopleController extends GetxController {
       "userId": FireStoreUtils.getCurrentUid(),
     };
 
-    UserModel? userModel0 = await FireStoreUtils.getUserProfile(FireStoreUtils.getCurrentUid());
+    UserModel? userModel0 =
+        await FireStoreUtils.getUserProfile(FireStoreUtils.getCurrentUid());
 
-    await SendNotification.sendOneNotification(token: userModel.value.fcmToken.toString(), title: userModel0!.fullName(), body: "You have a new follower!", payload: playLoad);
+    await SendNotification.sendOneNotification(
+        token: userModel.value.fcmToken.toString(),
+        title: userModel0!.fullName(),
+        body: "You have a new follower!",
+        payload: playLoad);
     ShowToastDialog.closeLoader();
     update();
   }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/controller/user_view_controller.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/controller/user_view_controller.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class ChatUserView extends StatelessWidget {
   final String userId;
@@ -29,7 +29,8 @@ class ChatUserView extends StatelessWidget {
             width: 50,
             height: 50,
             child: ClipOval(
-              child: NetworkImageWidget(imageUrl: userModel.profilePic.toString()),
+              child:
+                  NetworkImageWidget(imageUrl: userModel.profilePic.toString()),
             ),
           ),
           SizedBox(width: 10),
@@ -41,7 +42,9 @@ class ChatUserView extends StatelessWidget {
                   userModel.fullName(),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: themeChange.getThem()?AppThemeData.greyDark02:AppThemeData.grey02,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark02
+                        : AppThemeData.grey02,
                     fontSize: 16,
                     fontFamily: AppThemeData.boldOpenSans,
                   ),
@@ -50,7 +53,9 @@ class ChatUserView extends StatelessWidget {
                   lastMessage,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: themeChange.getThem()?AppThemeData.greyDark02:AppThemeData.grey02,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark02
+                        : AppThemeData.grey02,
                     fontSize: 14,
                     fontFamily: AppThemeData.mediumOpenSans,
                   ),

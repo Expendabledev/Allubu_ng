@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class FollowersListController extends GetxController {
   RxBool isLoading = true.obs;

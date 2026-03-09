@@ -32,7 +32,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/RelWithDebInfo/46j25203/x86_64",
+		"build" : "/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/RelWithDebInfo/46j25203/x86_64",
 		"source" : "/Users/rushabhpatel/Documents/flutter/packages/flutter_tools/gradle/src/main/groovy"
 	},
 	"version" : 

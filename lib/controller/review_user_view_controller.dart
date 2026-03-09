@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/models/review_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/models/review_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class ReviewUserViewController extends GetxController {
   var userMap = <String, UserModel>{}.obs;
@@ -29,7 +29,8 @@ class ReviewUserViewController extends GetxController {
 
   Future<void> getAllPhoto(String userId) async {
     if (!allPhotoMap.containsKey(userId)) {
-      List<PhotoModel>? user = await FireStoreUtils.getAllPhotosByUserId(userId);
+      List<PhotoModel>? user =
+          await FireStoreUtils.getAllPhotosByUserId(userId);
       if (user.isNotEmpty) {
         allPhotoMap[userId] = user;
       }
@@ -38,7 +39,6 @@ class ReviewUserViewController extends GetxController {
 
   var photoMap = <String, List<PhotoModel>>{}.obs; // Caches review images
   Future<void> loadReviewImages(String reviewId) async {
-
     if (photoMap.containsKey(reviewId)) return; // Prevent duplicate fetches
 
     List<PhotoModel> photos = await FireStoreUtils.getReviewImage(reviewId);

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/models/category_model.dart';
+import 'package:allubmarket/models/category_model.dart';
 
 class CategoryHistoryModel {
   String? id;
@@ -10,8 +10,12 @@ class CategoryHistoryModel {
 
   CategoryHistoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdAt = json['createdAt'] != null ? Timestamp.fromMillisecondsSinceEpoch(json['createdAt']) : null;
-    category = json['category'] != null ? CategoryModel.fromJson(json['category']) : null;
+    createdAt = json['createdAt'] != null
+        ? Timestamp.fromMillisecondsSinceEpoch(json['createdAt'])
+        : null;
+    category = json['category'] != null
+        ? CategoryModel.fromJson(json['category'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/sponsored_request_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/sponsored_request_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class SponsoredHistoryController extends GetxController {
   RxBool isLoading = true.obs;
@@ -18,12 +18,18 @@ class SponsoredHistoryController extends GetxController {
     super.onInit();
   }
 
-  RxList<SponsoredRequestModel> sponsoredHistoryList = <SponsoredRequestModel>[].obs;
-  RxList<SponsoredRequestModel> runningHistoryList = <SponsoredRequestModel>[].obs;
-  RxList<SponsoredRequestModel> acceptedHistoryList = <SponsoredRequestModel>[].obs;
-  RxList<SponsoredRequestModel> pendingHistoryList = <SponsoredRequestModel>[].obs;
-  RxList<SponsoredRequestModel> canceledHistoryList = <SponsoredRequestModel>[].obs;
-  RxList<SponsoredRequestModel> expiredHistoryList = <SponsoredRequestModel>[].obs;
+  RxList<SponsoredRequestModel> sponsoredHistoryList =
+      <SponsoredRequestModel>[].obs;
+  RxList<SponsoredRequestModel> runningHistoryList =
+      <SponsoredRequestModel>[].obs;
+  RxList<SponsoredRequestModel> acceptedHistoryList =
+      <SponsoredRequestModel>[].obs;
+  RxList<SponsoredRequestModel> pendingHistoryList =
+      <SponsoredRequestModel>[].obs;
+  RxList<SponsoredRequestModel> canceledHistoryList =
+      <SponsoredRequestModel>[].obs;
+  RxList<SponsoredRequestModel> expiredHistoryList =
+      <SponsoredRequestModel>[].obs;
 
   Future<void> getData() async {
     await FireStoreUtils.getCurrentUserModel().then(
@@ -34,7 +40,8 @@ class SponsoredHistoryController extends GetxController {
       },
     );
 
-    await FireStoreUtils.getOwnerBusinessListById(userModel.value.id.toString()).then(
+    await FireStoreUtils.getOwnerBusinessListById(userModel.value.id.toString())
+        .then(
       (value) async {
         businessList.value = value;
         if (businessList.isNotEmpty) {
@@ -47,15 +54,27 @@ class SponsoredHistoryController extends GetxController {
   }
 
   Future<void> getSponsoredHistory() async {
-    await FireStoreUtils.getSponsoredRequest(selectedBusiness.value.id.toString()).then(
+    await FireStoreUtils.getSponsoredRequest(
+            selectedBusiness.value.id.toString())
+        .then(
       (value) {
         sponsoredHistoryList.value = value;
 
-        runningHistoryList.value = sponsoredHistoryList.where((item) => item.status == 'Running').toList();
-        acceptedHistoryList.value = sponsoredHistoryList.where((item) => item.status == 'Accepted').toList();
-        pendingHistoryList.value = sponsoredHistoryList.where((item) => item.status == 'Pending').toList();
-        canceledHistoryList.value = sponsoredHistoryList.where((item) => item.status == 'Canceled').toList();
-        expiredHistoryList.value = sponsoredHistoryList.where((item) => item.status == 'Expired').toList();
+        runningHistoryList.value = sponsoredHistoryList
+            .where((item) => item.status == 'Running')
+            .toList();
+        acceptedHistoryList.value = sponsoredHistoryList
+            .where((item) => item.status == 'Accepted')
+            .toList();
+        pendingHistoryList.value = sponsoredHistoryList
+            .where((item) => item.status == 'Pending')
+            .toList();
+        canceledHistoryList.value = sponsoredHistoryList
+            .where((item) => item.status == 'Canceled')
+            .toList();
+        expiredHistoryList.value = sponsoredHistoryList
+            .where((item) => item.status == 'Expired')
+            .toList();
       },
     );
   }

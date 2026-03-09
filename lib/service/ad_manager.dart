@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:yelpify/constant/constant.dart';
+import 'package:allubmarket/constant/constant.dart';
 
 class AdManager {
   static void initialize() {
@@ -10,9 +10,11 @@ class AdManager {
 
   static String get googleBannerAdUnitId {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return Constant.adSetupModel!.google!.android!.googleBannerAdUnitId.toString();
+      return Constant.adSetupModel!.google!.android!.googleBannerAdUnitId
+          .toString();
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return Constant.adSetupModel!.google!.ios!.googleBannerAdUnitId.toString();
+      return Constant.adSetupModel!.google!.ios!.googleBannerAdUnitId
+          .toString();
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -20,9 +22,11 @@ class AdManager {
 
   static String get googleInterstitialAdUnitId {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return Constant.adSetupModel!.google!.android!.googleInterstitialAdUnitId.toString();
+      return Constant.adSetupModel!.google!.android!.googleInterstitialAdUnitId
+          .toString();
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return Constant.adSetupModel!.google!.ios!.googleInterstitialAdUnitId.toString();
+      return Constant.adSetupModel!.google!.ios!.googleInterstitialAdUnitId
+          .toString();
     } else {
       throw UnsupportedError("Unsupported platform");
     }

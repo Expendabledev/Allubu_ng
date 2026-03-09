@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/widgets/geoflutterfire/src/models/distance_doc_snapshot.dart';
-import 'package:yelpify/widgets/geoflutterfire/src/models/point.dart';
+import 'package:allubmarket/widgets/geoflutterfire/src/models/distance_doc_snapshot.dart';
+import 'package:allubmarket/widgets/geoflutterfire/src/models/point.dart';
 
 import 'base.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class CustomDialogBox extends StatelessWidget {
   final String title, descriptions, positiveString, negativeString;
@@ -36,11 +36,16 @@ class CustomDialogBox extends StatelessWidget {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
-      decoration: BoxDecoration(shape: BoxShape.rectangle, color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: themeChange.getThem()
+              ? AppThemeData.greyDark10
+              : AppThemeData.grey10,
+          borderRadius: BorderRadius.circular(20)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          img ??const SizedBox(),
+          img ?? const SizedBox(),
           const SizedBox(
             height: 20,
           ),
@@ -48,7 +53,12 @@ class CustomDialogBox extends StatelessWidget {
             visible: title.isNotEmpty,
             child: Text(
               title,
-              style: TextStyle(fontSize: 20, fontFamily: AppThemeData.semiboldOpenSans, color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: AppThemeData.semiboldOpenSans,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01),
             ),
           ),
           const SizedBox(
@@ -58,7 +68,12 @@ class CustomDialogBox extends StatelessWidget {
             visible: descriptions.isNotEmpty,
             child: Text(
               descriptions,
-              style: TextStyle(fontSize: 14, fontFamily: AppThemeData.regular, color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: AppThemeData.regular,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark02
+                      : AppThemeData.grey02),
               textAlign: TextAlign.center,
             ),
           ),
@@ -76,7 +91,9 @@ class CustomDialogBox extends StatelessWidget {
                     width: Responsive.width(100, context),
                     height: Responsive.height(5, context),
                     decoration: ShapeDecoration(
-                      color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark09
+                          : AppThemeData.grey09,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(200),
                       ),
@@ -90,7 +107,9 @@ class CustomDialogBox extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: AppThemeData.medium,
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),

@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/bookmarks_model.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/compliment_model.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/models/recommend_model.dart';
-import 'package:yelpify/models/review_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/bookmarks_model.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/compliment_model.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/models/recommend_model.dart';
+import 'package:allubmarket/models/review_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class ProfileController extends GetxController {
   RxBool isLoading = true.obs;
@@ -38,8 +38,10 @@ class ProfileController extends GetxController {
 
   Future getBusiness() async {
     FireStoreUtils.getAllSuggestedBusiness(Constant.currentLocation == null
-            ? LatLng(Constant.currentLocationLatLng!.latitude, Constant.currentLocationLatLng!.longitude)
-            : LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude))
+            ? LatLng(Constant.currentLocationLatLng!.latitude,
+                Constant.currentLocationLatLng!.longitude)
+            : LatLng(Constant.currentLocation!.latitude,
+                Constant.currentLocation!.longitude))
         .listen((event) async {
       suggestedBusinessList.clear();
       suggestedBusinessList.addAll(event);
@@ -60,14 +62,20 @@ class ProfileController extends GetxController {
     }
 
     myBusinessList.value = await FireStoreUtils.getMyBusiness();
-    photoList.value = await FireStoreUtils.getAllPhotosByUserId(FireStoreUtils.getCurrentUid());
-    reviewList.value = await FireStoreUtils.getReviewsNyUserId(FireStoreUtils.getCurrentUid());
-    bookMarkList.value = await FireStoreUtils.getBookmarks(FireStoreUtils.getCurrentUid());
-    followingList.value = await FireStoreUtils.getFollowing(FireStoreUtils.getCurrentUid());
-    complimentsList.value = await FireStoreUtils.getComplimentList(FireStoreUtils.getCurrentUid());
+    photoList.value = await FireStoreUtils.getAllPhotosByUserId(
+        FireStoreUtils.getCurrentUid());
+    reviewList.value =
+        await FireStoreUtils.getReviewsNyUserId(FireStoreUtils.getCurrentUid());
+    bookMarkList.value =
+        await FireStoreUtils.getBookmarks(FireStoreUtils.getCurrentUid());
+    followingList.value =
+        await FireStoreUtils.getFollowing(FireStoreUtils.getCurrentUid());
+    complimentsList.value =
+        await FireStoreUtils.getComplimentList(FireStoreUtils.getCurrentUid());
   }
 
-  Future<void> updateRecommended(String vote, BusinessModel businessModel) async {
+  Future<void> updateRecommended(
+      String vote, BusinessModel businessModel) async {
     ShowToastDialog.showLoader("Please wait");
     RecommendModel model = RecommendModel();
     model.id = Constant.getUuid();

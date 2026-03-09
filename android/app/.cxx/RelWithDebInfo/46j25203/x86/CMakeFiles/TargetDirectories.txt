@@ -1,2 +1,2 @@
-/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/RelWithDebInfo/46j25203/x86/CMakeFiles/edit_cache.dir
-/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/RelWithDebInfo/46j25203/x86/CMakeFiles/rebuild_cache.dir
+/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/RelWithDebInfo/46j25203/x86/CMakeFiles/edit_cache.dir
+/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/RelWithDebInfo/46j25203/x86/CMakeFiles/rebuild_cache.dir

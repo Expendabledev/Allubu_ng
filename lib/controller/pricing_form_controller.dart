@@ -8,20 +8,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/send_notification.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/email_template_model.dart';
-import 'package:yelpify/models/pricing_request_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/send_notification.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/email_template_model.dart';
+import 'package:allubmarket/models/pricing_request_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class PricingFormController extends GetxController {
   Rx<BusinessModel> businessModel = BusinessModel().obs;
   Rx<CategoryModel> categoryModel = CategoryModel().obs;
   RxBool isLoading = true.obs;
-  Rx<TextEditingController> descriptionTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> descriptionTextFieldController =
+      TextEditingController().obs;
   RxList<BusinessModel> allBusinessList = <BusinessModel>[].obs;
   RxList images = <dynamic>[].obs;
 
@@ -42,8 +43,10 @@ class PricingFormController extends GetxController {
     if (categoryModel.value.slug == null) {
       FireStoreUtils.getAllNearestRestaurantByCategoryId(
           Constant.currentLocation == null
-              ? LatLng(Constant.currentLocationLatLng!.latitude, Constant.currentLocationLatLng!.longitude)
-              : LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude),
+              ? LatLng(Constant.currentLocationLatLng!.latitude,
+                  Constant.currentLocationLatLng!.longitude)
+              : LatLng(Constant.currentLocation!.latitude,
+                  Constant.currentLocation!.longitude),
           businessModel.value.category!.firstWhere(
             (element) => element.getPricingForm == true,
           )).listen((event) async {
@@ -53,8 +56,10 @@ class PricingFormController extends GetxController {
     } else {
       FireStoreUtils.getAllNearestRestaurantByCategoryId(
               Constant.currentLocation == null
-                  ? LatLng(Constant.currentLocationLatLng!.latitude, Constant.currentLocationLatLng!.longitude)
-                  : LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude),
+                  ? LatLng(Constant.currentLocationLatLng!.latitude,
+                      Constant.currentLocationLatLng!.longitude)
+                  : LatLng(Constant.currentLocation!.latitude,
+                      Constant.currentLocation!.longitude),
               categoryModel.value)
           .listen((event) async {
         allBusinessList.clear();
@@ -88,7 +93,10 @@ class PricingFormController extends GetxController {
     pricingRequestModel.createdAt = Timestamp.now();
     pricingRequestModel.description = descriptionTextFieldController.value.text;
     pricingRequestModel.status = "active";
-    pricingRequestModel.category = categoryModel.value.slug != null ? categoryModel.value : businessModel.value.category!.firstWhere((element) => element.getPricingForm == true);
+    pricingRequestModel.category = categoryModel.value.slug != null
+        ? categoryModel.value
+        : businessModel.value.category!
+            .firstWhere((element) => element.getPricingForm == true);
     await FireStoreUtils.setPricingRequest(pricingRequestModel);
 
     Set<String> sentTokens = {};
@@ -103,7 +111,8 @@ class PricingFormController extends GetxController {
       final fcmToken = user.fcmToken;
       final email = user.email;
 
-      if (fcmToken == null || fcmToken.isEmpty || sentTokens.contains(fcmToken)) continue;
+      if (fcmToken == null || fcmToken.isEmpty || sentTokens.contains(fcmToken))
+        continue;
 
       // Prepare notification payload
       final notificationPayload = {
@@ -117,7 +126,8 @@ class PricingFormController extends GetxController {
         await SendNotification.sendOneNotification(
           token: fcmToken,
           title: 'New Project Request in Your Area!',
-          body: 'Someone nearby is looking for services like yours. Tap to view the details and send a quote before others do.',
+          body:
+              'Someone nearby is looking for services like yours. Tap to view the details and send a quote before others do.',
           payload: notificationPayload,
         );
 
@@ -129,7 +139,8 @@ class PricingFormController extends GetxController {
             businessName: business.businessName ?? '',
             useremail: Constant.userModel?.email ?? '',
             userphone: Constant.userModel?.phoneNumber ?? '',
-            date: Constant.formatTimestampToDateTime(pricingRequestModel.createdAt!),
+            date: Constant.formatTimestampToDateTime(
+                pricingRequestModel.createdAt!),
           );
         }
 
@@ -145,11 +156,18 @@ class PricingFormController extends GetxController {
   }
 
   Future<void> sendReviewEmail(
-      {required String recipientEmail, required String username, required String businessName, required String useremail, required String userphone, required String date}) async {
+      {required String recipientEmail,
+      required String username,
+      required String businessName,
+      required String useremail,
+      required String userphone,
+      required String date}) async {
     // Replace the placeholders in the HTML
-    EmailTemplateModel? emailTemplateModel = await FireStoreUtils.getEmailTemplates('new_project_request');
+    EmailTemplateModel? emailTemplateModel =
+        await FireStoreUtils.getEmailTemplates('new_project_request');
 
-    final emailBody = Constant.replacePlaceholders(emailTemplateModel!.message.toString(), {
+    final emailBody =
+        Constant.replacePlaceholders(emailTemplateModel!.message.toString(), {
       'username': username,
       'businessName': businessName,
       'useremail': useremail,
@@ -161,15 +179,17 @@ class PricingFormController extends GetxController {
     final smtpServer = SmtpServer(
       '${Constant.mailSettings!.host}',
       username: '${Constant.mailSettings!.userName}',
-      password: '${Constant.mailSettings!.password}', // Use App Password if 2FA is enabled
+      password:
+          '${Constant.mailSettings!.password}', // Use App Password if 2FA is enabled
       port: int.parse(Constant.mailSettings!.port.toString()),
       ssl: true,
     );
 
     // Create the email message
     final message = Message()
-      ..from = Address('${Constant.mailSettings!.userName}', 'Yelpify')
-      ..recipients = emailTemplateModel.isSendToAdmin == true && emailTemplateModel.isSendToBusiness == true
+      ..from = Address('${Constant.mailSettings!.userName}', 'allubmarket')
+      ..recipients = emailTemplateModel.isSendToAdmin == true &&
+              emailTemplateModel.isSendToBusiness == true
           ? [recipientEmail, Constant.adminEmail]
           : emailTemplateModel.isSendToAdmin == true
               ? [Constant.adminEmail]

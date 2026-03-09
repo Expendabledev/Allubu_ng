@@ -1,13 +1,12 @@
 import 'package:get/get.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class UserPhotoController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<PhotoModel> photosList = <PhotoModel>[].obs;
   Rx<UserModel> userModel = UserModel().obs;
-
 
   @override
   void onInit() {
@@ -38,7 +37,8 @@ class UserPhotoController extends GetxController {
   }
 
   Future<void> getPhotos() async {
-    await FireStoreUtils.getAllPhotosByUserId(userModel.value.id.toString()).then(
+    await FireStoreUtils.getAllPhotosByUserId(userModel.value.id.toString())
+        .then(
       (value) {
         photosList.value = value;
         update();

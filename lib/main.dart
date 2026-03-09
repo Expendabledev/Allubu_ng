@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/business_details_screen/business_details_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/language_model.dart';
-import 'package:yelpify/service/ad_manager.dart';
-import 'package:yelpify/themes/styles.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/preferences.dart';
+import 'package:allubmarket/app/business_details_screen/business_details_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/language_model.dart';
+import 'package:allubmarket/service/ad_manager.dart';
+import 'package:allubmarket/themes/styles.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/preferences.dart';
 import 'app/splash_screen.dart';
 import 'controller/global_setting_controller.dart';
 import 'firebase_options.dart';
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       child: Consumer<DarkThemeProvider>(
         builder: (context, value, child) {
           return GetMaterialApp(
-            title: 'Yelpify'.tr,
+            title: 'allubmarket'.tr,
             debugShowCheckedModeBanner: false,
             theme: Styles.themeData(
                 themeChangeProvider.darkTheme == 0

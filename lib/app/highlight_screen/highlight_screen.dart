@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/highlight_controller.dart';
-import 'package:yelpify/models/highlight_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/highlight_controller.dart';
+import 'package:allubmarket/models/highlight_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class HighlightScreen extends StatelessWidget {
   const HighlightScreen({super.key});
@@ -22,7 +22,9 @@ class HighlightScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -36,7 +38,9 @@ class HighlightScreen extends StatelessWidget {
                       SvgPicture.asset(
                         "assets/icons/icon_close.svg",
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                         width: 22,
@@ -48,7 +52,9 @@ class HighlightScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -60,7 +66,9 @@ class HighlightScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -68,7 +76,9 @@ class HighlightScreen extends StatelessWidget {
                 "Add Business Highlight".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -84,7 +94,9 @@ class HighlightScreen extends StatelessWidget {
                       "Submit".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.tealDark02
+                            : AppThemeData.teal02,
                         fontSize: 14,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
@@ -96,28 +108,36 @@ class HighlightScreen extends StatelessWidget {
             body: controller.isLoading.value
                 ? Constant.loader()
                 : controller.highLightList.isEmpty
-                    ? Constant.showEmptyView(message: "Service Not available".tr)
+                    ? Constant.showEmptyView(
+                        message: "Service Not available".tr)
                     : ListView.builder(
                         shrinkWrap: true,
                         itemCount: controller.highLightList.length,
                         itemBuilder: (context, index) {
-                          HighlightModel serviceModel = controller.highLightList[index];
+                          HighlightModel serviceModel =
+                              controller.highLightList[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Obx(
                               () => Container(
-                                color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark10
+                                    : AppThemeData.grey10,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 10),
                                   child: CheckboxListTile(
                                     value: isSelected(controller, serviceModel),
                                     dense: true,
                                     contentPadding: EdgeInsets.zero,
                                     onChanged: (bool? value) {
-                                      if (isSelected(controller, serviceModel)) {
-                                        controller.selectedHighLightList.remove(serviceModel);
+                                      if (isSelected(
+                                          controller, serviceModel)) {
+                                        controller.selectedHighLightList
+                                            .remove(serviceModel);
                                       } else {
-                                        controller.selectedHighLightList.add(serviceModel);
+                                        controller.selectedHighLightList
+                                            .add(serviceModel);
                                       }
                                     },
                                     title: Row(
@@ -125,7 +145,8 @@ class HighlightScreen extends StatelessWidget {
                                         NetworkImageWidget(
                                           width: Responsive.width(8, context),
                                           height: Responsive.width(8, context),
-                                          imageUrl: serviceModel.photo.toString(),
+                                          imageUrl:
+                                              serviceModel.photo.toString(),
                                           fit: BoxFit.cover,
                                         ),
                                         SizedBox(
@@ -134,16 +155,21 @@ class HighlightScreen extends StatelessWidget {
                                         Text(
                                           serviceModel.title.toString().tr,
                                           style: TextStyle(
-                                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.greyDark01
+                                                : AppThemeData.grey01,
                                             fontSize: 16,
-                                            fontFamily: AppThemeData.regularOpenSans,
+                                            fontFamily:
+                                                AppThemeData.regularOpenSans,
                                           ),
                                         ),
                                       ],
                                     ),
-                                    controlAffinity: ListTileControlAffinity.trailing,
+                                    controlAffinity:
+                                        ListTileControlAffinity.trailing,
                                     // Checkbox on the left
-                                    activeColor: AppThemeData.red02, // Change color as needed
+                                    activeColor: AppThemeData
+                                        .red02, // Change color as needed
                                   ),
                                 ),
                               ),
@@ -159,7 +185,8 @@ class HighlightScreen extends StatelessWidget {
     HighLightController controller,
     HighlightModel model,
   ) {
-    final index = controller.selectedHighLightList.indexWhere((e) => e.id == model.id);
+    final index =
+        controller.selectedHighLightList.indexWhere((e) => e.id == model.id);
     if (index == -1) return false;
     return controller.selectedHighLightList[index].id == model.id;
   }

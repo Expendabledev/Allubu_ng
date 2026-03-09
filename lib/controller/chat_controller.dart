@@ -4,17 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/send_notification.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/conversation_model.dart';
-import 'package:yelpify/models/pricing_request_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/send_notification.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/conversation_model.dart';
+import 'package:allubmarket/models/pricing_request_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class ChatController extends GetxController {
-  Rx<TextEditingController> messageTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> messageTextFieldController =
+      TextEditingController().obs;
 
   Rx<BusinessModel> businessModel = BusinessModel().obs;
   Rx<PricingRequestModel> projectModel = PricingRequestModel().obs;
@@ -56,12 +57,15 @@ class ChatController extends GetxController {
         final data = doc.data();
         final chat = ConversationModel.fromJson(data);
 
-        final isCurrentUserSender = isSender.value == "business" ? chat.senderId == businessModel.value.id : chat.senderId == FireStoreUtils.getCurrentUid();
+        final isCurrentUserSender = isSender.value == "business"
+            ? chat.senderId == businessModel.value.id
+            : chat.senderId == FireStoreUtils.getCurrentUid();
 
         if (isCurrentUserSender == false) {
           // Only update if value actually changed
           chat.isRead = true;
-          await FireStoreUtils.setProjectChat(chat); // Assuming this updates by chat.id
+          await FireStoreUtils.setProjectChat(
+              chat); // Assuming this updates by chat.id
         }
       }
     });
@@ -81,8 +85,12 @@ class ChatController extends GetxController {
     ConversationModel conversationModel = ConversationModel(
       id: const Uuid().v4(),
       message: messageTextFieldController.value.text,
-      senderId: isSender.value == "business" ? businessModel.value.id : userModel.value.id,
-      receiverId: isSender.value == "business" ? userModel.value.id : businessModel.value.id,
+      senderId: isSender.value == "business"
+          ? businessModel.value.id
+          : userModel.value.id,
+      receiverId: isSender.value == "business"
+          ? userModel.value.id
+          : businessModel.value.id,
       createdAt: Timestamp.now(),
       projectId: projectModel.value.id,
       isSender: isSender.value,
@@ -102,9 +110,14 @@ class ChatController extends GetxController {
       };
 
       await SendNotification.sendOneNotification(
-          token: userModel.value.fcmToken.toString(), title: "${businessModel.value.businessName}", body: messageTextFieldController.value.text, payload: playLoad);
+          token: userModel.value.fcmToken.toString(),
+          title: "${businessModel.value.businessName}",
+          body: messageTextFieldController.value.text,
+          payload: playLoad);
     } else {
-      await FireStoreUtils.getUserProfile(businessModel.value.ownerId.toString()).then(
+      await FireStoreUtils.getUserProfile(
+              businessModel.value.ownerId.toString())
+          .then(
         (value) {
           if (value != null) {
             Map<String, dynamic> playLoad = <String, dynamic>{
@@ -114,7 +127,11 @@ class ChatController extends GetxController {
               "businessId": businessModel.value.id,
               "projectId": projectModel.value.id,
             };
-            SendNotification.sendOneNotification(token: value.fcmToken.toString(), title: userModel.value.fullName(), body: messageTextFieldController.value.text, payload: playLoad);
+            SendNotification.sendOneNotification(
+                token: value.fcmToken.toString(),
+                title: userModel.value.fullName(),
+                body: messageTextFieldController.value.text,
+                payload: playLoad);
           }
         },
       );

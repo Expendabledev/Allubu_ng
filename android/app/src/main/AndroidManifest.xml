@@ -9,7 +9,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="yelpify">
+        android:label="Allubmarket NG">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <!-- Match your domain and scheme -->
-                <data android:scheme="https" android:host="yelpifyweb.siswebapp.com"/>
+                <data android:scheme="https" android:host="allubmarketweb.siswebapp.com"/>
             </intent-filter>
 
 
@@ -53,7 +53,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY_HERE" />
+            android:value="AIzaSyA0V3ScsGfUok7rfbza5TLffeckXqGiWGo" />
 
         <meta-data
             android:name="flutter.experimental.impeller"

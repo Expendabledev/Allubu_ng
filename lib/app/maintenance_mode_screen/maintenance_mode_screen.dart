@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/themes/app_them_data.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
 
 class MaintenanceModeScreen extends StatelessWidget {
   const MaintenanceModeScreen({super.key});
@@ -32,7 +32,8 @@ class MaintenanceModeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              "Sorry for the inconvenience but we're performing some maintenance at the moment. We'll be back online shortly!".tr,
+              "Sorry for the inconvenience but we're performing some maintenance at the moment. We'll be back online shortly!"
+                  .tr,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 16,

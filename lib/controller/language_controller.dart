@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/language_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/preferences.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/language_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/preferences.dart';
 
-class LanguageController extends GetxController{
+class LanguageController extends GetxController {
   RxList<LanguageModel> languageList = <LanguageModel>[].obs;
   Rx<LanguageModel> selectedLanguage = LanguageModel().obs;
 
@@ -21,7 +21,9 @@ class LanguageController extends GetxController{
     await FireStoreUtils.getLanguage().then((value) {
       if (value != null) {
         languageList.value = value;
-        if (Preferences.getString(Preferences.languageCodeKey).toString().isNotEmpty) {
+        if (Preferences.getString(Preferences.languageCodeKey)
+            .toString()
+            .isNotEmpty) {
           LanguageModel pref = Constant.getLanguage();
 
           for (var element in languageList) {

@@ -4,24 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/chat_screen/inbox_screen.dart';
-import 'package:yelpify/app/chat_screen/user_chat_screen.dart';
-import 'package:yelpify/app/create_bussiness_screen/create_business_screen.dart';
-import 'package:yelpify/app/settings_screen/setting_screens.dart';
-import 'package:yelpify/app/user_subscriotion_screen/user_subscription_screen.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/more_screen_controller.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/service/ad_manager.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/chat_screen/inbox_screen.dart';
+import 'package:allubmarket/app/chat_screen/user_chat_screen.dart';
+import 'package:allubmarket/app/create_bussiness_screen/create_business_screen.dart';
+import 'package:allubmarket/app/settings_screen/setting_screens.dart';
+import 'package:allubmarket/app/user_subscriotion_screen/user_subscription_screen.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/more_screen_controller.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/service/ad_manager.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -34,13 +34,17 @@ class MoreScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.surfaceDark50
+                  : AppThemeData.surface50,
               centerTitle: true,
               leadingWidth: 120,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -76,7 +80,8 @@ class MoreScreen extends StatelessWidget {
             body: controller.isLoading.value
                 ? Constant.loader()
                 : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -88,14 +93,22 @@ class MoreScreen extends StatelessWidget {
                           if (FireStoreUtils.getCurrentUid() != '')
                             Container(
                               width: Responsive.width(100, context),
-                              decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, borderRadius: BorderRadius.all(Radius.circular(10))),
+                              decoration: BoxDecoration(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark10
+                                      : AppThemeData.grey10,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
                                     DebouncedInkWell(
                                       onTap: () {
-                                        if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                        if (FireStoreUtils.getCurrentUid() ==
+                                                '' ||
+                                            FireStoreUtils.getCurrentUid()
+                                                .isEmpty) {
                                           Get.offAll(WelcomeScreen());
                                         } else {
                                           Get.to(InboxScreen());
@@ -105,19 +118,28 @@ class MoreScreen extends StatelessWidget {
                                         children: [
                                           StreamBuilder<QuerySnapshot>(
                                             stream: FireStoreUtils.fireStore
-                                                .collection(CollectionName.userChat)
-                                                .doc(FireStoreUtils.getCurrentUid())
+                                                .collection(
+                                                    CollectionName.userChat)
+                                                .doc(FireStoreUtils
+                                                    .getCurrentUid())
                                                 .collection("inbox")
-                                                .where("receiverId", isEqualTo: FireStoreUtils.getCurrentUid())
-                                                .where("chatType", isEqualTo: "chat")
+                                                .where("receiverId",
+                                                    isEqualTo: FireStoreUtils
+                                                        .getCurrentUid())
+                                                .where("chatType",
+                                                    isEqualTo: "chat")
                                                 .where("seen", isEqualTo: false)
                                                 .snapshots(),
                                             builder: (context, snapshot) {
-                                              final int unreadCount = snapshot.hasData ? snapshot.data!.docs.length : 0;
+                                              final int unreadCount = snapshot
+                                                      .hasData
+                                                  ? snapshot.data!.docs.length
+                                                  : 0;
                                               return badges.Badge(
                                                 showBadge: unreadCount > 0,
                                                 badgeStyle: badges.BadgeStyle(
-                                                  badgeColor: AppThemeData.red02,
+                                                  badgeColor:
+                                                      AppThemeData.red02,
                                                 ),
                                                 badgeContent: Text(
                                                   unreadCount.toString(),
@@ -127,8 +149,10 @@ class MoreScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Constant.svgPictureShow(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child:
+                                                      Constant.svgPictureShow(
                                                     "assets/icons/message-emoji.svg",
                                                     null,
                                                     20,
@@ -142,9 +166,12 @@ class MoreScreen extends StatelessWidget {
                                           Text(
                                             "Message".tr,
                                             style: TextStyle(
-                                              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                              color: themeChange.getThem()
+                                                  ? AppThemeData.greyDark01
+                                                  : AppThemeData.grey01,
                                               fontSize: 16,
-                                              fontFamily: AppThemeData.semiboldOpenSans,
+                                              fontFamily:
+                                                  AppThemeData.semiboldOpenSans,
                                             ),
                                           ),
                                         ],
@@ -387,7 +414,12 @@ class MoreScreen extends StatelessWidget {
                           if (FireStoreUtils.getCurrentUid() != '')
                             Container(
                               width: Responsive.width(100, context),
-                              decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, borderRadius: BorderRadius.all(Radius.circular(10))),
+                              decoration: BoxDecoration(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark10
+                                      : AppThemeData.grey10,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -397,7 +429,9 @@ class MoreScreen extends StatelessWidget {
                                       "Subscription".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 20,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
@@ -405,21 +439,32 @@ class MoreScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 16,
                                     ),
-                                    Constant.adSetupModel!.subscriptionEnable == false
+                                    Constant.adSetupModel!.subscriptionEnable ==
+                                            false
                                         ? SizedBox()
                                         : InkWell(
                                             onTap: () {
-                                              if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                              if (FireStoreUtils
+                                                          .getCurrentUid() ==
+                                                      '' ||
+                                                  FireStoreUtils.getCurrentUid()
+                                                      .isEmpty) {
                                                 Get.offAll(WelcomeScreen());
                                               } else {
-                                                Get.to(UserSubscriptionScreen());
+                                                Get.to(
+                                                    UserSubscriptionScreen());
                                               }
                                             },
                                             child: Row(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Constant.svgPictureShow("assets/icons/gift.svg", null, 20, 20),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Constant.svgPictureShow(
+                                                      "assets/icons/gift.svg",
+                                                      null,
+                                                      20,
+                                                      20),
                                                 ),
                                                 SizedBox(
                                                   width: 10,
@@ -428,9 +473,13 @@ class MoreScreen extends StatelessWidget {
                                                   "Subscription".tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
                                                     fontSize: 16,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                               ],
@@ -447,7 +496,12 @@ class MoreScreen extends StatelessWidget {
 
                           Container(
                             width: Responsive.width(100, context),
-                            decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, borderRadius: BorderRadius.all(Radius.circular(10))),
+                            decoration: BoxDecoration(
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark10
+                                    : AppThemeData.grey10,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
@@ -457,7 +511,9 @@ class MoreScreen extends StatelessWidget {
                                     "Settings and Support".tr,
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark01
+                                          : AppThemeData.grey01,
                                       fontSize: 20,
                                       fontFamily: AppThemeData.boldOpenSans,
                                     ),
@@ -469,7 +525,10 @@ class MoreScreen extends StatelessWidget {
                                   if (FireStoreUtils.getCurrentUid() != '')
                                     InkWell(
                                       onTap: () {
-                                        if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                        if (FireStoreUtils.getCurrentUid() ==
+                                                '' ||
+                                            FireStoreUtils.getCurrentUid()
+                                                .isEmpty) {
                                           Get.offAll(WelcomeScreen());
                                         } else {
                                           UserModel userModel = UserModel(
@@ -480,7 +539,9 @@ class MoreScreen extends StatelessWidget {
 
                                           Get.to(
                                             const UserChatScreen(),
-                                            arguments: {"receiverModel": userModel},
+                                            arguments: {
+                                              "receiverModel": userModel
+                                            },
                                           );
                                         }
                                       },
@@ -488,20 +549,29 @@ class MoreScreen extends StatelessWidget {
                                         children: [
                                           StreamBuilder<QuerySnapshot>(
                                             stream: FireStoreUtils.fireStore
-                                                .collection(CollectionName.userChat)
-                                                .doc(FireStoreUtils.getCurrentUid())
+                                                .collection(
+                                                    CollectionName.userChat)
+                                                .doc(FireStoreUtils
+                                                    .getCurrentUid())
                                                 .collection("inbox")
-                                                .where("receiverId", isEqualTo: FireStoreUtils.getCurrentUid())
-                                                .where("chatType", isEqualTo: "adminChat")
+                                                .where("receiverId",
+                                                    isEqualTo: FireStoreUtils
+                                                        .getCurrentUid())
+                                                .where("chatType",
+                                                    isEqualTo: "adminChat")
                                                 .where("seen", isEqualTo: false)
                                                 .snapshots(),
                                             builder: (context, snapshot) {
-                                              final int unreadCount = snapshot.hasData ? snapshot.data!.docs.length : 0;
+                                              final int unreadCount = snapshot
+                                                      .hasData
+                                                  ? snapshot.data!.docs.length
+                                                  : 0;
 
                                               return badges.Badge(
                                                 showBadge: unreadCount > 0,
                                                 badgeStyle: badges.BadgeStyle(
-                                                  badgeColor: AppThemeData.red02,
+                                                  badgeColor:
+                                                      AppThemeData.red02,
                                                 ),
                                                 badgeContent: Text(
                                                   unreadCount.toString(),
@@ -511,8 +581,10 @@ class MoreScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Constant.svgPictureShow(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child:
+                                                      Constant.svgPictureShow(
                                                     "assets/icons/message-emoji.svg",
                                                     null,
                                                     20,
@@ -526,9 +598,12 @@ class MoreScreen extends StatelessWidget {
                                           Text(
                                             "Support chat".tr,
                                             style: TextStyle(
-                                              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                              color: themeChange.getThem()
+                                                  ? AppThemeData.greyDark01
+                                                  : AppThemeData.grey01,
                                               fontSize: 16,
-                                              fontFamily: AppThemeData.semiboldOpenSans,
+                                              fontFamily:
+                                                  AppThemeData.semiboldOpenSans,
                                             ),
                                           ),
                                         ],
@@ -587,7 +662,11 @@ class MoreScreen extends StatelessWidget {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(12),
-                                          child: Constant.svgPictureShow("assets/icons/setting-two.svg", null, 20, 20),
+                                          child: Constant.svgPictureShow(
+                                              "assets/icons/setting-two.svg",
+                                              null,
+                                              20,
+                                              20),
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -596,9 +675,12 @@ class MoreScreen extends StatelessWidget {
                                           "Settings".tr,
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
-                                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.greyDark01
+                                                : AppThemeData.grey01,
                                             fontSize: 16,
-                                            fontFamily: AppThemeData.semiboldOpenSans,
+                                            fontFamily:
+                                                AppThemeData.semiboldOpenSans,
                                           ),
                                         ),
                                       ],
@@ -616,11 +698,14 @@ class MoreScreen extends StatelessWidget {
         });
   }
 
-  void showCustomBottomSheet(themeChange, BuildContext context, MoreScreenController controller) {
+  void showCustomBottomSheet(
+      themeChange, BuildContext context, MoreScreenController controller) {
     Get.bottomSheet(
       Container(
         decoration: BoxDecoration(
-          color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+          color: themeChange.getThem()
+              ? AppThemeData.greyDark10
+              : AppThemeData.grey10,
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
         child: Column(
@@ -644,7 +729,9 @@ class MoreScreen extends StatelessWidget {
                       child: SvgPicture.asset(
                         "assets/icons/icon_close.svg",
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -663,17 +750,22 @@ class MoreScreen extends StatelessWidget {
                       "Add a business".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark02
+                            : AppThemeData.grey02,
                         fontSize: 16,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "What’s your relationship with the business you’d like to add?".tr,
+                      "What’s your relationship with the business you’d like to add?"
+                          .tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark04
+                            : AppThemeData.grey04,
                         fontSize: 16,
                         fontFamily: AppThemeData.regularOpenSans,
                       ),
@@ -681,11 +773,18 @@ class MoreScreen extends StatelessWidget {
                     SizedBox(height: 15),
                     RoundedButtonFill(
                       title: 'I’m a customer',
-                      color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark06
+                          : AppThemeData.grey06,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark02
+                          : AppThemeData.grey02,
                       onPress: () {
                         Get.back();
-                        Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": true})!.then(
+                        Get.to(CreateBusinessScreen(), arguments: {
+                          "asCustomerOrWorkAtBusiness": true
+                        })!
+                            .then(
                           (value) {
                             if (value == true) {
                               controller.getBusiness();
@@ -697,11 +796,18 @@ class MoreScreen extends StatelessWidget {
                     SizedBox(height: 10),
                     RoundedButtonFill(
                       title: 'I work at the business',
-                      color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark06
+                          : AppThemeData.grey06,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark02
+                          : AppThemeData.grey02,
                       onPress: () {
                         Get.back();
-                        Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})!.then(
+                        Get.to(CreateBusinessScreen(), arguments: {
+                          "asCustomerOrWorkAtBusiness": false
+                        })!
+                            .then(
                           (value) {
                             if (value == true) {
                               controller.getBusiness();

@@ -4,10 +4,10 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/widgets/osm_map/map_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/widgets/osm_map/map_controller.dart';
 
 class MapPickerPage extends StatelessWidget {
   final OSMMapController controller = Get.put(OSMMapController());
@@ -20,7 +20,9 @@ class MapPickerPage extends StatelessWidget {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+        backgroundColor: themeChange.getThem()
+            ? AppThemeData.surfaceDark50
+            : AppThemeData.surface50,
         centerTitle: false,
         titleSpacing: 0,
         title: Text(
@@ -29,7 +31,9 @@ class MapPickerPage extends StatelessWidget {
           style: TextStyle(
             fontFamily: AppThemeData.medium,
             fontSize: 16,
-            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark01
+                : AppThemeData.grey01,
           ),
         ),
       ),
@@ -39,18 +43,21 @@ class MapPickerPage extends StatelessWidget {
             () => FlutterMap(
               mapController: controller.mapController,
               options: MapOptions(
-                initialCenter: controller.pickedPlace.value?.coordinates ?? LatLng(20.5937, 78.9629), // Default India center
+                initialCenter: controller.pickedPlace.value?.coordinates ??
+                    LatLng(20.5937, 78.9629), // Default India center
                 initialZoom: 13,
                 onTap: (tapPos, latlng) {
                   controller.addLatLngOnly(latlng);
-                  controller.mapController.move(latlng, controller.mapController.camera.zoom);
+                  controller.mapController
+                      .move(latlng, controller.mapController.camera.zoom);
                 },
               ),
               children: [
                 TileLayer(
-                  urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  urlTemplate:
+                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                   subdomains: const ['a', 'b', 'c'],
-                  userAgentPackageName: 'com.yelpify',
+                  userAgentPackageName: 'com.allubmarket',
                 ),
                 MarkerLayer(
                   markers: controller.pickedPlace.value != null
@@ -92,7 +99,8 @@ class MapPickerPage extends StatelessWidget {
                   ),
                 ),
                 Obx(() {
-                  if (controller.searchResults.isEmpty) return const SizedBox.shrink();
+                  if (controller.searchResults.isEmpty)
+                    return const SizedBox.shrink();
 
                   return Container(
                     margin: const EdgeInsets.only(top: 4),
@@ -134,9 +142,13 @@ class MapPickerPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                controller.pickedPlace.value != null ? "Picked Location:".tr : "No Location Picked".tr,
+                controller.pickedPlace.value != null
+                    ? "Picked Location:".tr
+                    : "No Location Picked".tr,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                  color: themeChange.getThem()
+                      ? AppThemeData.red02
+                      : AppThemeData.red02,
                   fontFamily: AppThemeData.semiboldOpenSans,
                   fontWeight: FontWeight.w600,
                 ),
@@ -162,7 +174,8 @@ class MapPickerPage extends StatelessWidget {
                       onPress: () async {
                         final selected = controller.pickedPlace.value;
                         if (selected != null) {
-                          Get.back(result: selected); // ✅ Return the selected place
+                          Get.back(
+                              result: selected); // ✅ Return the selected place
                           if (kDebugMode) {
                             print("Selected location: $selected");
                           }

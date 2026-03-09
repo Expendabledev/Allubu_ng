@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/user_subscription_history_controller.dart';
-import 'package:yelpify/models/subscription_ads_history.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/user_subscription_history_controller.dart';
+import 'package:allubmarket/models/subscription_ads_history.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class UserSubscriptionHistoryScreen extends StatelessWidget {
   const UserSubscriptionHistoryScreen({super.key});
@@ -19,7 +19,9 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -33,7 +35,9 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
                       SvgPicture.asset(
                         "assets/icons/icon_close.svg",
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                         width: 22,
@@ -45,7 +49,9 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -58,7 +64,9 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
                 "History".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -69,48 +77,70 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
                 : Column(
                     children: [
                       controller.historyList.isEmpty
-                          ? Constant.showEmptyView(message: "Subscription history not fond")
+                          ? Constant.showEmptyView(
+                              message: "Subscription history not fond")
                           : Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 16),
                               child: ListView.builder(
                                 itemCount: controller.historyList.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  SubscriptionAdsHistory subscriptionHistory = controller.historyList[index];
+                                  SubscriptionAdsHistory subscriptionHistory =
+                                      controller.historyList[index];
                                   return Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 5),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark10
+                                            : AppThemeData.grey10,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(16)),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 10),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
                                                 Expanded(
                                                   child: Text(
-                                                    "#${subscriptionHistory.purchaseID!}".tr,
+                                                    "#${subscriptionHistory.purchaseID!}"
+                                                        .tr,
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                      color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark03
+                                                          : AppThemeData.grey03,
                                                       fontSize: 14,
-                                                      fontFamily: AppThemeData.regularOpenSans,
+                                                      fontFamily: AppThemeData
+                                                          .regularOpenSans,
                                                     ),
                                                   ),
                                                 ),
                                                 Text(
                                                   'exp_date'.trParams({
-                                                    'date': Constant.dateToString(subscriptionHistory.expireDate!.toDate()),
+                                                    'date':
+                                                        Constant.dateToString(
+                                                            subscriptionHistory
+                                                                .expireDate!
+                                                                .toDate()),
                                                   }).tr,
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData.red02
+                                                        : AppThemeData.red02,
                                                     fontSize: 14,
-                                                    fontFamily: AppThemeData.boldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .boldOpenSans,
                                                   ),
                                                 ),
                                               ],
@@ -119,24 +149,34 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
                                               height: 5,
                                             ),
                                             Text(
-                                              subscriptionHistory.subscription!.title!.tr,
+                                              subscriptionHistory
+                                                  .subscription!.title!.tr,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
                                                 fontSize: 16,
-                                                fontFamily: AppThemeData.boldOpenSans,
+                                                fontFamily:
+                                                    AppThemeData.boldOpenSans,
                                               ),
                                             ),
                                             SizedBox(
                                               height: 5,
                                             ),
                                             Text(
-                                              Constant.formatTimestampToDateTime(subscriptionHistory.createdAt!).tr,
+                                              Constant.formatTimestampToDateTime(
+                                                      subscriptionHistory
+                                                          .createdAt!)
+                                                  .tr,
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
                                                 fontSize: 12,
-                                                fontFamily: AppThemeData.mediumOpenSans,
+                                                fontFamily:
+                                                    AppThemeData.mediumOpenSans,
                                               ),
                                             ),
                                             SizedBox(
@@ -144,13 +184,18 @@ class UserSubscriptionHistoryScreen extends StatelessWidget {
                                             ),
                                             Text(
                                               'days_duration'.trParams({
-                                                'days': subscriptionHistory.subscription!.duration.toString(),
+                                                'days': subscriptionHistory
+                                                    .subscription!.duration
+                                                    .toString(),
                                               }).tr,
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
                                                 fontSize: 12,
-                                                fontFamily: AppThemeData.mediumOpenSans,
+                                                fontFamily:
+                                                    AppThemeData.mediumOpenSans,
                                               ),
                                             ),
                                           ],

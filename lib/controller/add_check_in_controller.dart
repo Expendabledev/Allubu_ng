@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/check_in_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/check_in_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class AddCheckInController extends GetxController {
-  Rx<TextEditingController> commentTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> commentTextFieldController =
+      TextEditingController().obs;
   RxBool isLoading = true.obs;
   Rx<BusinessModel> businessModel = BusinessModel().obs;
   RxList images = <dynamic>[].obs;
@@ -36,8 +37,12 @@ class AddCheckInController extends GetxController {
 
   Future<void> checkIn() async {
     final distance = Constant.calculateDistance(
-      Constant.currentLocation == null ? Constant.currentLocationLatLng!.latitude : Constant.currentLocation!.latitude,
-      Constant.currentLocation == null ? Constant.currentLocationLatLng!.longitude : Constant.currentLocation!.longitude,
+      Constant.currentLocation == null
+          ? Constant.currentLocationLatLng!.latitude
+          : Constant.currentLocation!.latitude,
+      Constant.currentLocation == null
+          ? Constant.currentLocationLatLng!.longitude
+          : Constant.currentLocation!.longitude,
       double.parse(businessModel.value.location!.latitude!),
       double.parse(businessModel.value.location!.longitude!),
     );
@@ -65,8 +70,14 @@ class AddCheckInController extends GetxController {
       checkInModel.shareWithFriend = shareWithFriends.value;
       checkInModel.businessId = businessModel.value.id;
       checkInModel.location = LatLngModel(
-          latitude: (Constant.currentLocation == null ? Constant.currentLocationLatLng!.latitude : Constant.currentLocation!.latitude).toString(),
-          longitude: (Constant.currentLocation == null ? Constant.currentLocationLatLng!.longitude : Constant.currentLocation!.longitude).toString());
+          latitude: (Constant.currentLocation == null
+                  ? Constant.currentLocationLatLng!.latitude
+                  : Constant.currentLocation!.latitude)
+              .toString(),
+          longitude: (Constant.currentLocation == null
+                  ? Constant.currentLocationLatLng!.longitude
+                  : Constant.currentLocation!.longitude)
+              .toString());
 
       await FireStoreUtils.setCheckIn(checkInModel).then(
         (value) {

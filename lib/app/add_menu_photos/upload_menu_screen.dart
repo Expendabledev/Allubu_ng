@@ -5,15 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/add_menu_photo_controller.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/add_menu_photo_controller.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class UploadMenuScreen extends StatelessWidget {
   const UploadMenuScreen({super.key});
@@ -26,7 +26,9 @@ class UploadMenuScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -41,7 +43,9 @@ class UploadMenuScreen extends StatelessWidget {
                         "assets/icons/icon_close.svg",
                         width: 22,
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -52,7 +56,9 @@ class UploadMenuScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -64,7 +70,9 @@ class UploadMenuScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -72,7 +80,9 @@ class UploadMenuScreen extends StatelessWidget {
                 "Upload Menu".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -86,7 +96,9 @@ class UploadMenuScreen extends StatelessWidget {
                     "Submit".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                      color: themeChange.getThem()
+                          ? AppThemeData.tealDark02
+                          : AppThemeData.teal02,
                       fontSize: 14,
                       fontFamily: AppThemeData.semiboldOpenSans,
                     ),
@@ -97,7 +109,8 @@ class UploadMenuScreen extends StatelessWidget {
             body: controller.isLoading.value
                 ? Constant.loader()
                 : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -105,7 +118,9 @@ class UploadMenuScreen extends StatelessWidget {
                           "Upload Menu".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 16,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -116,13 +131,15 @@ class UploadMenuScreen extends StatelessWidget {
                         Expanded(
                           child: GridView.builder(
                             shrinkWrap: true,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3, // 3 columns
                               crossAxisSpacing: 8,
                               mainAxisSpacing: 8,
                               childAspectRatio: 1, // Adjust based on image size
                             ),
-                            itemCount: controller.menuPhotosList.length + 1, // First item is the upload button
+                            itemCount: controller.menuPhotosList.length +
+                                1, // First item is the upload button
                             itemBuilder: (context, index) {
                               if (index == 0) {
                                 // First item: Static Upload Button
@@ -138,17 +155,27 @@ class UploadMenuScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Constant.svgPictureShow("assets/icons/icon_upload.svg", themeChange.getThem() ? AppThemeData.teal02 : AppThemeData.teal02, 20, 20),
+                                        Constant.svgPictureShow(
+                                            "assets/icons/icon_upload.svg",
+                                            themeChange.getThem()
+                                                ? AppThemeData.teal02
+                                                : AppThemeData.teal02,
+                                            20,
+                                            20),
                                         SizedBox(height: 10),
                                         Text(
                                           "Click to \nUpload Image".tr,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.greyDark02
+                                                : AppThemeData.grey02,
                                             fontSize: 10,
-                                            fontFamily: AppThemeData.semiboldOpenSans,
+                                            fontFamily:
+                                                AppThemeData.semiboldOpenSans,
                                           ),
                                         ),
                                       ],
@@ -156,32 +183,41 @@ class UploadMenuScreen extends StatelessWidget {
                                   ),
                                 );
                               } else {
-                                PhotoModel menuModel = controller.menuPhotosList[index - 1];
+                                PhotoModel menuModel =
+                                    controller.menuPhotosList[index - 1];
                                 return Stack(
                                   children: [
                                     menuModel.imageUrl.runtimeType == XFile
                                         ? Image.file(
                                             File(menuModel.imageUrl.path),
                                             fit: BoxFit.cover,
-                                            height: Responsive.height(100, context),
-                                            width: Responsive.width(100, context),
+                                            height:
+                                                Responsive.height(100, context),
+                                            width:
+                                                Responsive.width(100, context),
                                           )
                                         : NetworkImageWidget(
                                             imageUrl: menuModel.imageUrl,
                                             fit: BoxFit.cover,
-                                            height: Responsive.height(100, context),
-                                            width: Responsive.width(100, context),
+                                            height:
+                                                Responsive.height(100, context),
+                                            width:
+                                                Responsive.width(100, context),
                                           ),
                                     Positioned(
                                       top: 8,
                                       right: 8,
                                       child: InkWell(
                                         onTap: () async {
-                                          ShowToastDialog.showLoader("Please wait".tr);
-                                          await FireStoreUtils.removePhoto(menuModel).then(
+                                          ShowToastDialog.showLoader(
+                                              "Please wait".tr);
+                                          await FireStoreUtils.removePhoto(
+                                                  menuModel)
+                                              .then(
                                             (value) {
                                               ShowToastDialog.closeLoader();
-                                              controller.menuPhotosList.removeAt(index - 1);
+                                              controller.menuPhotosList
+                                                  .removeAt(index - 1);
                                             },
                                           );
                                         },
@@ -191,8 +227,13 @@ class UploadMenuScreen extends StatelessWidget {
                                             width: 30,
                                             color: AppThemeData.red03,
                                             child: Padding(
-                                              padding: const EdgeInsets.all(5.0),
-                                              child: Constant.svgPictureShow("assets/icons/delete-one.svg", AppThemeData.red02, 30, 30),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: Constant.svgPictureShow(
+                                                  "assets/icons/delete-one.svg",
+                                                  AppThemeData.red02,
+                                                  30,
+                                                  30),
                                             ),
                                           ),
                                         ),
@@ -211,7 +252,8 @@ class UploadMenuScreen extends StatelessWidget {
         });
   }
 
-  Future buildBottomSheet(BuildContext context, AddMenuPhotoController controller) {
+  Future buildBottomSheet(
+      BuildContext context, AddMenuPhotoController controller) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -226,7 +268,12 @@ class UploadMenuScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 15),
                     child: Text(
                       "Please Select".tr,
-                      style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontFamily: AppThemeData.bold, fontSize: 16),
+                      style: TextStyle(
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          fontFamily: AppThemeData.bold,
+                          fontSize: 16),
                     ),
                   ),
                   Row(
@@ -239,7 +286,8 @@ class UploadMenuScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.camera),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.camera),
                                 icon: const Icon(
                                   Icons.camera_alt,
                                   size: 32,
@@ -258,7 +306,8 @@ class UploadMenuScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.gallery),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.gallery),
                                 icon: const Icon(
                                   Icons.photo_library_sharp,
                                   size: 32,

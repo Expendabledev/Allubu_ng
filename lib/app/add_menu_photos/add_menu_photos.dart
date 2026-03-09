@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/add_menu_photos/item_list_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/add_menu_photo_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/app/add_menu_photos/item_list_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/add_menu_photo_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 import 'upload_menu_screen.dart';
 
@@ -22,7 +22,9 @@ class AddMenuPhotos extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -37,7 +39,9 @@ class AddMenuPhotos extends StatelessWidget {
                         "assets/icons/icon_close.svg",
                         width: 22,
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -48,7 +52,9 @@ class AddMenuPhotos extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -60,7 +66,9 @@ class AddMenuPhotos extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -68,7 +76,9 @@ class AddMenuPhotos extends StatelessWidget {
                 "Add Menu".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -77,7 +87,8 @@ class AddMenuPhotos extends StatelessWidget {
             body: controller.isLoading.value
                 ? Constant.loader()
                 : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -85,7 +96,9 @@ class AddMenuPhotos extends StatelessWidget {
                           "Choose How to Add Menu Items".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 16,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -96,13 +109,16 @@ class AddMenuPhotos extends StatelessWidget {
                         Container(
                           width: Responsive.width(100, Get.context!),
                           decoration: BoxDecoration(
-                            color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 20),
                             child: Column(
                               children: [
                                 controller.hasMenuItem()
@@ -114,10 +130,22 @@ class AddMenuPhotos extends StatelessWidget {
                                           children: [
                                             ClipOval(
                                               child: Container(
-                                                decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09),
+                                                decoration: BoxDecoration(
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark09
+                                                        : AppThemeData.grey09),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(10),
-                                                  child: Constant.svgPictureShow("assets/icons/icon_write.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, 22, 22),
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Constant.svgPictureShow(
+                                                      "assets/icons/icon_write.svg",
+                                                      themeChange.getThem()
+                                                          ? AppThemeData
+                                                              .greyDark03
+                                                          : AppThemeData.grey03,
+                                                      22,
+                                                      22),
                                                 ),
                                               ),
                                             ),
@@ -129,13 +157,22 @@ class AddMenuPhotos extends StatelessWidget {
                                                 "Add Item".tr,
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
                                                   fontSize: 16,
-                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .semiboldOpenSans,
                                                 ),
                                               ),
                                             ),
-                                            Constant.svgPictureShow("assets/icons/icon_right.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, 20, 20)
+                                            Constant.svgPictureShow(
+                                                "assets/icons/icon_right.svg",
+                                                themeChange.getThem()
+                                                    ? AppThemeData.greyDark03
+                                                    : AppThemeData.grey03,
+                                                20,
+                                                20)
                                           ],
                                         ),
                                       )
@@ -152,10 +189,22 @@ class AddMenuPhotos extends StatelessWidget {
                                           children: [
                                             ClipOval(
                                               child: Container(
-                                                decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09),
+                                                decoration: BoxDecoration(
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark09
+                                                        : AppThemeData.grey09),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(10),
-                                                  child: Constant.svgPictureShow("assets/icons/icon_upload.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, 22, 22),
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Constant.svgPictureShow(
+                                                      "assets/icons/icon_upload.svg",
+                                                      themeChange.getThem()
+                                                          ? AppThemeData
+                                                              .greyDark03
+                                                          : AppThemeData.grey03,
+                                                      22,
+                                                      22),
                                                 ),
                                               ),
                                             ),
@@ -164,30 +213,47 @@ class AddMenuPhotos extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     "Upload Menu".tr,
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark01
+                                                          : AppThemeData.grey01,
                                                       fontSize: 16,
-                                                      fontFamily: AppThemeData.semiboldOpenSans,
+                                                      fontFamily: AppThemeData
+                                                          .semiboldOpenSans,
                                                     ),
                                                   ),
                                                   Text(
                                                     "Only Image".tr,
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                      color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark04
+                                                          : AppThemeData.grey04,
                                                       fontSize: 12,
-                                                      fontFamily: AppThemeData.semiboldOpenSans,
+                                                      fontFamily: AppThemeData
+                                                          .semiboldOpenSans,
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            Constant.svgPictureShow("assets/icons/icon_right.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, 20, 20)
+                                            Constant.svgPictureShow(
+                                                "assets/icons/icon_right.svg",
+                                                themeChange.getThem()
+                                                    ? AppThemeData.greyDark03
+                                                    : AppThemeData.grey03,
+                                                20,
+                                                20)
                                           ],
                                         ),
                                       )

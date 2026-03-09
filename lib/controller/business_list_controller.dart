@@ -7,13 +7,13 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:yelpify/app/business_details_screen/business_details_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/service_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/utils.dart';
+import 'package:allubmarket/app/business_details_screen/business_details_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/service_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/utils.dart';
 
 class BusinessListController extends GetxController {
   late GoogleMapController mapController;
@@ -54,7 +54,8 @@ class BusinessListController extends GetxController {
       selectedCategory.value = argumentData['categoryModel'];
       isZipCode.value = argumentData['isZipCode'];
 
-      await FireStoreUtils.getCategoryById(categoryModel.value.slug.toString()).then(
+      await FireStoreUtils.getCategoryById(categoryModel.value.slug.toString())
+          .then(
         (value) {
           if (value != null) {
             categoryModel.value = value;
@@ -67,7 +68,8 @@ class BusinessListController extends GetxController {
         if (Constant.currentLocation == null) {
           currentPosition.value = Constant.currentLocationLatLng!;
         } else {
-          currentPosition.value = LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude);
+          currentPosition.value = LatLng(Constant.currentLocation!.latitude,
+              Constant.currentLocation!.longitude);
         }
       }
 
@@ -87,7 +89,8 @@ class BusinessListController extends GetxController {
     update();
 
     // Load subcategories
-    if (selectedCategory.value.children != null && selectedCategory.value.children!.isNotEmpty) {
+    if (selectedCategory.value.children != null &&
+        selectedCategory.value.children!.isNotEmpty) {
       for (final id in selectedCategory.value.children!) {
         final subCategory = await FireStoreUtils.getCategoryById(id);
         if (subCategory != null) {
@@ -107,12 +110,15 @@ class BusinessListController extends GetxController {
     }
 
     // Filter services with 'filter == true'
-    categoryService.value = categoryService.where((s) => s.filter == true).toList();
+    categoryService.value =
+        categoryService.where((s) => s.filter == true).toList();
     update();
   }
 
   Future getBusiness() async {
-    FireStoreUtils.getAllNearestRestaurantByCategoryId(currentPosition.value, selectedCategory.value).listen((event) async {
+    FireStoreUtils.getAllNearestRestaurantByCategoryId(
+            currentPosition.value, selectedCategory.value)
+        .listen((event) async {
       allBusinessList.clear();
       filteredBusinessList.clear();
       sponsoredBusinessList.clear();
@@ -126,7 +132,8 @@ class BusinessListController extends GetxController {
 
   Future<void> setMarkers() async {
     final Set<Marker> newMarkers = {};
-    Set<String> sponsoredIds = sponsoredBusinessList.map((b) => b.id.toString()).toSet();
+    Set<String> sponsoredIds =
+        sponsoredBusinessList.map((b) => b.id.toString()).toSet();
 
     int index = 1;
 
@@ -135,7 +142,8 @@ class BusinessListController extends GetxController {
       BitmapDescriptor icon;
 
       if (isSponsored) {
-        final imageBytes = await Utils.getBytesFromUrl(Constant.sponsoredMarker); // Replace with actual image URL
+        final imageBytes = await Utils.getBytesFromUrl(
+            Constant.sponsoredMarker); // Replace with actual image URL
         icon = BitmapDescriptor.fromBytes(imageBytes);
       } else {
         Uint8List markerBytes = await createMarkerWithTextOnImage(
@@ -157,9 +165,11 @@ class BusinessListController extends GetxController {
           infoWindow: InfoWindow(
               title: business.businessName,
               onTap: () async {
-                final value = await FireStoreUtils.getBusinessById(business.id ?? '');
+                final value =
+                    await FireStoreUtils.getBusinessById(business.id ?? '');
                 if (value != null) {
-                  Get.to(BusinessDetailsScreen(), arguments: {"businessModel": value});
+                  Get.to(BusinessDetailsScreen(),
+                      arguments: {"businessModel": value});
                 }
               }),
         ),
@@ -175,7 +185,8 @@ class BusinessListController extends GetxController {
   }
 
   RxBool isOpenBusiness = false.obs;
-  RxMap<String, List<OptionModel>> selectedOptionsByServiceId = <String, List<OptionModel>>{}.obs;
+  RxMap<String, List<OptionModel>> selectedOptionsByServiceId =
+      <String, List<OptionModel>>{}.obs;
 
   List<BusinessModel> filterAndSort(List<BusinessModel> inputList) {
     List<BusinessModel> filtered = List.from(inputList);
@@ -185,7 +196,8 @@ class BusinessListController extends GetxController {
         if (business.services == null) return false;
 
         for (String serviceId in selectedOptionsByServiceId.keys) {
-          List<OptionModel> selectedOptions = selectedOptionsByServiceId[serviceId] ?? [];
+          List<OptionModel> selectedOptions =
+              selectedOptionsByServiceId[serviceId] ?? [];
           Map<String, dynamic>? matchedService;
 
           for (var item in business.services!) {
@@ -198,9 +210,12 @@ class BusinessListController extends GetxController {
           if (matchedService == null) return false;
 
           List<dynamic> businessOptionsRaw = matchedService[serviceId];
-          List<OptionModel> businessOptions = businessOptionsRaw.map((e) => e is OptionModel ? e : OptionModel.fromJson(e)).toList();
+          List<OptionModel> businessOptions = businessOptionsRaw
+              .map((e) => e is OptionModel ? e : OptionModel.fromJson(e))
+              .toList();
 
-          bool hasAnyMatch = selectedOptions.any((selected) => businessOptions.any((bOpt) => bOpt.name == selected.name));
+          bool hasAnyMatch = selectedOptions.any((selected) =>
+              businessOptions.any((bOpt) => bOpt.name == selected.name));
 
           if (!hasAnyMatch) return false;
         }
@@ -211,13 +226,15 @@ class BusinessListController extends GetxController {
 
     // Apply "Open Now" filter
     if (isOpenBusiness.value) {
-      filtered = filtered.where((b) => isBusinessOpenNow(b.businessHours)).toList();
+      filtered =
+          filtered.where((b) => isBusinessOpenNow(b.businessHours)).toList();
     }
 
     // Apply sorting
     switch (selectedSortOption.value) {
       case 'recommended':
-        filtered.sort((a, b) => (double.parse(b.recommendYesCount.toString())).compareTo(double.parse(a.recommendYesCount.toString())));
+        filtered.sort((a, b) => (double.parse(b.recommendYesCount.toString()))
+            .compareTo(double.parse(a.recommendYesCount.toString())));
         break;
 
       case 'distance':
@@ -236,11 +253,13 @@ class BusinessListController extends GetxController {
           return sum / count;
         }
 
-        filtered.sort((a, b) => getAverageRating(b).compareTo(getAverageRating(a)));
+        filtered
+            .sort((a, b) => getAverageRating(b).compareTo(getAverageRating(a)));
         break;
 
       case 'reviewed':
-        filtered.sort((a, b) => (double.tryParse(b.reviewCount ?? "0") ?? 0).compareTo(double.tryParse(a.reviewCount ?? "0") ?? 0));
+        filtered.sort((a, b) => (double.tryParse(b.reviewCount ?? "0") ?? 0)
+            .compareTo(double.tryParse(a.reviewCount ?? "0") ?? 0));
         break;
     }
 
@@ -248,15 +267,21 @@ class BusinessListController extends GetxController {
   }
 
   void getAllFilteredLists() {
-    sponsoredBusinessList.value = allBusinessList.where((p0) => p0.sponsored != null && p0.sponsored!.status == "Running").toList();
+    sponsoredBusinessList.value = allBusinessList
+        .where(
+            (p0) => p0.sponsored != null && p0.sponsored!.status == "Running")
+        .toList();
 
     // Get all filtered businesses
     List<BusinessModel> allFiltered = filterAndSort(allBusinessList);
-    List<BusinessModel> sponsoredFiltered = filterAndSort(sponsoredBusinessList);
+    List<BusinessModel> sponsoredFiltered =
+        filterAndSort(sponsoredBusinessList);
 
     // Remove sponsored businesses from the filtered list
-    Set<String> sponsoredIds = sponsoredFiltered.map((b) => b.id.toString()).toSet();
-    filteredBusinessList.value = allFiltered.where((b) => !sponsoredIds.contains(b.id)).toList();
+    Set<String> sponsoredIds =
+        sponsoredFiltered.map((b) => b.id.toString()).toSet();
+    filteredBusinessList.value =
+        allFiltered.where((b) => !sponsoredIds.contains(b.id)).toList();
 
     // Assign sponsored businesses separately
     sponsoredBusinessList.value = sponsoredFiltered;
@@ -265,9 +290,11 @@ class BusinessListController extends GetxController {
     update();
   }
 
-  Future<String?> getAddressFromLatLng(double latitude, double longitude) async {
+  Future<String?> getAddressFromLatLng(
+      double latitude, double longitude) async {
     try {
-      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latitude, longitude);
 
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks[0];
@@ -324,7 +351,8 @@ class BusinessListController extends GetxController {
       final end = times[1];
 
       // Normal time range
-      if (currentTime.compareTo(start) >= 0 && currentTime.compareTo(end) <= 0) {
+      if (currentTime.compareTo(start) >= 0 &&
+          currentTime.compareTo(end) <= 0) {
         return true;
       }
 
@@ -349,7 +377,11 @@ class BusinessListController extends GetxController {
     final dLat = _degToRad(lat2 - lat1);
     final dLon = _degToRad(lon2 - lon1);
 
-    final a = sin(dLat / 2) * sin(dLat / 2) + cos(_degToRad(lat1)) * cos(_degToRad(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(_degToRad(lat1)) *
+            cos(_degToRad(lat2)) *
+            sin(dLon / 2) *
+            sin(dLon / 2);
     final c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return earthRadius * c;
   }
@@ -408,7 +440,8 @@ class BusinessListController extends GetxController {
           baseImage.width,
           baseImage.height,
         );
-    final ByteData? markerData = await markerImage.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? markerData =
+        await markerImage.toByteData(format: ui.ImageByteFormat.png);
 
     return markerData!.buffer.asUint8List();
   }

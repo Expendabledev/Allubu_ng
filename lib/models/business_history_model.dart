@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/models/business_model.dart';
+import 'package:allubmarket/models/business_model.dart';
 
-class BusinessHistoryModel{
+class BusinessHistoryModel {
   String? id;
   Timestamp? createdAt;
   BusinessModel? business;
@@ -10,8 +10,12 @@ class BusinessHistoryModel{
 
   BusinessHistoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    createdAt = json['createdAt'] != null ? Timestamp.fromMillisecondsSinceEpoch(json['createdAt']) : null;
-    business = json['business'] != null ? BusinessModel.fromJson(json['business']) : null;
+    createdAt = json['createdAt'] != null
+        ? Timestamp.fromMillisecondsSinceEpoch(json['createdAt'])
+        : null;
+    business = json['business'] != null
+        ? BusinessModel.fromJson(json['business'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

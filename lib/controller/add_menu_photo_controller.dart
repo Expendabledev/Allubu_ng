@@ -4,13 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/country_model.dart';
-import 'package:yelpify/models/item_model.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/country_model.dart';
+import 'package:allubmarket/models/item_model.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class AddMenuPhotoController extends GetxController {
   RxBool isLoading = true.obs;
@@ -41,11 +41,13 @@ class AddMenuPhotoController extends GetxController {
   }
 
   Future<void> getBusinessData() async {
-    await FireStoreUtils.getBusinessById(businessModel.value.id.toString()).then(
+    await FireStoreUtils.getBusinessById(businessModel.value.id.toString())
+        .then(
       (value) {
         if (value != null) {
           businessModel.value = value;
-          currency.value = Constant.countryModel!.countries!.firstWhere((element) => element.dialCode ==businessModel.value.countryCode);
+          currency.value = Constant.countryModel!.countries!.firstWhere(
+              (element) => element.dialCode == businessModel.value.countryCode);
         }
       },
     );
@@ -62,7 +64,9 @@ class AddMenuPhotoController extends GetxController {
 
 // Menu get and upload
   Future<void> getMenuImages() async {
-    await FireStoreUtils.getAllPhotosByType(businessModel.value.id.toString(), "menuPhoto").then(
+    await FireStoreUtils.getAllPhotosByType(
+            businessModel.value.id.toString(), "menuPhoto")
+        .then(
       (value) {
         menuPhotosList.value = value;
       },
@@ -96,19 +100,23 @@ class AddMenuPhotoController extends GetxController {
   }
 
   bool hasMenuPhotos() {
-    if (businessModel.value.category == null || businessModel.value.category!.isEmpty) {
+    if (businessModel.value.category == null ||
+        businessModel.value.category!.isEmpty) {
       return false;
     }
 
-    return businessModel.value.category!.any((category) => category.menuPhotos == true);
+    return businessModel.value.category!
+        .any((category) => category.menuPhotos == true);
   }
 
   bool hasMenuItem() {
-    if (businessModel.value.category == null || businessModel.value.category!.isEmpty) {
+    if (businessModel.value.category == null ||
+        businessModel.value.category!.isEmpty) {
       return false;
     }
 
-    return businessModel.value.category!.any((category) => category.uploadItems == true);
+    return businessModel.value.category!
+        .any((category) => category.uploadItems == true);
   }
 
   final ImagePicker _imagePicker = ImagePicker();

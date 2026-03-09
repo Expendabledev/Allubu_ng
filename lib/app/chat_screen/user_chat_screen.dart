@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/user_chat_controller.dart';
-import 'package:yelpify/models/chat_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/firestore_pagination.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/models/view_type.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/user_chat_controller.dart';
+import 'package:allubmarket/models/chat_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/firestore_pagination.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/models/view_type.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 import '../../utils/dark_theme_provider.dart';
 
 class UserChatScreen extends StatelessWidget {
@@ -29,7 +29,9 @@ class UserChatScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: DebouncedInkWell(
@@ -40,13 +42,19 @@ class UserChatScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/icon_left.svg",
-                      colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          BlendMode.srcIn),
                     ),
                     Text(
                       "Back".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -58,7 +66,9 @@ class UserChatScreen extends StatelessWidget {
                 controller.receiverUserModel.value.fullName().tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -66,7 +76,9 @@ class UserChatScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -87,20 +99,28 @@ class UserChatScreen extends StatelessWidget {
                               shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, documentSnapshots, index) {
-                                ChatModel chatModel = ChatModel.fromJson(documentSnapshots[index].data() as Map<String, dynamic>);
+                                ChatModel chatModel = ChatModel.fromJson(
+                                    documentSnapshots[index].data()
+                                        as Map<String, dynamic>);
                                 return chatItemView(
                                   themeChange,
-                                  chatModel.senderId == controller.senderUserModel.value.id ? true : false,
+                                  chatModel.senderId ==
+                                          controller.senderUserModel.value.id
+                                      ? true
+                                      : false,
                                   chatModel,
                                 );
                               },
-                              onEmpty: Constant.showEmptyView(message: "No Conversion found".tr),
+                              onEmpty: Constant.showEmptyView(
+                                  message: "No Conversion found".tr),
                               // orderBy is compulsory to enable pagination
                               reverse: true,
                               query: FireStoreUtils.fireStore
                                   .collection(CollectionName.userChat)
                                   .doc(controller.senderUserModel.value.id)
-                                  .collection(controller.receiverUserModel.value.id.toString())
+                                  .collection(controller
+                                      .receiverUserModel.value.id
+                                      .toString())
                                   .orderBy("timestamp", descending: true),
                               isLive: true,
                               viewType: ViewType.list,
@@ -110,10 +130,12 @@ class UserChatScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 24),
                           child: TextFieldWidget(
-                            controller: controller.messageTextEditorController.value,
+                            controller:
+                                controller.messageTextEditorController.value,
                             hintText: 'Send a message',
                             suffix: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: DebouncedInkWell(
                                   onTap: () {
                                     controller.sendMessage();
@@ -141,10 +163,14 @@ class UserChatScreen extends StatelessWidget {
                   data.type == "text"
                       ? Container(
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                                bottomLeft: Radius.circular(12)),
                             color: AppThemeData.red02,
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
                           child: Text(
                             data.message.toString(),
                             style: const TextStyle(
@@ -155,7 +181,10 @@ class UserChatScreen extends StatelessWidget {
                           ),
                         )
                       : ClipRRect(
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12)),
                           child: Stack(alignment: Alignment.center, children: [
                             GestureDetector(
                               onTap: () {},
@@ -192,16 +221,24 @@ class UserChatScreen extends StatelessWidget {
                     data.type == "text"
                         ? Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
                             child: Text(
                               data.message.toString(),
                               style: TextStyle(
                                 fontFamily: AppThemeData.medium,
                                 fontSize: 16,
-                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
                               ),
                             ),
                           )
@@ -211,8 +248,12 @@ class UserChatScreen extends StatelessWidget {
                               maxWidth: 200,
                             ),
                             child: ClipRRect(
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
-                              child: Stack(alignment: Alignment.center, children: [
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                              child:
+                                  Stack(alignment: Alignment.center, children: [
                                 GestureDetector(
                                   onTap: () {},
                                   child: Hero(
@@ -227,7 +268,8 @@ class UserChatScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 5),
-                Text(Constant.formatTimestamp(data.timestamp!), style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(Constant.formatTimestamp(data.timestamp!),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
             ),
     );

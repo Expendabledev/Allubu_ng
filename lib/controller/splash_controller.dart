@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/dashboard_screen/dashboard_screen.dart';
-import 'package:yelpify/app/location_permission_screen/location_permission_screen.dart';
-import 'package:yelpify/app/maintenance_mode_screen/maintenance_mode_screen.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/dashboard_screen/dashboard_screen.dart';
+import 'package:allubmarket/app/location_permission_screen/location_permission_screen.dart';
+import 'package:allubmarket/app/maintenance_mode_screen/maintenance_mode_screen.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class SplashController extends GetxController {
   @override
@@ -46,7 +46,8 @@ class SplashController extends GetxController {
     } else {
       LocationPermission permission = await Geolocator.checkPermission();
 
-      if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
+      if (permission == LocationPermission.always ||
+          permission == LocationPermission.whileInUse) {
         isLocationEnable = true;
       } else {
         isLocationEnable = false;

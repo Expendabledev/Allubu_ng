@@ -6,17 +6,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/edit_profile_controller.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/edit_profile_controller.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -30,14 +30,18 @@ class EditProfileScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
               appBar: AppBar(
-                  backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                  backgroundColor: themeChange.getThem()
+                      ? AppThemeData.greyDark10
+                      : AppThemeData.grey10,
                   centerTitle: true,
                   leadingWidth: 120,
                   title: Text(
                     "Update Profile".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                       fontSize: 16,
                       fontFamily: AppThemeData.semiboldOpenSans,
                     ),
@@ -53,7 +57,11 @@ class EditProfileScreen extends StatelessWidget {
                           SvgPicture.asset(
                             "assets/icons/icon_close.svg",
                             width: 20,
-                            colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                            colorFilter: ColorFilter.mode(
+                                themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
+                                BlendMode.srcIn),
                           ),
                           SizedBox(
                             width: 10,
@@ -62,7 +70,9 @@ class EditProfileScreen extends StatelessWidget {
                             "Close".tr,
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark01
+                                  : AppThemeData.grey01,
                               fontSize: 14,
                               fontFamily: AppThemeData.semiboldOpenSans,
                             ),
@@ -104,18 +114,26 @@ class EditProfileScreen extends StatelessWidget {
                                       )
                                 : ClipRRect(
                                     borderRadius: BorderRadius.circular(60),
-                                    child: Constant().hasValidUrl(controller.profileImage.value) == false
+                                    child: Constant().hasValidUrl(controller
+                                                .profileImage.value) ==
+                                            false
                                         ? Image.file(
                                             File(controller.profileImage.value),
-                                            height: Responsive.width(30, context),
-                                            width: Responsive.width(30, context),
+                                            height:
+                                                Responsive.width(30, context),
+                                            width:
+                                                Responsive.width(30, context),
                                             fit: BoxFit.cover,
                                           )
                                         : NetworkImageWidget(
-                                            imageUrl: controller.profileImage.value.toString(),
+                                            imageUrl: controller
+                                                .profileImage.value
+                                                .toString(),
                                             fit: BoxFit.cover,
-                                            height: Responsive.width(30, context),
-                                            width: Responsive.width(30, context),
+                                            height:
+                                                Responsive.width(30, context),
+                                            width:
+                                                Responsive.width(30, context),
                                           ),
                                   ),
                           ),
@@ -136,7 +154,9 @@ class EditProfileScreen extends StatelessWidget {
                                     'assets/icons/ic_edit.svg',
                                     width: 22,
                                     height: 22,
-                                    color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark02
+                                        : AppThemeData.grey02,
                                   ),
                                 ),
                               ),
@@ -156,9 +176,17 @@ class EditProfileScreen extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Expanded(child: TextFieldWidget(hintText: 'First name'.tr, controller: controller.firstNameController.value)),
+                                      Expanded(
+                                          child: TextFieldWidget(
+                                              hintText: 'First name'.tr,
+                                              controller: controller
+                                                  .firstNameController.value)),
                                       SizedBox(width: 10),
-                                      Expanded(child: TextFieldWidget(hintText: 'Last name'.tr, controller: controller.lastNameController.value)),
+                                      Expanded(
+                                          child: TextFieldWidget(
+                                              hintText: 'Last name'.tr,
+                                              controller: controller
+                                                  .lastNameController.value)),
                                     ],
                                   ),
                                   const SizedBox(
@@ -166,48 +194,93 @@ class EditProfileScreen extends StatelessWidget {
                                   ),
                                   TextFieldWidget(
                                       hintText: 'Email'.tr,
-                                      controller: controller.emailController.value,
-                                      enable: controller.userModel.value.loginType != Constant.emailLoginType && controller.userModel.value.loginType != Constant.googleLoginType,
-                                      readOnly: controller.userModel.value.loginType == Constant.emailLoginType || controller.userModel.value.loginType == Constant.googleLoginType),
+                                      controller:
+                                          controller.emailController.value,
+                                      enable: controller
+                                                  .userModel.value.loginType !=
+                                              Constant.emailLoginType &&
+                                          controller
+                                                  .userModel.value.loginType !=
+                                              Constant.googleLoginType,
+                                      readOnly: controller
+                                                  .userModel.value.loginType ==
+                                              Constant.emailLoginType ||
+                                          controller
+                                                  .userModel.value.loginType ==
+                                              Constant.googleLoginType),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   TextFieldWidget(
-                                    readOnly: controller.userModel.value.loginType == Constant.phoneLoginType,
-                                    enable: controller.userModel.value.loginType != Constant.phoneLoginType,
-                                    controller: controller.phoneNumberTextFieldController.value,
+                                    readOnly:
+                                        controller.userModel.value.loginType ==
+                                            Constant.phoneLoginType,
+                                    enable:
+                                        controller.userModel.value.loginType !=
+                                            Constant.phoneLoginType,
+                                    controller: controller
+                                        .phoneNumberTextFieldController.value,
                                     hintText: 'Enter mobile number'.tr,
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('[0-9]')),
                                     ],
                                     prefix: CountryCodePicker(
                                       onInit: (value) {
-                                        controller.countryCodeController.value.text = value?.dialCode ?? Constant.defaultCountryCode;
-                                        controller.countryISOCodeController.value.text = value?.code ?? Constant.defaultCountryCode;
+                                        controller.countryCodeController.value
+                                                .text =
+                                            value?.dialCode ??
+                                                Constant.defaultCountryCode;
+                                        controller.countryISOCodeController
+                                                .value.text =
+                                            value?.code ??
+                                                Constant.defaultCountryCode;
                                       },
-                                      enabled: controller.userModel.value.loginType != Constant.phoneLoginType,
+                                      enabled: controller
+                                              .userModel.value.loginType !=
+                                          Constant.phoneLoginType,
                                       onChanged: (value) {
-                                        controller.countryCodeController.value.text = value.dialCode.toString();
-                                        controller.countryISOCodeController.value.text = value.code ?? Constant.defaultCountryCode;
+                                        controller.countryCodeController.value
+                                            .text = value.dialCode.toString();
+                                        controller.countryISOCodeController
+                                                .value.text =
+                                            value.code ??
+                                                Constant.defaultCountryCode;
                                       },
-                                      dialogTextStyle:
-                                          TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontWeight: FontWeight.w500, fontFamily: AppThemeData.medium),
-                                      dialogBackgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                      initialSelection: controller.countryISOCodeController.value.text,
-                                      comparator: (a, b) => b.name!.compareTo(a.name.toString()),
+                                      dialogTextStyle: TextStyle(
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark01
+                                              : AppThemeData.grey01,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppThemeData.medium),
+                                      dialogBackgroundColor:
+                                          themeChange.getThem()
+                                              ? AppThemeData.greyDark10
+                                              : AppThemeData.grey10,
+                                      initialSelection: controller
+                                          .countryISOCodeController.value.text,
+                                      comparator: (a, b) =>
+                                          b.name!.compareTo(a.name.toString()),
                                       flagDecoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(2)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(2)),
                                       ),
                                       textStyle: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: AppThemeData.medium,
                                       ),
                                       searchDecoration: InputDecoration(
-                                        iconColor: themeChange.getThem() ? AppThemeData.grey08 : AppThemeData.grey08,
+                                        iconColor: themeChange.getThem()
+                                            ? AppThemeData.grey08
+                                            : AppThemeData.grey08,
                                       ),
                                       searchStyle: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: AppThemeData.medium,
                                       ),
@@ -218,31 +291,62 @@ class EditProfileScreen extends StatelessWidget {
                                   ),
                                   RoundedButtonFill(
                                     height: 5.5,
-                                    textColor: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
-                                    color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                    textColor: themeChange.getThem()
+                                        ? AppThemeData.grey10
+                                        : AppThemeData.grey10,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.red02
+                                        : AppThemeData.red02,
                                     title: "Update Profile".tr,
                                     onPress: () async {
-                                      ShowToastDialog.showLoader("Please wait".tr);
-                                      print("======>${controller.profileImage.value}");
+                                      ShowToastDialog.showLoader(
+                                          "Please wait".tr);
+                                      print(
+                                          "======>${controller.profileImage.value}");
 
-                                      if (controller.profileImage.value.isNotEmpty && Constant().hasValidUrl(controller.profileImage.value) == false) {
-                                        controller.profileImage.value = await Constant.uploadUserImageToFireStorage(
-                                            File(controller.profileImage.value), "profileImage/${FireStoreUtils.getCurrentUid()}", File(controller.profileImage.value).path.split('/').last);
+                                      if (controller
+                                              .profileImage.value.isNotEmpty &&
+                                          Constant().hasValidUrl(controller
+                                                  .profileImage.value) ==
+                                              false) {
+                                        controller.profileImage.value =
+                                            await Constant
+                                                .uploadUserImageToFireStorage(
+                                                    File(controller
+                                                        .profileImage.value),
+                                                    "profileImage/${FireStoreUtils.getCurrentUid()}",
+                                                    File(controller
+                                                            .profileImage.value)
+                                                        .path
+                                                        .split('/')
+                                                        .last);
                                       }
 
-                                      UserModel userModel = controller.userModel.value;
-                                      userModel.firstName = controller.firstNameController.value.text;
-                                      userModel.lastName = controller.lastNameController.value.text;
-                                      userModel.profilePic = controller.profileImage.value;
-                                      userModel.countryCode = controller.countryCodeController.value.text;
-                                      userModel.countryISOCode = controller.countryISOCodeController.value.text;
-                                      userModel.phoneNumber = controller.phoneNumberTextFieldController.value.text;
-                                      userModel.email = controller.emailController.value.text;
+                                      UserModel userModel =
+                                          controller.userModel.value;
+                                      userModel.firstName = controller
+                                          .firstNameController.value.text;
+                                      userModel.lastName = controller
+                                          .lastNameController.value.text;
+                                      userModel.profilePic =
+                                          controller.profileImage.value;
+                                      userModel.countryCode = controller
+                                          .countryCodeController.value.text;
+                                      userModel.countryISOCode = controller
+                                          .countryISOCodeController.value.text;
+                                      userModel.phoneNumber = controller
+                                          .phoneNumberTextFieldController
+                                          .value
+                                          .text;
+                                      userModel.email =
+                                          controller.emailController.value.text;
 
-                                      FireStoreUtils.updateUser(userModel).then((value) {
+                                      FireStoreUtils.updateUser(userModel)
+                                          .then((value) {
                                         ShowToastDialog.closeLoader();
                                         Get.back(result: true);
-                                        ShowToastDialog.showToast("Profile update successfully".tr);
+                                        ShowToastDialog.showToast(
+                                            "Profile update successfully".tr);
                                       });
                                     },
                                   ),
@@ -256,7 +360,8 @@ class EditProfileScreen extends StatelessWidget {
         });
   }
 
-  Future buildBottomSheet(BuildContext context, EditProfileController controller) {
+  Future buildBottomSheet(
+      BuildContext context, EditProfileController controller) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -282,7 +387,8 @@ class EditProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.camera),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.camera),
                                 icon: const Icon(
                                   Icons.camera_alt,
                                   size: 32,
@@ -301,7 +407,8 @@ class EditProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.gallery),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.gallery),
                                 icon: const Icon(
                                   Icons.photo_library_sharp,
                                   size: 32,

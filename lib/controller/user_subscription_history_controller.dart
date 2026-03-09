@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yelpify/models/subscription_ads_history.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/subscription_ads_history.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class UserSubscriptionHistoryController extends GetxController {
   RxBool isLoading = true.obs;

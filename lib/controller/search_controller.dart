@@ -6,22 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:yelpify/app/home_screen/business_list_screen.dart';
-import 'package:yelpify/app/search_screen/voice_search_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/voice_search_controller.dart';
-import 'package:yelpify/models/business_history_model.dart';
-import 'package:yelpify/models/category_history_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/utils/business_history_storage.dart';
-import 'package:yelpify/utils/category_history_storage.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/app/home_screen/business_list_screen.dart';
+import 'package:allubmarket/app/search_screen/voice_search_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/voice_search_controller.dart';
+import 'package:allubmarket/models/business_history_model.dart';
+import 'package:allubmarket/models/category_history_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/utils/business_history_storage.dart';
+import 'package:allubmarket/utils/category_history_storage.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 import 'package:http/http.dart' as http;
 
 class SearchControllers extends GetxController {
-  Rx<TextEditingController> categoryTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> locationTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> categoryTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> locationTextFieldController =
+      TextEditingController().obs;
 
   FocusNode focusNode1 = FocusNode();
   FocusNode focusNode2 = FocusNode();
@@ -29,7 +31,8 @@ class SearchControllers extends GetxController {
   RxBool isLocationSearch = false.obs;
   RxBool isSearchClose = true.obs;
 
-  RxList<CategoryModel> categories = <CategoryModel>[].obs; // Observable category list
+  RxList<CategoryModel> categories =
+      <CategoryModel>[].obs; // Observable category list
   LatLng? latLng; // Observable category list
   Rx<CategoryModel> selectedCategory = CategoryModel().obs;
   RxBool isLoading = true.obs;
@@ -85,12 +88,15 @@ class SearchControllers extends GetxController {
         latLng = argumentData['latLng'];
       } else {
         if (Constant.currentLocation == null) {
-          latLng = LatLng(Constant.currentLocationLatLng!.latitude, Constant.currentLocationLatLng!.longitude);
+          latLng = LatLng(Constant.currentLocationLatLng!.latitude,
+              Constant.currentLocationLatLng!.longitude);
         } else {
-          latLng = LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude);
+          latLng = LatLng(Constant.currentLocation!.latitude,
+              Constant.currentLocation!.longitude);
         }
       }
-      categoryTextFieldController.value.text = selectedCategory.value.name.toString();
+      categoryTextFieldController.value.text =
+          selectedCategory.value.name.toString();
     }
     isLoading.value = false;
     update();
@@ -103,7 +109,9 @@ class SearchControllers extends GetxController {
       categories.assignAll([]); // Clear the list and update UI
     } else {
       isCategoryLoading.value = true;
-      await FireStoreUtils.getCategory(query.trim().replaceAll("  ", " ").toLowerCase()).then(
+      await FireStoreUtils.getCategory(
+              query.trim().replaceAll("  ", " ").toLowerCase())
+          .then(
         (value) async {
           categories.value = value;
         },
@@ -146,7 +154,8 @@ class SearchControllers extends GetxController {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final location = data['result']['geometry']['location'];
-      locationTextFieldController.value.text = data['result']['formatted_address'];
+      locationTextFieldController.value.text =
+          data['result']['formatted_address'];
       latLng = LatLng(location['lat'], location['lng']);
       navigateBusinessScree();
     }
@@ -158,7 +167,8 @@ class SearchControllers extends GetxController {
       Get.off(BusinessListScreen(), arguments: {
         "categoryModel": selectedCategory.value,
         "latLng": latLng,
-        "isZipCode": Constant.isNumeric(locationTextFieldController.value.text.trim()),
+        "isZipCode":
+            Constant.isNumeric(locationTextFieldController.value.text.trim()),
       });
     }
   }
@@ -180,7 +190,8 @@ class SearchControllers extends GetxController {
   }
 
   RxList<CategoryHistoryModel> categoryHistory = <CategoryHistoryModel>[].obs;
-  RxList<BusinessHistoryModel> recentSearchHistory = <BusinessHistoryModel>[].obs;
+  RxList<BusinessHistoryModel> recentSearchHistory =
+      <BusinessHistoryModel>[].obs;
 
   Future<void> getSearchHistory() async {
     await CategoryHistoryStorage.getCategoryHistoryList().then(

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/models/business_model.dart';
+import 'package:allubmarket/models/business_model.dart';
 
 class BookmarksModel {
   String? id;
@@ -47,8 +47,12 @@ class BookmarksModel {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     shareLinkCode = json['shareLinkCode'];
-    position = json['position'] != null ? Positions.fromJson(json['position']) : Positions();
-    location = json['location'] != null ? LatLngModel.fromJson(json['location']) : LatLngModel();
+    position = json['position'] != null
+        ? Positions.fromJson(json['position'])
+        : Positions();
+    location = json['location'] != null
+        ? LatLngModel.fromJson(json['location'])
+        : LatLngModel();
   }
 
   Map<String, dynamic> toJson() {

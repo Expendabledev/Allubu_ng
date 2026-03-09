@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/controller/voice_search_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/controller/voice_search_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class VoiceSearchScreen extends StatelessWidget {
   const VoiceSearchScreen({super.key});
@@ -25,7 +25,9 @@ class VoiceSearchScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 22,
-                            color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+                            color: themeChange.getThem()
+                                ? AppThemeData.surfaceDark50
+                                : AppThemeData.surface50,
                             fontWeight: FontWeight.w500,
                           ),
                         )
@@ -34,7 +36,9 @@ class VoiceSearchScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 22,
-                            color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+                            color: themeChange.getThem()
+                                ? AppThemeData.surfaceDark50
+                                : AppThemeData.surface50,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -52,7 +56,8 @@ class VoiceSearchScreen extends StatelessWidget {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppThemeData.greyDark04.withOpacity(0.6),
+                                  color:
+                                      AppThemeData.greyDark04.withOpacity(0.6),
                                   blurRadius: 30,
                                   spreadRadius: 10,
                                 ),
@@ -96,7 +101,8 @@ class VoiceSearchScreen extends StatelessWidget {
                       height: 100,
                     ),
                   const SizedBox(height: 20),
-                  if (controller.status.value == 'listening' || controller.recognizedText.value != 'Listening...')
+                  if (controller.status.value == 'listening' ||
+                      controller.recognizedText.value != 'Listening...')
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Text(

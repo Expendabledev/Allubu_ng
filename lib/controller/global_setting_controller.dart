@@ -3,11 +3,11 @@ import 'dart:developer';
 
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/country_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/notification_service.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/country_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/notification_service.dart';
 
 class GlobalSettingController extends GetxController {
   @override
@@ -24,7 +24,8 @@ class GlobalSettingController extends GetxController {
 
   Future<void> loadCountries() async {
     // Load the JSON string from assets
-    final String response = await rootBundle.loadString('assets/currency-codes.json');
+    final String response =
+        await rootBundle.loadString('assets/currency-codes.json');
 
     // Decode the JSON string
     final Map<String, dynamic> data = json.decode(response);
@@ -40,7 +41,8 @@ class GlobalSettingController extends GetxController {
       bool isLogin = await FireStoreUtils.isLogin();
       if (isLogin == true) {
         String token = await NotificationService.getToken();
-        UserModel? userModel = await FireStoreUtils.getUserProfile(FireStoreUtils.getCurrentUid());
+        UserModel? userModel =
+            await FireStoreUtils.getUserProfile(FireStoreUtils.getCurrentUid());
         userModel!.fcmToken = token;
         await FireStoreUtils.updateUser(userModel);
         log(":::::::TOKEN:::::: $token");

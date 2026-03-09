@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/bookmarks_model.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/bookmarks_model.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class CollectionDetailsController extends GetxController {
   var isLoading = true.obs; // Loading state
@@ -32,7 +32,8 @@ class CollectionDetailsController extends GetxController {
   }
 
   Future<void> getBookMark() async {
-    await FireStoreUtils.getBookmarksById(bookmarkModel.value.id.toString()).then(
+    await FireStoreUtils.getBookmarksById(bookmarkModel.value.id.toString())
+        .then(
       (value) {
         if (value != null) {
           bookmarkModel.value = value;
@@ -43,7 +44,8 @@ class CollectionDetailsController extends GetxController {
 
   Future<void> collectionUpdate() async {
     ShowToastDialog.showLoader("Please wait");
-    if (bookmarkModel.value.followers!.contains(FireStoreUtils.getCurrentUid())) {
+    if (bookmarkModel.value.followers!
+        .contains(FireStoreUtils.getCurrentUid())) {
       bookmarkModel.value.followers!.remove(FireStoreUtils.getCurrentUid());
     } else {
       bookmarkModel.value.followers!.add(FireStoreUtils.getCurrentUid());

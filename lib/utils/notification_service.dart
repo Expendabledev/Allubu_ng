@@ -4,16 +4,16 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/app/business_details_screen/business_details_screen.dart';
-import 'package:yelpify/app/business_project_list_screen/business_project_list_screen.dart';
-import 'package:yelpify/app/chat_screen/chat_screen.dart';
-import 'package:yelpify/app/chat_screen/user_chat_screen.dart';
-import 'package:yelpify/app/other_people_screen/other_people_screen.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/pricing_request_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/app/business_details_screen/business_details_screen.dart';
+import 'package:allubmarket/app/business_project_list_screen/business_project_list_screen.dart';
+import 'package:allubmarket/app/chat_screen/chat_screen.dart';
+import 'package:allubmarket/app/chat_screen/user_chat_screen.dart';
+import 'package:allubmarket/app/other_people_screen/other_people_screen.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/pricing_request_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 Future<void> firebaseMessageBackgroundHandle(RemoteMessage message) async {
   log("BackGround Message :: ${message.messageId}");
@@ -154,8 +154,8 @@ class NotificationService {
     try {
       AndroidNotificationChannel channel = const AndroidNotificationChannel(
         '0',
-        'yelpify',
-        description: 'Show yelpify Notification',
+        'allubmarket',
+        description: 'Show allubmarket Notification',
         importance: Importance.max,
       );
       AndroidNotificationDetails notificationDetails =

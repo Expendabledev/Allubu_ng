@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:yelpify/models/bookmarks_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/bookmarks_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class CollectionController extends GetxController {
   RxBool isLoading = true.obs;

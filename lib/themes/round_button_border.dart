@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
 
 class RoundedButtonBorder extends StatelessWidget {
   final String title;
@@ -52,7 +52,11 @@ class RoundedButtonBorder extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            (isRight == false) ? Padding(padding: const EdgeInsets.only(right: 10, left: 20), child: icon) : const SizedBox(),
+            (isRight == false)
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 10, left: 20),
+                    child: icon)
+                : const SizedBox(),
             isCenter == true
                 ? Text(
                     title.toString().tr,
@@ -77,7 +81,11 @@ class RoundedButtonBorder extends StatelessWidget {
                       ),
                     ),
                   ),
-            (isRight == true) ? Padding(padding: const EdgeInsets.only(left: 10, right: 20), child: icon) : const SizedBox(),
+            (isRight == true)
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 20),
+                    child: icon)
+                : const SizedBox(),
           ],
         ),
       ),

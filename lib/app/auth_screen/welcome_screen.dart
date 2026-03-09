@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/login_screen.dart';
-import 'package:yelpify/app/auth_screen/singup_screen.dart';
-import 'package:yelpify/app/dashboard_screen/dashboard_screen.dart';
-import 'package:yelpify/app/terms_and_condition/terms_and_condition_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/welcome_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/round_button_border.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/app/auth_screen/login_screen.dart';
+import 'package:allubmarket/app/auth_screen/singup_screen.dart';
+import 'package:allubmarket/app/dashboard_screen/dashboard_screen.dart';
+import 'package:allubmarket/app/terms_and_condition/terms_and_condition_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/welcome_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/round_button_border.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -27,9 +27,13 @@ class WelcomeScreen extends StatelessWidget {
       init: WelcomeController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+          backgroundColor: themeChange.getThem()
+              ? AppThemeData.greyDark10
+              : AppThemeData.grey10,
           appBar: AppBar(
-            backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+            backgroundColor: themeChange.getThem()
+                ? AppThemeData.greyDark10
+                : AppThemeData.grey10,
             leadingWidth: 400,
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -80,16 +84,21 @@ class WelcomeScreen extends StatelessWidget {
                           }).tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 28,
                             fontFamily: AppThemeData.bold,
                           ),
                         ),
                         Text(
-                          "Discover & Share Local Favorites Let’s get Started.".tr,
+                          "Discover & Share Local Favorites Let’s get Started."
+                              .tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark03
+                                : AppThemeData.grey03,
                             fontSize: 14,
                             fontFamily: AppThemeData.regular,
                             fontWeight: FontWeight.w400,
@@ -114,17 +123,22 @@ class WelcomeScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppThemeData.regularOpenSans,
-                          color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark04
+                              : AppThemeData.grey04,
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(const TermsAndConditionScreen(type: "terms"));
+                                Get.to(const TermsAndConditionScreen(
+                                    type: "terms"));
                               },
                             text: ' Terms of Service '.tr,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.tealDark02
+                                  : AppThemeData.teal02,
                               fontSize: 14,
                               fontFamily: AppThemeData.semiboldOpenSans,
                             ),
@@ -136,17 +150,22 @@ class WelcomeScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppThemeData.regularOpenSans,
-                              color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark04
+                                  : AppThemeData.grey04,
                             ),
                           ),
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(const TermsAndConditionScreen(type: "privacy"));
+                                Get.to(const TermsAndConditionScreen(
+                                    type: "privacy"));
                               },
                             text: ' Privacy Policy.'.tr,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.tealDark02
+                                  : AppThemeData.teal02,
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                               fontFamily: AppThemeData.semiboldOpenSans,
@@ -161,9 +180,15 @@ class WelcomeScreen extends StatelessWidget {
                     RoundedButtonBorder(
                       title: 'Go to Home Page'.tr,
                       isRight: false,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                      borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
+                      borderColor: themeChange.getThem()
+                          ? AppThemeData.greyDark06
+                          : AppThemeData.grey06,
                       onPress: () {
                         Get.offAll(DashBoardScreen());
                       },
@@ -175,9 +200,15 @@ class WelcomeScreen extends StatelessWidget {
                       icon: SvgPicture.asset("assets/icons/ic_google.svg.svg"),
                       title: 'Continue with Google'.tr,
                       isRight: false,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                      borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
+                      borderColor: themeChange.getThem()
+                          ? AppThemeData.greyDark06
+                          : AppThemeData.grey06,
                       onPress: () {
                         controller.loginWithGoogle();
                       },
@@ -189,12 +220,20 @@ class WelcomeScreen extends StatelessWidget {
                         ? RoundedButtonFill(
                             icon: SvgPicture.asset(
                               "assets/icons/apple.svg",
-                              colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, BlendMode.srcIn),
+                              colorFilter: ColorFilter.mode(
+                                  themeChange.getThem()
+                                      ? AppThemeData.greyDark10
+                                      : AppThemeData.grey10,
+                                  BlendMode.srcIn),
                             ),
                             title: 'Continue with Apple'.tr,
                             isRight: false,
-                            textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            textColor: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             onPress: () {
                               controller.loginWithApple();
                             },
@@ -208,8 +247,12 @@ class WelcomeScreen extends StatelessWidget {
                         Expanded(
                           child: RoundedButtonFill(
                             title: 'Log in'.tr,
-                            textColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                            color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                            textColor: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark07
+                                : AppThemeData.grey07,
                             onPress: () {
                               Get.to(LoginScreen());
                             },
@@ -221,8 +264,12 @@ class WelcomeScreen extends StatelessWidget {
                         Expanded(
                           child: RoundedButtonFill(
                             title: 'Signup'.tr,
-                            textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                            color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                            textColor: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
+                            color: themeChange.getThem()
+                                ? AppThemeData.redDark02
+                                : AppThemeData.red02,
                             onPress: () {
                               Get.to(SingUpScreen());
                             },

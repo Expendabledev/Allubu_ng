@@ -6,14 +6,14 @@
     [
       "/Users/rushabhpatel/Library/Android/sdk/cmake/3.22.1/bin/ninja",
       "-C",
-      "/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/RelWithDebInfo/46j25203/x86",
+      "/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/RelWithDebInfo/46j25203/x86",
       "clean"
     ]
   ],
   "buildTargetsCommandComponents": [
     "/Users/rushabhpatel/Library/Android/sdk/cmake/3.22.1/bin/ninja",
     "-C",
-    "/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/RelWithDebInfo/46j25203/x86",
+    "/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/RelWithDebInfo/46j25203/x86",
     "{LIST_OF_TARGETS_TO_BUILD}"
   ],
   "libraries": {},

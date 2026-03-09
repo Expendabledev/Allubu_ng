@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:yelpify/utils/dark_theme_preference.dart';
+import 'package:allubmarket/utils/dark_theme_preference.dart';
 
 class DarkThemeProvider with ChangeNotifier {
   DarkThemePreference darkThemePreference = DarkThemePreference();
@@ -23,7 +23,8 @@ class DarkThemeProvider with ChangeNotifier {
   }
 
   bool getSystemThem() {
-    var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    var brightness =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness;
     return brightness == Brightness.dark;
   }
 }

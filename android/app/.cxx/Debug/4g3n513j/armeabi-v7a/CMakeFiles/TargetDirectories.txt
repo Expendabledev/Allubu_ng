@@ -1,2 +1,2 @@
-/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/Debug/4g3n513j/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/rushabhpatel/Documents/GitHub/yelpify/android/app/.cxx/Debug/4g3n513j/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/Debug/4g3n513j/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/rushabhpatel/Documents/GitHub/allubmarket/android/app/.cxx/Debug/4g3n513j/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/photo_screen/photo_view_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/photo_controller.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/grid_video_thumbnail.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/photo_screen/photo_view_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/photo_controller.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/grid_video_thumbnail.dart';
 
 class PhotoScreen extends StatelessWidget {
   const PhotoScreen({super.key});
@@ -27,7 +27,9 @@ class PhotoScreen extends StatelessWidget {
             length: 2, // Number of tabs
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                backgroundColor: themeChange.getThem()
+                    ? AppThemeData.greyDark10
+                    : AppThemeData.grey10,
                 centerTitle: true,
                 leadingWidth: 120,
                 leading: Padding(
@@ -41,7 +43,9 @@ class PhotoScreen extends StatelessWidget {
                         SvgPicture.asset(
                           "assets/icons/icon_close.svg",
                           colorFilter: ColorFilter.mode(
-                            themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark06
+                                : AppThemeData.grey01,
                             BlendMode.srcIn,
                           ),
                           width: 22,
@@ -53,7 +57,9 @@ class PhotoScreen extends StatelessWidget {
                           "Close".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 14,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -64,22 +70,33 @@ class PhotoScreen extends StatelessWidget {
                 ),
                 bottom: controller.hasMenuPhoto()
                     ? TabBar(
-                        labelColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                        unselectedLabelColor: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                        labelColor: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
+                        unselectedLabelColor: themeChange.getThem()
+                            ? AppThemeData.greyDark04
+                            : AppThemeData.grey04,
                         labelStyle: TextStyle(
                           fontSize: 16,
                           fontFamily: AppThemeData.semiboldOpenSans,
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                         ),
                         unselectedLabelStyle: TextStyle(
                           fontSize: 14,
                           fontFamily: AppThemeData.regularOpenSans,
-                          color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark04
+                              : AppThemeData.grey04,
                         ),
                         indicatorSize: TabBarIndicatorSize.tab,
                         // Makes the indicator full width
                         indicator: UnderlineTabIndicator(
-                          borderSide: BorderSide(width: 4, color: AppThemeData.red02), // Full-width red indicator
+                          borderSide: BorderSide(
+                              width: 4,
+                              color: AppThemeData
+                                  .red02), // Full-width red indicator
                         ),
                         tabs: [
                           Tab(
@@ -88,7 +105,8 @@ class PhotoScreen extends StatelessWidget {
                           }).tr),
                           Tab(
                               text: 'menu_photos_count'.trParams({
-                            'count': controller.menuPhotosList.length.toString(),
+                            'count':
+                                controller.menuPhotosList.length.toString(),
                           })),
                         ],
                       )
@@ -97,7 +115,9 @@ class PhotoScreen extends StatelessWidget {
                   "Photos".tr,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.semiboldOpenSans,
                   ),
@@ -124,7 +144,8 @@ class PhotoScreen extends StatelessWidget {
         });
   }
 
-  Widget buildPhotoGrid(themeChange, List<PhotoModel> images, PhotoController controller) {
+  Widget buildPhotoGrid(
+      themeChange, List<PhotoModel> images, PhotoController controller) {
     return GridView.builder(
       padding: EdgeInsets.all(10),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -137,7 +158,8 @@ class PhotoScreen extends StatelessWidget {
         if (index == 0) {
           return DebouncedInkWell(
             onTap: () {
-              if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+              if (FireStoreUtils.getCurrentUid() == '' ||
+                  FireStoreUtils.getCurrentUid().isEmpty) {
                 Get.offAll(WelcomeScreen());
               } else {
                 controller.pickMultipleMediaFiles(true, themeChange);
@@ -145,7 +167,9 @@ class PhotoScreen extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                color: themeChange.getThem()
+                    ? AppThemeData.greyDark08
+                    : AppThemeData.grey08,
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Column(
@@ -156,7 +180,9 @@ class PhotoScreen extends StatelessWidget {
                     "Add Photo".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark02
+                          : AppThemeData.grey02,
                       fontSize: 16,
                       fontFamily: AppThemeData.semiboldOpenSans,
                     ),
@@ -172,7 +198,11 @@ class PhotoScreen extends StatelessWidget {
             if (FireStoreUtils.getCurrentUid() == '') {
               Get.offAll(WelcomeScreen());
             } else {
-              Get.to(PhotoViewScreen(), arguments: {"photoList": images, "index": images.indexOf(photoModel)})!.then(
+              Get.to(PhotoViewScreen(), arguments: {
+                "photoList": images,
+                "index": images.indexOf(photoModel)
+              })!
+                  .then(
                 (value) {
                   controller.getAllPhotos();
                   controller.getMenuImage();
@@ -199,8 +229,10 @@ class PhotoScreen extends StatelessWidget {
                   right: 5,
                   child: DebouncedInkWell(
                     onTap: () {
-                      if (photoModel.likedBy!.contains(FireStoreUtils.getCurrentUid())) {
-                        photoModel.likedBy!.remove(FireStoreUtils.getCurrentUid());
+                      if (photoModel.likedBy!
+                          .contains(FireStoreUtils.getCurrentUid())) {
+                        photoModel.likedBy!
+                            .remove(FireStoreUtils.getCurrentUid());
                       } else {
                         photoModel.likedBy!.add(FireStoreUtils.getCurrentUid());
                       }
@@ -210,7 +242,8 @@ class PhotoScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: photoModel.likedBy!.contains(FireStoreUtils.getCurrentUid())
+                        color: photoModel.likedBy!
+                                .contains(FireStoreUtils.getCurrentUid())
                             ? AppThemeData.red02
                             : themeChange.getThem()
                                 ? AppThemeData.greyDark10
@@ -219,7 +252,8 @@ class PhotoScreen extends StatelessWidget {
                       ),
                       child: Constant.svgPictureShow(
                         "assets/icons/icon_thumbs-up.svg",
-                        photoModel.likedBy!.contains(FireStoreUtils.getCurrentUid())
+                        photoModel.likedBy!
+                                .contains(FireStoreUtils.getCurrentUid())
                             ? AppThemeData.grey10
                             : themeChange.getThem()
                                 ? AppThemeData.greyDark02
@@ -237,7 +271,8 @@ class PhotoScreen extends StatelessWidget {
     );
   }
 
-  Widget buildMenuPhotoGrid(themeChange, List<PhotoModel> images, PhotoController controller) {
+  Widget buildMenuPhotoGrid(
+      themeChange, List<PhotoModel> images, PhotoController controller) {
     return images.isEmpty
         ? Constant.showEmptyView(message: "Photos not found")
         : GridView.builder(
@@ -252,7 +287,9 @@ class PhotoScreen extends StatelessWidget {
               PhotoModel uploadMenuModel = images[index];
               return DebouncedInkWell(
                 onTap: () {
-                  Get.to(PhotoViewScreen(), arguments: {"photoList": images, "index": index})!.then(
+                  Get.to(PhotoViewScreen(),
+                          arguments: {"photoList": images, "index": index})!
+                      .then(
                     (value) {
                       controller.getAllPhotos();
                       controller.getMenuImage();
@@ -272,10 +309,13 @@ class PhotoScreen extends StatelessWidget {
                       right: 5,
                       child: DebouncedInkWell(
                         onTap: () {
-                          if (uploadMenuModel.likedBy!.contains(FireStoreUtils.getCurrentUid())) {
-                            uploadMenuModel.likedBy!.remove(FireStoreUtils.getCurrentUid());
+                          if (uploadMenuModel.likedBy!
+                              .contains(FireStoreUtils.getCurrentUid())) {
+                            uploadMenuModel.likedBy!
+                                .remove(FireStoreUtils.getCurrentUid());
                           } else {
-                            uploadMenuModel.likedBy!.add(FireStoreUtils.getCurrentUid());
+                            uploadMenuModel.likedBy!
+                                .add(FireStoreUtils.getCurrentUid());
                           }
                           FireStoreUtils.addPhotos(uploadMenuModel);
                           controller.updateMenuPhoto(index, uploadMenuModel);
@@ -283,7 +323,8 @@ class PhotoScreen extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                            color: uploadMenuModel.likedBy!.contains(FireStoreUtils.getCurrentUid())
+                            color: uploadMenuModel.likedBy!
+                                    .contains(FireStoreUtils.getCurrentUid())
                                 ? AppThemeData.red02
                                 : themeChange.getThem()
                                     ? AppThemeData.greyDark10
@@ -292,7 +333,8 @@ class PhotoScreen extends StatelessWidget {
                           ),
                           child: Constant.svgPictureShow(
                             "assets/icons/icon_thumbs-up.svg",
-                            uploadMenuModel.likedBy!.contains(FireStoreUtils.getCurrentUid())
+                            uploadMenuModel.likedBy!
+                                    .contains(FireStoreUtils.getCurrentUid())
                                 ? AppThemeData.grey10
                                 : themeChange.getThem()
                                     ? AppThemeData.greyDark02

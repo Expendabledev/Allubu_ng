@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class MoreScreenController extends GetxController {
   RxList<BusinessModel> businessList = <BusinessModel>[].obs;
@@ -29,7 +29,10 @@ class MoreScreenController extends GetxController {
   }
 
   Stream<int> getLiveCount(BusinessModel businessModel) async* {
-    final projectRequests = await FireStoreUtils.fireStore.collection(CollectionName.projectRequest).where("businessIds", arrayContains: businessModel.id).get();
+    final projectRequests = await FireStoreUtils.fireStore
+        .collection(CollectionName.projectRequest)
+        .where("businessIds", arrayContains: businessModel.id)
+        .get();
 
     if (projectRequests.docs.isEmpty) {
       yield 0;

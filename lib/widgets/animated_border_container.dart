@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/widgets/dimensions.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/widgets/dimensions.dart';
 
 class AnimatedBorderContainer extends StatefulWidget {
   final Widget child;
   final bool isLoading;
   final EdgeInsets? padding;
   final Color? color;
-  const AnimatedBorderContainer({super.key, required this.child, required this.isLoading, this.padding, this.color});
+  const AnimatedBorderContainer(
+      {super.key,
+      required this.child,
+      required this.isLoading,
+      this.padding,
+      this.color});
 
   @override
-  State<AnimatedBorderContainer> createState() => _AnimatedBorderContainerState();
+  State<AnimatedBorderContainer> createState() =>
+      _AnimatedBorderContainerState();
 }
 
-class _AnimatedBorderContainerState extends State<AnimatedBorderContainer> with SingleTickerProviderStateMixin {
+class _AnimatedBorderContainerState extends State<AnimatedBorderContainer>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 1))..repeat();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+          ..repeat();
   }
 
   @override
@@ -36,23 +45,27 @@ class _AnimatedBorderContainerState extends State<AnimatedBorderContainer> with 
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-            border: Border.all(width: widget.isLoading ? 2 : 0, color: Colors.transparent),
-            gradient: widget.isLoading ? SweepGradient(
-              startAngle: 0.0,
-              endAngle: 6.28,
-              colors: [
-                Colors.red,
-                Colors.green,
-                Colors.red,
-                Colors.green,
-                Colors.red,
-              ],
-              stops: const [0.0, 0.25, 0.5, 0.75, 1.0],
-              transform: GradientRotation(_controller.value * 6.28),
-            ) : null,
+            border: Border.all(
+                width: widget.isLoading ? 2 : 0, color: Colors.transparent),
+            gradient: widget.isLoading
+                ? SweepGradient(
+                    startAngle: 0.0,
+                    endAngle: 6.28,
+                    colors: [
+                      Colors.red,
+                      Colors.green,
+                      Colors.red,
+                      Colors.green,
+                      Colors.red,
+                    ],
+                    stops: const [0.0, 0.25, 0.5, 0.75, 1.0],
+                    transform: GradientRotation(_controller.value * 6.28),
+                  )
+                : null,
           ),
           child: Container(
-            padding: widget.padding ?? const EdgeInsets.all(Dimensions.paddingSizeSmall),
+            padding: widget.padding ??
+                const EdgeInsets.all(Dimensions.paddingSizeSmall),
             decoration: BoxDecoration(
               color: widget.color ?? AppThemeData.grey05,
               borderRadius: BorderRadius.circular(Dimensions.radiusDefault),

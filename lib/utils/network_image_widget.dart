@@ -1,7 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:yelpify/constant/constant.dart';
+import 'package:allubmarket/constant/constant.dart';
 
 class NetworkImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -29,7 +29,7 @@ class NetworkImageWidget extends StatelessWidget {
       imageUrl: imageUrl,
       fit: fit ?? BoxFit.fitWidth,
       height: height,
-      width: width ,
+      width: width,
       color: color,
       progressIndicatorBuilder: (context, url, downloadProgress) => Image.asset(
         "assets/images/simmer_gif.gif",

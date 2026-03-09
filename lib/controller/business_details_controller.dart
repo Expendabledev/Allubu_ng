@@ -3,21 +3,22 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/country_model.dart';
-import 'package:yelpify/models/highlight_model.dart';
-import 'package:yelpify/models/item_model.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/models/recommend_model.dart';
-import 'package:yelpify/models/review_model.dart';
-import 'package:yelpify/models/service_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/country_model.dart';
+import 'package:allubmarket/models/highlight_model.dart';
+import 'package:allubmarket/models/item_model.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/models/recommend_model.dart';
+import 'package:allubmarket/models/review_model.dart';
+import 'package:allubmarket/models/service_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 import '../constant/constant.dart';
 import '../constant/show_toast_dialog.dart';
 
-class BusinessDetailsController extends GetxController with GetSingleTickerProviderStateMixin {
+class BusinessDetailsController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   RxBool isLoading = true.obs;
   RxInt currentIndex = 0.obs;
   late TabController tabController;
@@ -27,7 +28,15 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
   final infoKey = GlobalKey();
   final reviewKey = GlobalKey();
 
-  final days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  final days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
 
   @override
   void onInit() {
@@ -82,11 +91,13 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
   Rx<Currency> currency = Currency().obs;
 
   Future<void> getBusiness() async {
-    await FireStoreUtils.getBusinessById(businessModel.value.id.toString()).then(
+    await FireStoreUtils.getBusinessById(businessModel.value.id.toString())
+        .then(
       (value) async {
         if (value != null) {
           businessModel.value = value;
-          currency.value = Constant.countryModel!.countries!.firstWhere((element) => element.dialCode == businessModel.value.countryCode);
+          currency.value = Constant.countryModel!.countries!.firstWhere(
+              (element) => element.dialCode == businessModel.value.countryCode);
           await fetchBusinessServices();
           await fetchBusinessHighLight();
           await getBusinessListOfSameCategory();
@@ -96,7 +107,8 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
       },
     );
 
-    FireStoreUtils.getAllPhotos(businessModel.value.id.toString(), "menuPhoto").then(
+    FireStoreUtils.getAllPhotos(businessModel.value.id.toString(), "menuPhoto")
+        .then(
       (value) {
         allPhotos.value = value;
         update();
@@ -111,8 +123,10 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
   Future<void> getBusinessListOfSameCategory() async {
     await FireStoreUtils.getNearestBusinessByCategoryId(
             Constant.currentLocation == null
-                ? LatLng(Constant.currentLocationLatLng!.latitude, Constant.currentLocationLatLng!.longitude)
-                : LatLng(Constant.currentLocation!.latitude, Constant.currentLocation!.longitude),
+                ? LatLng(Constant.currentLocationLatLng!.latitude,
+                    Constant.currentLocationLatLng!.longitude)
+                : LatLng(Constant.currentLocation!.latitude,
+                    Constant.currentLocation!.longitude),
             categoryModel.value)
         .then(
       (value) {
@@ -134,7 +148,9 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
   Future<void> fetchBusinessHighLight() async {
     try {
       if (businessModel.value.highLights!.isNotEmpty) {
-        await FireStoreUtils.getBusinessHighLightById(businessModel.value.highLights ?? []).then(
+        await FireStoreUtils.getBusinessHighLightById(
+                businessModel.value.highLights ?? [])
+            .then(
           (value) {
             highLightList.value = value;
           },
@@ -155,7 +171,9 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
         final docId = service.keys.first;
         final List<dynamic> rawOptions = service[docId];
 
-        final List<OptionModel> options = rawOptions.map((e) => OptionModel.fromJson(Map<String, dynamic>.from(e))).toList();
+        final List<OptionModel> options = rawOptions
+            .map((e) => OptionModel.fromJson(Map<String, dynamic>.from(e)))
+            .toList();
 
         await FireStoreUtils.getServiceById(docId).then((value) {
           if (value != null) {
@@ -205,13 +223,17 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
   }
 
   Future<void> loadCustomMarker() async {
-    final Uint8List departure = await Constant.getBytesFromAsset('assets/images/map_marker.png', 100);
+    final Uint8List departure =
+        await Constant.getBytesFromAsset('assets/images/map_marker.png', 100);
     BitmapDescriptor customIcon = BitmapDescriptor.fromBytes(departure);
 
     markers.add(
       Marker(
         markerId: const MarkerId('customMarker'),
-        position: LatLng(double.parse(businessModel.value.location!.latitude ?? "0.0"), double.parse(businessModel.value.location!.longitude ?? "0.0")), // Example: San Francisco
+        position: LatLng(
+            double.parse(businessModel.value.location!.latitude ?? "0.0"),
+            double.parse(businessModel.value.location!.longitude ??
+                "0.0")), // Example: San Francisco
         icon: customIcon,
         infoWindow: const InfoWindow(title: 'Custom Marker'),
       ),
@@ -227,10 +249,12 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
     if (categoryModel.value.slug != null) {
       return categoryModel.value.uploadItems == true;
     } else {
-      if (businessModel.value.category == null || businessModel.value.category!.isEmpty) {
+      if (businessModel.value.category == null ||
+          businessModel.value.category!.isEmpty) {
         return false;
       }
-      return businessModel.value.category!.any((category) => category.uploadItems == true);
+      return businessModel.value.category!
+          .any((category) => category.uploadItems == true);
     }
   }
 
@@ -238,10 +262,12 @@ class BusinessDetailsController extends GetxController with GetSingleTickerProvi
     if (categoryModel.value.slug != null) {
       return categoryModel.value.getPricingForm == true;
     } else {
-      if (businessModel.value.category == null || businessModel.value.category!.isEmpty) {
+      if (businessModel.value.category == null ||
+          businessModel.value.category!.isEmpty) {
         return false;
       }
-      return businessModel.value.category!.any((category) => category.getPricingForm == true);
+      return businessModel.value.category!
+          .any((category) => category.getPricingForm == true);
     }
   }
 }

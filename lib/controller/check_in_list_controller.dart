@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yelpify/models/check_in_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/models/check_in_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class CheckInListController extends GetxController {
   RxBool isLoading = true.obs;

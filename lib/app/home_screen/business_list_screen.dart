@@ -3,21 +3,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/business_details_screen/business_details_screen.dart';
-import 'package:yelpify/app/search_screen/search_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/business_list_controller.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/service_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/custom_star_rating/custom_star_rating_list_screen.dart';
-import 'package:yelpify/widgets/flutter_sticky_headers/sticky_headers/widget.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/app/business_details_screen/business_details_screen.dart';
+import 'package:allubmarket/app/search_screen/search_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/business_list_controller.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/service_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/custom_star_rating/custom_star_rating_list_screen.dart';
+import 'package:allubmarket/widgets/flutter_sticky_headers/sticky_headers/widget.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class BusinessListScreen extends StatelessWidget {
   const BusinessListScreen({super.key});
@@ -42,7 +42,8 @@ class BusinessListScreen extends StatelessWidget {
                       zoomControlsEnabled: true,
                       zoomGesturesEnabled: true,
                       myLocationButtonEnabled: false,
-                      markers: controller.markers.toSet(), // reactive marker set
+                      markers:
+                          controller.markers.toSet(), // reactive marker set
                     ),
                     Positioned(
                       top: 120, // change this to move button
@@ -51,7 +52,8 @@ class BusinessListScreen extends StatelessWidget {
                         backgroundColor: AppThemeData.greyDark01,
                         mini: true,
                         onPressed: () async {
-                          final GoogleMapController mapController = controller.mapController;
+                          final GoogleMapController mapController =
+                              controller.mapController;
                           mapController.animateCamera(
                             CameraUpdate.newCameraPosition(
                               CameraPosition(
@@ -61,7 +63,8 @@ class BusinessListScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Icon(Icons.my_location, color: AppThemeData.grey01),
+                        child:
+                            Icon(Icons.my_location, color: AppThemeData.grey01),
                       ),
                     ),
                     Positioned(
@@ -69,12 +72,17 @@ class BusinessListScreen extends StatelessWidget {
                       left: 16,
                       right: 16,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                         decoration: BoxDecoration(
-                          color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark10
+                              : AppThemeData.grey10,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           border: Border.all(
-                            color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark06
+                                : AppThemeData.grey06,
                           ),
                         ),
                         child: Row(
@@ -85,7 +93,11 @@ class BusinessListScreen extends StatelessWidget {
                                 },
                                 child: SvgPicture.asset(
                                   "assets/icons/icon_left.svg",
-                                  colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                                  colorFilter: ColorFilter.mode(
+                                      themeChange.getThem()
+                                          ? AppThemeData.greyDark01
+                                          : AppThemeData.grey01,
+                                      BlendMode.srcIn),
                                 )),
                             SizedBox(
                               width: 10,
@@ -94,7 +106,8 @@ class BusinessListScreen extends StatelessWidget {
                               child: DebouncedInkWell(
                                 onTap: () {
                                   Get.to(SearchScreen(), arguments: {
-                                    "categoryModel": controller.selectedCategory.value,
+                                    "categoryModel":
+                                        controller.selectedCategory.value,
                                     "latLng": controller.currentPosition.value,
                                     "isZipCode": controller.isZipCode.value,
                                   })!
@@ -107,10 +120,13 @@ class BusinessListScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "${controller.selectedCategory.value.name}".tr,
+                                      "${controller.selectedCategory.value.name}"
+                                          .tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 14,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
@@ -125,13 +141,20 @@ class BusinessListScreen extends StatelessWidget {
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark03
+                                              : AppThemeData.grey03,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.regularOpenSans,
+                                          fontFamily:
+                                              AppThemeData.regularOpenSans,
                                         ),
                                       ),
                                     ),
-                                    Constant.svgPictureShow("assets/icons/list-two.svg", null, null, null)
+                                    Constant.svgPictureShow(
+                                        "assets/icons/list-two.svg",
+                                        null,
+                                        null,
+                                        null)
                                   ],
                                 ),
                               ),
@@ -154,8 +177,11 @@ class BusinessListScreen extends StatelessWidget {
                         builder: (context, scrollController) {
                           return Container(
                             decoration: BoxDecoration(
-                              color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.surfaceDark50
+                                  : AppThemeData.surface50,
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(16)),
                             ),
                             child: ListView(
                               padding: EdgeInsets.zero,
@@ -164,8 +190,11 @@ class BusinessListScreen extends StatelessWidget {
                               children: [
                                 StickyHeader(
                                   header: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                                    color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 20),
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.surfaceDark50
+                                        : AppThemeData.surface50,
                                     child: SizedBox(
                                       height: 40,
                                       child: ListView(
@@ -173,15 +202,32 @@ class BusinessListScreen extends StatelessWidget {
                                         children: [
                                           DebouncedInkWell(
                                             onTap: () {
-                                              moreFilterBottomSheet(themeChange, controller);
+                                              moreFilterBottomSheet(
+                                                  themeChange, controller);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                                  border: Border.all(color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(30)),
+                                                  border: Border.all(
+                                                      color:
+                                                          themeChange.getThem()
+                                                              ? AppThemeData
+                                                                  .greyDark05
+                                                              : AppThemeData
+                                                                  .grey05)),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(12),
-                                                child: Constant.svgPictureShow("assets/icons/ic_filter.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, null, null),
+                                                padding:
+                                                    const EdgeInsets.all(12),
+                                                child: Constant.svgPictureShow(
+                                                    "assets/icons/ic_filter.svg",
+                                                    themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
+                                                    null,
+                                                    null),
                                               ),
                                             ),
                                           ),
@@ -190,32 +236,65 @@ class BusinessListScreen extends StatelessWidget {
                                           ),
                                           DebouncedInkWell(
                                             onTap: () {
-                                              sortFilterBottomSheet(themeChange, controller);
+                                              sortFilterBottomSheet(
+                                                  themeChange, controller);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: controller.selectedSortOption.value.isEmpty ? Colors.transparent : AppThemeData.green02,
-                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                                  border: Border.all(color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05)),
+                                                  color: controller
+                                                          .selectedSortOption
+                                                          .value
+                                                          .isEmpty
+                                                      ? Colors.transparent
+                                                      : AppThemeData.green02,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(30)),
+                                                  border: Border.all(
+                                                      color: themeChange
+                                                              .getThem()
+                                                          ? AppThemeData
+                                                              .greyDark05
+                                                          : AppThemeData
+                                                              .grey05)),
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16,
+                                                        vertical: 10),
                                                 child: Row(
                                                   children: [
                                                     Text(
-                                                      controller.selectedSortOption.value.isEmpty
+                                                      controller
+                                                              .selectedSortOption
+                                                              .value
+                                                              .isEmpty
                                                           ? "Sort"
                                                           : 'sort_by'.trParams({
-                                                              'sort': Constant.capitalizeFirst(controller.selectedSortOption.value),
+                                                              'sort': Constant
+                                                                  .capitalizeFirst(
+                                                                      controller
+                                                                          .selectedSortOption
+                                                                          .value),
                                                             }).tr,
-                                                      textAlign: TextAlign.start,
+                                                      textAlign:
+                                                          TextAlign.start,
                                                       style: TextStyle(
-                                                        color: controller.selectedSortOption.value.isNotEmpty
-                                                            ? AppThemeData.grey10
-                                                            : themeChange.getThem()
-                                                                ? AppThemeData.greyDark01
-                                                                : AppThemeData.grey01,
+                                                        color: controller
+                                                                .selectedSortOption
+                                                                .value
+                                                                .isNotEmpty
+                                                            ? AppThemeData
+                                                                .grey10
+                                                            : themeChange
+                                                                    .getThem()
+                                                                ? AppThemeData
+                                                                    .greyDark01
+                                                                : AppThemeData
+                                                                    .grey01,
                                                         fontSize: 12,
-                                                        fontFamily: AppThemeData.mediumOpenSans,
+                                                        fontFamily: AppThemeData
+                                                            .mediumOpenSans,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -223,11 +302,18 @@ class BusinessListScreen extends StatelessWidget {
                                                     ),
                                                     Constant.svgPictureShow(
                                                         "assets/icons/icon_down.svg",
-                                                        controller.selectedSortOption.value.isNotEmpty
-                                                            ? AppThemeData.grey10
-                                                            : themeChange.getThem()
-                                                                ? AppThemeData.greyDark01
-                                                                : AppThemeData.grey01,
+                                                        controller
+                                                                .selectedSortOption
+                                                                .value
+                                                                .isNotEmpty
+                                                            ? AppThemeData
+                                                                .grey10
+                                                            : themeChange
+                                                                    .getThem()
+                                                                ? AppThemeData
+                                                                    .greyDark01
+                                                                : AppThemeData
+                                                                    .grey01,
                                                         null,
                                                         null),
                                                   ],
@@ -240,32 +326,57 @@ class BusinessListScreen extends StatelessWidget {
                                           ),
                                           DebouncedInkWell(
                                             onTap: () {
-                                              if (controller.isOpenBusiness.value) {
-                                                controller.isOpenBusiness.value = false;
+                                              if (controller
+                                                  .isOpenBusiness.value) {
+                                                controller.isOpenBusiness
+                                                    .value = false;
                                               } else {
-                                                controller.isOpenBusiness.value = true;
+                                                controller.isOpenBusiness
+                                                    .value = true;
                                               }
                                               controller.getAllFilteredLists();
                                             },
                                             child: Obx(
                                               () => Container(
                                                 decoration: BoxDecoration(
-                                                    color: controller.isOpenBusiness.value ? AppThemeData.green02 : Colors.transparent,
-                                                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                                                    border: Border.all(color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05)),
+                                                    color: controller
+                                                            .isOpenBusiness
+                                                            .value
+                                                        ? AppThemeData.green02
+                                                        : Colors.transparent,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius
+                                                                .circular(30)),
+                                                    border: Border.all(
+                                                        color: themeChange
+                                                                .getThem()
+                                                            ? AppThemeData
+                                                                .greyDark05
+                                                            : AppThemeData
+                                                                .grey05)),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 16,
+                                                      vertical: 10),
                                                   child: Text(
                                                     "Open Now".tr,
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                      color: controller.isOpenBusiness.value
+                                                      color: controller
+                                                              .isOpenBusiness
+                                                              .value
                                                           ? AppThemeData.grey10
-                                                          : themeChange.getThem()
-                                                              ? AppThemeData.greyDark01
-                                                              : AppThemeData.grey01,
+                                                          : themeChange
+                                                                  .getThem()
+                                                              ? AppThemeData
+                                                                  .greyDark01
+                                                              : AppThemeData
+                                                                  .grey01,
                                                       fontSize: 12,
-                                                      fontFamily: AppThemeData.mediumOpenSans,
+                                                      fontFamily: AppThemeData
+                                                          .mediumOpenSans,
                                                     ),
                                                   ),
                                                 ),
@@ -277,21 +388,37 @@ class BusinessListScreen extends StatelessWidget {
                                           ),
                                           DebouncedInkWell(
                                             onTap: () {
-                                              moreFilterBottomSheet(themeChange, controller);
+                                              moreFilterBottomSheet(
+                                                  themeChange, controller);
                                             },
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                                  border: Border.all(color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(30)),
+                                                  border: Border.all(
+                                                      color:
+                                                          themeChange.getThem()
+                                                              ? AppThemeData
+                                                                  .greyDark05
+                                                              : AppThemeData
+                                                                  .grey05)),
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16,
+                                                        vertical: 10),
                                                 child: Text(
                                                   "More Filter".tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
                                                     fontSize: 12,
-                                                    fontFamily: AppThemeData.mediumOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .mediumOpenSans,
                                                   ),
                                                 ),
                                               ),
@@ -307,29 +434,52 @@ class BusinessListScreen extends StatelessWidget {
                                         controller.subCategoryList.isEmpty
                                             ? SizedBox()
                                             : Padding(
-                                                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 16,
+                                                    vertical: 10),
                                                 child: SizedBox(
                                                   height: 100,
                                                   child: ListView.builder(
-                                                    itemCount: controller.subCategoryList.length,
-                                                    scrollDirection: Axis.horizontal,
+                                                    itemCount: controller
+                                                        .subCategoryList.length,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
                                                     padding: EdgeInsets.zero,
-                                                    itemBuilder: (BuildContext context, int index) {
-                                                      CategoryModel category = controller.subCategoryList[index];
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      CategoryModel category =
+                                                          controller
+                                                                  .subCategoryList[
+                                                              index];
                                                       return DebouncedInkWell(
                                                         onTap: () {
-                                                          if (controller.selectedCategory.value.slug == category.slug) {
-                                                            controller.selectedCategory.value = controller.categoryModel.value;
+                                                          if (controller
+                                                                  .selectedCategory
+                                                                  .value
+                                                                  .slug ==
+                                                              category.slug) {
+                                                            controller
+                                                                    .selectedCategory
+                                                                    .value =
+                                                                controller
+                                                                    .categoryModel
+                                                                    .value;
                                                           } else {
-                                                            controller.selectedCategory.value = category;
+                                                            controller
+                                                                .selectedCategory
+                                                                .value = category;
                                                           }
 
-                                                          controller.getBusiness();
+                                                          controller
+                                                              .getBusiness();
                                                         },
                                                         child: SizedBox(
                                                           width: 100,
                                                           child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Container(
                                                                 decoration: BoxDecoration(
@@ -342,27 +492,50 @@ class BusinessListScreen extends StatelessWidget {
                                                                                 ? AppThemeData.greyDark01
                                                                                 : AppThemeData.grey01)),
                                                                 child: Padding(
-                                                                  padding: const EdgeInsets.all(8),
-                                                                  child: NetworkImageWidget(
-                                                                    imageUrl: category.icon.toString(),
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8),
+                                                                  child:
+                                                                      NetworkImageWidget(
+                                                                    imageUrl:
+                                                                        category
+                                                                            .icon
+                                                                            .toString(),
                                                                     width: 30,
                                                                     height: 30,
                                                                   ),
                                                                 ),
                                                               ),
-                                                              SizedBox(height: 4),
+                                                              SizedBox(
+                                                                  height: 4),
                                                               Text(
-                                                                category.name.toString(),
-                                                                textAlign: TextAlign.center,
+                                                                category.name
+                                                                    .toString(),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
                                                                 maxLines: 2,
-                                                                style: TextStyle(
+                                                                style:
+                                                                    TextStyle(
                                                                   fontSize: 12,
-                                                                  color: controller.selectedCategory.value.slug == category.slug
-                                                                      ? AppThemeData.teal02
-                                                                      : themeChange.getThem()
-                                                                          ? AppThemeData.greyDark01
-                                                                          : AppThemeData.grey01,
-                                                                  fontFamily: AppThemeData.medium,
+                                                                  color: controller
+                                                                              .selectedCategory
+                                                                              .value
+                                                                              .slug ==
+                                                                          category
+                                                                              .slug
+                                                                      ? AppThemeData
+                                                                          .teal02
+                                                                      : themeChange
+                                                                              .getThem()
+                                                                          ? AppThemeData
+                                                                              .greyDark01
+                                                                          : AppThemeData
+                                                                              .grey01,
+                                                                  fontFamily:
+                                                                      AppThemeData
+                                                                          .medium,
                                                                 ),
                                                               ),
                                                             ],
@@ -374,343 +547,437 @@ class BusinessListScreen extends StatelessWidget {
                                                 ),
                                               ),
                                         Obx(
-                                          () => controller.sponsoredBusinessList.isEmpty && controller.filteredBusinessList.isEmpty
-                                              ? emptyView(themeChange, scrollController, controller)
-                                              : Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    controller.sponsoredBusinessList.isEmpty
-                                                        ? SizedBox()
-                                                        : Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Padding(
-                                                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                                                child: Text(
-                                                                  "Sponsored Result".tr,
-                                                                  textAlign: TextAlign.start,
-                                                                  style: TextStyle(
-                                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                                                    fontSize: 16,
-                                                                    fontFamily: AppThemeData.boldOpenSans,
+                                          () =>
+                                              controller.sponsoredBusinessList
+                                                          .isEmpty &&
+                                                      controller
+                                                          .filteredBusinessList
+                                                          .isEmpty
+                                                  ? emptyView(
+                                                      themeChange,
+                                                      scrollController,
+                                                      controller)
+                                                  : Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        controller
+                                                                .sponsoredBusinessList
+                                                                .isEmpty
+                                                            ? SizedBox()
+                                                            : Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            16),
+                                                                    child: Text(
+                                                                      "Sponsored Result"
+                                                                          .tr,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: themeChange.getThem()
+                                                                            ? AppThemeData.greyDark01
+                                                                            : AppThemeData.grey01,
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontFamily:
+                                                                            AppThemeData.boldOpenSans,
+                                                                      ),
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                                                child: Divider(),
-                                                              ),
-                                                              ListView.builder(
-                                                                itemCount: controller.sponsoredBusinessList.length,
-                                                                shrinkWrap: true,
-                                                                physics: NeverScrollableScrollPhysics(),
-                                                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                                                itemBuilder: (context, index) {
-                                                                  BusinessModel businessModel = controller.sponsoredBusinessList[index];
-                                                                  return DebouncedInkWell(
-                                                                    onTap: () {
-                                                                      Constant.setRecentBusiness(businessModel);
-                                                                      Get.to(BusinessDetailsScreen(), arguments: {"businessModel": businessModel, "categoryModel": controller.selectedCategory.value});
-                                                                    },
-                                                                    child: Padding(
-                                                                      padding: const EdgeInsets.symmetric(vertical: 10),
-                                                                      child: Column(
-                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Row(
-                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        vertical:
+                                                                            10),
+                                                                    child:
+                                                                        Divider(),
+                                                                  ),
+                                                                  ListView
+                                                                      .builder(
+                                                                    itemCount: controller
+                                                                        .sponsoredBusinessList
+                                                                        .length,
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    physics:
+                                                                        NeverScrollableScrollPhysics(),
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            16),
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            index) {
+                                                                      BusinessModel
+                                                                          businessModel =
+                                                                          controller
+                                                                              .sponsoredBusinessList[index];
+                                                                      return DebouncedInkWell(
+                                                                        onTap:
+                                                                            () {
+                                                                          Constant.setRecentBusiness(
+                                                                              businessModel);
+                                                                          Get.to(
+                                                                              BusinessDetailsScreen(),
+                                                                              arguments: {
+                                                                                "businessModel": businessModel,
+                                                                                "categoryModel": controller.selectedCategory.value
+                                                                              });
+                                                                        },
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .symmetric(
+                                                                              vertical: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
                                                                             children: [
-                                                                              ClipRRect(
-                                                                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                child: NetworkImageWidget(
-                                                                                  imageUrl: businessModel.coverPhoto.toString(),
-                                                                                  width: Responsive.width(32, context),
-                                                                                  height: Responsive.height(14, context),
-                                                                                  fit: BoxFit.cover,
-                                                                                  errorWidget: Constant.svgPictureShow("assets/icons/ic_placeholder_bussiness.svg", null, 50, 50),
-                                                                                ),
-                                                                              ),
-                                                                              SizedBox(
-                                                                                width: 10,
-                                                                              ),
-                                                                              Expanded(
-                                                                                child: Column(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    Text(
-                                                                                      "${businessModel.businessName}".tr,
-                                                                                      textAlign: TextAlign.start,
-                                                                                      style: TextStyle(
-                                                                                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
-                                                                                        fontSize: 16,
-                                                                                        fontFamily: AppThemeData.boldOpenSans,
-                                                                                      ),
+                                                                              Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  ClipRRect(
+                                                                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                    child: NetworkImageWidget(
+                                                                                      imageUrl: businessModel.coverPhoto.toString(),
+                                                                                      width: Responsive.width(32, context),
+                                                                                      height: Responsive.height(14, context),
+                                                                                      fit: BoxFit.cover,
+                                                                                      errorWidget: Constant.svgPictureShow("assets/icons/ic_placeholder_bussiness.svg", null, 50, 50),
                                                                                     ),
-                                                                                    SizedBox(
-                                                                                      height: 5,
-                                                                                    ),
-                                                                                    CustomStarRatingList(
-                                                                                      initialRating:
-                                                                                          Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum),
-                                                                                      size: 20,
-                                                                                      enable: false,
-                                                                                      bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                                                                      emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      height: 5,
-                                                                                    ),
-                                                                                    Row(
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum).tr,
-                                                                                          textAlign: TextAlign.start,
-                                                                                          style: TextStyle(
-                                                                                            color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                                                                            fontSize: 14,
-                                                                                            fontFamily: AppThemeData.semiboldOpenSans,
-                                                                                          ),
-                                                                                        ),
-                                                                                        SizedBox(
-                                                                                          width: 10,
-                                                                                        ),
-                                                                                        Text(
-                                                                                          "(${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews)",
-                                                                                          textAlign: TextAlign.start,
-                                                                                          style: TextStyle(
-                                                                                            color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                                                                            fontSize: 14,
-                                                                                            fontFamily: AppThemeData.semiboldOpenSans,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      height: 5,
-                                                                                    ),
-                                                                                    Row(
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    width: 10,
+                                                                                  ),
+                                                                                  Expanded(
+                                                                                    child: Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                                       children: [
-                                                                                        Constant.svgPictureShow(
-                                                                                          "assets/icons/icon_local-two.svg",
-                                                                                          themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                                                                          16,
-                                                                                          16,
+                                                                                        Text(
+                                                                                          "${businessModel.businessName}".tr,
+                                                                                          textAlign: TextAlign.start,
+                                                                                          style: TextStyle(
+                                                                                            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                                                            fontSize: 16,
+                                                                                            fontFamily: AppThemeData.boldOpenSans,
+                                                                                          ),
                                                                                         ),
                                                                                         SizedBox(
-                                                                                          width: 5,
+                                                                                          height: 5,
                                                                                         ),
-                                                                                        Expanded(
-                                                                                          child: Text(
-                                                                                            businessModel.address!.formattedAddress.toString(),
-                                                                                            textAlign: TextAlign.start,
-                                                                                            style: TextStyle(
-                                                                                              color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                                                                              fontSize: 12,
-                                                                                              fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                        CustomStarRatingList(
+                                                                                          initialRating: Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum),
+                                                                                          size: 20,
+                                                                                          enable: false,
+                                                                                          bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                                                                                          emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 5,
+                                                                                        ),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum).tr,
+                                                                                              textAlign: TextAlign.start,
+                                                                                              style: TextStyle(
+                                                                                                color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                                                                fontSize: 14,
+                                                                                                fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
+                                                                                            SizedBox(
+                                                                                              width: 10,
+                                                                                            ),
+                                                                                            Text(
+                                                                                              "(${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews)",
+                                                                                              textAlign: TextAlign.start,
+                                                                                              style: TextStyle(
+                                                                                                color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                                                                fontSize: 14,
+                                                                                                fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
                                                                                         ),
+                                                                                        SizedBox(
+                                                                                          height: 5,
+                                                                                        ),
+                                                                                        Row(
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Constant.svgPictureShow(
+                                                                                              "assets/icons/icon_local-two.svg",
+                                                                                              themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                                                              16,
+                                                                                              16,
+                                                                                            ),
+                                                                                            SizedBox(
+                                                                                              width: 5,
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Text(
+                                                                                                businessModel.address!.formattedAddress.toString(),
+                                                                                                textAlign: TextAlign.start,
+                                                                                                style: TextStyle(
+                                                                                                  color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                                                                  fontSize: 12,
+                                                                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                        businessModel.businessHours == null || businessModel.showWorkingHours == false
+                                                                                            ? SizedBox()
+                                                                                            : Padding(
+                                                                                                padding: const EdgeInsets.only(top: 5),
+                                                                                                child: Constant.buildStatusText(themeChange, Constant.getBusinessStatus(businessModel.businessHours!), true),
+                                                                                              ),
                                                                                       ],
                                                                                     ),
-                                                                                    businessModel.businessHours == null || businessModel.showWorkingHours == false
-                                                                                        ? SizedBox()
-                                                                                        : Padding(
-                                                                                            padding: const EdgeInsets.only(top: 5),
-                                                                                            child:
-                                                                                                Constant.buildStatusText(themeChange, Constant.getBusinessStatus(businessModel.businessHours!), true),
-                                                                                          ),
-                                                                                  ],
-                                                                                ),
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 10,
+                                                                              ),
+                                                                              Wrap(
+                                                                                spacing: 8,
+                                                                                runSpacing: 8,
+                                                                                children: businessModel.category!.map((category) => categoryChip(themeChange, category)).toList(),
                                                                               )
                                                                             ],
                                                                           ),
-                                                                          SizedBox(
-                                                                            height: 10,
-                                                                          ),
-                                                                          Wrap(
-                                                                            spacing: 8,
-                                                                            runSpacing: 8,
-                                                                            children: businessModel.category!.map((category) => categoryChip(themeChange, category)).toList(),
-                                                                          )
-                                                                        ],
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                        controller
+                                                                .filteredBusinessList
+                                                                .isEmpty
+                                                            ? SizedBox()
+                                                            : Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            16),
+                                                                    child: Text(
+                                                                      "All Result"
+                                                                          .tr,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: themeChange.getThem()
+                                                                            ? AppThemeData.greyDark01
+                                                                            : AppThemeData.grey01,
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontFamily:
+                                                                            AppThemeData.boldOpenSans,
                                                                       ),
                                                                     ),
-                                                                  );
-                                                                },
-                                                              ),
-                                                            ],
-                                                          ),
-                                                    controller.filteredBusinessList.isEmpty
-                                                        ? SizedBox()
-                                                        : Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Padding(
-                                                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                                                child: Text(
-                                                                  "All Result".tr,
-                                                                  textAlign: TextAlign.start,
-                                                                  style: TextStyle(
-                                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                                                    fontSize: 16,
-                                                                    fontFamily: AppThemeData.boldOpenSans,
                                                                   ),
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                                                child: Divider(),
-                                                              ),
-                                                              ListView.builder(
-                                                                itemCount: controller.filteredBusinessList.length,
-                                                                shrinkWrap: true,
-                                                                physics: NeverScrollableScrollPhysics(),
-                                                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                                                itemBuilder: (context, index) {
-                                                                  BusinessModel businessModel = controller.filteredBusinessList[index];
-                                                                  return DebouncedInkWell(
-                                                                    onTap: () {
-                                                                      Constant.setRecentBusiness(businessModel);
-                                                                      Get.to(BusinessDetailsScreen(), arguments: {"businessModel": businessModel, "categoryModel": controller.selectedCategory.value});
-                                                                    },
-                                                                    child: Padding(
-                                                                      padding: const EdgeInsets.symmetric(vertical: 10),
-                                                                      child: Column(
-                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Row(
-                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        vertical:
+                                                                            10),
+                                                                    child:
+                                                                        Divider(),
+                                                                  ),
+                                                                  ListView
+                                                                      .builder(
+                                                                    itemCount: controller
+                                                                        .filteredBusinessList
+                                                                        .length,
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    physics:
+                                                                        NeverScrollableScrollPhysics(),
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            16),
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            index) {
+                                                                      BusinessModel
+                                                                          businessModel =
+                                                                          controller
+                                                                              .filteredBusinessList[index];
+                                                                      return DebouncedInkWell(
+                                                                        onTap:
+                                                                            () {
+                                                                          Constant.setRecentBusiness(
+                                                                              businessModel);
+                                                                          Get.to(
+                                                                              BusinessDetailsScreen(),
+                                                                              arguments: {
+                                                                                "businessModel": businessModel,
+                                                                                "categoryModel": controller.selectedCategory.value
+                                                                              });
+                                                                        },
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .symmetric(
+                                                                              vertical: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
                                                                             children: [
-                                                                              ClipRRect(
-                                                                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                                                                child: NetworkImageWidget(
-                                                                                  imageUrl: businessModel.coverPhoto.toString(),
-                                                                                  width: Responsive.width(32, context),
-                                                                                  height: Responsive.height(14, context),
-                                                                                  fit: BoxFit.cover,
-                                                                                  errorWidget: Constant.svgPictureShow("assets/icons/ic_placeholder_bussiness.svg", null, 50, 50),
-                                                                                ),
-                                                                              ),
-                                                                              SizedBox(
-                                                                                width: 10,
-                                                                              ),
-                                                                              Expanded(
-                                                                                child: Column(
-                                                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    Text(
-                                                                                      "${index + 1}. ${businessModel.businessName}".tr,
-                                                                                      textAlign: TextAlign.start,
-                                                                                      style: TextStyle(
-                                                                                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
-                                                                                        fontSize: 16,
-                                                                                        fontFamily: AppThemeData.boldOpenSans,
-                                                                                      ),
+                                                                              Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  ClipRRect(
+                                                                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                                                    child: NetworkImageWidget(
+                                                                                      imageUrl: businessModel.coverPhoto.toString(),
+                                                                                      width: Responsive.width(32, context),
+                                                                                      height: Responsive.height(14, context),
+                                                                                      fit: BoxFit.cover,
+                                                                                      errorWidget: Constant.svgPictureShow("assets/icons/ic_placeholder_bussiness.svg", null, 50, 50),
                                                                                     ),
-                                                                                    SizedBox(
-                                                                                      height: 5,
-                                                                                    ),
-                                                                                    CustomStarRatingList(
-                                                                                      initialRating:
-                                                                                          Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum),
-                                                                                      size: 20,
-                                                                                      enable: false,
-                                                                                      bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
-                                                                                      emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      height: 5,
-                                                                                    ),
-                                                                                    Row(
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum).tr,
-                                                                                          textAlign: TextAlign.start,
-                                                                                          style: TextStyle(
-                                                                                            color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                                                                            fontSize: 14,
-                                                                                            fontFamily: AppThemeData.semiboldOpenSans,
-                                                                                          ),
-                                                                                        ),
-                                                                                        SizedBox(
-                                                                                          width: 10,
-                                                                                        ),
-                                                                                        Text(
-                                                                                          "(${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews)",
-                                                                                          textAlign: TextAlign.start,
-                                                                                          style: TextStyle(
-                                                                                            color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                                                                            fontSize: 14,
-                                                                                            fontFamily: AppThemeData.semiboldOpenSans,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      height: 5,
-                                                                                    ),
-                                                                                    Row(
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    width: 10,
+                                                                                  ),
+                                                                                  Expanded(
+                                                                                    child: Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                                       children: [
-                                                                                        Constant.svgPictureShow(
-                                                                                          "assets/icons/icon_local-two.svg",
-                                                                                          themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                                                                                          16,
-                                                                                          16,
+                                                                                        Text(
+                                                                                          "${index + 1}. ${businessModel.businessName}".tr,
+                                                                                          textAlign: TextAlign.start,
+                                                                                          style: TextStyle(
+                                                                                            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                                                                            fontSize: 16,
+                                                                                            fontFamily: AppThemeData.boldOpenSans,
+                                                                                          ),
                                                                                         ),
                                                                                         SizedBox(
-                                                                                          width: 5,
+                                                                                          height: 5,
                                                                                         ),
-                                                                                        Expanded(
-                                                                                          child: Text(
-                                                                                            businessModel.address!.formattedAddress.toString(),
-                                                                                            textAlign: TextAlign.start,
-                                                                                            style: TextStyle(
-                                                                                              color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
-                                                                                              fontSize: 12,
-                                                                                              fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                        CustomStarRatingList(
+                                                                                          initialRating: Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum),
+                                                                                          size: 20,
+                                                                                          enable: false,
+                                                                                          bgColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                                                                                          emptyColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 5,
+                                                                                        ),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum).tr,
+                                                                                              textAlign: TextAlign.start,
+                                                                                              style: TextStyle(
+                                                                                                color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                                                                fontSize: 14,
+                                                                                                fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
+                                                                                            SizedBox(
+                                                                                              width: 10,
+                                                                                            ),
+                                                                                            Text(
+                                                                                              "(${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews)",
+                                                                                              textAlign: TextAlign.start,
+                                                                                              style: TextStyle(
+                                                                                                color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                                                                fontSize: 14,
+                                                                                                fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
                                                                                         ),
+                                                                                        SizedBox(
+                                                                                          height: 5,
+                                                                                        ),
+                                                                                        Row(
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Constant.svgPictureShow(
+                                                                                              "assets/icons/icon_local-two.svg",
+                                                                                              themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                                                              16,
+                                                                                              16,
+                                                                                            ),
+                                                                                            SizedBox(
+                                                                                              width: 5,
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Text(
+                                                                                                businessModel.address!.formattedAddress.toString(),
+                                                                                                textAlign: TextAlign.start,
+                                                                                                style: TextStyle(
+                                                                                                  color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                                                                                  fontSize: 12,
+                                                                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                        businessModel.businessHours == null || businessModel.showWorkingHours == false
+                                                                                            ? SizedBox()
+                                                                                            : Padding(
+                                                                                                padding: const EdgeInsets.only(top: 5),
+                                                                                                child: Constant.buildStatusText(themeChange, Constant.getBusinessStatus(businessModel.businessHours!), true),
+                                                                                              ),
                                                                                       ],
                                                                                     ),
-                                                                                    businessModel.businessHours == null || businessModel.showWorkingHours == false
-                                                                                        ? SizedBox()
-                                                                                        : Padding(
-                                                                                            padding: const EdgeInsets.only(top: 5),
-                                                                                            child:
-                                                                                                Constant.buildStatusText(themeChange, Constant.getBusinessStatus(businessModel.businessHours!), true),
-                                                                                          ),
-                                                                                  ],
-                                                                                ),
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 10,
+                                                                              ),
+                                                                              Wrap(
+                                                                                spacing: 8,
+                                                                                runSpacing: 8,
+                                                                                children: businessModel.category!.map((category) => categoryChip(themeChange, category)).toList(),
                                                                               )
                                                                             ],
                                                                           ),
-                                                                          SizedBox(
-                                                                            height: 10,
-                                                                          ),
-                                                                          Wrap(
-                                                                            spacing: 8,
-                                                                            runSpacing: 8,
-                                                                            children: businessModel.category!.map((category) => categoryChip(themeChange, category)).toList(),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                },
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                  ],
-                                                ),
+                                                      ],
+                                                    ),
                                         ),
                                       ],
                                     ),
@@ -735,7 +1002,9 @@ class BusinessListScreen extends StatelessWidget {
         height: Responsive.height(32, Get.context!),
         padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+          color: themeChange.getThem()
+              ? AppThemeData.surfaceDark50
+              : AppThemeData.surface50,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: Obx(
@@ -749,7 +1018,9 @@ class BusinessListScreen extends StatelessWidget {
                       "Sort".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 18,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
@@ -762,7 +1033,9 @@ class BusinessListScreen extends StatelessWidget {
                     child: SvgPicture.asset(
                       "assets/icons/icon_close.svg",
                       colorFilter: ColorFilter.mode(
-                        themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                        themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey01,
                         BlendMode.srcIn,
                       ),
                       width: 22,
@@ -777,7 +1050,9 @@ class BusinessListScreen extends StatelessWidget {
                 title: Text(
                   'Recommended'.tr,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.mediumOpenSans,
                   ),
@@ -797,7 +1072,9 @@ class BusinessListScreen extends StatelessWidget {
                 title: Text(
                   'Distance'.tr,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.mediumOpenSans,
                   ),
@@ -817,7 +1094,9 @@ class BusinessListScreen extends StatelessWidget {
                 title: Text(
                   'Rating'.tr,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.mediumOpenSans,
                   ),
@@ -837,7 +1116,9 @@ class BusinessListScreen extends StatelessWidget {
                 title: Text(
                   'Reviewed'.tr,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.mediumOpenSans,
                   ),
@@ -876,7 +1157,9 @@ class BusinessListScreen extends StatelessWidget {
             height: Responsive.height(32, Get.context!),
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+              color: themeChange.getThem()
+                  ? AppThemeData.surfaceDark50
+                  : AppThemeData.surface50,
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Obx(
@@ -901,7 +1184,9 @@ class BusinessListScreen extends StatelessWidget {
                               "Close".tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
                                 fontSize: 14,
                                 fontFamily: AppThemeData.semiboldOpenSans,
                               ),
@@ -914,7 +1199,9 @@ class BusinessListScreen extends StatelessWidget {
                           "Filters".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 18,
                             fontFamily: AppThemeData.boldOpenSans,
                           ),
@@ -930,7 +1217,9 @@ class BusinessListScreen extends StatelessWidget {
                           "Reset".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.teal02 : AppThemeData.teal02,
+                            color: themeChange.getThem()
+                                ? AppThemeData.teal02
+                                : AppThemeData.teal02,
                             fontSize: 16,
                             fontFamily: AppThemeData.boldOpenSans,
                           ),
@@ -951,7 +1240,9 @@ class BusinessListScreen extends StatelessWidget {
                             "Sort".tr,
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark01
+                                  : AppThemeData.grey01,
                               fontSize: 18,
                               fontFamily: AppThemeData.boldOpenSans,
                             ),
@@ -962,13 +1253,16 @@ class BusinessListScreen extends StatelessWidget {
                                 title: Text(
                                   'Recommended',
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontSize: 16,
                                     fontFamily: AppThemeData.mediumOpenSans,
                                   ),
                                 ),
                                 value: 'recommended',
-                                controlAffinity: ListTileControlAffinity.trailing,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
                                 groupValue: controller.selectedSortOption.value,
@@ -976,7 +1270,8 @@ class BusinessListScreen extends StatelessWidget {
                                 // Reduces vertical & horizontal space
 
                                 onChanged: (value) {
-                                  controller.selectedSortOption.value = value ?? '';
+                                  controller.selectedSortOption.value =
+                                      value ?? '';
                                   controller.getAllFilteredLists();
                                 },
                               ),
@@ -984,13 +1279,16 @@ class BusinessListScreen extends StatelessWidget {
                                 title: Text(
                                   'Distance',
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontSize: 16,
                                     fontFamily: AppThemeData.mediumOpenSans,
                                   ),
                                 ),
                                 value: 'distance',
-                                controlAffinity: ListTileControlAffinity.trailing,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
                                 groupValue: controller.selectedSortOption.value,
@@ -998,7 +1296,8 @@ class BusinessListScreen extends StatelessWidget {
                                 // Reduces vertical & horizontal space
 
                                 onChanged: (value) {
-                                  controller.selectedSortOption.value = value ?? '';
+                                  controller.selectedSortOption.value =
+                                      value ?? '';
                                   controller.getAllFilteredLists();
                                 },
                               ),
@@ -1006,13 +1305,16 @@ class BusinessListScreen extends StatelessWidget {
                                 title: Text(
                                   'Rating',
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontSize: 16,
                                     fontFamily: AppThemeData.mediumOpenSans,
                                   ),
                                 ),
                                 value: 'rating',
-                                controlAffinity: ListTileControlAffinity.trailing,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
                                 groupValue: controller.selectedSortOption.value,
@@ -1020,7 +1322,8 @@ class BusinessListScreen extends StatelessWidget {
                                 // Reduces vertical & horizontal space
 
                                 onChanged: (value) {
-                                  controller.selectedSortOption.value = value ?? '';
+                                  controller.selectedSortOption.value =
+                                      value ?? '';
                                   controller.getAllFilteredLists();
                                 },
                               ),
@@ -1028,20 +1331,24 @@ class BusinessListScreen extends StatelessWidget {
                                 title: Text(
                                   'Reviewed',
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontSize: 16,
                                     fontFamily: AppThemeData.mediumOpenSans,
                                   ),
                                 ),
                                 value: 'reviewed',
-                                controlAffinity: ListTileControlAffinity.trailing,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
                                 groupValue: controller.selectedSortOption.value,
                                 visualDensity: VisualDensity.compact,
                                 // Reduces vertical & horizontal space
                                 onChanged: (value) {
-                                  controller.selectedSortOption.value = value ?? '';
+                                  controller.selectedSortOption.value =
+                                      value ?? '';
                                   controller.getAllFilteredLists();
                                 },
                               )
@@ -1055,7 +1362,8 @@ class BusinessListScreen extends StatelessWidget {
                               itemCount: controller.categoryService.length,
                               physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
-                                ServiceModel serviceModel = controller.categoryService[index];
+                                ServiceModel serviceModel =
+                                    controller.categoryService[index];
                                 return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1063,7 +1371,9 @@ class BusinessListScreen extends StatelessWidget {
                                       serviceModel.name.toString().tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 18,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
@@ -1079,33 +1389,58 @@ class BusinessListScreen extends StatelessWidget {
                                         return Obx(
                                           () => CheckboxListTile(
                                             title: Text(
-                                              serviceModel.options![index0].name.toString(),
+                                              serviceModel.options![index0].name
+                                                  .toString(),
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
                                                 fontSize: 16,
-                                                fontFamily: AppThemeData.mediumOpenSans,
+                                                fontFamily:
+                                                    AppThemeData.mediumOpenSans,
                                               ),
                                             ),
-                                            value: controller.selectedOptionsByServiceId[serviceModel.id]?.contains(serviceModel.options![index0]) ?? false,
-                                            controlAffinity: ListTileControlAffinity.trailing,
+                                            value: controller
+                                                    .selectedOptionsByServiceId[
+                                                        serviceModel.id]
+                                                    ?.contains(serviceModel
+                                                        .options![index0]) ??
+                                                false,
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .trailing,
                                             contentPadding: EdgeInsets.zero,
                                             dense: true,
-                                            visualDensity: VisualDensity.compact,
+                                            visualDensity:
+                                                VisualDensity.compact,
                                             // Reduces vertical & horizontal space
                                             onChanged: (value) {
                                               final id = serviceModel.id!;
-                                              OptionModel option = serviceModel.options![index0];
+                                              OptionModel option =
+                                                  serviceModel.options![index0];
                                               if (value == true) {
-                                                List<OptionModel> updatedList = controller.selectedOptionsByServiceId[id] ?? [];
+                                                List<OptionModel> updatedList =
+                                                    controller.selectedOptionsByServiceId[
+                                                            id] ??
+                                                        [];
                                                 updatedList.add(option);
-                                                controller.selectedOptionsByServiceId[id] = updatedList;
+                                                controller
+                                                        .selectedOptionsByServiceId[
+                                                    id] = updatedList;
                                               } else {
-                                                final updatedList = controller.selectedOptionsByServiceId[id] ?? [];
+                                                final updatedList = controller
+                                                            .selectedOptionsByServiceId[
+                                                        id] ??
+                                                    [];
                                                 updatedList.remove(option);
                                                 if (updatedList.isEmpty) {
-                                                  controller.selectedOptionsByServiceId.remove(id);
+                                                  controller
+                                                      .selectedOptionsByServiceId
+                                                      .remove(id);
                                                 } else {
-                                                  controller.selectedOptionsByServiceId[id] = updatedList;
+                                                  controller
+                                                          .selectedOptionsByServiceId[
+                                                      id] = updatedList;
                                                 }
                                               }
                                             },
@@ -1116,7 +1451,8 @@ class BusinessListScreen extends StatelessWidget {
                                   ],
                                 );
                               },
-                              separatorBuilder: (BuildContext context, int index) {
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
                                 return Divider();
                               },
                             ),
@@ -1128,8 +1464,12 @@ class BusinessListScreen extends StatelessWidget {
                   RoundedButtonFill(
                     title: 'Apply'.tr,
                     height: 5,
-                    textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                    color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                    textColor: themeChange.getThem()
+                        ? AppThemeData.greyDark10
+                        : AppThemeData.grey10,
+                    color: themeChange.getThem()
+                        ? AppThemeData.redDark02
+                        : AppThemeData.red02,
                     onPress: () {
                       Get.back();
                       controller.getAllFilteredLists();
@@ -1145,7 +1485,8 @@ class BusinessListScreen extends StatelessWidget {
     );
   }
 
-  Widget emptyView(themeChange, ScrollController scrollController, BusinessListController controller) {
+  Widget emptyView(themeChange, ScrollController scrollController,
+      BusinessListController controller) {
     return Column(
       children: [
         Padding(
@@ -1160,7 +1501,9 @@ class BusinessListScreen extends StatelessWidget {
                 }).tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.boldOpenSans,
                 ),
@@ -1169,10 +1512,13 @@ class BusinessListScreen extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "Try using different or fewer keywords, or move the map and redo your search.".tr,
+                "Try using different or fewer keywords, or move the map and redo your search."
+                    .tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 14,
                   fontFamily: AppThemeData.regularOpenSans,
                 ),
@@ -1184,7 +1530,9 @@ class BusinessListScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Divider(
             thickness: 10,
-            color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark07
+                : AppThemeData.grey07,
           ),
         ),
         Padding(
@@ -1200,7 +1548,9 @@ class BusinessListScreen extends StatelessWidget {
                       "Notice something missing here?".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 16,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
@@ -1211,8 +1561,12 @@ class BusinessListScreen extends StatelessWidget {
                     RoundedButtonFill(
                       title: 'Add business'.tr,
                       height: 5.5,
-                      textColor: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
-                      color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                      textColor: themeChange.getThem()
+                          ? AppThemeData.greyDark03
+                          : AppThemeData.grey03,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark07
+                          : AppThemeData.grey07,
                       onPress: () {},
                     ),
                   ],
@@ -1239,13 +1593,17 @@ class BusinessListScreen extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05,
+          color: themeChange.getThem()
+              ? AppThemeData.greyDark05
+              : AppThemeData.grey05,
         ),
       ),
       child: Text(
         label.name.toString(),
         style: TextStyle(
-          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+          color: themeChange.getThem()
+              ? AppThemeData.greyDark01
+              : AppThemeData.grey01,
           fontSize: 14,
           fontFamily: AppThemeData.semiboldOpenSans,
         ),

@@ -5,15 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/pricing_form_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/pricing_form_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class PricingFormScreen extends StatelessWidget {
   const PricingFormScreen({super.key});
@@ -28,7 +28,9 @@ class PricingFormScreen extends StatelessWidget {
               ? Constant.loader()
               : Scaffold(
                   appBar: AppBar(
-                    backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                    backgroundColor: themeChange.getThem()
+                        ? AppThemeData.greyDark10
+                        : AppThemeData.grey10,
                     centerTitle: true,
                     leadingWidth: 120,
                     leading: Padding(
@@ -43,7 +45,9 @@ class PricingFormScreen extends StatelessWidget {
                               "assets/icons/icon_close.svg",
                               width: 22,
                               colorFilter: ColorFilter.mode(
-                                themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                                themeChange.getThem()
+                                    ? AppThemeData.greyDark06
+                                    : AppThemeData.grey01,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -54,7 +58,9 @@ class PricingFormScreen extends StatelessWidget {
                               "Close".tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
                                 fontSize: 14,
                                 fontFamily: AppThemeData.semiboldOpenSans,
                               ),
@@ -67,20 +73,24 @@ class PricingFormScreen extends StatelessWidget {
                       "${controller.businessModel.value.businessName}".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 16,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
                     ),
                   ),
                   body: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFieldWidget(
                           title: 'Add details you’d like to add?'.tr,
-                          controller: controller.descriptionTextFieldController.value,
+                          controller:
+                              controller.descriptionTextFieldController.value,
                           hintText: 'write your experience here....'.tr,
                           maxLine: 10,
                         ),
@@ -92,7 +102,9 @@ class PricingFormScreen extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: AppThemeData.boldOpenSans,
                             fontSize: 14,
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                           ),
                         ),
                         SizedBox(
@@ -101,13 +113,16 @@ class PricingFormScreen extends StatelessWidget {
                         Container(
                           width: Responsive.width(100, Get.context!),
                           decoration: BoxDecoration(
-                            color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 20),
                             child: InkWell(
                               onTap: () {
                                 buildBottomSheet(context, controller);
@@ -116,10 +131,19 @@ class PricingFormScreen extends StatelessWidget {
                                 children: [
                                   ClipOval(
                                     child: Container(
-                                      decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09),
+                                      decoration: BoxDecoration(
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark09
+                                              : AppThemeData.grey09),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10),
-                                        child: Constant.svgPictureShow("assets/icons/icon_upload.svg", themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, 22, 22),
+                                        child: Constant.svgPictureShow(
+                                            "assets/icons/icon_upload.svg",
+                                            themeChange.getThem()
+                                                ? AppThemeData.greyDark03
+                                                : AppThemeData.grey03,
+                                            22,
+                                            22),
                                       ),
                                     ),
                                   ),
@@ -127,7 +151,9 @@ class PricingFormScreen extends StatelessWidget {
                                     "Upload Image".tr,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark01
+                                          : AppThemeData.grey01,
                                       fontSize: 16,
                                       fontFamily: AppThemeData.semiboldOpenSans,
                                     ),
@@ -136,7 +162,9 @@ class PricingFormScreen extends StatelessWidget {
                                     "Only Image".tr,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark04
+                                          : AppThemeData.grey04,
                                       fontSize: 12,
                                       fontFamily: AppThemeData.semiboldOpenSans,
                                     ),
@@ -159,20 +187,27 @@ class PricingFormScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
                                     return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
-                                            borderRadius: const BorderRadius.all(Radius.circular(4)),
-                                            child: controller.images[index].runtimeType == XFile
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(4)),
+                                            child: controller.images[index]
+                                                        .runtimeType ==
+                                                    XFile
                                                 ? Image.file(
-                                                    File(controller.images[index].path),
+                                                    File(controller
+                                                        .images[index].path),
                                                     fit: BoxFit.cover,
                                                     width: 100,
                                                     height: 100,
                                                   )
                                                 : NetworkImageWidget(
-                                                    imageUrl: controller.images[index],
+                                                    imageUrl: controller
+                                                        .images[index],
                                                     fit: BoxFit.cover,
                                                     width: 100,
                                                     height: 100,
@@ -183,7 +218,8 @@ class PricingFormScreen extends StatelessWidget {
                                             right: 8,
                                             child: InkWell(
                                               onTap: () async {
-                                                controller.images.removeAt(index);
+                                                controller.images
+                                                    .removeAt(index);
                                               },
                                               child: ClipOval(
                                                 child: Container(
@@ -191,8 +227,14 @@ class PricingFormScreen extends StatelessWidget {
                                                   width: 30,
                                                   color: AppThemeData.red03,
                                                   child: Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child: Constant.svgPictureShow("assets/icons/delete-one.svg", AppThemeData.red02, 20, 20),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            5.0),
+                                                    child: Constant.svgPictureShow(
+                                                        "assets/icons/delete-one.svg",
+                                                        AppThemeData.red02,
+                                                        20,
+                                                        20),
                                                   ),
                                                 ),
                                               ),
@@ -210,17 +252,25 @@ class PricingFormScreen extends StatelessWidget {
                   bottomNavigationBar: Container(
                     width: Responsive.width(100, Get.context!),
                     decoration: BoxDecoration(
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 30),
                       child: RoundedButtonFill(
                         title: 'Send Request'.tr,
                         height: 5.5,
-                        textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                        color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                        textColor: themeChange.getThem()
+                            ? AppThemeData.greyDark10
+                            : AppThemeData.grey10,
+                        color: themeChange.getThem()
+                            ? AppThemeData.redDark02
+                            : AppThemeData.red02,
                         onPress: () {
-                          if (controller.descriptionTextFieldController.value.text.isEmpty) {
+                          if (controller.descriptionTextFieldController.value
+                              .text.isEmpty) {
                             ShowToastDialog.showToast("Please enter details");
                           } else {
                             controller.submitRequest();
@@ -233,7 +283,8 @@ class PricingFormScreen extends StatelessWidget {
         });
   }
 
-  Future buildBottomSheet(BuildContext context, PricingFormController controller) {
+  Future buildBottomSheet(
+      BuildContext context, PricingFormController controller) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -248,7 +299,12 @@ class PricingFormScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 15),
                     child: Text(
                       "Please Select".tr,
-                      style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontFamily: AppThemeData.bold, fontSize: 16),
+                      style: TextStyle(
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          fontFamily: AppThemeData.bold,
+                          fontSize: 16),
                     ),
                   ),
                   Row(
@@ -261,7 +317,8 @@ class PricingFormScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.camera),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.camera),
                                 icon: const Icon(
                                   Icons.camera_alt,
                                   size: 32,
@@ -280,7 +337,8 @@ class PricingFormScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.gallery),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.gallery),
                                 icon: const Icon(
                                   Icons.photo_library_sharp,
                                   size: 32,

@@ -9,20 +9,21 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/send_notification.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/email_template_model.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/models/review_model.dart';
-import 'package:yelpify/service/api.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/send_notification.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/email_template_model.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/models/review_model.dart';
+import 'package:allubmarket/service/api.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class AddReviewController extends GetxController {
   RxBool isLoading = true.obs;
   Rx<BusinessModel> businessModel = BusinessModel().obs;
-  Rx<TextEditingController> reviewDescriptionController = TextEditingController().obs;
+  Rx<TextEditingController> reviewDescriptionController =
+      TextEditingController().obs;
 
   RxList images = <dynamic>[].obs;
 
@@ -77,11 +78,16 @@ class AddReviewController extends GetxController {
       }
     }
 
-    businessModel.value.reviewCount = (double.parse(businessModel.value.reviewCount.toString()) + 1).toString();
-    businessModel.value.reviewSum = (double.parse(businessModel.value.reviewSum.toString()) + rating.value).toString();
+    businessModel.value.reviewCount =
+        (double.parse(businessModel.value.reviewCount.toString()) + 1)
+            .toString();
+    businessModel.value.reviewSum =
+        (double.parse(businessModel.value.reviewSum.toString()) + rating.value)
+            .toString();
     await FireStoreUtils.addBusiness(businessModel.value);
 
-    await FireStoreUtils.getUserProfile(businessModel.value.ownerId.toString()).then(
+    await FireStoreUtils.getUserProfile(businessModel.value.ownerId.toString())
+        .then(
       (value) {
         if (value != null) {
           Map<String, dynamic> playLoad = <String, dynamic>{
@@ -90,7 +96,11 @@ class AddReviewController extends GetxController {
           };
 
           SendNotification.sendOneNotification(
-              token: value.fcmToken.toString(), title: 'You’ve got a new review! ${businessModel.value.businessName}', body: 'Check out what they said about your business', payload: playLoad);
+              token: value.fcmToken.toString(),
+              title:
+                  'You’ve got a new review! ${businessModel.value.businessName}',
+              body: 'Check out what they said about your business',
+              payload: playLoad);
 
           sendReviewEmail(
             recipientEmail: value.email.toString(),
@@ -132,9 +142,11 @@ class AddReviewController extends GetxController {
       required String reviewerName,
       required String date}) async {
     // Replace the placeholders in the HTML
-    EmailTemplateModel? emailTemplateModel = await FireStoreUtils.getEmailTemplates('new_business_review');
+    EmailTemplateModel? emailTemplateModel =
+        await FireStoreUtils.getEmailTemplates('new_business_review');
 
-    final emailBody = Constant.replacePlaceholders(emailTemplateModel!.message.toString(), {
+    final emailBody =
+        Constant.replacePlaceholders(emailTemplateModel!.message.toString(), {
       'username': username,
       'businessName': businessName,
       'reviewText': reviewText,
@@ -147,7 +159,8 @@ class AddReviewController extends GetxController {
     final smtpServer = SmtpServer(
       '${Constant.mailSettings!.host}',
       username: '${Constant.mailSettings!.userName}',
-      password: '${Constant.mailSettings!.password}', // Use App Password if 2FA is enabled
+      password:
+          '${Constant.mailSettings!.password}', // Use App Password if 2FA is enabled
       port: int.parse(Constant.mailSettings!.port.toString()),
       ssl: true,
     );
@@ -156,8 +169,9 @@ class AddReviewController extends GetxController {
     print(recipientEmail);
     // Create the email message
     final message = Message()
-      ..from = Address('${Constant.mailSettings!.userName}', 'Yelpify')
-      ..recipients = emailTemplateModel.isSendToAdmin == true && emailTemplateModel.isSendToBusiness == true
+      ..from = Address('${Constant.mailSettings!.userName}', 'allubmarket')
+      ..recipients = emailTemplateModel.isSendToAdmin == true &&
+              emailTemplateModel.isSendToBusiness == true
           ? [recipientEmail, Constant.adminEmail]
           : emailTemplateModel.isSendToAdmin == true
               ? [Constant.adminEmail]
@@ -173,17 +187,30 @@ class AddReviewController extends GetxController {
     }
   }
 
-  Future<void> generateComment({required String? businessName, required String? categoryName, required double? rating}) async {
+  Future<void> generateComment(
+      {required String? businessName,
+      required String? categoryName,
+      required double? rating}) async {
     isTitleGenerated.value = true;
-    Map<String, dynamic> bodyParams = {'name': businessName?.trim(), 'category': categoryName?.trim(), 'rating': rating};
-    await API.handleApiRequest(request: () => http.post(Uri.parse(API.generateComment), headers: API.headers, body: jsonEncode(bodyParams)), showLoader: false).then(
+    Map<String, dynamic> bodyParams = {
+      'name': businessName?.trim(),
+      'category': categoryName?.trim(),
+      'rating': rating
+    };
+    await API
+        .handleApiRequest(
+            request: () => http.post(Uri.parse(API.generateComment),
+                headers: API.headers, body: jsonEncode(bodyParams)),
+            showLoader: false)
+        .then(
       (value) {
         isTitleGenerated.value = false;
         if (value != null) {
           if (value['success'] == "Failed") {
             ShowToastDialog.showToast(value['error']);
           } else {
-            reviewDescriptionController.value.text = value['data']?['comment'] ?? '';
+            reviewDescriptionController.value.text =
+                value['data']?['comment'] ?? '';
             ShowToastDialog.showToast("experience generated successfully.".tr);
           }
         }

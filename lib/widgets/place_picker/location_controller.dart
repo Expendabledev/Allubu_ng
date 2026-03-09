@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
-import 'package:yelpify/widgets/place_picker/selected_location_model.dart';
+import 'package:allubmarket/widgets/place_picker/selected_location_model.dart';
 
 class LocationController extends GetxController {
   GoogleMapController? mapController;
@@ -25,10 +25,9 @@ class LocationController extends GetxController {
     dynamic argumentData = Get.arguments;
     if (argumentData != null) {
       zipCode.value = argumentData['zipCode'] ?? '';
-      if(zipCode.value.isNotEmpty){
+      if (zipCode.value.isNotEmpty) {
         getCoordinatesFromZipCode(zipCode.value);
       }
-
     }
     update();
   }
@@ -51,11 +50,13 @@ class LocationController extends GetxController {
 
   Future<void> getAddressFromLatLng(LatLng latLng) async {
     try {
-      List<Placemark> placemarks = await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
         selectedPlaceAddress.value = place;
-        address.value = "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
+        address.value =
+            "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
       }
     } catch (e) {
       print(e);
@@ -70,7 +71,8 @@ class LocationController extends GetxController {
     try {
       List<Location> locations = await locationFromAddress(zipCode);
       if (locations.isNotEmpty) {
-        selectedLocation.value = LatLng(locations.first.latitude, locations.first.longitude);
+        selectedLocation.value =
+            LatLng(locations.first.latitude, locations.first.longitude);
       }
     } catch (e) {
       print("Error getting coordinates for ZIP code: $e");
@@ -79,7 +81,8 @@ class LocationController extends GetxController {
 
   void confirmLocation() {
     if (selectedLocation.value != null) {
-      SelectedLocationModel selectedLocationModel = SelectedLocationModel(address: selectedPlaceAddress.value, latLng: selectedLocation.value);
+      SelectedLocationModel selectedLocationModel = SelectedLocationModel(
+          address: selectedPlaceAddress.value, latLng: selectedLocation.value);
       Get.back(result: selectedLocationModel);
     }
   }

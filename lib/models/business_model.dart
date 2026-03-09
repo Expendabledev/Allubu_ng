@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/service_model.dart';
-import 'package:yelpify/models/sponsored_request_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/service_model.dart';
+import 'package:allubmarket/models/sponsored_request_model.dart';
 
 class BusinessModel {
   String? id;
@@ -99,9 +99,15 @@ class BusinessModel {
     website = json['website'] ?? '';
     noteForYelpTeam = json['noteForYelpTeam'];
     zipCode = json['zipCode'];
-    position = json['position'] != null ? Positions.fromJson(json['position']) : Positions();
-    location = json['location'] != null ? LatLngModel.fromJson(json['location']) : LatLngModel();
-    address = json['address'] != null ? AddressModel.fromJson(json['address']) : AddressModel();
+    position = json['position'] != null
+        ? Positions.fromJson(json['position'])
+        : Positions();
+    location = json['location'] != null
+        ? LatLngModel.fromJson(json['location'])
+        : LatLngModel();
+    address = json['address'] != null
+        ? AddressModel.fromJson(json['address'])
+        : AddressModel();
     if (json['category'] != null) {
       category = <CategoryModel>[];
       json['category'].forEach((v) {
@@ -116,14 +122,19 @@ class BusinessModel {
     services = json['services'];
     recommendUserId = json['recommendUserId'] ?? [];
     bookmarkUserId = json['bookmarkUserId'] ?? [];
-    suggestedBusinessRemovedUserId = json['suggestedBusinessRemovedUserId'] ?? [];
+    suggestedBusinessRemovedUserId =
+        json['suggestedBusinessRemovedUserId'] ?? [];
     recommendYesCount = json['recommendYesCount'] ?? "0.0";
     reviewCount = json['reviewCount'] ?? "0.0";
     reviewSum = json['reviewSum'] ?? "0";
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    businessHours = json['businessHours'] != null ? BusinessHours.fromJson(json['businessHours']) : null;
-    sponsored = json['sponsored'] != null ? SponsoredRequestModel.fromJson(json['sponsored']) : null;
+    businessHours = json['businessHours'] != null
+        ? BusinessHours.fromJson(json['businessHours'])
+        : null;
+    sponsored = json['sponsored'] != null
+        ? SponsoredRequestModel.fromJson(json['sponsored'])
+        : null;
     highLights = json['highLights'] ?? [];
     slug = json['slug'];
     metaKeywords = json['metaKeywords'];
@@ -238,14 +249,16 @@ class BusinessModel {
 
   List<Map<String, dynamic>> convertForUpload(List<dynamic> services) {
     return services.map((entry) {
-      final Map<String, List<OptionModel>> map = Map<String, List<OptionModel>>.from(entry);
+      final Map<String, List<OptionModel>> map =
+          Map<String, List<OptionModel>>.from(entry);
       return map.map((key, value) {
         return MapEntry(key, value.map((e) => e.toJson()).toList());
       });
     }).toList();
   }
 
-  List<Map<String, List<OptionModel>>> decodeFromFirebase(List<dynamic> jsonList) {
+  List<Map<String, List<OptionModel>>> decodeFromFirebase(
+      List<dynamic> jsonList) {
     return jsonList.map((entry) {
       final map = Map<String, dynamic>.from(entry);
       return map.map((key, value) {
@@ -367,7 +380,14 @@ class BusinessHours {
   List<dynamic>? saturday;
   List<dynamic>? sunday;
 
-  BusinessHours({this.monday, this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday});
+  BusinessHours(
+      {this.monday,
+      this.tuesday,
+      this.wednesday,
+      this.thursday,
+      this.friday,
+      this.saturday,
+      this.sunday});
 
   BusinessHours.fromJson(Map<String, dynamic> json) {
     monday = json['monday'] ?? [];
@@ -406,7 +426,8 @@ class TimeRange {
 }
 
 extension TimeFormatExt on TimeOfDay {
-  String format24h() => '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  String format24h() =>
+      '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
 }
 
 class DayHours {

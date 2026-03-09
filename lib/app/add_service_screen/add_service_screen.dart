@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/add_service_controller.dart';
-import 'package:yelpify/models/service_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/add_service_controller.dart';
+import 'package:allubmarket/models/service_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class AddServiceScreen extends StatelessWidget {
   const AddServiceScreen({super.key});
@@ -20,7 +20,9 @@ class AddServiceScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -35,7 +37,9 @@ class AddServiceScreen extends StatelessWidget {
                         "assets/icons/icon_close.svg",
                         width: 22,
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -46,7 +50,9 @@ class AddServiceScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -58,7 +64,9 @@ class AddServiceScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -66,7 +74,9 @@ class AddServiceScreen extends StatelessWidget {
                 "Add Service".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -82,7 +92,9 @@ class AddServiceScreen extends StatelessWidget {
                       "Submit".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.tealDark02
+                            : AppThemeData.teal02,
                         fontSize: 14,
                         fontFamily: AppThemeData.boldOpenSans,
                       ),
@@ -94,18 +106,23 @@ class AddServiceScreen extends StatelessWidget {
             body: controller.isLoading.value
                 ? Constant.loader()
                 : controller.serviceList.isEmpty
-                    ? Constant.showEmptyView(message: "Service Not available".tr)
+                    ? Constant.showEmptyView(
+                        message: "Service Not available".tr)
                     : ListView.builder(
                         shrinkWrap: true,
                         itemCount: controller.serviceList.length,
                         itemBuilder: (context, index) {
-                          ServiceModel serviceModel = controller.serviceList[index];
+                          ServiceModel serviceModel =
+                              controller.serviceList[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Container(
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -113,7 +130,9 @@ class AddServiceScreen extends StatelessWidget {
                                       "${serviceModel.name}".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 16,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
@@ -121,27 +140,41 @@ class AddServiceScreen extends StatelessWidget {
                                     ListView.builder(
                                       itemCount: serviceModel.options?.length,
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(), // Prevent scrolling inside scrolling
+                                      physics:
+                                          NeverScrollableScrollPhysics(), // Prevent scrolling inside scrolling
                                       itemBuilder: (context, index1) {
                                         return Obx(
                                           () => CheckboxListTile(
-                                            value: isSelected(controller, serviceModel, serviceModel.options![index1]),
+                                            value: isSelected(
+                                                controller,
+                                                serviceModel,
+                                                serviceModel.options![index1]),
                                             dense: true,
                                             contentPadding: EdgeInsets.zero,
                                             onChanged: (bool? value) {
-                                              controller.toggleOption(serviceModel, serviceModel.options![index1], value ?? false);
+                                              controller.toggleOption(
+                                                  serviceModel,
+                                                  serviceModel.options![index1],
+                                                  value ?? false);
                                             },
                                             title: Text(
-                                              serviceModel.options![index1].name.toString().tr,
+                                              serviceModel.options![index1].name
+                                                  .toString()
+                                                  .tr,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
                                                 fontSize: 16,
-                                                fontFamily: AppThemeData.regularOpenSans,
+                                                fontFamily: AppThemeData
+                                                    .regularOpenSans,
                                               ),
                                             ),
-                                            controlAffinity: ListTileControlAffinity.leading,
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
                                             // Checkbox on the left
-                                            activeColor: AppThemeData.red02, // Change color as needed
+                                            activeColor: AppThemeData
+                                                .red02, // Change color as needed
                                           ),
                                         );
                                       },
@@ -157,9 +190,13 @@ class AddServiceScreen extends StatelessWidget {
         });
   }
 
-  bool isSelected(AddServiceController controller, ServiceModel serviceModel, OptionModel option) {
-    final index = controller.selectedServiceModel.indexWhere((e) => e.id == serviceModel.id);
+  bool isSelected(AddServiceController controller, ServiceModel serviceModel,
+      OptionModel option) {
+    final index = controller.selectedServiceModel
+        .indexWhere((e) => e.id == serviceModel.id);
     if (index == -1) return false;
-    return controller.selectedServiceModel[index].options?.any((e) => e.name == option.name) ?? false;
+    return controller.selectedServiceModel[index].options
+            ?.any((e) => e.name == option.name) ??
+        false;
   }
 }

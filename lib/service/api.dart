@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
 
 class API {
   static Map<String, String> get headers {
@@ -17,11 +17,15 @@ class API {
   }
 
   //new
-  static String generateTitleAndDescription = "${Constant.apiBaseUrl}/api/v1/generate-data";
+  static String generateTitleAndDescription =
+      "${Constant.apiBaseUrl}/api/v1/generate-data";
   //Comment
-  static String generateComment = "${Constant.apiBaseUrl}/api/v1/generate-comment-data";
+  static String generateComment =
+      "${Constant.apiBaseUrl}/api/v1/generate-comment-data";
 
-  static Future<dynamic> handleApiRequest({required Future<http.Response> Function() request, bool showLoader = true}) async {
+  static Future<dynamic> handleApiRequest(
+      {required Future<http.Response> Function() request,
+      bool showLoader = true}) async {
     try {
       if (showLoader) {
         ShowToastDialog.showLoader("Please wait");
@@ -42,15 +46,18 @@ class API {
       } else if (response.statusCode == 401) {
         return null;
       } else {
-        CustomDialog.showErrorDialog("Server Error", "Status Code: ${response.statusCode}");
+        CustomDialog.showErrorDialog(
+            "Server Error", "Status Code: ${response.statusCode}");
         return null;
       }
     } on TimeoutException {
       log("⏰ Timeout Exception");
-      CustomDialog.showErrorDialog("Server Timeout", "The server took too long to respond.");
+      CustomDialog.showErrorDialog(
+          "Server Timeout", "The server took too long to respond.");
     } on SocketException {
       log("🌐 No Internet / DNS Fail");
-      CustomDialog.showErrorDialog("No Internet", "Please check your connection.");
+      CustomDialog.showErrorDialog(
+          "No Internet", "Please check your connection.");
     } on FormatException {
       log("📦 JSON Decode Error");
       ShowToastDialog.showToast("Invalid response format.");
@@ -65,7 +72,11 @@ class API {
   }
 
   static Future<dynamic> handleMultipartRequest(
-      {required String url, required Map<String, String> headers, required Map<String, String> fields, List<http.MultipartFile>? files, bool showLoader = true}) async {
+      {required String url,
+      required Map<String, String> headers,
+      required Map<String, String> fields,
+      List<http.MultipartFile>? files,
+      bool showLoader = true}) async {
     try {
       if (showLoader) {
         ShowToastDialog.showLoader("Please wait");
@@ -107,7 +118,8 @@ class API {
       if (response.statusCode == 200) {
         return decodedResponse;
       } else {
-        ShowToastDialog.showToast(decodedResponse['error'] ?? "Something went wrong: ${response.statusCode}");
+        ShowToastDialog.showToast(decodedResponse['error'] ??
+            "Something went wrong: ${response.statusCode}");
         return null;
       }
     } on TimeoutException catch (e) {

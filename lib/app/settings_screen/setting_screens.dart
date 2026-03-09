@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/login_screen.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/language_screen/language_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/setting_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/custom_dialog_box.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/preferences.dart';
+import 'package:allubmarket/app/auth_screen/login_screen.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/language_screen/language_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/setting_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/custom_dialog_box.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/preferences.dart';
 
 class SettingScreens extends StatelessWidget {
   const SettingScreens({super.key});
@@ -28,7 +28,9 @@ class SettingScreens extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -41,7 +43,11 @@ class SettingScreens extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         "assets/icons/icon_left.svg",
-                        colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
+                            BlendMode.srcIn),
                         width: 22,
                       ),
                       SizedBox(
@@ -51,7 +57,9 @@ class SettingScreens extends StatelessWidget {
                         "Back".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -64,7 +72,9 @@ class SettingScreens extends StatelessWidget {
                 "Settings".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -76,10 +86,13 @@ class SettingScreens extends StatelessWidget {
                 width: Responsive.width(100, context),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark10
+                      : AppThemeData.grey10,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -91,14 +104,22 @@ class SettingScreens extends StatelessWidget {
                           children: [
                             Container(
                               decoration: ShapeDecoration(
-                                color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark09
+                                    : AppThemeData.grey09,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(72),
                                 ),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(12),
-                                child: Constant.svgPictureShow("assets/icons/global-line.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 20, 20),
+                                child: Constant.svgPictureShow(
+                                    "assets/icons/global-line.svg",
+                                    themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
+                                    20,
+                                    20),
                               ),
                             ),
                             SizedBox(
@@ -109,7 +130,9 @@ class SettingScreens extends StatelessWidget {
                                 "Change Language".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark01
+                                      : AppThemeData.grey01,
                                   fontSize: 16,
                                   fontFamily: AppThemeData.semiboldOpenSans,
                                 ),
@@ -126,14 +149,22 @@ class SettingScreens extends StatelessWidget {
                         children: [
                           Container(
                             decoration: ShapeDecoration(
-                              color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark09
+                                  : AppThemeData.grey09,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(72),
                               ),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(12),
-                              child: Constant.svgPictureShow("assets/icons/dark-mode.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 20, 20),
+                              child: Constant.svgPictureShow(
+                                  "assets/icons/dark-mode.svg",
+                                  themeChange.getThem()
+                                      ? AppThemeData.greyDark01
+                                      : AppThemeData.grey01,
+                                  20,
+                                  20),
                             ),
                           ),
                           SizedBox(
@@ -144,7 +175,9 @@ class SettingScreens extends StatelessWidget {
                               "Light Dark Mode".tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
                                 fontSize: 16,
                                 fontFamily: AppThemeData.semiboldOpenSans,
                               ),
@@ -158,13 +191,17 @@ class SettingScreens extends StatelessWidget {
                               onChanged: (value) {
                                 controller.isDarkModeSwitch.value = value;
                                 if (controller.isDarkModeSwitch.value == true) {
-                                  Preferences.setString(Preferences.themKey, "Dark");
+                                  Preferences.setString(
+                                      Preferences.themKey, "Dark");
                                   themeChange.darkTheme = 0;
-                                } else if (controller.isDarkMode.value == "Light") {
-                                  Preferences.setString(Preferences.themKey, "Light");
+                                } else if (controller.isDarkMode.value ==
+                                    "Light") {
+                                  Preferences.setString(
+                                      Preferences.themKey, "Light");
                                   themeChange.darkTheme = 1;
                                 } else {
-                                  Preferences.setString(Preferences.themKey, "");
+                                  Preferences.setString(
+                                      Preferences.themKey, "");
                                   themeChange.darkTheme = 2;
                                 }
                               },
@@ -183,18 +220,25 @@ class SettingScreens extends StatelessWidget {
                                     builder: (BuildContext context) {
                                       return CustomDialogBox(
                                         title: "Delete Account".tr,
-                                        descriptions: "This will permanently delete your account and all associated data. Are you sure?".tr,
+                                        descriptions:
+                                            "This will permanently delete your account and all associated data. Are you sure?"
+                                                .tr,
                                         positiveString: "OK".tr,
                                         negativeString: "Cancel".tr,
                                         positiveClick: () async {
-                                          ShowToastDialog.showLoader("Please wait".tr);
-                                          await FireStoreUtils.deleteUser().then((value) {
+                                          ShowToastDialog.showLoader(
+                                              "Please wait".tr);
+                                          await FireStoreUtils.deleteUser()
+                                              .then((value) {
                                             ShowToastDialog.closeLoader();
                                             if (value == true) {
-                                              ShowToastDialog.showToast("Account deleted successfully".tr);
+                                              ShowToastDialog.showToast(
+                                                  "Account deleted successfully"
+                                                      .tr);
                                               Get.offAll(const WelcomeScreen());
                                             } else {
-                                              ShowToastDialog.showToast("Contact Administrator".tr);
+                                              ShowToastDialog.showToast(
+                                                  "Contact Administrator".tr);
                                             }
                                           });
                                         },
@@ -213,14 +257,22 @@ class SettingScreens extends StatelessWidget {
                                 children: [
                                   Container(
                                     decoration: ShapeDecoration(
-                                      color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark09
+                                          : AppThemeData.grey09,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(72),
                                       ),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(12),
-                                      child: Constant.svgPictureShow("assets/icons/icon_delete.svg", themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02, 20, 20),
+                                      child: Constant.svgPictureShow(
+                                          "assets/icons/icon_delete.svg",
+                                          themeChange.getThem()
+                                              ? AppThemeData.red02
+                                              : AppThemeData.red02,
+                                          20,
+                                          20),
                                     ),
                                   ),
                                   SizedBox(
@@ -230,7 +282,9 @@ class SettingScreens extends StatelessWidget {
                                     "Delete Account".tr,
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.red02
+                                          : AppThemeData.red02,
                                       fontSize: 16,
                                       fontFamily: AppThemeData.semiboldOpenSans,
                                     ),
@@ -250,12 +304,15 @@ class SettingScreens extends StatelessWidget {
                                 builder: (BuildContext context) {
                                   return CustomDialogBox(
                                     title: "Log out".tr,
-                                    descriptions: "You will be signed out of the app. Tap Log Out to confirm.".tr,
+                                    descriptions:
+                                        "You will be signed out of the app. Tap Log Out to confirm."
+                                            .tr,
                                     positiveString: "Log out".tr,
                                     negativeString: "Cancel".tr,
                                     positiveClick: () async {
                                       await FirebaseAuth.instance.signOut();
-                                      Preferences.clearKeyData(Preferences.isLogin);
+                                      Preferences.clearKeyData(
+                                          Preferences.isLogin);
                                       Get.offAll(WelcomeScreen());
                                     },
                                     negativeClick: () {
@@ -276,24 +333,36 @@ class SettingScreens extends StatelessWidget {
                           children: [
                             Container(
                               decoration: ShapeDecoration(
-                                color: themeChange.getThem() ? AppThemeData.greyDark09 : AppThemeData.grey09,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark09
+                                    : AppThemeData.grey09,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(72),
                                 ),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(12),
-                                child: Constant.svgPictureShow("assets/icons/icon_logout.svg", themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02, 20, 20),
+                                child: Constant.svgPictureShow(
+                                    "assets/icons/icon_logout.svg",
+                                    themeChange.getThem()
+                                        ? AppThemeData.red02
+                                        : AppThemeData.red02,
+                                    20,
+                                    20),
                               ),
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             Text(
-                              FireStoreUtils.getCurrentUid() != '' ? 'Logout'.tr : 'Login'.tr,
+                              FireStoreUtils.getCurrentUid() != ''
+                                  ? 'Logout'.tr
+                                  : 'Login'.tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.red02
+                                    : AppThemeData.red02,
                                 fontSize: 16,
                                 fontFamily: AppThemeData.semiboldOpenSans,
                               ),

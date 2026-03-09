@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
-import 'package:yelpify/utils/preferences.dart';
+import 'package:allubmarket/utils/preferences.dart';
 
-class SettingsController extends GetxController{
-
+class SettingsController extends GetxController {
   RxBool isDarkModeSwitch = false.obs;
   RxString isDarkMode = "Light".obs;
   RxBool isLoading = true.obs;
@@ -13,7 +12,6 @@ class SettingsController extends GetxController{
     getThem();
     super.onInit();
   }
-
 
   void getThem() {
     isDarkMode.value = Preferences.getString(Preferences.themKey);
@@ -26,5 +24,4 @@ class SettingsController extends GetxController{
     }
     isLoading.value = false;
   }
-
 }

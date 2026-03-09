@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
 
 class ForgotPasswordController extends GetxController {
-  Rx<TextEditingController> emailEditingController = TextEditingController().obs;
+  Rx<TextEditingController> emailEditingController =
+      TextEditingController().obs;
 
   Future<void> forgotPassword() async {
     try {
@@ -13,7 +14,8 @@ class ForgotPasswordController extends GetxController {
         email: emailEditingController.value.text.trim(),
       );
       ShowToastDialog.closeLoader();
-      ShowToastDialog.showToast('${'Reset Password link sent your'.tr} ${emailEditingController.value.text} ${'email'.tr}');
+      ShowToastDialog.showToast(
+          '${'Reset Password link sent your'.tr} ${emailEditingController.value.text} ${'email'.tr}');
       Get.back();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

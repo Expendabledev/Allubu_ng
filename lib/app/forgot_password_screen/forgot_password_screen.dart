@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/forgot_password_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/forgot_password_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -22,7 +22,9 @@ class ForgotPasswordScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-                backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                backgroundColor: themeChange.getThem()
+                    ? AppThemeData.greyDark10
+                    : AppThemeData.grey10,
                 centerTitle: true,
                 leadingWidth: 120,
                 leading: DebouncedInkWell(
@@ -33,13 +35,19 @@ class ForgotPasswordScreen extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         "assets/icons/icon_left.svg",
-                        colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
+                            BlendMode.srcIn),
                       ),
                       Text(
                         "Back".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -54,11 +62,21 @@ class ForgotPasswordScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Forgot Password".tr,
-                    style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01, fontSize: 22, fontFamily: AppThemeData.semibold),
+                    style: TextStyle(
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey01,
+                        fontSize: 22,
+                        fontFamily: AppThemeData.semibold),
                   ),
                   Text(
                     "No worries!! We’ll send you reset instructions".tr,
-                    style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01, fontSize: 16, fontFamily: AppThemeData.regular),
+                    style: TextStyle(
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey01,
+                        fontSize: 16,
+                        fontFamily: AppThemeData.regular),
                   ),
                   const SizedBox(
                     height: 32,
@@ -72,7 +90,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                       child: SvgPicture.asset(
                         "assets/icons/ic_mail.svg",
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -83,10 +103,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   RoundedButtonFill(
                     title: "Forgot Password".tr,
-                    textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                    color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                    textColor: themeChange.getThem()
+                        ? AppThemeData.greyDark10
+                        : AppThemeData.grey10,
+                    color: themeChange.getThem()
+                        ? AppThemeData.redDark02
+                        : AppThemeData.red02,
                     onPress: () async {
-                      if (!Constant.isValidEmail(controller.emailEditingController.value.text.trim())) {
+                      if (!Constant.isValidEmail(controller
+                          .emailEditingController.value.text
+                          .trim())) {
                         ShowToastDialog.showToast("Enter valid email");
                         return;
                       } else {

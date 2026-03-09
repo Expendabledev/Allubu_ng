@@ -13,17 +13,17 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
-import 'package:yelpify/models/ad_setup_model.dart';
-import 'package:yelpify/models/business_history_model.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/country_model.dart';
-import 'package:yelpify/models/language_model.dart';
-import 'package:yelpify/models/mail_setting.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/business_history_storage.dart';
-import 'package:yelpify/utils/preferences.dart';
+import 'package:allubmarket/models/ad_setup_model.dart';
+import 'package:allubmarket/models/business_history_model.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/country_model.dart';
+import 'package:allubmarket/models/language_model.dart';
+import 'package:allubmarket/models/mail_setting.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/business_history_storage.dart';
+import 'package:allubmarket/utils/preferences.dart';
 
 class Constant {
   static const String emailLoginType = "email";
@@ -42,7 +42,7 @@ class Constant {
 
   static const userPlaceHolder = "assets/images/user_placeholder.svg";
   static String businessDeepLink = '/business-detail/';
-  static String applicationName = 'Yelpify';
+  static String applicationName = 'allubmarket';
   static String jsonNotificationFileURL = '';
   static String senderId = '';
 
@@ -92,16 +92,19 @@ class Constant {
     return DateFormat('yyyy-MM-dd').parse(openDineTime);
   }
 
-  static Widget svgPictureShow(String path, Color? color, double? height, double? width) {
+  static Widget svgPictureShow(
+      String path, Color? color, double? height, double? width) {
     return SvgPicture.asset(
       path,
       width: width,
       height: height,
-      colorFilter: color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
+      colorFilter:
+          color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
     );
   }
 
-  static String replacePlaceholders(String template, Map<String, String> values) {
+  static String replacePlaceholders(
+      String template, Map<String, String> values) {
     values.forEach((key, value) {
       template = template.replaceAll('{$key}', value);
     });
@@ -119,7 +122,8 @@ class Constant {
     int age = today.year - birthDate.year;
 
     // Adjust if the birthday hasn't occurred yet this year
-    if (today.month < birthDate.month || (today.month == birthDate.month && today.day < birthDate.day)) {
+    if (today.month < birthDate.month ||
+        (today.month == birthDate.month && today.day < birthDate.day)) {
       age--;
     }
 
@@ -128,7 +132,10 @@ class Constant {
 
   static Widget showEmptyView({required String message}) {
     return Center(
-      child: Text(message.tr, textAlign: TextAlign.center, style: const TextStyle(fontFamily: AppThemeData.regularOpenSans, fontSize: 16)),
+      child: Text(message.tr,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+              fontFamily: AppThemeData.regularOpenSans, fontSize: 16)),
     );
   }
 
@@ -144,7 +151,10 @@ class Constant {
     if (categoryList == null || categoryList.isEmpty) {
       return ""; // Return empty string if list is null or empty
     }
-    return categoryList.map((category) => category.name ?? "").where((name) => name.isNotEmpty).join(", ");
+    return categoryList
+        .map((category) => category.name ?? "")
+        .where((name) => name.isNotEmpty)
+        .join(", ");
   }
 
   static Widget buildStatusText(themeChange, String status, bool isList) {
@@ -158,15 +168,27 @@ class Constant {
                 ? AppThemeData.greyDark06
                 : AppThemeData.grey06,
         fontFamily: AppThemeData.mediumOpenSans);
-    TextStyle openStyle = TextStyle(fontSize: 12, color: themeChange.getThem() ? AppThemeData.greenDark02 : AppThemeData.green02, fontFamily: AppThemeData.boldOpenSans);
-    TextStyle closedStyle = TextStyle(fontSize: 12, color: themeChange.getThem() ? AppThemeData.greenDark02 : AppThemeData.red02, fontFamily: AppThemeData.boldOpenSans);
+    TextStyle openStyle = TextStyle(
+        fontSize: 12,
+        color: themeChange.getThem()
+            ? AppThemeData.greenDark02
+            : AppThemeData.green02,
+        fontFamily: AppThemeData.boldOpenSans);
+    TextStyle closedStyle = TextStyle(
+        fontSize: 12,
+        color: themeChange.getThem()
+            ? AppThemeData.greenDark02
+            : AppThemeData.red02,
+        fontFamily: AppThemeData.boldOpenSans);
 
     if (status.startsWith("Open until")) {
       return RichText(
         text: TextSpan(
           children: [
             TextSpan(text: "Open", style: openStyle),
-            TextSpan(text: " Until ${status.replaceFirst("Open until", "").trim()}", style: defaultStyle),
+            TextSpan(
+                text: " Until ${status.replaceFirst("Open until", "").trim()}",
+                style: defaultStyle),
           ],
         ),
       );
@@ -175,7 +197,10 @@ class Constant {
         text: TextSpan(
           children: [
             TextSpan(text: "Closed", style: closedStyle),
-            TextSpan(text: " until ${status.replaceFirst("Closed until", "").trim()}", style: defaultStyle),
+            TextSpan(
+                text:
+                    " until ${status.replaceFirst("Closed until", "").trim()}",
+                style: defaultStyle),
           ],
         ),
       );
@@ -209,7 +234,8 @@ class Constant {
   }
 
   String? validateEmail(String? value) {
-    String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regExp = RegExp(pattern);
     if (value == null || value.isEmpty) {
       return "Email is Required".tr;
@@ -221,7 +247,8 @@ class Constant {
   }
 
   bool hasValidUrl(String value) {
-    String pattern = r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
+    String pattern =
+        r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
     RegExp regExp = RegExp(pattern);
     if (value.isEmpty) {
       return false;
@@ -287,18 +314,25 @@ class Constant {
     return const Uuid().v4();
   }
 
-  static Future<String> uploadUserImageToFireStorage(File image, String filePath, String fileName) async {
-    Reference upload = FirebaseStorage.instance.ref().child('$filePath/$fileName');
+  static Future<String> uploadUserImageToFireStorage(
+      File image, String filePath, String fileName) async {
+    Reference upload =
+        FirebaseStorage.instance.ref().child('$filePath/$fileName');
     UploadTask uploadTask = upload.putFile(image);
-    var downloadUrl = await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
+    var downloadUrl =
+        await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
     return downloadUrl.toString();
   }
 
-  static String calculateReview({required String? reviewCount, required String? reviewSum}) {
-    if (0 == double.parse(reviewSum.toString()) && 0 == double.parse(reviewSum.toString())) {
+  static String calculateReview(
+      {required String? reviewCount, required String? reviewSum}) {
+    if (0 == double.parse(reviewSum.toString()) &&
+        0 == double.parse(reviewSum.toString())) {
       return "0";
     }
-    return (double.parse(reviewSum.toString()) / double.parse(reviewCount.toString())).toStringAsFixed(1);
+    return (double.parse(reviewSum.toString()) /
+            double.parse(reviewCount.toString()))
+        .toStringAsFixed(1);
   }
 
   static String formatReviewCount(String count) {
@@ -314,19 +348,24 @@ class Constant {
   static String generateRandomCode(String collectionName, {int length = 6}) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     Random random = Random();
-    String randomPart = List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
+    String randomPart =
+        List.generate(length, (index) => chars[random.nextInt(chars.length)])
+            .join();
     return "${collectionName.toUpperCase()}_$randomPart";
   }
 
   bool isBusinessOpenNow(Map<String, dynamic> businessHours) {
-    String today = DateFormat('EEEE').format(DateTime.now()).toLowerCase(); // e.g., "monday"
+    String today = DateFormat('EEEE')
+        .format(DateTime.now())
+        .toLowerCase(); // e.g., "monday"
     String currentTime = DateFormat('HH:mm').format(DateTime.now());
 
     if (businessHours[today] == "Closed") return false;
 
     for (String timeRange in businessHours[today]) {
       List<String> times = timeRange.split('-');
-      if (currentTime.compareTo(times[0]) >= 0 && currentTime.compareTo(times[1]) <= 0) {
+      if (currentTime.compareTo(times[0]) >= 0 &&
+          currentTime.compareTo(times[1]) <= 0) {
         return true; // Business is open
       }
     }
@@ -355,7 +394,8 @@ class Constant {
   static String getBusinessStatus(BusinessHours businessHours) {
     final now = DateTime.now();
     final today = DateFormat('EEEE').format(now).toLowerCase();
-    final tomorrow = DateFormat('EEEE').format(now.add(Duration(days: 1))).toLowerCase();
+    final tomorrow =
+        DateFormat('EEEE').format(now.add(Duration(days: 1))).toLowerCase();
     final currentTime = DateFormat('HH:mm').format(now);
 
     List<dynamic> todayHours = getDayHours(businessHours, today);
@@ -367,11 +407,13 @@ class Constant {
       final start = times[0];
       final end = times[1];
 
-      if (currentTime.compareTo(start) >= 0 && currentTime.compareTo(end) <= 0) {
+      if (currentTime.compareTo(start) >= 0 &&
+          currentTime.compareTo(end) <= 0) {
         return "Open until ${formatTimeBusiness(end)}";
       }
 
-      if (currentTime.compareTo(start) >= 0 && currentTime.compareTo(end) <= 0) {
+      if (currentTime.compareTo(start) >= 0 &&
+          currentTime.compareTo(end) <= 0) {
         return "Open until ${formatTimeBusiness(end)}";
       }
 
@@ -494,7 +536,8 @@ class Constant {
         .toList();
   }
 
-  static Future<TimeOfDay?> pickTime({required BuildContext context, required TimeOfDay initialTime}) async {
+  static Future<TimeOfDay?> pickTime(
+      {required BuildContext context, required TimeOfDay initialTime}) async {
     return await showTimePicker(
       context: context,
       initialTime: initialTime,
@@ -506,9 +549,12 @@ class Constant {
 
   static Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   static bool isNumeric(String str) {
@@ -521,13 +567,18 @@ class Constant {
     return text[0].toUpperCase() + text.substring(1).toLowerCase();
   }
 
-  static double calculateDistance(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
+  static double calculateDistance(double startLatitude, double startLongitude,
+      double endLatitude, double endLongitude) {
     const earthRadius = 6371; // Earth's radius in KM
 
     final dLat = _toRadians(endLatitude - startLatitude);
     final dLon = _toRadians(endLongitude - startLongitude);
 
-    final a = sin(dLat / 2) * sin(dLat / 2) + cos(_toRadians(startLatitude)) * cos(_toRadians(endLatitude)) * sin(dLon / 2) * sin(dLon / 2);
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(_toRadians(startLatitude)) *
+            cos(_toRadians(endLatitude)) *
+            sin(dLon / 2) *
+            sin(dLon / 2);
 
     final c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
@@ -539,7 +590,8 @@ class Constant {
     return degree * pi / 180;
   }
 
-  static Timestamp? addDayInTimestamp({required String? days, required Timestamp date}) {
+  static Timestamp? addDayInTimestamp(
+      {required String? days, required Timestamp date}) {
     if (days?.isNotEmpty == true && days != '0') {
       Timestamp now = date;
       DateTime dateTime = now.toDate();
@@ -585,7 +637,8 @@ class Constant {
     BusinessHistoryStorage.addCategoryHistoryItem(model);
   }
 
-  static Future<void> launchUrlOfClimBusiness(BuildContext context, String url) async {
+  static Future<void> launchUrlOfClimBusiness(
+      BuildContext context, String url) async {
     final theme = Theme.of(context);
     try {
       await launchUrl(

@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/report_list_model.dart';
-import 'package:yelpify/models/report_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/report_list_model.dart';
+import 'package:allubmarket/models/report_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class ComplainReportController extends GetxController {
   RxBool isLoading = true.obs;
   RxString reportType = ''.obs;
-  Rx<TextEditingController> reportTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> reportTextFieldController =
+      TextEditingController().obs;
 
   @override
   void onInit() {
@@ -38,12 +39,20 @@ class ComplainReportController extends GetxController {
   }
 
   Future<void> getReportSettings() async {
-    await FireStoreUtils.fireStore.collection(CollectionName.settings).doc("complain_and_report").get().then(
+    await FireStoreUtils.fireStore
+        .collection(CollectionName.settings)
+        .doc("complain_and_report")
+        .get()
+        .then(
       (value) {
         if (value.exists) {
-          ReportListModel reportListModel = ReportListModel.fromJson(value.data()!);
+          ReportListModel reportListModel =
+              ReportListModel.fromJson(value.data()!);
 
-          reportCategories.value = reportListModel.reportCategories!.firstWhere((element) => element.category == reportType.value).reports ?? [];
+          reportCategories.value = reportListModel.reportCategories!
+                  .firstWhere((element) => element.category == reportType.value)
+                  .reports ??
+              [];
         }
       },
     );

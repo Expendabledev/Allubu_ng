@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/dashboard_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/dashboard_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({super.key});
@@ -21,7 +21,9 @@ class DashBoardScreen extends StatelessWidget {
             canPop: controller.canPopNow.value,
             onPopInvoked: (didPop) {
               final now = DateTime.now();
-              if (controller.currentBackPressTime == null || now.difference(controller.currentBackPressTime!) > const Duration(seconds: 2)) {
+              if (controller.currentBackPressTime == null ||
+                  now.difference(controller.currentBackPressTime!) >
+                      const Duration(seconds: 2)) {
                 controller.currentBackPressTime = now;
                 controller.canPopNow.value = false;
                 ShowToastDialog.showToast("Double press to exit".tr);
@@ -37,12 +39,20 @@ class DashBoardScreen extends StatelessWidget {
                   showUnselectedLabels: true,
                   showSelectedLabels: true,
                   selectedFontSize: 12,
-                  selectedLabelStyle: const TextStyle(fontFamily: AppThemeData.bold),
-                  unselectedLabelStyle: const TextStyle(fontFamily: AppThemeData.bold),
+                  selectedLabelStyle:
+                      const TextStyle(fontFamily: AppThemeData.bold),
+                  unselectedLabelStyle:
+                      const TextStyle(fontFamily: AppThemeData.bold),
                   currentIndex: controller.selectedIndex.value,
-                  backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                  selectedItemColor: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
-                  unselectedItemColor: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                  backgroundColor: themeChange.getThem()
+                      ? AppThemeData.greyDark10
+                      : AppThemeData.grey10,
+                  selectedItemColor: themeChange.getThem()
+                      ? AppThemeData.red02
+                      : AppThemeData.red02,
+                  unselectedItemColor: themeChange.getThem()
+                      ? AppThemeData.greyDark03
+                      : AppThemeData.grey03,
                   onTap: (int index) {
                     controller.selectedIndex.value = index;
                   },
@@ -105,7 +115,11 @@ class DashBoardScreen extends StatelessWidget {
         });
   }
 
-  BottomNavigationBarItem navigationBarItem(themeChange, {required int index, required String label, required String assetIcon, required DashBoardController controller}) {
+  BottomNavigationBarItem navigationBarItem(themeChange,
+      {required int index,
+      required String label,
+      required String assetIcon,
+      required DashBoardController controller}) {
     return BottomNavigationBarItem(
       icon: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),

@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yelpify/models/business_history_model.dart';
+import 'package:allubmarket/models/business_history_model.dart';
 
 class BusinessHistoryStorage {
   static const String _key = 'business_history_list';
 
   /// Add a single BusinessHistoryModel to the existing list
-  static Future<void> addCategoryHistoryItem(BusinessHistoryModel newItem) async {
+  static Future<void> addCategoryHistoryItem(
+      BusinessHistoryModel newItem) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     // Load existing list
@@ -25,7 +26,8 @@ class BusinessHistoryStorage {
     rawList.add(newItem);
 
     // Convert back to string list
-    List<String> updatedJsonList = rawList.map((item) => jsonEncode(item.toJson())).toList();
+    List<String> updatedJsonList =
+        rawList.map((item) => jsonEncode(item.toJson())).toList();
 
     // Save
     await prefs.setStringList(_key, updatedJsonList);

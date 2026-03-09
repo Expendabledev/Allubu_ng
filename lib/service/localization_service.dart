@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/lang/app_ar.dart';
-import 'package:yelpify/lang/app_de.dart';
-import 'package:yelpify/lang/app_fr.dart';
-import 'package:yelpify/lang/app_hi.dart';
-import 'package:yelpify/lang/app_ja.dart';
-import 'package:yelpify/lang/app_pt.dart';
-import 'package:yelpify/lang/app_ru.dart';
-import 'package:yelpify/lang/app_zh.dart';
+import 'package:allubmarket/lang/app_ar.dart';
+import 'package:allubmarket/lang/app_de.dart';
+import 'package:allubmarket/lang/app_fr.dart';
+import 'package:allubmarket/lang/app_hi.dart';
+import 'package:allubmarket/lang/app_ja.dart';
+import 'package:allubmarket/lang/app_pt.dart';
+import 'package:allubmarket/lang/app_ru.dart';
+import 'package:allubmarket/lang/app_zh.dart';
 
 import '../lang/app_en.dart';
 

@@ -7,12 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:yelpify/app/auth_screen/singup_screen.dart';
-import 'package:yelpify/app/dashboard_screen/dashboard_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/app/auth_screen/singup_screen.dart';
+import 'package:allubmarket/app/dashboard_screen/dashboard_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class WelcomeController extends GetxController {
   Future<void> loginWithGoogle() async {
@@ -33,16 +33,19 @@ class WelcomeController extends GetxController {
             "userModel": userModel,
           });
         } else {
-          await FireStoreUtils.userExistOrNot(value.user!.uid).then((userExit) async {
+          await FireStoreUtils.userExistOrNot(value.user!.uid)
+              .then((userExit) async {
             ShowToastDialog.closeLoader();
             if (userExit == true) {
-              UserModel? userModel = await FireStoreUtils.getUserProfile(value.user!.uid);
+              UserModel? userModel =
+                  await FireStoreUtils.getUserProfile(value.user!.uid);
               if (userModel != null) {
                 if (userModel.isActive == true) {
                   Get.offAll(const DashBoardScreen());
                 } else {
                   await FirebaseAuth.instance.signOut();
-                  ShowToastDialog.showToast("This user is disable please contact administrator".tr);
+                  ShowToastDialog.showToast(
+                      "This user is disable please contact administrator".tr);
                 }
               }
             } else {
@@ -83,17 +86,20 @@ class WelcomeController extends GetxController {
             "userModel": userModel,
           });
         } else {
-          FireStoreUtils.userExistOrNot(userCredential.user!.uid).then((userExit) async {
+          FireStoreUtils.userExistOrNot(userCredential.user!.uid)
+              .then((userExit) async {
             ShowToastDialog.closeLoader();
 
             if (userExit == true) {
-              UserModel? userModel = await FireStoreUtils.getUserProfile(userCredential.user!.uid);
+              UserModel? userModel =
+                  await FireStoreUtils.getUserProfile(userCredential.user!.uid);
               if (userModel != null) {
                 if (userModel.isActive == true) {
                   Get.offAll(const DashBoardScreen());
                 } else {
                   await FirebaseAuth.instance.signOut();
-                  ShowToastDialog.showToast("This user is disable please contact administrator".tr);
+                  ShowToastDialog.showToast(
+                      "This user is disable please contact administrator".tr);
                 }
               }
             } else {
@@ -126,7 +132,8 @@ class WelcomeController extends GetxController {
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
-      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
       return userCredential;
     } catch (e) {
@@ -166,7 +173,8 @@ class WelcomeController extends GetxController {
       final nonce = sha256ofString(rawNonce);
 
       // Request credential for the currently signed in Apple account.
-      AuthorizationCredentialAppleID appleCredential = await SignInWithApple.getAppleIDCredential(
+      AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
@@ -184,8 +192,12 @@ class WelcomeController extends GetxController {
 
       // Sign in the user with Firebase. If the nonce we generated earlier does
       // not match the nonce in `appleCredential.identityToken`, sign in will fail.
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-      return {"appleCredential": appleCredential, "userCredential": userCredential};
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      return {
+        "appleCredential": appleCredential,
+        "userCredential": userCredential
+      };
     } catch (e) {
       debugPrint("signInWithApple :: $e");
     }
@@ -193,9 +205,11 @@ class WelcomeController extends GetxController {
   }
 
   String generateNonce([int length = 32]) {
-    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
   }
 
   /// Returns the sha256 hash of [input] in hex notation.

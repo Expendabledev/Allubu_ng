@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
 import 'package:http/http.dart' as http;
 import '../constant/constant.dart';
 
@@ -14,7 +14,8 @@ class Utils {
   /// Get Current Location (Latitude & Longitude)
   static Future<Position?> getCurrentLocation() async {
     try {
-      Position position = await Geolocator.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+      Position position = await Geolocator.getCurrentPosition(
+          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
 
       return position;
     } catch (e) {
@@ -23,7 +24,8 @@ class Utils {
     return null;
   }
 
-  static Future<void> shareMultipleImages({required List<String> imageUrls, required String description}) async {
+  static Future<void> shareMultipleImages(
+      {required List<String> imageUrls, required String description}) async {
     try {
       ShowToastDialog.showLoader("Please wait");
 
@@ -69,7 +71,8 @@ class Utils {
     }
   }
 
-  static Future<void> sendSMS({required String phoneNumber, required String message}) async {
+  static Future<void> sendSMS(
+      {required String phoneNumber, required String message}) async {
     final Uri smsUri = Uri(
       scheme: 'sms',
       path: phoneNumber,
@@ -103,10 +106,12 @@ class Utils {
     }
   }
 
-  static Future<void> openMap({required double lat, required double lng, String? label}) async {
+  static Future<void> openMap(
+      {required double lat, required double lng, String? label}) async {
     final encodedLabel = Uri.encodeComponent(label ?? "Destination");
 
-    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng&query_place_id=$encodedLabel';
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=$lat,$lng&query_place_id=$encodedLabel';
     String appleUrl = 'http://maps.apple.com/?daddr=$lat,$lng&q=$encodedLabel';
 
     final Uri url = Uri.parse(Platform.isIOS ? appleUrl : googleUrl);
@@ -118,7 +123,8 @@ class Utils {
     }
   }
 
-  static Future<Uint8List> getBytesFromUrl(String url, {int width = 100}) async {
+  static Future<Uint8List> getBytesFromUrl(String url,
+      {int width = 100}) async {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode != 200) {
       throw Exception('Failed to load image from $url');
@@ -129,7 +135,8 @@ class Utils {
       targetWidth: width,
     );
     final frame = await codec.getNextFrame();
-    final byteData = await frame.image.toByteData(format: ui.ImageByteFormat.png);
+    final byteData =
+        await frame.image.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
   }
 }

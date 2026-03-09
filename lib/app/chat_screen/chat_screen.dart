@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/chat_controller.dart';
-import 'package:yelpify/models/conversation_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/firestore_pagination.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/models/view_type.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/chat_controller.dart';
+import 'package:allubmarket/models/conversation_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/firestore_pagination.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/models/view_type.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -31,7 +31,9 @@ class ChatScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: DebouncedInkWell(
@@ -42,13 +44,19 @@ class ChatScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/icon_left.svg",
-                      colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          BlendMode.srcIn),
                     ),
                     Text(
                       "Back".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -59,15 +67,20 @@ class ChatScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
               title: Text(
-                "${controller.isSender.value == "business" ? controller.userModel.value.fullName() : controller.businessModel.value.businessName}".tr,
+                "${controller.isSender.value == "business" ? controller.userModel.value.fullName() : controller.businessModel.value.businessName}"
+                    .tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -87,24 +100,31 @@ class ChatScreen extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, documentSnapshots, index) {
-                          ConversationModel inboxModel = ConversationModel.fromJson(documentSnapshots[index].data() as Map<String, dynamic>);
+                          ConversationModel inboxModel =
+                              ConversationModel.fromJson(
+                                  documentSnapshots[index].data()
+                                      as Map<String, dynamic>);
 
                           return chatItemView(
                             themeChange,
                             controller.isSender.value == "business"
-                                ? inboxModel.senderId == controller.businessModel.value.id
-                                : inboxModel.senderId == FireStoreUtils.getCurrentUid(),
+                                ? inboxModel.senderId ==
+                                    controller.businessModel.value.id
+                                : inboxModel.senderId ==
+                                    FireStoreUtils.getCurrentUid(),
                             inboxModel,
                           );
                         },
-                        onEmpty: Constant.showEmptyView(message: "No Conversion found".tr),
+                        onEmpty: Constant.showEmptyView(
+                            message: "No Conversion found".tr),
                         // orderBy is compulsory to enable pagination
                         reverse: true,
                         query: FireStoreUtils.fireStore
                             .collection(CollectionName.projectRequest)
                             .doc(controller.projectModel.value.id)
                             .collection("chat")
-                            .where("businessId", isEqualTo: controller.businessModel.value.id)
+                            .where("businessId",
+                                isEqualTo: controller.businessModel.value.id)
                             .orderBy('createdAt', descending: true),
                         isLive: true,
                         viewType: ViewType.list,
@@ -145,10 +165,14 @@ class ChatScreen extends StatelessWidget {
                   data.messageType == "text"
                       ? Container(
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                                bottomLeft: Radius.circular(12)),
                             color: AppThemeData.red02,
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 10),
                           child: Text(
                             data.message.toString(),
                             style: const TextStyle(
@@ -159,7 +183,10 @@ class ChatScreen extends StatelessWidget {
                           ),
                         )
                       : ClipRRect(
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomLeft: Radius.circular(12)),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12),
+                              bottomLeft: Radius.circular(12)),
                           child: Stack(alignment: Alignment.center, children: [
                             GestureDetector(
                               onTap: () {},
@@ -196,16 +223,24 @@ class ChatScreen extends StatelessWidget {
                     data.messageType == "text"
                         ? Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
                             child: Text(
                               data.message.toString(),
                               style: TextStyle(
                                 fontFamily: AppThemeData.medium,
                                 fontSize: 16,
-                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark01
+                                    : AppThemeData.grey01,
                               ),
                             ),
                           )
@@ -215,8 +250,12 @@ class ChatScreen extends StatelessWidget {
                               maxWidth: 200,
                             ),
                             child: ClipRRect(
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12), bottomRight: Radius.circular(12)),
-                              child: Stack(alignment: Alignment.center, children: [
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                  bottomRight: Radius.circular(12)),
+                              child:
+                                  Stack(alignment: Alignment.center, children: [
                                 GestureDetector(
                                   onTap: () {},
                                   child: Hero(
@@ -231,7 +270,8 @@ class ChatScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 5),
-                Text(Constant.formatTimestamp(data.createdAt!), style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(Constant.formatTimestamp(data.createdAt!),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
             ),
     );

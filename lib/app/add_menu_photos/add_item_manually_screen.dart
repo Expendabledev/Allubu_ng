@@ -6,14 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/add_item_manully_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/add_item_manully_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class AddItemManuallyScreen extends StatelessWidget {
   const AddItemManuallyScreen({super.key});
@@ -26,7 +26,9 @@ class AddItemManuallyScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -41,7 +43,9 @@ class AddItemManuallyScreen extends StatelessWidget {
                         "assets/icons/icon_close.svg",
                         width: 22,
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -52,7 +56,9 @@ class AddItemManuallyScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -66,11 +72,14 @@ class AddItemManuallyScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: InkWell(
                     onTap: () {
-                      if (controller.nameTextFieldController.value.text.isEmpty) {
+                      if (controller
+                          .nameTextFieldController.value.text.isEmpty) {
                         ShowToastDialog.showToast("Please enter name");
-                      } else if (controller.descriptionTextFieldController.value.text.isEmpty) {
+                      } else if (controller
+                          .descriptionTextFieldController.value.text.isEmpty) {
                         ShowToastDialog.showToast("Please enter description");
-                      } else if (controller.priceTextFieldController.value.text.isEmpty) {
+                      } else if (controller
+                          .priceTextFieldController.value.text.isEmpty) {
                         ShowToastDialog.showToast("Please enter a price");
                       } else {
                         controller.saveItem();
@@ -80,7 +89,9 @@ class AddItemManuallyScreen extends StatelessWidget {
                       "Submit".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.tealDark02
+                            : AppThemeData.teal02,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -91,7 +102,9 @@ class AddItemManuallyScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -99,7 +112,9 @@ class AddItemManuallyScreen extends StatelessWidget {
                 "Add Item".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -115,7 +130,9 @@ class AddItemManuallyScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: AppThemeData.boldOpenSans,
                       fontSize: 14,
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                     ),
                   ),
                   SizedBox(
@@ -123,7 +140,9 @@ class AddItemManuallyScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: themeChange.getThem() ? AppThemeData.teal03 : AppThemeData.teal03,
+                      color: themeChange.getThem()
+                          ? AppThemeData.teal03
+                          : AppThemeData.teal03,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
@@ -139,14 +158,25 @@ class AddItemManuallyScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Constant.svgPictureShow("assets/icons/icon_upload.svg", themeChange.getThem() ? AppThemeData.teal02 : AppThemeData.teal02, 20, 20),
+                              Constant.svgPictureShow(
+                                  "assets/icons/icon_upload.svg",
+                                  themeChange.getThem()
+                                      ? AppThemeData.teal02
+                                      : AppThemeData.teal02,
+                                  20,
+                                  20),
                               const SizedBox(
                                 height: 10,
                               ),
                               Text(
                                 "Click to \nUpload Image".tr,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02, fontFamily: AppThemeData.medium, fontSize: 14),
+                                style: TextStyle(
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark02
+                                        : AppThemeData.grey02,
+                                    fontFamily: AppThemeData.medium,
+                                    fontSize: 14),
                               ),
                             ],
                           )),
@@ -169,20 +199,27 @@ class AddItemManuallyScreen extends StatelessWidget {
                                   // physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) {
                                     return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
                                       child: Stack(
                                         children: [
                                           ClipRRect(
-                                            borderRadius: const BorderRadius.all(Radius.circular(4)),
-                                            child: controller.images[index].runtimeType == XFile
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(4)),
+                                            child: controller.images[index]
+                                                        .runtimeType ==
+                                                    XFile
                                                 ? Image.file(
-                                                    File(controller.images[index].path),
+                                                    File(controller
+                                                        .images[index].path),
                                                     fit: BoxFit.cover,
                                                     width: 100,
                                                     height: 100,
                                                   )
                                                 : NetworkImageWidget(
-                                                    imageUrl: controller.images[index],
+                                                    imageUrl: controller
+                                                        .images[index],
                                                     fit: BoxFit.cover,
                                                     width: 100,
                                                     height: 100,
@@ -193,7 +230,8 @@ class AddItemManuallyScreen extends StatelessWidget {
                                             right: 8,
                                             child: InkWell(
                                               onTap: () async {
-                                                controller.images.removeAt(index);
+                                                controller.images
+                                                    .removeAt(index);
                                               },
                                               child: ClipOval(
                                                 child: Container(
@@ -201,8 +239,14 @@ class AddItemManuallyScreen extends StatelessWidget {
                                                   width: 30,
                                                   color: AppThemeData.red03,
                                                   child: Padding(
-                                                    padding: const EdgeInsets.all(5.0),
-                                                    child: Constant.svgPictureShow("assets/icons/delete-one.svg", AppThemeData.red02, 20, 20),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            5.0),
+                                                    child: Constant.svgPictureShow(
+                                                        "assets/icons/delete-one.svg",
+                                                        AppThemeData.red02,
+                                                        20,
+                                                        20),
                                                   ),
                                                 ),
                                               ),
@@ -244,7 +288,8 @@ class AddItemManuallyScreen extends StatelessWidget {
         });
   }
 
-  Future buildBottomSheet(BuildContext context, AddItemManuallyController controller) {
+  Future buildBottomSheet(
+      BuildContext context, AddItemManuallyController controller) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -259,7 +304,12 @@ class AddItemManuallyScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 15),
                     child: Text(
                       "Please Select".tr,
-                      style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontFamily: AppThemeData.bold, fontSize: 16),
+                      style: TextStyle(
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          fontFamily: AppThemeData.bold,
+                          fontSize: 16),
                     ),
                   ),
                   Row(
@@ -272,7 +322,8 @@ class AddItemManuallyScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.camera),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.camera),
                                 icon: const Icon(
                                   Icons.camera_alt,
                                   size: 32,
@@ -291,7 +342,8 @@ class AddItemManuallyScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                                onPressed: () => controller.pickFile(source: ImageSource.gallery),
+                                onPressed: () => controller.pickFile(
+                                    source: ImageSource.gallery),
                                 icon: const Icon(
                                   Icons.photo_library_sharp,
                                   size: 32,

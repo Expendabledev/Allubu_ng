@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/more_categoy_controller.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/more_categoy_controller.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 import '../home_screen/business_list_screen.dart';
 
@@ -24,7 +24,9 @@ class MoreCategoryScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: InkWell(
@@ -35,13 +37,19 @@ class MoreCategoryScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/icon_left.svg",
-                      colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          BlendMode.srcIn),
                     ),
                     Text(
                       "Back".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -52,7 +60,9 @@ class MoreCategoryScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -60,7 +70,9 @@ class MoreCategoryScreen extends StatelessWidget {
                 "More Categories".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -75,7 +87,9 @@ class MoreCategoryScreen extends StatelessWidget {
                     "All Category".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                       fontSize: 14,
                       fontFamily: AppThemeData.boldOpenSans,
                     ),
@@ -85,10 +99,14 @@ class MoreCategoryScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       border: Border.all(
-                        color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey06,
                       ),
                     ),
                     child: Padding(
@@ -98,7 +116,8 @@ class MoreCategoryScreen extends StatelessWidget {
                         itemCount: controller.categoryList.length,
                         padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
-                          CategoryModel categoryModel = controller.categoryList[index];
+                          CategoryModel categoryModel =
+                              controller.categoryList[index];
                           return InkWell(
                             onTap: () async {
                               if (categoryModel.children!.isEmpty) {
@@ -109,10 +128,13 @@ class MoreCategoryScreen extends StatelessWidget {
                                 });
                               } else {
                                 ShowToastDialog.showLoader("Please wait");
-                                await controller.getSubCategory(categoryModel).then(
+                                await controller
+                                    .getSubCategory(categoryModel)
+                                    .then(
                                   (value) {
                                     ShowToastDialog.closeLoader();
-                                    showCategoryBottomSheet(themeChange, controller, categoryModel);
+                                    showCategoryBottomSheet(
+                                        themeChange, controller, categoryModel);
                                   },
                                 );
                               }
@@ -136,16 +158,21 @@ class MoreCategoryScreen extends StatelessWidget {
                                       "${categoryModel.name}".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark02
+                                            : AppThemeData.grey02,
                                         fontSize: 14,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
                                     ),
                                   ),
-                                  categoryModel.children != null && categoryModel.children!.isNotEmpty
+                                  categoryModel.children != null &&
+                                          categoryModel.children!.isNotEmpty
                                       ? Constant.svgPictureShow(
                                           "assets/icons/content.svg",
-                                          themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                          themeChange.getThem()
+                                              ? AppThemeData.greyDark03
+                                              : AppThemeData.grey03,
                                           20,
                                           20,
                                         )
@@ -165,13 +192,16 @@ class MoreCategoryScreen extends StatelessWidget {
         });
   }
 
-  void showCategoryBottomSheet(themeChange, MoreCategoryController controller, CategoryModel parentCategoryModel) {
+  void showCategoryBottomSheet(themeChange, MoreCategoryController controller,
+      CategoryModel parentCategoryModel) {
     Get.bottomSheet(
       Container(
         height: Responsive.height(80, Get.context!),
         padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+          color: themeChange.getThem()
+              ? AppThemeData.surfaceDark50
+              : AppThemeData.surface50,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: Column(
@@ -186,7 +216,9 @@ class MoreCategoryScreen extends StatelessWidget {
                 child: SvgPicture.asset(
                   "assets/icons/icon_close.svg",
                   colorFilter: ColorFilter.mode(
-                    themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                    themeChange.getThem()
+                        ? AppThemeData.greyDark06
+                        : AppThemeData.grey01,
                     BlendMode.srcIn,
                   ),
                   width: 22,
@@ -202,10 +234,14 @@ class MoreCategoryScreen extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       border: Border.all(
-                        color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey06,
                       ),
                     ),
                     child: InkWell(
@@ -217,7 +253,8 @@ class MoreCategoryScreen extends StatelessWidget {
                         });
                       },
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         child: Row(
                           children: [
                             ClipOval(
@@ -235,7 +272,9 @@ class MoreCategoryScreen extends StatelessWidget {
                                 "${parentCategoryModel.name}".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.boldOpenSans,
                                 ),
@@ -253,7 +292,9 @@ class MoreCategoryScreen extends StatelessWidget {
                     "or something more specific...".tr,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark01
+                          : AppThemeData.grey01,
                       fontSize: 14,
                       fontFamily: AppThemeData.boldOpenSans,
                     ),
@@ -263,10 +304,14 @@ class MoreCategoryScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       border: Border.all(
-                        color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey06,
                       ),
                     ),
                     child: Padding(
@@ -277,15 +322,20 @@ class MoreCategoryScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
-                          CategoryModel categoryModel = controller.subCategoryList[index];
+                          CategoryModel categoryModel =
+                              controller.subCategoryList[index];
                           return InkWell(
                             onTap: () async {
-                              if (categoryModel.children != null && categoryModel.children!.isNotEmpty) {
+                              if (categoryModel.children != null &&
+                                  categoryModel.children!.isNotEmpty) {
                                 ShowToastDialog.showLoader("Please wait");
-                                await controller.getSubCategory(categoryModel).then(
+                                await controller
+                                    .getSubCategory(categoryModel)
+                                    .then(
                                   (value) {
                                     ShowToastDialog.closeLoader();
-                                    showCategoryBottomSheet(themeChange, controller, categoryModel);
+                                    showCategoryBottomSheet(
+                                        themeChange, controller, categoryModel);
                                   },
                                 );
                               } else {
@@ -315,16 +365,21 @@ class MoreCategoryScreen extends StatelessWidget {
                                       "${categoryModel.name}".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark02
+                                            : AppThemeData.grey02,
                                         fontSize: 14,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
                                     ),
                                   ),
-                                  categoryModel.children != null && categoryModel.children!.isNotEmpty
+                                  categoryModel.children != null &&
+                                          categoryModel.children!.isNotEmpty
                                       ? Constant.svgPictureShow(
                                           "assets/icons/content.svg",
-                                          themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                          themeChange.getThem()
+                                              ? AppThemeData.greyDark03
+                                              : AppThemeData.grey03,
                                           20,
                                           20,
                                         )

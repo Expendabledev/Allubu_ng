@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/models/business_model.dart';
+import 'package:allubmarket/models/business_model.dart';
 
 class CheckInModel {
   String? id;
@@ -11,7 +11,15 @@ class CheckInModel {
   String? userId;
   LatLngModel? location;
 
-  CheckInModel({this.id, this.description, this.createdAt, this.images, this.shareWithFriend, this.businessId, this.userId,this.location});
+  CheckInModel(
+      {this.id,
+      this.description,
+      this.createdAt,
+      this.images,
+      this.shareWithFriend,
+      this.businessId,
+      this.userId,
+      this.location});
 
   CheckInModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -21,7 +29,9 @@ class CheckInModel {
     shareWithFriend = json['shareWithFriend'];
     businessId = json['businessId'];
     userId = json['userId'];
-    location = json['location'] != null ? LatLngModel.fromJson(json['location']) : LatLngModel();
+    location = json['location'] != null
+        ? LatLngModel.fromJson(json['location'])
+        : LatLngModel();
   }
 
   Map<String, dynamic> toJson() {

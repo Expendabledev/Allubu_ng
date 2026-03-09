@@ -4,17 +4,18 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/send_notification.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/chat_model.dart';
-import 'package:yelpify/models/inbox_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/send_notification.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/chat_model.dart';
+import 'package:allubmarket/models/inbox_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class UserChatController extends GetxController {
-  final Rx<TextEditingController> messageTextEditorController = TextEditingController().obs;
+  final Rx<TextEditingController> messageTextEditorController =
+      TextEditingController().obs;
   final ScrollController scrollController = ScrollController();
 
   RxBool isLoading = true.obs;
@@ -56,11 +57,23 @@ class UserChatController extends GetxController {
         senderId: senderUserModel.value.id.toString(),
         timestamp: Timestamp.now(),
         type: "text",
-        chatType: receiverUserModel.value.id?.contains('admin') == true ? 'adminChat' : 'chat');
+        chatType: receiverUserModel.value.id?.contains('admin') == true
+            ? 'adminChat'
+            : 'chat');
 
-    await FireStoreUtils.fireStore.collection(CollectionName.userChat).doc(senderUserModel.value.id.toString()).collection("inbox").doc(receiverUserModel.value.id.toString()).set(inboxModel.toJson());
+    await FireStoreUtils.fireStore
+        .collection(CollectionName.userChat)
+        .doc(senderUserModel.value.id.toString())
+        .collection("inbox")
+        .doc(receiverUserModel.value.id.toString())
+        .set(inboxModel.toJson());
 
-    await FireStoreUtils.fireStore.collection(CollectionName.userChat).doc(receiverUserModel.value.id.toString()).collection("inbox").doc(senderUserModel.value.id.toString()).set(inboxModel.toJson());
+    await FireStoreUtils.fireStore
+        .collection(CollectionName.userChat)
+        .doc(receiverUserModel.value.id.toString())
+        .collection("inbox")
+        .doc(senderUserModel.value.id.toString())
+        .set(inboxModel.toJson());
 
     ChatModel chatModel = ChatModel(
         type: "text",
@@ -71,7 +84,9 @@ class UserChatController extends GetxController {
         mediaUrl: "",
         chatID: Constant.getUuid(),
         message: messageTextEditorController.value.text.trim(),
-        chatType: receiverUserModel.value.id?.contains('admin') == true ? 'adminChat' : 'chat');
+        chatType: receiverUserModel.value.id?.contains('admin') == true
+            ? 'adminChat'
+            : 'chat');
 
     await FireStoreUtils.fireStore
         .collection(CollectionName.userChat)
@@ -94,7 +109,10 @@ class UserChatController extends GetxController {
     };
 
     SendNotification.sendOneNotification(
-        token: receiverUserModel.value.fcmToken.toString(), title: receiverUserModel.value.fullName(), body: messageTextEditorController.value.text, payload: playLoad);
+        token: receiverUserModel.value.fcmToken.toString(),
+        title: receiverUserModel.value.fullName(),
+        body: messageTextEditorController.value.text,
+        payload: playLoad);
     messageTextEditorController.value.clear();
   }
 
@@ -109,7 +127,8 @@ class UserChatController extends GetxController {
         .snapshots()
         .listen((documentSnapshot) {
       for (int i = 0; i < documentSnapshot.docs.length; i++) {
-        if (documentSnapshot.docs[i]['senderId'] == senderUserModel.value.id.toString()) {
+        if (documentSnapshot.docs[i]['senderId'] ==
+            senderUserModel.value.id.toString()) {
           // Update the sender's side to "seen" for the current message
           FireStoreUtils.fireStore
               .collection(CollectionName.userChat)
@@ -139,7 +158,12 @@ class UserChatController extends GetxController {
             log("Failed : $error");
           });
 
-          FireStoreUtils.fireStore.collection(CollectionName.userChat).doc(documentSnapshot.docs[i]['receiverId']).collection("inbox").doc(documentSnapshot.docs[i]['senderId']).update({
+          FireStoreUtils.fireStore
+              .collection(CollectionName.userChat)
+              .doc(documentSnapshot.docs[i]['receiverId'])
+              .collection("inbox")
+              .doc(documentSnapshot.docs[i]['senderId'])
+              .update({
             'seen': true,
           }).catchError((error) {
             log("Failed to add: $error");

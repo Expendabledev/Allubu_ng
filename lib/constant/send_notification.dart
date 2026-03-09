@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
-import 'package:yelpify/constant/constant.dart';
+import 'package:allubmarket/constant/constant.dart';
 
 class SendNotification {
   static final _scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
@@ -22,23 +22,29 @@ class SendNotification {
       jsonData = json.decode(response.body);
     });
 
-    final serviceAccountCredentials = ServiceAccountCredentials.fromJson(jsonData);
+    final serviceAccountCredentials =
+        ServiceAccountCredentials.fromJson(jsonData);
 
-    final client = await clientViaServiceAccount(serviceAccountCredentials, _scopes);
+    final client =
+        await clientViaServiceAccount(serviceAccountCredentials, _scopes);
     debugPrint("accessToken=======>$client");
 
     return client.credentials.accessToken.data;
   }
 
-  static Future<bool> sendOneNotification({required String token, required String title, required String body, required Map<String, dynamic> payload}) async {
+  static Future<bool> sendOneNotification(
+      {required String token,
+      required String title,
+      required String body,
+      required Map<String, dynamic> payload}) async {
     try {
-
       final String accessToken = await getAccessToken();
       debugPrint("accessToken=======>");
       debugPrint(accessToken);
 
       final response = await http.post(
-        Uri.parse('https://fcm.googleapis.com/v1/projects/${Constant.senderId}/messages:send'),
+        Uri.parse(
+            'https://fcm.googleapis.com/v1/projects/${Constant.senderId}/messages:send'),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',

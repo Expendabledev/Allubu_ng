@@ -22,7 +22,7 @@
     <string>$(DEVELOPMENT_LANGUAGE)</string>
 
     <key>CFBundleDisplayName</key>
-    <string>Yelpify</string>
+    <string>allubmarket</string>
 
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
@@ -34,7 +34,7 @@
     <string>6.0</string>
 
     <key>CFBundleName</key>
-    <string>Yelpify</string>
+    <string>allubmarket</string>
 
     <key>CFBundlePackageType</key>
     <string>APPL</string>
@@ -75,7 +75,7 @@
     <!-- Universal Links setup -->
     <key>AssociatedDomains</key>
     <array>
-        <string>applinks:yelpifyweb.siswebapp.com</string>
+        <string>applinks:allubmarketweb.siswebapp.com</string>
     </array>
 
     <!-- App URL schemes -->
@@ -86,7 +86,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>yelpify</string> <!-- Your custom URL scheme -->
+                <string>allubmarket</string> <!-- Your custom URL scheme -->
                 <string>com.googleusercontent.apps.930102973522-bt2njb5e2agb21q7uji5jik25duoo9ef</string> <!-- Google Sign-In Client ID if needed -->
             </array>
         </dict>

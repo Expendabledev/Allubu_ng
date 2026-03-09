@@ -1,4 +1,4 @@
-name: yelpify
+name: allubmarket
 description: "A modern Flutter app with Firebase, Maps, Authentication, and In-App Purchases."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 

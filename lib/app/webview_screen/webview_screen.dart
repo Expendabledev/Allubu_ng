@@ -3,10 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/webview_controllerx.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/webview_controllerx.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class WebviewScreen extends StatelessWidget {
   const WebviewScreen({super.key});
@@ -19,7 +19,9 @@ class WebviewScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+            backgroundColor: themeChange.getThem()
+                ? AppThemeData.greyDark10
+                : AppThemeData.grey10,
             centerTitle: true,
             leadingWidth: 120,
             leading: Padding(
@@ -33,7 +35,9 @@ class WebviewScreen extends StatelessWidget {
                     SvgPicture.asset(
                       "assets/icons/icon_close.svg",
                       colorFilter: ColorFilter.mode(
-                        themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                        themeChange.getThem()
+                            ? AppThemeData.greyDark06
+                            : AppThemeData.grey01,
                         BlendMode.srcIn,
                       ),
                       width: 22,
@@ -45,7 +49,9 @@ class WebviewScreen extends StatelessWidget {
                       "Close".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -57,7 +63,9 @@ class WebviewScreen extends StatelessWidget {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(4.0),
               child: Container(
-                color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                color: themeChange.getThem()
+                    ? AppThemeData.greyDark08
+                    : AppThemeData.grey08,
                 height: 2.0,
               ),
             ),
@@ -65,13 +73,17 @@ class WebviewScreen extends StatelessWidget {
               "Claim business".tr,
               textAlign: TextAlign.start,
               style: TextStyle(
-                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                color: themeChange.getThem()
+                    ? AppThemeData.greyDark01
+                    : AppThemeData.grey01,
                 fontSize: 16,
                 fontFamily: AppThemeData.semiboldOpenSans,
               ),
             ),
           ),
-          body: controller.isLoading.value ? Constant.loader() : WebViewWidget(controller: controller.webcontroller.value),
+          body: controller.isLoading.value
+              ? Constant.loader()
+              : WebViewWidget(controller: controller.webcontroller.value),
         );
       },
     );

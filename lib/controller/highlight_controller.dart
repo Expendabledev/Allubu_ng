@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/highlight_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/highlight_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class HighLightController extends GetxController {
   RxBool isLoading = true.obs;
@@ -33,7 +33,10 @@ class HighLightController extends GetxController {
     await FireStoreUtils.getBusinessHighLight().then(
       (value) {
         highLightList.value = value;
-        selectedHighLightList.value = highLightList.where((element) => businessModel.value.highLights!.contains(element.id)).toList();
+        selectedHighLightList.value = highLightList
+            .where((element) =>
+                businessModel.value.highLights!.contains(element.id))
+            .toList();
       },
     );
 
@@ -45,7 +48,8 @@ class HighLightController extends GetxController {
       ShowToastDialog.showToast("Please select highlight");
     } else {
       ShowToastDialog.showLoader("Please wait");
-      businessModel.value.highLights = selectedHighLightList.map((e) => e.id).toList();
+      businessModel.value.highLights =
+          selectedHighLightList.map((e) => e.id).toList();
       await FireStoreUtils.addBusiness(businessModel.value);
       ShowToastDialog.closeLoader();
       ShowToastDialog.showToast("Business highlight save successfully ");

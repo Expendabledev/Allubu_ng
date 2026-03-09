@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class CustomStarRatingList extends StatelessWidget {
   final String initialRating;
@@ -50,23 +50,23 @@ class CustomStarRatingList extends StatelessWidget {
                 color: isActive
                     ? AppThemeData.red01
                     : bgColor ??
-                    (themeChange.getThem()
-                        ? AppThemeData.greyDark03
-                        : AppThemeData.grey03),
+                        (themeChange.getThem()
+                            ? AppThemeData.greyDark03
+                            : AppThemeData.grey03),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Icon(
                 isFull
                     ? Icons.star
                     : isActive
-                    ? Icons.star_half
-                    : Icons.star,
+                        ? Icons.star_half
+                        : Icons.star,
                 color: emptyColor ??
                     (isActive
                         ? AppThemeData.greyDark01
                         : themeChange.getThem()
-                        ? AppThemeData.greyDark03
-                        : AppThemeData.grey03),
+                            ? AppThemeData.greyDark03
+                            : AppThemeData.grey03),
                 size: size,
               ),
             ),

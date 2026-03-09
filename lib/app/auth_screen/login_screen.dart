@@ -7,19 +7,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/singup_screen.dart';
-import 'package:yelpify/app/forgot_password_screen/forgot_password_screen.dart';
-import 'package:yelpify/app/terms_and_condition/terms_and_condition_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/login_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/round_button_border.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/debounced_inkwell.dart';
+import 'package:allubmarket/app/auth_screen/singup_screen.dart';
+import 'package:allubmarket/app/forgot_password_screen/forgot_password_screen.dart';
+import 'package:allubmarket/app/terms_and_condition/terms_and_condition_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/login_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/round_button_border.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/debounced_inkwell.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -32,7 +32,9 @@ class LoginScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: DebouncedInkWell(
@@ -43,13 +45,19 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/icon_left.svg",
-                      colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
+                          BlendMode.srcIn),
                     ),
                     Text(
                       "Back".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -60,7 +68,9 @@ class LoginScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -109,8 +119,16 @@ class LoginScreen extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              buildButton("Email Address".tr, controller.isEmailSelected.value, true, controller),
-                              buildButton("Phone number".tr, !controller.isEmailSelected.value, false, controller),
+                              buildButton(
+                                  "Email Address".tr,
+                                  controller.isEmailSelected.value,
+                                  true,
+                                  controller),
+                              buildButton(
+                                  "Phone number".tr,
+                                  !controller.isEmailSelected.value,
+                                  false,
+                                  controller),
                             ],
                           ),
                         ),
@@ -119,10 +137,14 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Text(
-                        controller.isEmailSelected.value ? "Enter your email to log in".tr : "Enter your mobile no. to log in".tr,
+                        controller.isEmailSelected.value
+                            ? "Enter your email to log in".tr
+                            : "Enter your mobile no. to log in".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark02
+                              : AppThemeData.grey02,
                           fontSize: 20,
                           fontFamily: AppThemeData.bold,
                         ),
@@ -132,31 +154,38 @@ class LoginScreen extends StatelessWidget {
                         ? Column(
                             children: [
                               TextFieldWidget(
-                                controller: controller.emailTextFieldController.value,
+                                controller:
+                                    controller.emailTextFieldController.value,
                                 hintText: 'Email'.tr,
                               ),
                               TextFieldWidget(
-                                controller: controller.passwordTextFieldController.value,
+                                controller: controller
+                                    .passwordTextFieldController.value,
                                 hintText: 'Password'.tr,
                                 obscureText: controller.passwordVisible.value,
                                 suffix: Padding(
                                   padding: const EdgeInsets.all(12),
                                   child: DebouncedInkWell(
                                       onTap: () {
-                                        controller.passwordVisible.value = !controller.passwordVisible.value;
+                                        controller.passwordVisible.value =
+                                            !controller.passwordVisible.value;
                                       },
                                       child: controller.passwordVisible.value
                                           ? SvgPicture.asset(
                                               "assets/icons/ic_password_show.svg",
                                               colorFilter: ColorFilter.mode(
-                                                themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                                                themeChange.getThem()
+                                                    ? AppThemeData.greyDark06
+                                                    : AppThemeData.grey01,
                                                 BlendMode.srcIn,
                                               ),
                                             )
                                           : SvgPicture.asset(
                                               "assets/icons/ic_password_close.svg",
                                               colorFilter: ColorFilter.mode(
-                                                themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                                                themeChange.getThem()
+                                                    ? AppThemeData.greyDark06
+                                                    : AppThemeData.grey01,
                                                 BlendMode.srcIn,
                                               ),
                                             )),
@@ -172,7 +201,9 @@ class LoginScreen extends StatelessWidget {
                                     "Forgot Password".tr,
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
-                                      color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.tealDark02
+                                          : AppThemeData.teal02,
                                       fontSize: 14,
                                       fontFamily: AppThemeData.semiboldOpenSans,
                                     ),
@@ -185,8 +216,12 @@ class LoginScreen extends StatelessWidget {
                               RoundedButtonFill(
                                 title: 'Log in'.tr,
                                 height: 5.5,
-                                textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                                textColor: themeChange.getThem()
+                                    ? AppThemeData.greyDark10
+                                    : AppThemeData.grey10,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.redDark02
+                                    : AppThemeData.red02,
                                 onPress: () {
                                   controller.signInWithEmailPassword();
                                 },
@@ -196,38 +231,65 @@ class LoginScreen extends StatelessWidget {
                         : Column(
                             children: [
                               TextFieldWidget(
-                                controller: controller.phoneNumberTextFieldController.value,
+                                controller: controller
+                                    .phoneNumberTextFieldController.value,
                                 hintText: 'Enter mobile number'.tr,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp('[0-9]')),
                                 ],
                                 prefix: CountryCodePicker(
                                   onInit: (value) {
-                                    controller.countryCodeController.value.text = value?.dialCode ?? Constant.defaultCountryCode;
-                                    controller.countryISOCodeController.value.text = value?.code ?? Constant.defaultCountryCode;
+                                    controller
+                                            .countryCodeController.value.text =
+                                        value?.dialCode ??
+                                            Constant.defaultCountryCode;
+                                    controller.countryISOCodeController.value
+                                            .text =
+                                        value?.code ??
+                                            Constant.defaultCountryCode;
                                   },
                                   onChanged: (value) {
-                                    controller.countryCodeController.value.text = value.dialCode.toString();
-                                    controller.countryISOCodeController.value.text = value.code ?? Constant.defaultCountryCode;
+                                    controller.countryCodeController.value
+                                        .text = value.dialCode.toString();
+                                    controller.countryISOCodeController.value
+                                            .text =
+                                        value.code ??
+                                            Constant.defaultCountryCode;
                                   },
-                                  dialogTextStyle:
-                                      TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontWeight: FontWeight.w500, fontFamily: AppThemeData.medium),
-                                  dialogBackgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                  initialSelection: controller.countryISOCodeController.value.text,
-                                  comparator: (a, b) => b.name!.compareTo(a.name.toString()),
+                                  dialogTextStyle: TextStyle(
+                                      color: themeChange.getThem()
+                                          ? AppThemeData.greyDark01
+                                          : AppThemeData.grey01,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: AppThemeData.medium),
+                                  dialogBackgroundColor: themeChange.getThem()
+                                      ? AppThemeData.greyDark10
+                                      : AppThemeData.grey10,
+                                  initialSelection: controller
+                                      .countryISOCodeController.value.text,
+                                  comparator: (a, b) =>
+                                      b.name!.compareTo(a.name.toString()),
                                   flagDecoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(2)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2)),
                                   ),
                                   textStyle: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppThemeData.medium,
                                   ),
                                   searchDecoration: InputDecoration(
-                                    iconColor: themeChange.getThem() ? AppThemeData.grey08 : AppThemeData.grey08,
+                                    iconColor: themeChange.getThem()
+                                        ? AppThemeData.grey08
+                                        : AppThemeData.grey08,
                                   ),
                                   searchStyle: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark01
+                                        : AppThemeData.grey01,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppThemeData.medium,
                                   ),
@@ -239,11 +301,17 @@ class LoginScreen extends StatelessWidget {
                               RoundedButtonFill(
                                 title: 'Send OTP'.tr,
                                 height: 5.5,
-                                textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                                textColor: themeChange.getThem()
+                                    ? AppThemeData.greyDark10
+                                    : AppThemeData.grey10,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.redDark02
+                                    : AppThemeData.red02,
                                 onPress: () {
-                                  if (controller.phoneNumberTextFieldController.value.text.isEmpty) {
-                                    ShowToastDialog.showToast("Please enter a phone number");
+                                  if (controller.phoneNumberTextFieldController
+                                      .value.text.isEmpty) {
+                                    ShowToastDialog.showToast(
+                                        "Please enter a phone number");
                                   } else {
                                     controller.sendCode();
                                   }
@@ -257,41 +325,53 @@ class LoginScreen extends StatelessWidget {
                     Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                        text: "${'${'By continuing, you agree to'.tr} ${Constant.applicationName}'.tr} ",
+                        text:
+                            "${'${'By continuing, you agree to'.tr} ${Constant.applicationName}'.tr} ",
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppThemeData.regularOpenSans,
-                          color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark04
+                              : AppThemeData.grey04,
                         ),
                         children: <TextSpan>[
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(const TermsAndConditionScreen(type: "terms"));
+                                Get.to(const TermsAndConditionScreen(
+                                    type: "terms"));
                               },
                             text: 'Terms of Service'.tr,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.tealDark02
+                                  : AppThemeData.teal02,
                               fontSize: 14,
                               fontFamily: AppThemeData.semiboldOpenSans,
                             ),
                           ),
                           TextSpan(
-                            text: " ${"${'and acknowledge'.tr} ${Constant.applicationName}".tr} ",
+                            text:
+                                " ${"${'and acknowledge'.tr} ${Constant.applicationName}".tr} ",
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppThemeData.regularOpenSans,
-                              color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark04
+                                  : AppThemeData.grey04,
                             ),
                           ),
                           TextSpan(
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(const TermsAndConditionScreen(type: "privacy"));
+                                Get.to(const TermsAndConditionScreen(
+                                    type: "privacy"));
                               },
                             text: 'Privacy Policy.'.tr,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.tealDark02
+                                  : AppThemeData.teal02,
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                               fontFamily: AppThemeData.semiboldOpenSans,
@@ -313,9 +393,15 @@ class LoginScreen extends StatelessWidget {
                     icon: SvgPicture.asset("assets/icons/ic_google.svg.svg"),
                     title: 'Continue with Google'.tr,
                     isRight: false,
-                    textColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                    color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                    borderColor: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06,
+                    textColor: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark10
+                        : AppThemeData.grey10,
+                    borderColor: themeChange.getThem()
+                        ? AppThemeData.greyDark06
+                        : AppThemeData.grey06,
                     onPress: () {
                       controller.loginWithGoogle();
                     },
@@ -327,12 +413,20 @@ class LoginScreen extends StatelessWidget {
                       ? RoundedButtonFill(
                           icon: SvgPicture.asset(
                             "assets/icons/apple.svg",
-                            colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10, BlendMode.srcIn),
+                            colorFilter: ColorFilter.mode(
+                                themeChange.getThem()
+                                    ? AppThemeData.greyDark10
+                                    : AppThemeData.grey10,
+                                BlendMode.srcIn),
                           ),
                           title: 'Continue with Apple'.tr,
                           isRight: false,
-                          textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          textColor: themeChange.getThem()
+                              ? AppThemeData.greyDark10
+                              : AppThemeData.grey10,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           onPress: () {
                             controller.loginWithApple();
                           },
@@ -344,11 +438,14 @@ class LoginScreen extends StatelessWidget {
                   Text.rich(
                     textAlign: TextAlign.center,
                     TextSpan(
-                      text: 'dont_have_account'.trParams({'appName': Constant.applicationName}),
+                      text: 'dont_have_account'
+                          .trParams({'appName': Constant.applicationName}),
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: AppThemeData.regularOpenSans,
-                        color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark04
+                            : AppThemeData.grey04,
                       ),
                       children: <TextSpan>[
                         TextSpan(
@@ -358,7 +455,9 @@ class LoginScreen extends StatelessWidget {
                             },
                           text: ' Sign up'.tr,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                            color: themeChange.getThem()
+                                ? AppThemeData.tealDark02
+                                : AppThemeData.teal02,
                             fontSize: 14,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -373,7 +472,8 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget buildButton(String text, bool isSelected, bool isLeft, LoginController controller) {
+  Widget buildButton(
+      String text, bool isSelected, bool isLeft, LoginController controller) {
     return GestureDetector(
       onTap: () {
         controller.isEmailSelected.value = isLeft;
@@ -386,7 +486,10 @@ class LoginScreen extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: TextStyle(color: isSelected ? AppThemeData.grey10 : AppThemeData.grey03, fontSize: 14, fontFamily: AppThemeData.mediumOpenSans),
+          style: TextStyle(
+              color: isSelected ? AppThemeData.grey10 : AppThemeData.grey03,
+              fontSize: 14,
+              fontFamily: AppThemeData.mediumOpenSans),
         ),
       ),
     );

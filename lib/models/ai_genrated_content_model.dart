@@ -1,5 +1,4 @@
-
-import 'package:yelpify/models/category_model.dart';
+import 'package:allubmarket/models/category_model.dart';
 
 class AiGeneratedContentContentModel {
   String? status;
@@ -7,7 +6,8 @@ class AiGeneratedContentContentModel {
   String? message;
   Data? data;
 
-  AiGeneratedContentContentModel({this.status, this.code, this.message, this.data});
+  AiGeneratedContentContentModel(
+      {this.status, this.code, this.message, this.data});
 
   AiGeneratedContentContentModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];

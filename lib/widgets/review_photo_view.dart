@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/app/photo_screen/photo_view_screen.dart';
-import 'package:yelpify/controller/review_user_view_controller.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/app/photo_screen/photo_view_screen.dart';
+import 'package:allubmarket/controller/review_user_view_controller.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class ReviewPhotoView extends StatelessWidget {
   final String reviewId;
-  final ReviewUserViewController userController = Get.put(ReviewUserViewController());
+  final ReviewUserViewController userController =
+      Get.put(ReviewUserViewController());
 
   ReviewPhotoView({super.key, required this.reviewId});
 
@@ -31,7 +32,8 @@ class ReviewPhotoView extends StatelessWidget {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Get.to(PhotoViewScreen(), arguments: {"photoList": photos,"index" :index});
+                Get.to(PhotoViewScreen(),
+                    arguments: {"photoList": photos, "index": index});
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),

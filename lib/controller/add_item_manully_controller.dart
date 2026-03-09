@@ -4,18 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/item_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/item_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 import '../constant/show_toast_dialog.dart';
 
 class AddItemManuallyController extends GetxController {
   RxBool isLoading = true.obs;
-  Rx<TextEditingController> nameTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> descriptionTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> priceTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> nameTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> descriptionTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> priceTextFieldController =
+      TextEditingController().obs;
   RxList images = <dynamic>[].obs;
 
   Rx<BusinessModel> businessModel = BusinessModel().obs;
@@ -35,7 +38,8 @@ class AddItemManuallyController extends GetxController {
       itemModel.value = argumentData['itemModel'];
       if (itemModel.value.id != null) {
         nameTextFieldController.value.text = itemModel.value.name.toString();
-        descriptionTextFieldController.value.text = itemModel.value.description.toString();
+        descriptionTextFieldController.value.text =
+            itemModel.value.description.toString();
         priceTextFieldController.value.text = itemModel.value.price.toString();
         images.value = itemModel.value.images ?? [];
       }
@@ -64,7 +68,9 @@ class AddItemManuallyController extends GetxController {
     itemModel.value.price = priceTextFieldController.value.text;
     itemModel.value.images = images;
 
-    await FireStoreUtils.uploadItem(businessModel.value.id.toString(), itemModel.value).then(
+    await FireStoreUtils.uploadItem(
+            businessModel.value.id.toString(), itemModel.value)
+        .then(
       (value) {
         ShowToastDialog.closeLoader();
         Get.back(result: true);

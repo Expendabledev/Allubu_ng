@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/sponsored_history_controller.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/sponsored_request_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/widgets/business_view.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/sponsored_history_controller.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/sponsored_request_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/widgets/business_view.dart';
 
 class SponsoredHistory extends StatelessWidget {
   const SponsoredHistory({super.key});
@@ -26,7 +26,9 @@ class SponsoredHistory extends StatelessWidget {
             length: 5, // Number of tabs
             child: Scaffold(
               appBar: AppBar(
-                backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                backgroundColor: themeChange.getThem()
+                    ? AppThemeData.greyDark10
+                    : AppThemeData.grey10,
                 centerTitle: true,
                 leadingWidth: 120,
                 leading: Padding(
@@ -40,7 +42,9 @@ class SponsoredHistory extends StatelessWidget {
                         SvgPicture.asset(
                           "assets/icons/icon_close.svg",
                           colorFilter: ColorFilter.mode(
-                            themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark06
+                                : AppThemeData.grey01,
                             BlendMode.srcIn,
                           ),
                           width: 22,
@@ -52,7 +56,9 @@ class SponsoredHistory extends StatelessWidget {
                           "Close".tr,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                            color: themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
                             fontSize: 14,
                             fontFamily: AppThemeData.semiboldOpenSans,
                           ),
@@ -70,40 +76,75 @@ class SponsoredHistory extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: DropdownButtonFormField<BusinessModel>(
                           hint: Text("Select Business"),
-                          initialValue: controller.selectedBusiness.value.id == null ? null : controller.selectedBusiness.value,
+                          initialValue:
+                              controller.selectedBusiness.value.id == null
+                                  ? null
+                                  : controller.selectedBusiness.value,
                           onChanged: (BusinessModel? newValue) {
                             controller.selectedBusiness.value = newValue!;
                             controller.getSponsoredHistory();
                           },
-                          items: controller.businessList.map((BusinessModel reason) {
+                          items: controller.businessList
+                              .map((BusinessModel reason) {
                             return DropdownMenuItem<BusinessModel>(
                               value: reason,
                               child: Text(reason.businessName.toString()),
                             );
                           }).toList(),
-                          style: TextStyle(color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, fontFamily: AppThemeData.medium),
+                          style: TextStyle(
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark01
+                                  : AppThemeData.grey01,
+                              fontFamily: AppThemeData.medium),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                            fillColor: themeChange.getThem()
+                                ? AppThemeData.greyDark10
+                                : AppThemeData.grey10,
                             disabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.redDark02
+                                      : AppThemeData.red02,
+                                  width: 1),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                             errorBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                             border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              borderSide: BorderSide(
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark06
+                                      : AppThemeData.grey06,
+                                  width: 1),
                             ),
                           ),
                         ),
@@ -113,22 +154,33 @@ class SponsoredHistory extends StatelessWidget {
                       ),
                       TabBar(
                         tabAlignment: TabAlignment.start,
-                        labelColor: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
-                        unselectedLabelColor: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                        labelColor: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01,
+                        unselectedLabelColor: themeChange.getThem()
+                            ? AppThemeData.greyDark04
+                            : AppThemeData.grey04,
                         labelStyle: TextStyle(
                           fontSize: 16,
                           fontFamily: AppThemeData.semiboldOpenSans,
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                         ),
                         unselectedLabelStyle: TextStyle(
                           fontSize: 14,
                           fontFamily: AppThemeData.regularOpenSans,
-                          color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark04
+                              : AppThemeData.grey04,
                         ),
                         indicatorSize: TabBarIndicatorSize.tab,
                         // Makes the indicator full width
                         indicator: UnderlineTabIndicator(
-                          borderSide: BorderSide(width: 4, color: AppThemeData.red02), // Full-width red indicator
+                          borderSide: BorderSide(
+                              width: 4,
+                              color: AppThemeData
+                                  .red02), // Full-width red indicator
                         ),
                         isScrollable: true,
                         tabs: [
@@ -146,7 +198,9 @@ class SponsoredHistory extends StatelessWidget {
                   "History".tr,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01,
                     fontSize: 16,
                     fontFamily: AppThemeData.semiboldOpenSans,
                   ),
@@ -156,11 +210,16 @@ class SponsoredHistory extends StatelessWidget {
                   ? Constant.loader()
                   : TabBarView(
                       children: [
-                        showListView(themeChange, controller.runningHistoryList, controller),
-                        showListView(themeChange, controller.acceptedHistoryList, controller),
-                        showListView(themeChange, controller.pendingHistoryList, controller),
-                        showListView(themeChange, controller.expiredHistoryList, controller),
-                        showListView(themeChange, controller.canceledHistoryList, controller),
+                        showListView(themeChange, controller.runningHistoryList,
+                            controller),
+                        showListView(themeChange,
+                            controller.acceptedHistoryList, controller),
+                        showListView(themeChange, controller.pendingHistoryList,
+                            controller),
+                        showListView(themeChange, controller.expiredHistoryList,
+                            controller),
+                        showListView(themeChange,
+                            controller.canceledHistoryList, controller),
                       ],
                     ),
             ),
@@ -168,7 +227,10 @@ class SponsoredHistory extends StatelessWidget {
         });
   }
 
-  Widget showListView(themeChange, List<SponsoredRequestModel> sponsoredHistoryList, SponsoredHistoryController controller) {
+  Widget showListView(
+      themeChange,
+      List<SponsoredRequestModel> sponsoredHistoryList,
+      SponsoredHistoryController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: sponsoredHistoryList.isEmpty
@@ -182,7 +244,9 @@ class SponsoredHistory extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                     ),
                     child: Padding(
@@ -197,7 +261,9 @@ class SponsoredHistory extends StatelessWidget {
                                   "#${model.id!}".tr,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    color: themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03,
+                                    color: themeChange.getThem()
+                                        ? AppThemeData.greyDark03
+                                        : AppThemeData.grey03,
                                     fontSize: 14,
                                     fontFamily: AppThemeData.regularOpenSans,
                                   ),
@@ -205,7 +271,9 @@ class SponsoredHistory extends StatelessWidget {
                               ),
                               InkWell(
                                   onTap: () {
-                                    Clipboard.setData(ClipboardData(text: "${model.id}")).then((_) {
+                                    Clipboard.setData(
+                                            ClipboardData(text: "${model.id}"))
+                                        .then((_) {
                                       ShowToastDialog.showToast("ID Copied");
                                     });
                                   },
@@ -227,16 +295,21 @@ class SponsoredHistory extends StatelessWidget {
                                 "Start Date : ".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.mediumOpenSans,
                                 ),
                               ),
                               Text(
-                                Constant.formatTimestampToDateTime(model.startDate!),
+                                Constant.formatTimestampToDateTime(
+                                    model.startDate!),
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.boldOpenSans,
                                 ),
@@ -252,16 +325,21 @@ class SponsoredHistory extends StatelessWidget {
                                 "End Date : ".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.mediumOpenSans,
                                 ),
                               ),
                               Text(
-                                Constant.formatTimestampToDateTime(model.endDate!),
+                                Constant.formatTimestampToDateTime(
+                                    model.endDate!),
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.boldOpenSans,
                                 ),
@@ -277,16 +355,21 @@ class SponsoredHistory extends StatelessWidget {
                                 "Status : ".tr,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.greyDark02
+                                      : AppThemeData.grey02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.mediumOpenSans,
                                 ),
                               ),
                               Text(
-                                Constant.capitalizeFirst(model.status.toString()),
+                                Constant.capitalizeFirst(
+                                    model.status.toString()),
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.red02
+                                      : AppThemeData.red02,
                                   fontSize: 14,
                                   fontFamily: AppThemeData.boldOpenSans,
                                 ),
@@ -296,12 +379,17 @@ class SponsoredHistory extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          model.status == "pending" || model.status == "accepted"
+                          model.status == "pending" ||
+                                  model.status == "accepted"
                               ? RoundedButtonFill(
                                   title: 'Cansel'.tr,
                                   height: 5,
-                                  textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                  color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                                  textColor: themeChange.getThem()
+                                      ? AppThemeData.greyDark10
+                                      : AppThemeData.grey10,
+                                  color: themeChange.getThem()
+                                      ? AppThemeData.redDark02
+                                      : AppThemeData.red02,
                                   onPress: () {},
                                 )
                               : SizedBox(),

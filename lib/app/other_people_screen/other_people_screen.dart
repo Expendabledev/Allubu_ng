@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/chat_screen/user_chat_screen.dart';
-import 'package:yelpify/app/complain_report_screen/complain_report_screen.dart';
-import 'package:yelpify/app/other_people_screen/compliments_list_screen.dart';
-import 'package:yelpify/app/other_people_screen/followers_list.dart';
-import 'package:yelpify/app/other_people_screen/following_list.dart';
-import 'package:yelpify/app/user_photo_screen/user_photo_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/other_people_controller.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/text_field_widget.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/chat_screen/user_chat_screen.dart';
+import 'package:allubmarket/app/complain_report_screen/complain_report_screen.dart';
+import 'package:allubmarket/app/other_people_screen/compliments_list_screen.dart';
+import 'package:allubmarket/app/other_people_screen/followers_list.dart';
+import 'package:allubmarket/app/other_people_screen/following_list.dart';
+import 'package:allubmarket/app/user_photo_screen/user_photo_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/other_people_controller.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/text_field_widget.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 
 class OtherPeopleScreen extends StatelessWidget {
   const OtherPeopleScreen({super.key});
@@ -34,7 +34,9 @@ class OtherPeopleScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -48,7 +50,11 @@ class OtherPeopleScreen extends StatelessWidget {
                       SvgPicture.asset(
                         "assets/icons/icon_left.svg",
                         width: 22,
-                        colorFilter: ColorFilter.mode(themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(
+                            themeChange.getThem()
+                                ? AppThemeData.greyDark01
+                                : AppThemeData.grey01,
+                            BlendMode.srcIn),
                       ),
                       SizedBox(
                         width: 10,
@@ -57,7 +63,9 @@ class OtherPeopleScreen extends StatelessWidget {
                         "Back".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -74,14 +82,20 @@ class OtherPeopleScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: Responsive.width(100, context),
-                          decoration: BoxDecoration(color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10),
+                          decoration: BoxDecoration(
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
                             child: Column(
                               children: [
                                 ClipOval(
                                   child: NetworkImageWidget(
-                                    imageUrl: controller.userModel.value.profilePic.toString(),
+                                    imageUrl: controller
+                                        .userModel.value.profilePic
+                                        .toString(),
                                     width: 100,
                                     height: 100,
                                   ),
@@ -92,7 +106,9 @@ class OtherPeopleScreen extends StatelessWidget {
                                 Text(
                                   controller.userModel.value.fullName(),
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 20, fontFamily: AppThemeData.boldOpenSans),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: AppThemeData.boldOpenSans),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -103,7 +119,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Constant.svgPictureShow("assets/icons/icon_user-business.svg", themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05, 20, 20),
+                                        Constant.svgPictureShow(
+                                            "assets/icons/icon_user-business.svg",
+                                            themeChange.getThem()
+                                                ? AppThemeData.greyDark05
+                                                : AppThemeData.grey05,
+                                            20,
+                                            20),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -111,9 +133,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                           "${controller.userModel.value.followers!.length}",
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
-                                            color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05,
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.greyDark05
+                                                : AppThemeData.grey05,
                                             fontSize: 14,
-                                            fontFamily: AppThemeData.boldOpenSans,
+                                            fontFamily:
+                                                AppThemeData.boldOpenSans,
                                           ),
                                         ),
                                       ],
@@ -123,7 +148,11 @@ class OtherPeopleScreen extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Constant.svgPictureShow("assets/icons/review_show.svg", null, 20, 20),
+                                        Constant.svgPictureShow(
+                                            "assets/icons/review_show.svg",
+                                            null,
+                                            20,
+                                            20),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -131,9 +160,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                           "${controller.reviewList.length}",
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
-                                            color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05,
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.greyDark05
+                                                : AppThemeData.grey05,
                                             fontSize: 14,
-                                            fontFamily: AppThemeData.boldOpenSans,
+                                            fontFamily:
+                                                AppThemeData.boldOpenSans,
                                           ),
                                         ),
                                       ],
@@ -143,7 +175,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Constant.svgPictureShow("assets/icons/icon_picture.svg", themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05, 20, 20),
+                                        Constant.svgPictureShow(
+                                            "assets/icons/icon_picture.svg",
+                                            themeChange.getThem()
+                                                ? AppThemeData.greyDark05
+                                                : AppThemeData.grey05,
+                                            20,
+                                            20),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -151,9 +189,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                           "${controller.photoList.length}",
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
-                                            color: themeChange.getThem() ? AppThemeData.greyDark05 : AppThemeData.grey05,
+                                            color: themeChange.getThem()
+                                                ? AppThemeData.greyDark05
+                                                : AppThemeData.grey05,
                                             fontSize: 14,
-                                            fontFamily: AppThemeData.boldOpenSans,
+                                            fontFamily:
+                                                AppThemeData.boldOpenSans,
                                           ),
                                         ),
                                       ],
@@ -164,46 +205,85 @@ class OtherPeopleScreen extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       InkWell(
                                           onTap: () {
-                                            complimentBottomSheet(themeChange, controller);
+                                            complimentBottomSheet(
+                                                themeChange, controller);
                                           },
-                                          child: imageWidget(themeChange, "assets/icons/icon_hot-air-balloon.svg", "Compliment")),
+                                          child: imageWidget(
+                                              themeChange,
+                                              "assets/icons/icon_hot-air-balloon.svg",
+                                              "Compliment")),
                                       Obx(
-                                        () => controller.userModel.value.followers!.contains(FireStoreUtils.getCurrentUid())
+                                        () => controller
+                                                .userModel.value.followers!
+                                                .contains(FireStoreUtils
+                                                    .getCurrentUid())
                                             ? InkWell(
                                                 onTap: () {
                                                   controller.unfollow();
                                                 },
-                                                child: imageWidget(themeChange, "assets/icons/icon_add-user.svg", "UnFollow"))
+                                                child: imageWidget(
+                                                    themeChange,
+                                                    "assets/icons/icon_add-user.svg",
+                                                    "UnFollow"))
                                             : InkWell(
                                                 onTap: () {
                                                   controller.followUser();
                                                 },
-                                                child: imageWidget(themeChange, "assets/icons/icon_add-user.svg", "Follow")),
+                                                child: imageWidget(
+                                                    themeChange,
+                                                    "assets/icons/icon_add-user.svg",
+                                                    "Follow")),
                                       ),
                                       InkWell(
                                           onTap: () async {
-                                            await FireStoreUtils.getUserProfile(controller.userModel.value.id.toString()).then((value) {
+                                            await FireStoreUtils.getUserProfile(
+                                                    controller
+                                                        .userModel.value.id
+                                                        .toString())
+                                                .then((value) {
                                               UserModel userModel = value!;
-                                              Get.to(const UserChatScreen(), arguments: {"receiverModel": userModel});
+                                              Get.to(const UserChatScreen(),
+                                                  arguments: {
+                                                    "receiverModel": userModel
+                                                  });
                                             });
                                           },
-                                          child: imageWidget(themeChange, "assets/icons/icon_wechat.svg", "Message")),
+                                          child: imageWidget(
+                                              themeChange,
+                                              "assets/icons/icon_wechat.svg",
+                                              "Message")),
                                       InkWell(
                                           onTap: () async {
-                                            if (FireStoreUtils.getCurrentUid() == '' || FireStoreUtils.getCurrentUid().isEmpty) {
+                                            if (FireStoreUtils
+                                                        .getCurrentUid() ==
+                                                    '' ||
+                                                FireStoreUtils.getCurrentUid()
+                                                    .isEmpty) {
                                               Get.offAll(WelcomeScreen());
                                             } else {
                                               Get.to(ComplainReportScreen(),
-                                                  arguments: {"type": Constant.appUserIssues, "givenBy": controller.userModel.value.id, "postId": controller.userModel.value.id});
+                                                  arguments: {
+                                                    "type":
+                                                        Constant.appUserIssues,
+                                                    "givenBy": controller
+                                                        .userModel.value.id,
+                                                    "postId": controller
+                                                        .userModel.value.id
+                                                  });
                                             }
                                           },
-                                          child: imageWidget(themeChange, "assets/icons/ic_warning.svg", "Report")),
+                                          child: imageWidget(
+                                              themeChange,
+                                              "assets/icons/ic_warning.svg",
+                                              "Report")),
                                     ],
                                   ),
                                 ),
@@ -218,10 +298,15 @@ class OtherPeopleScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark07
+                                    : AppThemeData.grey07,
                               ),
                             ),
                             child: Padding(
@@ -230,28 +315,39 @@ class OtherPeopleScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Text(
                                       "Contributions".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 20,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
                                     child: Divider(),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
                                     child: Column(
                                       children: [
                                         Row(
                                           children: [
-                                            Constant.svgPictureShow("assets/icons/star.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 24, 24),
+                                            Constant.svgPictureShow(
+                                                "assets/icons/star.svg",
+                                                themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
+                                                24,
+                                                24),
                                             SizedBox(
                                               width: 10,
                                             ),
@@ -260,9 +356,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                                 "Review".tr,
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
                                                   fontSize: 16,
-                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .semiboldOpenSans,
                                                 ),
                                               ),
                                             ),
@@ -270,9 +369,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                               "${controller.reviewList.length}",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.greyDark01
+                                                    : AppThemeData.grey01,
                                                 fontSize: 16,
-                                                fontFamily: AppThemeData.semiboldOpenSans,
+                                                fontFamily: AppThemeData
+                                                    .semiboldOpenSans,
                                               ),
                                             )
                                           ],
@@ -282,11 +384,21 @@ class OtherPeopleScreen extends StatelessWidget {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(UserPhotoScreen(), arguments: {"userModel": controller.userModel.value});
+                                            Get.to(UserPhotoScreen(),
+                                                arguments: {
+                                                  "userModel":
+                                                      controller.userModel.value
+                                                });
                                           },
                                           child: Row(
                                             children: [
-                                              Constant.svgPictureShow("assets/icons/picture.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 24, 24),
+                                              Constant.svgPictureShow(
+                                                  "assets/icons/picture.svg",
+                                                  themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
+                                                  24,
+                                                  24),
                                               SizedBox(
                                                 width: 10,
                                               ),
@@ -295,9 +407,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                                   "Photos".tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
                                                     fontSize: 16,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                               ),
@@ -305,9 +421,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                                 "${controller.photoList.length}",
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
                                                   fontSize: 16,
-                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .semiboldOpenSans,
                                                 ),
                                               )
                                             ],
@@ -331,10 +450,15 @@ class OtherPeopleScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark10
+                                  : AppThemeData.grey10,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark07
+                                    : AppThemeData.grey07,
                               ),
                             ),
                             child: Padding(
@@ -343,28 +467,37 @@ class OtherPeopleScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Text(
                                       "Community".tr,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
-                                        color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                        color: themeChange.getThem()
+                                            ? AppThemeData.greyDark01
+                                            : AppThemeData.grey01,
                                         fontSize: 20,
                                         fontFamily: AppThemeData.boldOpenSans,
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
                                     child: Divider(),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
                                     child: Column(
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            Get.to(FollowersList(), arguments: {"userModel": controller.userModel.value.id})!.then(
+                                            Get.to(FollowersList(), arguments: {
+                                              "userModel":
+                                                  controller.userModel.value.id
+                                            })!
+                                                .then(
                                               (value) {
                                                 controller.getUser();
                                               },
@@ -372,7 +505,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                           },
                                           child: Row(
                                             children: [
-                                              Constant.svgPictureShow("assets/icons/peoples-two.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 24, 24),
+                                              Constant.svgPictureShow(
+                                                  "assets/icons/peoples-two.svg",
+                                                  themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
+                                                  24,
+                                                  24),
                                               SizedBox(
                                                 width: 10,
                                               ),
@@ -381,9 +520,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                                   "Followers".tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
                                                     fontSize: 16,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                               ),
@@ -391,9 +534,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                                 "${controller.userModel.value.followers!.length}",
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
                                                   fontSize: 16,
-                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .semiboldOpenSans,
                                                 ),
                                               )
                                             ],
@@ -404,7 +550,11 @@ class OtherPeopleScreen extends StatelessWidget {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(FollowingList(), arguments: {"userModel": controller.userModel.value})!.then(
+                                            Get.to(FollowingList(), arguments: {
+                                              "userModel":
+                                                  controller.userModel.value
+                                            })!
+                                                .then(
                                               (value) {
                                                 controller.getUser();
                                               },
@@ -412,7 +562,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                           },
                                           child: Row(
                                             children: [
-                                              Constant.svgPictureShow("assets/icons/peoples-two.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 24, 24),
+                                              Constant.svgPictureShow(
+                                                  "assets/icons/peoples-two.svg",
+                                                  themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
+                                                  24,
+                                                  24),
                                               SizedBox(
                                                 width: 10,
                                               ),
@@ -421,9 +577,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                                   "Following".tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
                                                     fontSize: 16,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                               ),
@@ -431,9 +591,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                                 "${controller.followingList.length}",
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
                                                   fontSize: 16,
-                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .semiboldOpenSans,
                                                 ),
                                               )
                                             ],
@@ -444,7 +607,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            Get.to(ComplimentsListScreen(), arguments: {"userModel": controller.userModel.value})!.then(
+                                            Get.to(ComplimentsListScreen(),
+                                                    arguments: {
+                                                  "userModel":
+                                                      controller.userModel.value
+                                                })!
+                                                .then(
                                               (value) {
                                                 controller.getComplimentList();
                                               },
@@ -452,7 +620,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                           },
                                           child: Row(
                                             children: [
-                                              Constant.svgPictureShow("assets/icons/icon_hot-air-balloon.svg", themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01, 24, 24),
+                                              Constant.svgPictureShow(
+                                                  "assets/icons/icon_hot-air-balloon.svg",
+                                                  themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
+                                                  24,
+                                                  24),
                                               SizedBox(
                                                 width: 10,
                                               ),
@@ -461,9 +635,13 @@ class OtherPeopleScreen extends StatelessWidget {
                                                   "Compliments".tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
-                                                    color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                    color: themeChange.getThem()
+                                                        ? AppThemeData
+                                                            .greyDark01
+                                                        : AppThemeData.grey01,
                                                     fontSize: 16,
-                                                    fontFamily: AppThemeData.semiboldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .semiboldOpenSans,
                                                   ),
                                                 ),
                                               ),
@@ -471,9 +649,12 @@ class OtherPeopleScreen extends StatelessWidget {
                                                 "${controller.complimentsList.length}",
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
-                                                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                                  color: themeChange.getThem()
+                                                      ? AppThemeData.greyDark01
+                                                      : AppThemeData.grey01,
                                                   fontSize: 16,
-                                                  fontFamily: AppThemeData.semiboldOpenSans,
+                                                  fontFamily: AppThemeData
+                                                      .semiboldOpenSans,
                                                 ),
                                               )
                                             ],
@@ -500,11 +681,19 @@ class OtherPeopleScreen extends StatelessWidget {
         ClipOval(
             child: Container(
           decoration: BoxDecoration(
-            color: themeChange.getThem() ? AppThemeData.greyDark07 : AppThemeData.grey07,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark07
+                : AppThemeData.grey07,
           ),
           child: Padding(
             padding: const EdgeInsets.all(14),
-            child: Constant.svgPictureShow(imagePath, themeChange.getThem() ? AppThemeData.greyDark03 : AppThemeData.grey03, 28, 28),
+            child: Constant.svgPictureShow(
+                imagePath,
+                themeChange.getThem()
+                    ? AppThemeData.greyDark03
+                    : AppThemeData.grey03,
+                28,
+                28),
           ),
         )),
         SizedBox(
@@ -514,7 +703,9 @@ class OtherPeopleScreen extends StatelessWidget {
           title.tr,
           textAlign: TextAlign.start,
           style: TextStyle(
-            color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+            color: themeChange.getThem()
+                ? AppThemeData.greyDark02
+                : AppThemeData.grey02,
             fontSize: 12,
             fontFamily: AppThemeData.mediumOpenSans,
           ),
@@ -538,7 +729,9 @@ class OtherPeopleScreen extends StatelessWidget {
               height: Responsive.height(32, Get.context!),
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: themeChange.getThem() ? AppThemeData.surfaceDark50 : AppThemeData.surface50,
+                color: themeChange.getThem()
+                    ? AppThemeData.surfaceDark50
+                    : AppThemeData.surface50,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: SingleChildScrollView(
@@ -557,7 +750,9 @@ class OtherPeopleScreen extends StatelessWidget {
                             child: SvgPicture.asset(
                               "assets/icons/icon_close.svg",
                               colorFilter: ColorFilter.mode(
-                                themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                                themeChange.getThem()
+                                    ? AppThemeData.greyDark06
+                                    : AppThemeData.grey01,
                                 BlendMode.srcIn,
                               ),
                               width: 22,
@@ -569,7 +764,9 @@ class OtherPeopleScreen extends StatelessWidget {
                             "Compliment".tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.greyDark01
+                                  : AppThemeData.grey01,
                               fontSize: 18,
                               fontFamily: AppThemeData.boldOpenSans,
                             ),
@@ -582,7 +779,9 @@ class OtherPeopleScreen extends StatelessWidget {
                           child: Text(
                             "Send".tr,
                             style: TextStyle(
-                              color: themeChange.getThem() ? AppThemeData.teal02 : AppThemeData.teal02,
+                              color: themeChange.getThem()
+                                  ? AppThemeData.teal02
+                                  : AppThemeData.teal02,
                               fontSize: 16,
                               fontFamily: AppThemeData.boldOpenSans,
                             ),
@@ -598,19 +797,25 @@ class OtherPeopleScreen extends StatelessWidget {
                       height: 150,
                       child: CupertinoPicker(
                         itemExtent: 40,
-                        scrollController: FixedExtentScrollController(initialItem: controller.selectedIndex.value),
+                        scrollController: FixedExtentScrollController(
+                            initialItem: controller.selectedIndex.value),
                         onSelectedItemChanged: (index) {
                           controller.selectedIndex.value = index;
                         },
-                        children: controller.items.map((item) => Center(child: Text(item.tr))).toList(),
+                        children: controller.items
+                            .map((item) => Center(child: Text(item.tr)))
+                            .toList(),
                       ),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     TextFieldWidget(
-                      controller: controller.complimentTextFieldController.value,
-                      hintText: 'Like  : You’re like wasabi — bold, unforgettable, and a little dangerous.'.tr,
+                      controller:
+                          controller.complimentTextFieldController.value,
+                      hintText:
+                          'Like  : You’re like wasabi — bold, unforgettable, and a little dangerous.'
+                              .tr,
                       maxLine: 5,
                     ),
                   ],

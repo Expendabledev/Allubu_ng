@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String? title;
@@ -56,7 +56,12 @@ class TextFieldWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title == null ? '' : title!.tr,
-                    style: TextStyle(fontFamily: AppThemeData.boldOpenSans, fontSize: 14, color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01)),
+                    style: TextStyle(
+                        fontFamily: AppThemeData.boldOpenSans,
+                        fontSize: 14,
+                        color: themeChange.getThem()
+                            ? AppThemeData.greyDark01
+                            : AppThemeData.grey01)),
                 const SizedBox(
                   height: 5,
                 ),
@@ -76,7 +81,12 @@ class TextFieldWidget extends StatelessWidget {
             onChanged: onchange,
             readOnly: readOnly ?? false,
             onFieldSubmitted: onFieldSubmitted,
-            style: TextStyle(color: textColor ?? (themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01), fontFamily: AppThemeData.medium),
+            style: TextStyle(
+                color: textColor ??
+                    (themeChange.getThem()
+                        ? AppThemeData.greyDark01
+                        : AppThemeData.grey01),
+                fontFamily: AppThemeData.medium),
             decoration: InputDecoration(
               errorStyle: const TextStyle(color: Colors.red),
               filled: true,
@@ -88,35 +98,61 @@ class TextFieldWidget extends StatelessWidget {
                           ? 13
                           : 8,
                   horizontal: 10),
-              fillColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              fillColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               prefixIcon: prefix,
               suffixIcon: suffix,
-              suffixIconConstraints: BoxConstraints(minHeight: 20, minWidth: 20),
-              prefixIconConstraints: BoxConstraints(minHeight: 20, minWidth: 20),
+              suffixIconConstraints:
+                  BoxConstraints(minHeight: 20, minWidth: 20),
+              prefixIconConstraints:
+                  BoxConstraints(minHeight: 20, minWidth: 20),
               disabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                borderSide: BorderSide(
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark06
+                        : AppThemeData.grey06,
+                    width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02, width: 1),
+                borderSide: BorderSide(
+                    color: themeChange.getThem()
+                        ? AppThemeData.redDark02
+                        : AppThemeData.red02,
+                    width: 1),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                borderSide: BorderSide(
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark06
+                        : AppThemeData.grey06,
+                    width: 1),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                borderSide: BorderSide(
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark06
+                        : AppThemeData.grey06,
+                    width: 1),
               ),
               border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
-                borderSide: BorderSide(color: themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey06, width: 1),
+                borderSide: BorderSide(
+                    color: themeChange.getThem()
+                        ? AppThemeData.greyDark06
+                        : AppThemeData.grey06,
+                    width: 1),
               ),
               hintText: hintText.tr,
               hintStyle: TextStyle(
                 fontSize: 14,
-                color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                color: themeChange.getThem()
+                    ? AppThemeData.greyDark04
+                    : AppThemeData.grey04,
                 fontFamily: AppThemeData.regularOpenSans,
               ),
             ),

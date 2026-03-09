@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/controller/splash_controller.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/controller/splash_controller.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
 import '../themes/responsive.dart';
 
 class SplashScreen extends StatelessWidget {

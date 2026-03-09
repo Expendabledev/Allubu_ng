@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/auth_screen/welcome_screen.dart';
-import 'package:yelpify/app/business_details_screen/business_details_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/collection_details_controller.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/service/ad_manager.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/themes/round_button_fill.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/custom_star_rating/custom_star_rating_screen.dart';
-import 'package:yelpify/widgets/readmore.dart';
+import 'package:allubmarket/app/auth_screen/welcome_screen.dart';
+import 'package:allubmarket/app/business_details_screen/business_details_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/collection_details_controller.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/service/ad_manager.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/themes/round_button_fill.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/custom_star_rating/custom_star_rating_screen.dart';
+import 'package:allubmarket/widgets/readmore.dart';
 
 import '../../utils/fire_store_utils.dart' show FireStoreUtils;
 
@@ -32,7 +32,8 @@ class CollectionDetailsScreen extends StatelessWidget {
                 ? Constant.loader()
                 : NestedScrollView(
                     controller: controller.scrollController,
-                    headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
                       return <Widget>[
                         SliverAppBar(
                           expandedHeight: Responsive.height(42, context),
@@ -73,7 +74,9 @@ class CollectionDetailsScreen extends StatelessWidget {
                             ),
                           ),
                           actions: [],
-                          backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                          backgroundColor: themeChange.getThem()
+                              ? AppThemeData.greyDark10
+                              : AppThemeData.grey10,
                           flexibleSpace: FlexibleSpaceBar(
                             background: Stack(
                               children: [
@@ -81,15 +84,22 @@ class CollectionDetailsScreen extends StatelessWidget {
                                     ? Stack(
                                         children: [
                                           NetworkImageWidget(
-                                            height: Responsive.height(100, context),
-                                            width: Responsive.width(100, context),
-                                            imageUrl: controller.businessList.first.coverPhoto.toString(),
+                                            height:
+                                                Responsive.height(100, context),
+                                            width:
+                                                Responsive.width(100, context),
+                                            imageUrl: controller
+                                                .businessList.first.coverPhoto
+                                                .toString(),
                                             fit: BoxFit.cover,
                                           ),
                                           Container(
-                                            height: Responsive.height(100, context),
-                                            width: Responsive.width(100, context),
-                                            color: Colors.black.withOpacity(0.40),
+                                            height:
+                                                Responsive.height(100, context),
+                                            width:
+                                                Responsive.width(100, context),
+                                            color:
+                                                Colors.black.withOpacity(0.40),
                                           ),
                                         ],
                                       )
@@ -98,7 +108,9 @@ class CollectionDetailsScreen extends StatelessWidget {
                                         width: Responsive.width(100, context),
                                         padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey03,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark08
+                                              : AppThemeData.grey03,
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(10),
                                           ),
@@ -107,7 +119,9 @@ class CollectionDetailsScreen extends StatelessWidget {
                                           padding: const EdgeInsets.all(20),
                                           child: Constant.svgPictureShow(
                                             "assets/icons/noun-map-markers.svg",
-                                            themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                            themeChange.getThem()
+                                                ? AppThemeData.greyDark04
+                                                : AppThemeData.grey04,
                                             null,
                                             null,
                                           ),
@@ -118,62 +132,88 @@ class CollectionDetailsScreen extends StatelessWidget {
                                   left: 16,
                                   right: 16,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "${controller.bookmarkModel.value.followers!.length} Followers".tr,
+                                        "${controller.bookmarkModel.value.followers!.length} Followers"
+                                            .tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey05 : AppThemeData.grey05,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey05
+                                              : AppThemeData.grey05,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.regularOpenSans,
+                                          fontFamily:
+                                              AppThemeData.regularOpenSans,
                                         ),
                                       ),
                                       Text(
                                         controller.bookmarkModel.value.name!.tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey10
+                                              : AppThemeData.grey10,
                                           fontSize: 24,
                                           fontFamily: AppThemeData.bold,
                                         ),
                                       ),
                                       ReadMoreText(
-                                        controller.bookmarkModel.value.description ?? '',
+                                        controller.bookmarkModel.value
+                                                .description ??
+                                            '',
                                         trimLines: 2,
                                         colorClickableText: Colors.pink,
                                         trimMode: TrimMode.Line,
                                         trimCollapsedText: 'Show more'.tr,
                                         trimExpandedText: 'Show less'.tr,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey05 : AppThemeData.grey05,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey05
+                                              : AppThemeData.grey05,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.regularOpenSans,
+                                          fontFamily:
+                                              AppThemeData.regularOpenSans,
                                         ),
                                         moreStyle: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey10
+                                              : AppThemeData.grey10,
                                           fontSize: 14,
                                           fontFamily: AppThemeData.boldOpenSans,
                                         ),
                                       ),
                                       Divider(),
                                       Text(
-                                        (controller.bookmarkModel.value.byAdmin == true ? "By ${Constant.applicationName}" : "").tr,
+                                        (controller.bookmarkModel.value
+                                                        .byAdmin ==
+                                                    true
+                                                ? "By ${Constant.applicationName}"
+                                                : "")
+                                            .tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey05 : AppThemeData.grey05,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey05
+                                              : AppThemeData.grey05,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.regularOpenSans,
+                                          fontFamily:
+                                              AppThemeData.regularOpenSans,
                                         ),
                                       ),
                                       SizedBox(
                                         height: 2,
                                       ),
                                       Text(
-                                        Constant.timeAgo(controller.bookmarkModel.value.updatedAt!).tr,
+                                        Constant.timeAgo(controller
+                                                .bookmarkModel.value.updatedAt!)
+                                            .tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey10 : AppThemeData.grey10,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey10
+                                              : AppThemeData.grey10,
                                           fontSize: 14,
                                           fontFamily: AppThemeData.boldOpenSans,
                                         ),
@@ -181,20 +221,34 @@ class CollectionDetailsScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      controller.bookmarkModel.value.ownerId == FireStoreUtils.getCurrentUid()
+                                      controller.bookmarkModel.value.ownerId ==
+                                              FireStoreUtils.getCurrentUid()
                                           ? SizedBox()
                                           : Obx(
                                               () => RoundedButtonFill(
-                                                title: controller.bookmarkModel.value.followers!.contains(FireStoreUtils.getCurrentUid()) ? 'Unfollow collection'.tr : 'Follow Collections'.tr,
+                                                title: controller.bookmarkModel
+                                                        .value.followers!
+                                                        .contains(FireStoreUtils
+                                                            .getCurrentUid())
+                                                    ? 'Unfollow collection'.tr
+                                                    : 'Follow Collections'.tr,
                                                 height: 4.5,
-                                                textColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
-                                                color: themeChange.getThem() ? AppThemeData.redDark02 : AppThemeData.red02,
+                                                textColor: themeChange.getThem()
+                                                    ? AppThemeData.greyDark10
+                                                    : AppThemeData.grey10,
+                                                color: themeChange.getThem()
+                                                    ? AppThemeData.redDark02
+                                                    : AppThemeData.red02,
                                                 onPress: () {
-                                                  if (FireStoreUtils.getCurrentUid() == '') {
-                                                    ShowToastDialog.showToast('Please create your account first before follow collections.');
+                                                  if (FireStoreUtils
+                                                          .getCurrentUid() ==
+                                                      '') {
+                                                    ShowToastDialog.showToast(
+                                                        'Please create your account first before follow collections.');
                                                     Get.offAll(WelcomeScreen());
                                                   } else {
-                                                    controller.collectionUpdate();
+                                                    controller
+                                                        .collectionUpdate();
                                                   }
                                                 },
                                               ),
@@ -209,7 +263,9 @@ class CollectionDetailsScreen extends StatelessWidget {
                       ];
                     },
                     body: Container(
-                      color: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+                      color: themeChange.getThem()
+                          ? AppThemeData.greyDark10
+                          : AppThemeData.grey10,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
@@ -220,10 +276,15 @@ class CollectionDetailsScreen extends StatelessWidget {
                               child: AdManager.bannerAdWidget(),
                             ),
                             Text(
-                              'places_sorted'.trParams({'count': controller.businessList.length.toString()}).tr,
+                              'places_sorted'.trParams({
+                                'count':
+                                    controller.businessList.length.toString()
+                              }).tr,
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                color: themeChange.getThem() ? AppThemeData.greyDark04 : AppThemeData.grey04,
+                                color: themeChange.getThem()
+                                    ? AppThemeData.greyDark04
+                                    : AppThemeData.grey04,
                                 fontSize: 14,
                                 fontFamily: AppThemeData.boldOpenSans,
                               ),
@@ -238,30 +299,44 @@ class CollectionDetailsScreen extends StatelessWidget {
                                 physics: NeverScrollableScrollPhysics(),
                                 itemCount: controller.businessList.length,
                                 itemBuilder: (context, index) {
-                                  BusinessModel businessModel = controller.businessList[index];
+                                  BusinessModel businessModel =
+                                      controller.businessList[index];
                                   return Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 5),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
                                     child: InkWell(
                                       onTap: () {
-                                        Constant.setRecentBusiness(businessModel);
-                                        Get.to(BusinessDetailsScreen(), arguments: {"businessModel": businessModel});
+                                        Constant.setRecentBusiness(
+                                            businessModel);
+                                        Get.to(BusinessDetailsScreen(),
+                                            arguments: {
+                                              "businessModel": businessModel
+                                            });
                                       },
                                       child: Stack(
                                         children: [
                                           ClipRRect(
-                                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
                                             child: Stack(
                                               children: [
                                                 NetworkImageWidget(
-                                                  height: Responsive.height(22, context),
-                                                  width: Responsive.width(100, context),
-                                                  imageUrl: businessModel.coverPhoto.toString(),
+                                                  height: Responsive.height(
+                                                      22, context),
+                                                  width: Responsive.width(
+                                                      100, context),
+                                                  imageUrl: businessModel
+                                                      .coverPhoto
+                                                      .toString(),
                                                   fit: BoxFit.cover,
                                                 ),
                                                 Container(
-                                                  height: Responsive.height(22, context),
-                                                  width: Responsive.width(100, context),
-                                                  color: Colors.black.withOpacity(0.40),
+                                                  height: Responsive.height(
+                                                      22, context),
+                                                  width: Responsive.width(
+                                                      100, context),
+                                                  color: Colors.black
+                                                      .withOpacity(0.40),
                                                 ),
                                               ],
                                             ),
@@ -271,15 +346,18 @@ class CollectionDetailsScreen extends StatelessWidget {
                                             left: 16,
                                             right: 16,
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "${businessModel.businessName}".tr,
+                                                  "${businessModel.businessName}"
+                                                      .tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                     color: AppThemeData.grey10,
                                                     fontSize: 18,
-                                                    fontFamily: AppThemeData.boldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .boldOpenSans,
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -290,18 +368,35 @@ class CollectionDetailsScreen extends StatelessWidget {
                                                     CustomStarRating(
                                                       size: 16,
                                                       enable: false,
-                                                      initialRating: Constant.calculateReview(reviewCount: businessModel.reviewCount!, reviewSum: businessModel.reviewSum!),
+                                                      initialRating: Constant
+                                                          .calculateReview(
+                                                              reviewCount:
+                                                                  businessModel
+                                                                      .reviewCount!,
+                                                              reviewSum:
+                                                                  businessModel
+                                                                      .reviewSum!),
                                                     ),
                                                     SizedBox(
                                                       width: 10,
                                                     ),
                                                     Text(
-                                                      Constant.calculateReview(reviewCount: businessModel.reviewCount, reviewSum: businessModel.reviewSum).tr,
-                                                      textAlign: TextAlign.start,
+                                                      Constant.calculateReview(
+                                                              reviewCount:
+                                                                  businessModel
+                                                                      .reviewCount,
+                                                              reviewSum:
+                                                                  businessModel
+                                                                      .reviewSum)
+                                                          .tr,
+                                                      textAlign:
+                                                          TextAlign.start,
                                                       style: TextStyle(
-                                                        color: AppThemeData.grey10,
+                                                        color:
+                                                            AppThemeData.grey10,
                                                         fontSize: 14,
-                                                        fontFamily: AppThemeData.semiboldOpenSans,
+                                                        fontFamily: AppThemeData
+                                                            .semiboldOpenSans,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -309,11 +404,14 @@ class CollectionDetailsScreen extends StatelessWidget {
                                                     ),
                                                     Text(
                                                       "(${double.parse(businessModel.reviewCount.toString()).toStringAsFixed(0)} reviews)",
-                                                      textAlign: TextAlign.start,
+                                                      textAlign:
+                                                          TextAlign.start,
                                                       style: TextStyle(
-                                                        color: AppThemeData.grey10,
+                                                        color:
+                                                            AppThemeData.grey10,
                                                         fontSize: 14,
-                                                        fontFamily: AppThemeData.semiboldOpenSans,
+                                                        fontFamily: AppThemeData
+                                                            .semiboldOpenSans,
                                                       ),
                                                     ),
                                                   ],
@@ -322,12 +420,14 @@ class CollectionDetailsScreen extends StatelessWidget {
                                                   height: 5,
                                                 ),
                                                 Text(
-                                                  "${businessModel.address!.formattedAddress}".tr,
+                                                  "${businessModel.address!.formattedAddress}"
+                                                      .tr,
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                     color: AppThemeData.grey10,
                                                     fontSize: 12,
-                                                    fontFamily: AppThemeData.mediumOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .mediumOpenSans,
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -339,7 +439,8 @@ class CollectionDetailsScreen extends StatelessWidget {
                                                   style: TextStyle(
                                                     color: AppThemeData.grey10,
                                                     fontSize: 14,
-                                                    fontFamily: AppThemeData.boldOpenSans,
+                                                    fontFamily: AppThemeData
+                                                        .boldOpenSans,
                                                   ),
                                                 ),
                                               ],

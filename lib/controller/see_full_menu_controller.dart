@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/country_model.dart';
-import 'package:yelpify/models/item_model.dart';
-import 'package:yelpify/models/photo_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/country_model.dart';
+import 'package:allubmarket/models/item_model.dart';
+import 'package:allubmarket/models/photo_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class SeeFullMenuController extends GetxController {
   RxBool isLoading = true.obs;
@@ -17,7 +17,15 @@ class SeeFullMenuController extends GetxController {
     super.onInit();
   }
 
-  final days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  final days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
 
   Rx<BusinessModel> businessModel = BusinessModel().obs;
   RxList<ItemModel> itemList = <ItemModel>[].obs;
@@ -31,12 +39,13 @@ class SeeFullMenuController extends GetxController {
     dynamic argumentData = Get.arguments;
     if (argumentData != null) {
       businessModel.value = argumentData['businessModel'];
-      currency.value = Constant.countryModel!.countries!.firstWhere((element) => element.dialCode == businessModel.value.countryCode);
+      currency.value = Constant.countryModel!.countries!.firstWhere(
+          (element) => element.dialCode == businessModel.value.countryCode);
       await getMenu();
       await getMenuImage();
     }
 
-    if(businessModel.value.website!.isNotEmpty){
+    if (businessModel.value.website!.isNotEmpty) {
       controller.value = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..setNavigationDelegate(
@@ -72,7 +81,9 @@ class SeeFullMenuController extends GetxController {
   }
 
   Future<void> getMenuImage() async {
-    await FireStoreUtils.getAllPhotosByType(businessModel.value.id.toString(), "menuPhoto").then(
+    await FireStoreUtils.getAllPhotosByType(
+            businessModel.value.id.toString(), "menuPhoto")
+        .then(
       (value) {
         menuPhotosList.value = value;
       },
@@ -85,10 +96,12 @@ class SeeFullMenuController extends GetxController {
   }
 
   bool hasMenuItem() {
-    if (businessModel.value.category == null || businessModel.value.category!.isEmpty) {
+    if (businessModel.value.category == null ||
+        businessModel.value.category!.isEmpty) {
       return false;
     }
 
-    return businessModel.value.category!.any((category) => category.uploadItems == true);
+    return businessModel.value.category!
+        .any((category) => category.uploadItems == true);
   }
 }

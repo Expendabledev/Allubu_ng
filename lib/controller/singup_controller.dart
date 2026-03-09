@@ -8,25 +8,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:yelpify/app/create_bussiness_screen/create_business_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/bookmarks_model.dart';
-import 'package:yelpify/models/business_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/notification_service.dart';
+import 'package:allubmarket/app/create_bussiness_screen/create_business_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/bookmarks_model.dart';
+import 'package:allubmarket/models/business_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/notification_service.dart';
 
 import '../app/dashboard_screen/dashboard_screen.dart';
 
 class SignupController extends GetxController {
-  Rx<TextEditingController> firstNameTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> lastNameTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> phoneNumberTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> countryCodeController = TextEditingController(text: Constant.defaultCountryCode).obs;
-  Rx<TextEditingController> countryISOCodeController = TextEditingController(text: Constant.defaultCountryCode).obs;
-  Rx<TextEditingController> emailTextFieldController = TextEditingController().obs;
-  Rx<TextEditingController> passwordTextFieldController = TextEditingController().obs;
+  Rx<TextEditingController> firstNameTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> lastNameTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> phoneNumberTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> countryCodeController =
+      TextEditingController(text: Constant.defaultCountryCode).obs;
+  Rx<TextEditingController> countryISOCodeController =
+      TextEditingController(text: Constant.defaultCountryCode).obs;
+  Rx<TextEditingController> emailTextFieldController =
+      TextEditingController().obs;
+  Rx<TextEditingController> passwordTextFieldController =
+      TextEditingController().obs;
 
   RxString profileImage = "".obs;
   RxBool passwordVisible = true.obs;
@@ -49,12 +56,17 @@ class SignupController extends GetxController {
         userModel.value = argumentData['userModel'];
         loginType.value = userModel.value.loginType.toString();
         if (loginType.value == Constant.phoneLoginType) {
-          phoneNumberTextFieldController.value.text = userModel.value.phoneNumber.toString();
-          countryCodeController.value.text = userModel.value.countryCode.toString();
-          countryISOCodeController.value.text = userModel.value.countryISOCode.toString();
+          phoneNumberTextFieldController.value.text =
+              userModel.value.phoneNumber.toString();
+          countryCodeController.value.text =
+              userModel.value.countryCode.toString();
+          countryISOCodeController.value.text =
+              userModel.value.countryISOCode.toString();
         } else {
-          emailTextFieldController.value.text = userModel.value.email.toString();
-          firstNameTextFieldController.value.text = userModel.value.firstName ?? '';
+          emailTextFieldController.value.text =
+              userModel.value.email.toString();
+          firstNameTextFieldController.value.text =
+              userModel.value.firstName ?? '';
         }
       } else if (argumentData['type'] == 'Add a business') {
         isAddAbusinessBtn.value = true;
@@ -66,7 +78,8 @@ class SignupController extends GetxController {
   Future<void> signUpWithEmailPassword() async {
     try {
       ShowToastDialog.showLoader("Please wait".tr);
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailTextFieldController.value.text.trim(),
         password: passwordTextFieldController.value.text.trim(),
       );
@@ -79,7 +92,8 @@ class SignupController extends GetxController {
       if (e.code == 'weak-password') {
         ShowToastDialog.showToast("The password provided is too weak.".tr);
       } else if (e.code == 'email-already-in-use') {
-        ShowToastDialog.showToast("The account already exists for that email.".tr);
+        ShowToastDialog.showToast(
+            "The account already exists for that email.".tr);
       } else if (e.code == 'invalid-email') {
         ShowToastDialog.showToast("Enter email is Invalid".tr);
       }
@@ -99,7 +113,8 @@ class SignupController extends GetxController {
       userModelData.countryCode = countryCodeController.value.text;
       userModelData.countryISOCode = countryISOCodeController.value.text;
       userModelData.phoneNumber = phoneNumberTextFieldController.value.text;
-      userModelData.loginType = userModel.value.loginType ?? Constant.emailLoginType;
+      userModelData.loginType =
+          userModel.value.loginType ?? Constant.emailLoginType;
       userModelData.profilePic = profileImage.value;
       userModelData.fcmToken = fcmToken;
       userModelData.createdAt = Timestamp.now();
@@ -110,7 +125,9 @@ class SignupController extends GetxController {
         if (value == true) {
           if (isAddAbusinessBtn.value == true) {
             ShowToastDialog.showToast("Account is created");
-            Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+            Get.to(CreateBusinessScreen(),
+                    arguments: {"asCustomerOrWorkAtBusiness": false})
+                ?.then((value) {
               Get.offAll(const DashBoardScreen());
             });
           } else {
@@ -145,7 +162,9 @@ class SignupController extends GetxController {
             if (value == true) {
               ShowToastDialog.showToast("Account is created");
               if (isAddAbusinessBtn.value == true) {
-                Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+                Get.to(CreateBusinessScreen(),
+                        arguments: {"asCustomerOrWorkAtBusiness": false})
+                    ?.then((value) {
                   Get.offAll(const DashBoardScreen());
                 });
               } else {
@@ -155,14 +174,18 @@ class SignupController extends GetxController {
           });
           ShowToastDialog.closeLoader();
         } else {
-          await FireStoreUtils.userExistOrNot(value.user!.uid).then((userExit) async {
+          await FireStoreUtils.userExistOrNot(value.user!.uid)
+              .then((userExit) async {
             if (userExit == true) {
-              UserModel? userModel = await FireStoreUtils.getUserProfile(value.user!.uid);
+              UserModel? userModel =
+                  await FireStoreUtils.getUserProfile(value.user!.uid);
               ShowToastDialog.closeLoader();
               if (userModel != null) {
                 if (userModel.isActive == true) {
                   if (isAddAbusinessBtn.value == true) {
-                    Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+                    Get.to(CreateBusinessScreen(),
+                            arguments: {"asCustomerOrWorkAtBusiness": false})
+                        ?.then((value) {
                       Get.offAll(const DashBoardScreen());
                     });
                   } else {
@@ -170,7 +193,8 @@ class SignupController extends GetxController {
                   }
                 } else {
                   await FirebaseAuth.instance.signOut();
-                  ShowToastDialog.showToast("This user is disable please contact administrator".tr);
+                  ShowToastDialog.showToast(
+                      "This user is disable please contact administrator".tr);
                 }
               }
             } else {
@@ -191,7 +215,9 @@ class SignupController extends GetxController {
                 if (value == true) {
                   ShowToastDialog.showToast("Account is created");
                   if (isAddAbusinessBtn.value == true) {
-                    Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+                    Get.to(CreateBusinessScreen(),
+                            arguments: {"asCustomerOrWorkAtBusiness": false})
+                        ?.then((value) {
                       Get.offAll(const DashBoardScreen());
                     });
                   } else {
@@ -232,7 +258,9 @@ class SignupController extends GetxController {
             if (value == true) {
               ShowToastDialog.showToast("Account is created");
               if (isAddAbusinessBtn.value == true) {
-                Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+                Get.to(CreateBusinessScreen(),
+                        arguments: {"asCustomerOrWorkAtBusiness": false})
+                    ?.then((value) {
                   Get.offAll(const DashBoardScreen());
                 });
               } else {
@@ -241,14 +269,18 @@ class SignupController extends GetxController {
             }
           });
         } else {
-          FireStoreUtils.userExistOrNot(userCredential.user!.uid).then((userExit) async {
+          FireStoreUtils.userExistOrNot(userCredential.user!.uid)
+              .then((userExit) async {
             ShowToastDialog.closeLoader();
             if (userExit == true) {
-              UserModel? userModel = await FireStoreUtils.getUserProfile(userCredential.user!.uid);
+              UserModel? userModel =
+                  await FireStoreUtils.getUserProfile(userCredential.user!.uid);
               if (userModel != null) {
                 if (userModel.isActive == true) {
                   if (isAddAbusinessBtn.value == true) {
-                    Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+                    Get.to(CreateBusinessScreen(),
+                            arguments: {"asCustomerOrWorkAtBusiness": false})
+                        ?.then((value) {
                       Get.offAll(const DashBoardScreen());
                     });
                   } else {
@@ -256,7 +288,8 @@ class SignupController extends GetxController {
                   }
                 } else {
                   await FirebaseAuth.instance.signOut();
-                  ShowToastDialog.showToast("This user is disable please contact administrator".tr);
+                  ShowToastDialog.showToast(
+                      "This user is disable please contact administrator".tr);
                 }
               }
             } else {
@@ -276,7 +309,9 @@ class SignupController extends GetxController {
                 if (value == true) {
                   ShowToastDialog.showToast("Account is created");
                   if (isAddAbusinessBtn.value == true) {
-                    Get.to(CreateBusinessScreen(), arguments: {"asCustomerOrWorkAtBusiness": false})?.then((value) {
+                    Get.to(CreateBusinessScreen(),
+                            arguments: {"asCustomerOrWorkAtBusiness": false})
+                        ?.then((value) {
                       Get.offAll(const DashBoardScreen());
                     });
                   } else {
@@ -322,7 +357,8 @@ class SignupController extends GetxController {
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
-      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
       return userCredential;
     } catch (e) {
@@ -337,7 +373,8 @@ class SignupController extends GetxController {
       final nonce = sha256ofString(rawNonce);
 
       // Request credential for the currently signed in Apple account.
-      AuthorizationCredentialAppleID appleCredential = await SignInWithApple.getAppleIDCredential(
+      AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
@@ -355,8 +392,12 @@ class SignupController extends GetxController {
 
       // Sign in the user with Firebase. If the nonce we generated earlier does
       // not match the nonce in `appleCredential.identityToken`, sign in will fail.
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-      return {"appleCredential": appleCredential, "userCredential": userCredential};
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      return {
+        "appleCredential": appleCredential,
+        "userCredential": userCredential
+      };
     } catch (e) {
       debugPrint("signInWithApple :: $e");
     }
@@ -364,9 +405,11 @@ class SignupController extends GetxController {
   }
 
   String generateNonce([int length = 32]) {
-    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
   }
 
   /// Returns the sha256 hash of [input] in hex notation.

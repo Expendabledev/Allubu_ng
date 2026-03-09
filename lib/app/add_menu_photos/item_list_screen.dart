@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:yelpify/app/add_menu_photos/add_item_manually_screen.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/controller/add_menu_photo_controller.dart';
-import 'package:yelpify/models/item_model.dart';
-import 'package:yelpify/themes/app_them_data.dart';
-import 'package:yelpify/themes/responsive.dart';
-import 'package:yelpify/utils/dark_theme_provider.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
-import 'package:yelpify/utils/network_image_widget.dart';
-import 'package:yelpify/widgets/readmore.dart';
+import 'package:allubmarket/app/add_menu_photos/add_item_manually_screen.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/controller/add_menu_photo_controller.dart';
+import 'package:allubmarket/models/item_model.dart';
+import 'package:allubmarket/themes/app_them_data.dart';
+import 'package:allubmarket/themes/responsive.dart';
+import 'package:allubmarket/utils/dark_theme_provider.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
+import 'package:allubmarket/utils/network_image_widget.dart';
+import 'package:allubmarket/widgets/readmore.dart';
 
 class ItemListScreen extends StatelessWidget {
   const ItemListScreen({super.key});
@@ -25,7 +25,9 @@ class ItemListScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: themeChange.getThem() ? AppThemeData.greyDark10 : AppThemeData.grey10,
+              backgroundColor: themeChange.getThem()
+                  ? AppThemeData.greyDark10
+                  : AppThemeData.grey10,
               centerTitle: true,
               leadingWidth: 120,
               leading: Padding(
@@ -40,7 +42,9 @@ class ItemListScreen extends StatelessWidget {
                         "assets/icons/icon_close.svg",
                         width: 22,
                         colorFilter: ColorFilter.mode(
-                          themeChange.getThem() ? AppThemeData.greyDark06 : AppThemeData.grey01,
+                          themeChange.getThem()
+                              ? AppThemeData.greyDark06
+                              : AppThemeData.grey01,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -51,7 +55,9 @@ class ItemListScreen extends StatelessWidget {
                         "Close".tr,
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                          color: themeChange.getThem()
+                              ? AppThemeData.greyDark01
+                              : AppThemeData.grey01,
                           fontSize: 14,
                           fontFamily: AppThemeData.semiboldOpenSans,
                         ),
@@ -63,7 +69,9 @@ class ItemListScreen extends StatelessWidget {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(4.0),
                 child: Container(
-                  color: themeChange.getThem() ? AppThemeData.greyDark08 : AppThemeData.grey08,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark08
+                      : AppThemeData.grey08,
                   height: 2.0,
                 ),
               ),
@@ -71,7 +79,9 @@ class ItemListScreen extends StatelessWidget {
                 "Items".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                  color: themeChange.getThem()
+                      ? AppThemeData.greyDark01
+                      : AppThemeData.grey01,
                   fontSize: 16,
                   fontFamily: AppThemeData.semiboldOpenSans,
                 ),
@@ -79,7 +89,9 @@ class ItemListScreen extends StatelessWidget {
               actions: [
                 InkWell(
                   onTap: () {
-                    Get.to(AddItemManuallyScreen(), arguments: {"businessModel": controller.businessModel.value})?.then(
+                    Get.to(AddItemManuallyScreen(), arguments: {
+                      "businessModel": controller.businessModel.value
+                    })?.then(
                       (value) {
                         if (value == true) {
                           controller.getItemList();
@@ -93,7 +105,9 @@ class ItemListScreen extends StatelessWidget {
                       "Add Another".tr,
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: themeChange.getThem() ? AppThemeData.tealDark02 : AppThemeData.teal02,
+                        color: themeChange.getThem()
+                            ? AppThemeData.tealDark02
+                            : AppThemeData.teal02,
                         fontSize: 14,
                         fontFamily: AppThemeData.semiboldOpenSans,
                       ),
@@ -107,7 +121,8 @@ class ItemListScreen extends StatelessWidget {
                 : controller.itemList.isEmpty
                     ? Constant.showEmptyView(message: "Item is empty".tr)
                     : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 10),
                         child: ListView.separated(
                           itemCount: controller.itemList.length,
                           itemBuilder: (context, index) {
@@ -116,9 +131,12 @@ class ItemListScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   child: NetworkImageWidget(
-                                    imageUrl: itemModel.images!.isEmpty ? '' : itemModel.images!.first.toString(),
+                                    imageUrl: itemModel.images!.isEmpty
+                                        ? ''
+                                        : itemModel.images!.first.toString(),
                                     height: Responsive.height(12, context),
                                     width: Responsive.width(24, context),
                                     fit: BoxFit.cover,
@@ -130,7 +148,8 @@ class ItemListScreen extends StatelessWidget {
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         height: 10,
@@ -139,18 +158,24 @@ class ItemListScreen extends StatelessWidget {
                                         itemModel.name.toString().tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark01 : AppThemeData.grey01,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark01
+                                              : AppThemeData.grey01,
                                           fontSize: 16,
                                           fontFamily: AppThemeData.boldOpenSans,
                                         ),
                                       ),
                                       Text(
-                                        "${controller.currency.value.symbol} ${double.parse(itemModel.price.toString()).toStringAsFixed(2)}".tr,
+                                        "${controller.currency.value.symbol} ${double.parse(itemModel.price.toString()).toStringAsFixed(2)}"
+                                            .tr,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.greyDark02 : AppThemeData.grey02,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.greyDark02
+                                              : AppThemeData.grey02,
                                           fontSize: 16,
-                                          fontFamily: AppThemeData.semiboldOpenSans,
+                                          fontFamily:
+                                              AppThemeData.semiboldOpenSans,
                                         ),
                                       ),
                                       ReadMoreText(
@@ -161,12 +186,17 @@ class ItemListScreen extends StatelessWidget {
                                         trimCollapsedText: 'Show more'.tr,
                                         trimExpandedText: 'Show less'.tr,
                                         style: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.grey03 : AppThemeData.grey03,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.grey03
+                                              : AppThemeData.grey03,
                                           fontSize: 14,
-                                          fontFamily: AppThemeData.regularOpenSans,
+                                          fontFamily:
+                                              AppThemeData.regularOpenSans,
                                         ),
                                         moreStyle: TextStyle(
-                                          color: themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02,
+                                          color: themeChange.getThem()
+                                              ? AppThemeData.red02
+                                              : AppThemeData.red02,
                                           fontSize: 14,
                                           fontFamily: AppThemeData.boldOpenSans,
                                         ),
@@ -179,10 +209,12 @@ class ItemListScreen extends StatelessWidget {
                                 ),
                                 InkWell(
                                     onTap: () {
-                                      Get.to(AddItemManuallyScreen(), arguments: {
-                                        "businessModel": controller.businessModel.value,
-                                        "itemModel": itemModel,
-                                      })?.then(
+                                      Get.to(AddItemManuallyScreen(),
+                                          arguments: {
+                                            "businessModel":
+                                                controller.businessModel.value,
+                                            "itemModel": itemModel,
+                                          })?.then(
                                         (value) {
                                           if (value == true) {
                                             controller.getItemList();
@@ -190,19 +222,36 @@ class ItemListScreen extends StatelessWidget {
                                         },
                                       );
                                     },
-                                    child: Constant.svgPictureShow('assets/icons/edit.svg', themeChange.getThem() ? AppThemeData.teal02 : AppThemeData.teal02, 20, 20)),
+                                    child: Constant.svgPictureShow(
+                                        'assets/icons/edit.svg',
+                                        themeChange.getThem()
+                                            ? AppThemeData.teal02
+                                            : AppThemeData.teal02,
+                                        20,
+                                        20)),
                                 SizedBox(
                                   width: 10,
                                 ),
                                 InkWell(
                                     onTap: () async {
-                                      ShowToastDialog.showLoader("Please wait".tr);
-                                      await FireStoreUtils.deleteItem(controller.businessModel.value.id.toString(), itemModel);
+                                      ShowToastDialog.showLoader(
+                                          "Please wait".tr);
+                                      await FireStoreUtils.deleteItem(
+                                          controller.businessModel.value.id
+                                              .toString(),
+                                          itemModel);
                                       controller.getItemList();
                                       ShowToastDialog.closeLoader();
-                                      ShowToastDialog.showToast("Item Deleted".tr);
+                                      ShowToastDialog.showToast(
+                                          "Item Deleted".tr);
                                     },
-                                    child: Constant.svgPictureShow('assets/icons/delete.svg', themeChange.getThem() ? AppThemeData.red02 : AppThemeData.red02, 20, 20)),
+                                    child: Constant.svgPictureShow(
+                                        'assets/icons/delete.svg',
+                                        themeChange.getThem()
+                                            ? AppThemeData.red02
+                                            : AppThemeData.red02,
+                                        20,
+                                        20)),
                                 SizedBox(
                                   width: 10,
                                 ),

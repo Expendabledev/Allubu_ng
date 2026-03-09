@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/collection_name.dart';
-import 'package:yelpify/constant/constant.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
-import 'package:yelpify/models/categiry_plan_model.dart';
-import 'package:yelpify/models/category_model.dart';
-import 'package:yelpify/models/pricing_request_model.dart';
-import 'package:yelpify/models/user_model.dart';
-import 'package:yelpify/utils/fire_store_utils.dart';
+import 'package:allubmarket/constant/collection_name.dart';
+import 'package:allubmarket/constant/constant.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
+import 'package:allubmarket/models/categiry_plan_model.dart';
+import 'package:allubmarket/models/category_model.dart';
+import 'package:allubmarket/models/pricing_request_model.dart';
+import 'package:allubmarket/models/user_model.dart';
+import 'package:allubmarket/utils/fire_store_utils.dart';
 
 class ProjectController extends GetxController {
   RxBool isLoading = true.obs;
@@ -87,7 +87,12 @@ class ProjectController extends GetxController {
   }
 
   Stream<bool> checkStatus(PricingRequestModel projectRequestModel) {
-    return FireStoreUtils.fireStore.collection(CollectionName.projectRequest).doc(projectRequestModel.id).collection("chat").snapshots().map((snapshot) => snapshot.docs.isNotEmpty ? true : false);
+    return FireStoreUtils.fireStore
+        .collection(CollectionName.projectRequest)
+        .doc(projectRequestModel.id)
+        .collection("chat")
+        .snapshots()
+        .map((snapshot) => snapshot.docs.isNotEmpty ? true : false);
   }
 
   Stream<int> getUnreadChatCount(PricingRequestModel projectRequestModel) {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:yelpify/models/category_model.dart';
+import 'package:allubmarket/models/category_model.dart';
 
 class CategoryPlanModel {
   String? id;
@@ -7,11 +7,13 @@ class CategoryPlanModel {
   CategoryModel? category;
   Timestamp? createdAt;
 
-  CategoryPlanModel({this.id, this.category, this.createdAt,this.userId});
+  CategoryPlanModel({this.id, this.category, this.createdAt, this.userId});
 
   CategoryPlanModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    category = json['category'] != null ? CategoryModel.fromJson(json['category']) : CategoryModel();
+    category = json['category'] != null
+        ? CategoryModel.fromJson(json['category'])
+        : CategoryModel();
     userId = json['userId'];
     createdAt = json['createdAt'];
   }

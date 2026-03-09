@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yelpify/models/category_history_model.dart';
+import 'package:allubmarket/models/category_history_model.dart';
 
 class CategoryHistoryStorage {
   static const String _key = 'category_history_list';
 
   /// Add a single CategoryHistoryModel to the existing list
-  static Future<void> addCategoryHistoryItem(CategoryHistoryModel newItem) async {
+  static Future<void> addCategoryHistoryItem(
+      CategoryHistoryModel newItem) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     // Load existing list
@@ -19,13 +20,15 @@ class CategoryHistoryStorage {
     }).toList();
 
     // Remove any existing item with the same slug
-    rawList.removeWhere((item) => item.category?.slug == newItem.category?.slug);
+    rawList
+        .removeWhere((item) => item.category?.slug == newItem.category?.slug);
 
     // Add new item
     rawList.add(newItem);
 
     // Convert back to string list
-    List<String> updatedJsonList = rawList.map((item) => jsonEncode(item.toJson())).toList();
+    List<String> updatedJsonList =
+        rawList.map((item) => jsonEncode(item.toJson())).toList();
 
     // Save
     await prefs.setStringList(_key, updatedJsonList);

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yelpify/constant/show_toast_dialog.dart';
+import 'package:allubmarket/constant/show_toast_dialog.dart';
 
 class OtpController extends GetxController {
   Rx<TextEditingController> otpController = TextEditingController().obs;

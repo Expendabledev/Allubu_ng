@@ -1,8 +1,8 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/models/page_options.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/models/view_type.dart';
-import 'package:yelpify/widgets/firebase_pagination/src/models/wrap_options.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/models/page_options.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/models/view_type.dart';
+import 'package:allubmarket/widgets/firebase_pagination/src/models/wrap_options.dart';
 
 /// A [ScrollView] to use for the provided [items].
 ///
