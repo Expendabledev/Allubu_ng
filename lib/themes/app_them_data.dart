@@ -30,63 +30,63 @@ class AppThemeData {
 
   // Red (Red)
 
-  static const Color red01 = Color(0xFFFA4D4D);
-  static Color red02 = Color(0xFFD71616);
+  static const Color red01 =  Color(0xFFE4214F);
+  static const Color red02 = Color(0xFFE4214F);
   static const Color red03 = Color(0xFFFFECEC);
 
   static const Color redDark01 = Color(0xFFFFECEC);
-  static const Color redDark02 = Color(0xFFD71616);
-  static const Color redDark03 = Color(0xFFFA4D4D);
+  static const Color redDark02 =  Color(0xFFE4214F);
+  static const Color redDark03 =  Color(0xFFE4214F);
 
-  // Orange (Orange)
+  
 
-  static const Color orange01 = Color(0xFFE7632F);
-  static const Color orange02 = Color(0xFFC04214);
+  static const Color orange01 =  Color(0xFFE4214F);
+  static const Color orange02 =  Color(0xFFE4214F);
   static const Color orange03 = Color(0xFFFFEDDD);
 
   static const Color orangeDark01 = Color(0xFFFFEDDD);
-  static const Color orangeDark02 = Color(0xFFC04214);
-  static const Color orangeDark03 = Color(0xFFE7632F);
+  static const Color orangeDark02 =  Color(0xFFE4214F);
+  static const Color orangeDark03 =  Color(0xFFE4214F);
 
   // Lime (Lime)
 
-  static const Color lime01 = Color(0xFF429F29);
-  static const Color lime02 = Color(0xFF327C1E);
+  static const Color lime01 =  Color(0xFFE4214F);
+  static const Color lime02 =  Color(0xFFE4214F);
   static const Color lime03 = Color(0xFFE1F7DC);
 
   static const Color limeDark01 = Color(0xFFE1F7DC);
-  static const Color limeDark02 = Color(0xFF327C1E);
-  static const Color limeDark03 = Color(0xFF429F29);
+  static const Color limeDark02 =  Color(0xFFE4214F);
+  static const Color limeDark03 =  Color(0xFFE4214F);
 
   // Green (Green)
 
-  static const Color green01 = Color(0xFF02A06C);
-  static const Color green02 = Color(0xFF007C52);
+  static const Color green01 =  Color(0xFFE4214F);
+  static const Color green02 =  Color(0xFFE4214F);
   static const Color green03 = Color(0xFFDEF6E7);
 
   static const Color greenDark01 = Color(0xFFDEF6E7);
-  static const Color greenDark02 = Color(0xFF007C52);
-  static const Color greenDark03 = Color(0xFF02A06C);
+  static const Color greenDark02 =  Color(0xFFE4214F);
+  static const Color greenDark03 =  Color(0xFFE4214F);
 
-  // Green (Green)
 
-  static const Color teal01 = Color(0xFF0398BE);
-  static const Color teal02 = Color(0xFF007692);
+
+  static const Color teal01 =  Color(0xFFE4214F);
+  static const Color teal02 =  Color(0xFFE4214F);
   static const Color teal03 = Color(0xFFD9F6FD);
 
-  static const Color tealDark01 = Color(0xFF0398BE);
-  static const Color tealDark02 = Color(0xFF007692);
-  static const Color tealDark03 = Color(0xFF0398BE);
+  static const Color tealDark01 =  Color(0xFFE4214F);
+  static const Color tealDark02 =  Color(0xFFE4214F);
+  static const Color tealDark03 =  Color(0xFFE4214F);
 
-  // Green (Green)
+ 
 
-  static const Color blue01 = Color(0xFF258CFA);
-  static const Color blue02 = Color(0xFF1A6DC3);
+  static const Color blue01 =  Color(0xFFE4214F);
+  static const Color blue02 =  Color(0xFFE4214F);
   static const Color blue03 = Color(0xFFE1F4FE);
 
   static const Color blueDark01 = Color(0xFFE1F4FE);
-  static const Color blueDark02 = Color(0xFF1A6DC3);
-  static const Color blueDark03 = Color(0xFF258CFA);
+  static const Color blueDark02 =  Color(0xFFE4214F);
+  static const Color blueDark03 =  Color(0xFFE4214F);
 
   static const String regular = 'Poppins-Regular';
   static const String medium = 'Poppins-Medium';
