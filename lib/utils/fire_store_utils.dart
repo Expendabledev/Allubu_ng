@@ -238,9 +238,6 @@ class FireStoreUtils {
 
         Constant.apiBaseUrl = event.data()!["apiBaseUrl"];
         Constant.apiSecureKey = event.data()!["apiSecureKey"];
-
-        AppThemeData.red02 =
-            Color(int.parse(Constant.appColor.replaceFirst("#", "0xff")));
       }
     });
 

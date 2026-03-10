@@ -30,7 +30,7 @@ class AppThemeData {
 
   // Red (Red)
 
-  static const Color red01 =  Color(0xFFE4214F);
+  static const Color red01 = Color(0xFFE4214F);
   static const Color red02 = Color(0xFFE4214F);
   static const Color red03 = Color(0xFFFFECEC);
 
